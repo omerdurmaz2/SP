@@ -1,0 +1,9 @@
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\bin\Release\sp.exe.config
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\bin\Release\sp.exe
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\bin\Release\sp.pdb
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.Home.resources
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.Login.resources
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.Properties.Resources.resources
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.csproj.GenerateResource.Cache
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.exe
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.pdb

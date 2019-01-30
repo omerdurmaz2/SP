@@ -1,0 +1,10 @@
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\bin\Debug\sp.exe.config
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\bin\Debug\sp.exe
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\bin\Debug\sp.pdb
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Debug\sp.Home.resources
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Debug\sp.Properties.Resources.resources
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Debug\sp.csproj.GenerateResource.Cache
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Debug\sp.exe
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Debug\sp.pdb
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Debug\sp.Login.resources
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Debug\sp.csprojResolveAssemblyReference.cache
