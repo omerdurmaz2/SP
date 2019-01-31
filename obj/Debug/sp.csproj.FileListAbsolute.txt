@@ -8,3 +8,4 @@ C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Debug\sp.exe
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Debug\sp.pdb
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Debug\sp.Login.resources
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Debug\sp.csprojResolveAssemblyReference.cache
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\bin\Debug\MySql.Data.dll

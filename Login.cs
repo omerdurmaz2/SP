@@ -3,11 +3,25 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
-
+using MySql.Data.MySqlClient;
 namespace sp
 {
     public partial class Login : Form
     {
+        //Güvenlik Kodu
+        public void GuvenlikKodu()
+        {
+            int rsayi; //guvenlik kodunun tutulduğu yer
+            Random r = new Random();
+            rsayi = r.Next(100000, 999999);
+            lblkod.Text = rsayi.ToString();
+
+        }
+        //Veritabanı Connection Stringi
+        public string ConnectionString()
+        {
+            return "server=remotemysql.com; database= tDNQ1XRXlu; uid=tDNQ1XRXlu; pwd=F44eHROJZ1;";
+        }
         public Login()
         {
             InitializeComponent();
@@ -17,7 +31,7 @@ namespace sp
         }
         private void Login_Load(object sender, EventArgs e)
         {
-            
+
         }
         #region Tasarım için Yapılmış Değişiklikler
         #region Köşelerin Yuvarlanması
@@ -117,17 +131,16 @@ namespace sp
         #endregion
 
         public bool Session { get; set; }//Eğer Kullanıcı Bilgileri Doğru Girerse Ana Forma Girildi Bilgisini Gönderen Method
-
+        public byte Yetki { get; set; }
         //Sayfa Yüklendiğinde Yapılacaklar
+
         private void Login_Load_1(object sender, EventArgs e)
         {
             //Güvenlik Kodu
-            int rsayi;
-            Random r = new Random();
-            rsayi = r.Next(100000, 999999);
-            lblkod.Text = rsayi.ToString();
+            GuvenlikKodu();
 
         }
+
         #region Şifreyi Göster Gizle Butonu
 
         private void buttonEllipse1_Click(object sender, EventArgs e)
@@ -151,13 +164,15 @@ namespace sp
         }
         #endregion
 
-        #region Şifremi Unuttum
         #region Giriş Butonu
 
         private void button5_Click(object sender, EventArgs e)
         {
-            string eposta = "admin@hotmail.com";
-            string sifre = "root";
+
+            string eposta = txteposta.Text;
+            string sifre = txtsifre.Text;
+
+
             //Eposta kontrolü ve girilen eposta uygunsa ana forma giriş yapıldı gönderiyor
             Regex duzenliifade;
             if (txtkod.Text == "" || txteposta.Text == "" || txtsifre.Text == "")
@@ -175,22 +190,55 @@ namespace sp
                 }
                 else
                 {
-                    if (txteposta.Text == eposta && txtsifre.Text == sifre && txtkod.Text == lblkod.Text)
+                    if (txtkod.Text == lblkod.Text)
                     {
-                        this.Session = true;
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
+                        #region Veritabanı Bağlantısı
+
+                        MySqlConnection cnn = new MySqlConnection(ConnectionString());
+                        MySqlDataReader rd;
+                        MySqlCommand cmd;
+                        try
+                        {
+                            cnn.Open();
+                            cmd = new MySqlCommand("SELECT * FROM OgretimElemani WHERE eposta='" + eposta + "' AND sifre='" + sifre + "';", cnn);
+                            rd = cmd.ExecuteReader();
+                            if (rd.Read())
+                            {
+                                this.Yetki = byte.Parse(rd["yetki"].ToString());
+                                MessageBox.Show("Giriş Başarılı : " + this.Yetki);
+                                this.Session = true;
+                                this.DialogResult = DialogResult.OK;
+                                this.Close();
+
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("E posta ya da şifre yanlış!");
+                            }
+
+                        }
+                        catch (Exception err)
+                        {
+                            MessageBox.Show("Bağlantı Hatası: " + err);
+                        }
+                        #endregion
                     }
                     else
                     {
-                        MessageBox.Show("Girilen Bilgiler Hatalı!");
+                        MessageBox.Show("Hatalı Güvenlik Kodu Girişi");
+                        GuvenlikKodu();
                     }
 
                 }
-            }
 
+            }
         }
+
+
         #endregion
+        #region Şifremi Unuttum
+
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
 
@@ -205,9 +253,8 @@ namespace sp
                 e.Handled = true;
             }
         }
-
-
         #endregion
+
 
     }
 }

@@ -24,11 +24,15 @@ namespace sp
             if (cevap == DialogResult.OK)
             {
                 if (giris.Session == false) this.Close();
-                else label1.Text = "girildi";
+                else
+                {
+                    label1.Text =giris.Yetki.ToString();
+                    
+                }
             }
             else
             {
-                this.BeginInvoke(new MethodInvoker(this.Close));
+                this.BeginInvoke(new MethodInvoker(this.Close));// formu zorla kapatma yolu
 
             }
         }

@@ -51,7 +51,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.menuStrip1.Size = new System.Drawing.Size(404, 36);
+            this.menuStrip1.Size = new System.Drawing.Size(662, 36);
             this.menuStrip1.TabIndex = 18;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.menuStrip1_MouseDown);
@@ -92,7 +92,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(56, 128);
+            this.button1.Location = new System.Drawing.Point(48, 80);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(136, 64);
             this.button1.TabIndex = 20;
@@ -101,7 +101,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(216, 272);
+            this.button2.Location = new System.Drawing.Point(344, 80);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(136, 64);
             this.button2.TabIndex = 21;
@@ -110,7 +110,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(56, 272);
+            this.button3.Location = new System.Drawing.Point(344, 152);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(136, 64);
             this.button3.TabIndex = 22;
@@ -119,7 +119,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(216, 200);
+            this.button4.Location = new System.Drawing.Point(200, 152);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(136, 64);
             this.button4.TabIndex = 23;
@@ -128,7 +128,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(56, 200);
+            this.button5.Location = new System.Drawing.Point(48, 152);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(136, 64);
             this.button5.TabIndex = 24;
@@ -137,7 +137,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(216, 128);
+            this.button6.Location = new System.Drawing.Point(200, 80);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(136, 64);
             this.button6.TabIndex = 25;
@@ -150,7 +150,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(404, 454);
+            this.ClientSize = new System.Drawing.Size(662, 304);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
