@@ -62,13 +62,34 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="OgretimElemanlari.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OgretimElemanlari.Designer.cs">
+      <DependentUpon>OgretimElemanlari.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TasarimOrnek.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TasarimOrnek.Designer.cs">
+      <DependentUpon>TasarimOrnek.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YeniOgretimElemani.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YeniOgretimElemani.Designer.cs">
+      <DependentUpon>YeniOgretimElemani.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OgretimElemanlari.resx">
+      <DependentUpon>OgretimElemanlari.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -80,6 +101,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TasarimOrnek.resx">
+      <DependentUpon>TasarimOrnek.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YeniOgretimElemani.resx">
+      <DependentUpon>YeniOgretimElemani.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

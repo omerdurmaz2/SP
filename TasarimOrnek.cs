@@ -6,34 +6,19 @@ using System.Runtime.InteropServices;
 
 namespace sp
 {
-    public partial class Home : Form
+    public partial class TasarimOrnek : Form
     {
         #region Yapıcı Metot ve Form_Load
 
-        public Home()
+        public TasarimOrnek()
         {
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // border radius
             menuStrip1.Renderer = new MyRenderer(); // menü butonlarının hover rengi
 
         }
-        private void Home_Load(object sender, EventArgs e)
+        private void TasarimOrnek_Load(object sender, EventArgs e)
         {
-            Login giris = new Login();
-            var cevap = giris.ShowDialog();
-            if (cevap == DialogResult.OK)
-            {
-                if (giris.Session == false) this.Close();
-                else
-                {
-                    label1.Text =giris.Ad;
-                }
-            }
-            else
-            {
-                this.BeginInvoke(new MethodInvoker(this.Close));// formu zorla kapatma yolu
-
-            }
         }
         #endregion
         #region Tasarım için Yapılmış Değişiklikler
@@ -134,10 +119,5 @@ namespace sp
 
         #endregion
 
-        private void button12_Click(object sender, EventArgs e)
-        {
-            OgretimElemanlari ogr = new OgretimElemanlari();
-            ogr.Show();
-        }
     }
 }

@@ -6,33 +6,28 @@ using System.Runtime.InteropServices;
 
 namespace sp
 {
-    public partial class Home : Form
+    public partial class YeniOgretimElemani : Form
     {
         #region Yapıcı Metot ve Form_Load
 
-        public Home()
+        public YeniOgretimElemani()
         {
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // border radius
             menuStrip1.Renderer = new MyRenderer(); // menü butonlarının hover rengi
 
         }
-        private void Home_Load(object sender, EventArgs e)
+        private void TasarimOrnek_Load(object sender, EventArgs e)
         {
-            Login giris = new Login();
-            var cevap = giris.ShowDialog();
-            if (cevap == DialogResult.OK)
+            OgretimElemanlari kaynak = new OgretimElemanlari();
+            switch (kaynak.islem)
             {
-                if (giris.Session == false) this.Close();
-                else
-                {
-                    label1.Text =giris.Ad;
-                }
-            }
-            else
-            {
-                this.BeginInvoke(new MethodInvoker(this.Close));// formu zorla kapatma yolu
-
+                case 0:
+                    label3.Text = kaynak.id.ToString() + " YENİ KAYIT";
+                    break;
+                case 1:
+                    label3.Text = kaynak.id.ToString() + " DÜZENLE";
+                    break;
             }
         }
         #endregion
@@ -134,10 +129,10 @@ namespace sp
 
         #endregion
 
-        private void button12_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
-            OgretimElemanlari ogr = new OgretimElemanlari();
-            ogr.Show();
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }

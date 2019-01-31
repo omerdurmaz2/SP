@@ -22,15 +22,12 @@ namespace sp
         {
             return "server=remotemysql.com; database= tDNQ1XRXlu; uid=tDNQ1XRXlu; pwd=F44eHROJZ1;";
         }
+
         public Login()
         {
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // border radius
             menuStrip2.Renderer = new MyRenderer(); // menü butonlarının hover rengi
-
-        }
-        private void Login_Load(object sender, EventArgs e)
-        {
 
         }
         #region Tasarım için Yapılmış Değişiklikler
@@ -130,9 +127,12 @@ namespace sp
         }
         #endregion
 
-        public bool Session { get; set; }//Eğer Kullanıcı Bilgileri Doğru Girerse Ana Forma Girildi Bilgisini Gönderen Method
-        public byte Yetki { get; set; }
-        //Sayfa Yüklendiğinde Yapılacaklar
+        #region Diğer Formlara Gönderilen Bilgiler
+
+        public bool Session { get; set; } // giris kontrolü
+        public byte Yetki { get; set; } // Kullanıcı yetkisi
+        public string Ad { get; set; } // Ad Soyad
+        #endregion
 
         private void Login_Load_1(object sender, EventArgs e)
         {
@@ -173,6 +173,7 @@ namespace sp
             string sifre = txtsifre.Text;
 
 
+
             //Eposta kontrolü ve girilen eposta uygunsa ana forma giriş yapıldı gönderiyor
             Regex duzenliifade;
             if (txtkod.Text == "" || txteposta.Text == "" || txtsifre.Text == "")
@@ -199,14 +200,15 @@ namespace sp
                         MySqlCommand cmd;
                         try
                         {
+                            label5.Text="Bağlanıyor...";
                             cnn.Open();
                             cmd = new MySqlCommand("SELECT * FROM OgretimElemani WHERE eposta='" + eposta + "' AND sifre='" + sifre + "';", cnn);
                             rd = cmd.ExecuteReader();
                             if (rd.Read())
                             {
                                 this.Yetki = byte.Parse(rd["yetki"].ToString());
-                                MessageBox.Show("Giriş Başarılı : " + this.Yetki);
                                 this.Session = true;
+                                this.Ad = rd["Ad_Soyad"].ToString();
                                 this.DialogResult = DialogResult.OK;
                                 this.Close();
 
@@ -214,13 +216,16 @@ namespace sp
                             }
                             else
                             {
+                                label5.Text="";
                                 MessageBox.Show("E posta ya da şifre yanlış!");
                             }
 
                         }
                         catch (Exception err)
                         {
-                            MessageBox.Show("Bağlantı Hatası: " + err);
+                            label5.Text = "Bağlantı Hatası!";
+
+                            MessageBox.Show("Hata: " + err);
                         }
                         #endregion
                     }
