@@ -250,6 +250,10 @@ namespace sp
 
                 }
             }
+            else
+            {
+                this.Close();
+            }
 
         }
 
