@@ -19,9 +19,15 @@ namespace sp
         }
         //Veritabanı Connection Stringi
         public string ConnectionString()
-        {
+        {   //orijinal
+            //"server=remotemysql.com; database= tDNQ1XRXlu; uid=tDNQ1XRXlu; pwd=F44eHROJZ1;";
+
+            //test
+            //"server=localhost; database= sp_test; uid=root; pwd=root;";
             return "server=remotemysql.com; database= tDNQ1XRXlu; uid=tDNQ1XRXlu; pwd=F44eHROJZ1;";
         }
+
+        #region Yapıcı metot ve Form_Load
 
         public Login()
         {
@@ -30,6 +36,13 @@ namespace sp
             menuStrip2.Renderer = new MyRenderer(); // menü butonlarının hover rengi
 
         }
+        private void Login_Load_1(object sender, EventArgs e)
+        {
+            //Güvenlik Kodu
+            GuvenlikKodu();
+        }
+        #endregion
+
         #region Tasarım için Yapılmış Değişiklikler
         #region Köşelerin Yuvarlanması
 
@@ -117,7 +130,7 @@ namespace sp
 
         private void xToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Session = false;
+            Login.Session = false;
             this.Close();
         }
 
@@ -129,17 +142,12 @@ namespace sp
 
         #region Diğer Formlara Gönderilen Bilgiler
 
-        public bool Session { get; set; } // giris kontrolü
-        public byte Yetki { get; set; } // Kullanıcı yetkisi
-        public string Ad { get; set; } // Ad Soyad
+        public static bool Session; // giris kontrolü
+        public static byte Yetki;  // Kullanıcı yetkisi
+        public static string Ad;// Ad Soyad
         #endregion
 
-        private void Login_Load_1(object sender, EventArgs e)
-        {
-            //Güvenlik Kodu
-            GuvenlikKodu();
 
-        }
 
         #region Şifreyi Göster Gizle Butonu
 
@@ -206,10 +214,9 @@ namespace sp
                             rd = cmd.ExecuteReader();
                             if (rd.Read())
                             {
-                                this.Yetki = byte.Parse(rd["yetki"].ToString());
-                                this.Session = true;
-                                this.Ad = rd["Ad_Soyad"].ToString();
-                                this.DialogResult = DialogResult.OK;
+                                Yetki = byte.Parse(rd["yetki"].ToString());
+                                Session = true;
+                                Ad = rd["Ad_Soyad"].ToString();
                                 this.Close();
 
 

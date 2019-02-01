@@ -8,8 +8,8 @@ namespace sp
 {
     public partial class Home : Form
     {
+        //public static bool Session; // giris yapıldı mı sorgusu
         #region Yapıcı Metot ve Form_Load
-
         public Home()
         {
             InitializeComponent();
@@ -20,19 +20,15 @@ namespace sp
         private void Home_Load(object sender, EventArgs e)
         {
             Login giris = new Login();
-            var cevap = giris.ShowDialog();
-            if (cevap == DialogResult.OK)
+            giris.ShowDialog(); //anasayfa açıldığında giris ekranını açma
+            if (Login.Session==false)
             {
-                if (giris.Session == false) this.Close();
-                else
-                {
-                    label1.Text =giris.Ad;
-                }
+                this.BeginInvoke(new MethodInvoker(this.Close));// formu zorla kapatma yolu
             }
             else
             {
-                this.BeginInvoke(new MethodInvoker(this.Close));// formu zorla kapatma yolu
-
+                //Session = true;
+                label1.Text = Login.Ad;
             }
         }
         #endregion
@@ -134,10 +130,20 @@ namespace sp
 
         #endregion
 
+        #region Öğretim Elemanları Görüntüleme,Düzenleme ve Yeni Ekleme Butonu
+
         private void button12_Click(object sender, EventArgs e)
         {
+            label3.Visible = true;
             OgretimElemanlari ogr = new OgretimElemanlari();
-            ogr.Show();
+            ogr.ShowDialog();
+
+        }
+        #endregion
+
+        private void Home_Activated(object sender, EventArgs e)
+        {
+            label3.Visible = false;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace sp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new OgretimElemanlari());
+            Application.Run(new Home());
         }
     }
 }

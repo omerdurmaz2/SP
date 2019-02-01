@@ -8,14 +8,42 @@ namespace sp
 {
     public partial class OgretimElemanlari : Form
     {
-        public byte islem{ get; set; } //session olarak ekleme formu açıldığına bu formun islem parametresinin true ya da false olmasına bakacak. Eğer true ise yeni ekleme, false ise duzenleme olacak sekilde ekrani duzenleyecek
-        public int id { get; set; } // session olarak duzenlenecek uyenin id sini tutuyor
+        public static int sessionid; // session olarak duzenlenecek uyenin id sini tutuyor
 
+        //Connection String
         public string ConnectionString()
-        {
+        {   //orijinal
+            //"server=remotemysql.com; database= tDNQ1XRXlu; uid=tDNQ1XRXlu; pwd=F44eHROJZ1;";
 
+            //test
+            //"server=localhost; database= sp_test; uid=root; pwd=root;";
             return "server=remotemysql.com; database= tDNQ1XRXlu; uid=tDNQ1XRXlu; pwd=F44eHROJZ1;";
         }
+
+        #region Yapıcı Metot ve Form_Load
+
+        public OgretimElemanlari()
+        {
+            InitializeComponent();
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // border radius
+            menuStrip1.Renderer = new MyRenderer(); // menü butonlarının hover rengi
+
+
+        }
+        private void OgretimElemanlari_Load(object sender, EventArgs e)
+        {
+            //session kontrolü
+            if (Login.Session)
+            {
+                Listele();
+            }
+            else
+            {
+                this.BeginInvoke(new MethodInvoker(this.Close));// formu zorla kapatma yolu
+            }
+        }
+        #endregion
+
         #region Tablo Elemanları
 
         MySqlConnection bag;// tekrar tekrar tanımlamamak için dışarı tanımladık
@@ -25,6 +53,8 @@ namespace sp
         DataGridViewButtonColumn duzenle;// tekrar tekrar tanımlamamak için dışarı tanımladık
         DataGridViewButtonColumn sil;// tekrar tekrar tanımlamamak için dışarı tanımladık
         #endregion
+
+        #region Veritabanından verilerin Çekilip Listelenmesi
 
         public void Listele()
         {
@@ -43,49 +73,29 @@ namespace sp
                 bag.Close();
 
                 duzenle = new DataGridViewButtonColumn();
-                duzenle.HeaderText = "duzenle";
-                duzenle.Text = "duzenle";
+                duzenle.HeaderText = "DÜZENLE";
+                duzenle.Text = "DÜZENLE";
                 duzenle.UseColumnTextForButtonValue = true;
-                duzenle.DataPropertyName = "id";
                 dataGridView1.Columns.Add(duzenle);
 
                 sil = new DataGridViewButtonColumn();
                 sil.HeaderText = "SİL";
                 sil.Text = "SİL";
                 sil.UseColumnTextForButtonValue = true;
-                sil.DataPropertyName = "id";
                 dataGridView1.Columns.Add(sil);
+
 
             }
             catch (Exception err)
             {
 
-                MessageBox.Show("İşlem Gerçekleştirlemedi" + err.ToString());
+                MessageBox.Show("İşlem Gerçekleştirlemedi, Lütfen Sonra Tekrar Deneyin!" + err.ToString());
+                this.Close();
             }
         }
-        public OgretimElemanlari()
-        {
-            InitializeComponent();
-            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // border radius
-            menuStrip1.Renderer = new MyRenderer(); // menü butonlarının hover rengi
+        #endregion
 
 
-        }
-        private void OgretimElemanlari_Load(object sender, EventArgs e)
-        {
-            //session kontrolü
-            //Login giris = new Login();
-            //if (giris.Session)
-            //{
-
-            Listele();
-
-            //}
-            //else
-            //{
-            //    this.Close();
-            //}
-        }
         #region Tasarım için Yapılmış Değişiklikler
         #region Köşelerin Yuvarlanması
 
@@ -184,59 +194,72 @@ namespace sp
 
         #endregion
 
+        #region Yeni Kayıt Ekleme Butonu
+
         private void button5_Click(object sender, EventArgs e)
         {
-            YeniOgretimElemani yogr = new YeniOgretimElemani();
-            this.islem = 0; 
-            var cevap = yogr.ShowDialog();
-            if (cevap == DialogResult.OK)
+            sessionid = -1;
+            YeniOgretimElemani formac = new YeniOgretimElemani();
+            formac.ShowDialog();
+            if (YeniOgretimElemani.iptal == false) // kaydetmeişlemi iptal edilmediyse listeyi yenile
             {
                 Listele();
             }
-            else MessageBox.Show("İşlem Gerçekleştirlemedi");
         }
+        #endregion
+
+        #region Tablodaki verileri Düzenleme ve Silme Butonları
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int id = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-
-            switch (e.ColumnIndex)
+            if (e.RowIndex >= 0) // sütun başlığına tıklayınca hata vermesini önlemek için...
             {
-                case 6:
-                    this.id = id;
-                    this.islem = 1;
-                    YeniOgretimElemani yogr = new YeniOgretimElemani();
-                    var cevap = yogr.ShowDialog();
-                    if (cevap == DialogResult.OK)
-                    {
-                        Listele();
-                    }
-                    else MessageBox.Show("İşlem Gerçekleştirlemedi");
+                int userid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
 
-                    break;
-                case 7:
-                    try
-                    {
-                        MySqlConnection bag;
-                        MySqlCommand kmt;
-                        bag = new MySqlConnection(ConnectionString());
-                        bag.Open();
-                        kmt = new MySqlCommand("DELETE FROM OgretimElemani where id=" + id + ";", bag);
-                        kmt.ExecuteNonQuery();
-                        bag.Close();
-                    }
-                    catch (Exception err)
-                    {
+                switch (e.ColumnIndex)
+                {
+                    case 6:
 
-                        MessageBox.Show("Hata: " + err);
-                    }
-                    Listele();
+                        sessionid = userid;
+                        YeniOgretimElemani formac = new YeniOgretimElemani();
+                        formac.ShowDialog();
+                        if (YeniOgretimElemani.iptal == false) // düzenleme işlemi iptal edilmediyse listeyi yenile
+                        {
+                            Listele();
+                        }
+                        break;
+                    case 7:
+                        try
+                        {
+                            DialogResult uyari = MessageBox.Show("Silmek İstiyor musunuz? ", "DİKKAT!", MessageBoxButtons.YesNo);
+                            if (uyari == DialogResult.Yes)
+                            {
+                                MySqlConnection bag;
+                                MySqlCommand kmt;
+                                bag = new MySqlConnection(ConnectionString());
+                                bag.Open();
+                                kmt = new MySqlCommand("DELETE FROM OgretimElemani where id=" + userid + ";", bag);
+                                kmt.ExecuteNonQuery();
+                                bag.Close();
+                                MessageBox.Show("Silindi.");
+                                Listele();
 
-                    break;
+                            }
+                        }
+                        catch (Exception err)
+                        {
+
+                            MessageBox.Show("Hata: " + err);
+                        }
+
+                        break;
+
+                }
 
             }
         }
 
+        #endregion
 
     }
 }

@@ -7,3 +7,8 @@ C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.P
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.csproj.GenerateResource.Cache
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.exe
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.pdb
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\bin\Release\MySql.Data.dll
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.OgretimElemanlari.resources
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.TasarimOrnek.resources
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.YeniOgretimElemani.resources
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.csprojResolveAssemblyReference.cache
