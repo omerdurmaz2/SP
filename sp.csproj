@@ -51,6 +51,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ConnectionString.cs" />
+    <Compile Include="Derslikler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Derslikler.Designer.cs">
+      <DependentUpon>Derslikler.cs</DependentUpon>
+    </Compile>
     <Compile Include="Home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,12 +88,9 @@
     <Compile Include="TasarimOrnek.Designer.cs">
       <DependentUpon>TasarimOrnek.cs</DependentUpon>
     </Compile>
-    <Compile Include="YeniOgretimElemani.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="YeniOgretimElemani.Designer.cs">
-      <DependentUpon>YeniOgretimElemani.cs</DependentUpon>
-    </Compile>
+    <EmbeddedResource Include="Derslikler.resx">
+      <DependentUpon>Derslikler.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
@@ -104,9 +107,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TasarimOrnek.resx">
       <DependentUpon>TasarimOrnek.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="YeniOgretimElemani.resx">
-      <DependentUpon>YeniOgretimElemani.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

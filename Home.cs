@@ -133,7 +133,7 @@ namespace sp
 
         #endregion
 
-#region Öğretim Elemanları Görüntüleme,Düzenleme ve Yeni Ekleme Butonu
+        #region Öğretim Elemanları Görüntüleme,Düzenleme ve Yeni Ekleme Butonu
 
         private void button12_Click(object sender, EventArgs e)
         {
@@ -150,6 +150,13 @@ namespace sp
             label3.Visible = false;
         }
         #endregion
-
+        #region Derslik Görüntüleme ve Ekleme Butonu
+        private void button1_Click(object sender, EventArgs e)
+        {
+            label3.Visible = true;
+            Derslikler ders = new Derslikler();
+            ders.ShowDialog();
+        }
+        #endregion
     }
 }

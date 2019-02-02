@@ -8,16 +8,6 @@ namespace sp
 {
     public partial class Login : Form
     {
-        //Güvenlik Kodu
-        public void GuvenlikKodu()
-        {
-            int rsayi; //guvenlik kodunun tutulduğu yer
-            Random r = new Random();
-            rsayi = r.Next(100000, 999999);
-            lblkod.Text = rsayi.ToString();
-
-        }
-
         #region Yapıcı metot ve Form_Load
 
         public Login()
@@ -33,6 +23,17 @@ namespace sp
             GuvenlikKodu();
         }
         #endregion
+
+        //Güvenlik Kodu
+        public void GuvenlikKodu()
+        {
+            int rsayi; //guvenlik kodunun tutulduğu yer
+            Random r = new Random();
+            rsayi = r.Next(100000, 999999);
+            lblkod.Text = rsayi.ToString();
+
+        }
+
 
         #region Tasarım için Yapılmış Değişiklikler
         #region Köşelerin Yuvarlanması
