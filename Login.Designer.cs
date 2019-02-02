@@ -42,8 +42,9 @@
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.xToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.buttonEllipse2 = new sp.ButtonEllipse();
             this.buttonEllipse1 = new sp.ButtonEllipse();
             this.menuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -54,7 +55,7 @@
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.linkLabel1.LinkColor = System.Drawing.Color.Black;
-            this.linkLabel1.Location = new System.Drawing.Point(72, 407);
+            this.linkLabel1.Location = new System.Drawing.Point(72, 416);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(98, 20);
             this.linkLabel1.TabIndex = 29;
@@ -77,10 +78,10 @@
             // lblkod
             // 
             this.lblkod.AutoSize = true;
-            this.lblkod.Font = new System.Drawing.Font("Arial Black", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
-            this.lblkod.Location = new System.Drawing.Point(240, 351);
+            this.lblkod.Font = new System.Drawing.Font("Arial Black", 16F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
+            this.lblkod.Location = new System.Drawing.Point(232, 351);
             this.lblkod.Name = "lblkod";
-            this.lblkod.Size = new System.Drawing.Size(90, 27);
+            this.lblkod.Size = new System.Drawing.Size(104, 31);
             this.lblkod.TabIndex = 28;
             this.lblkod.Text = "000000";
             // 
@@ -114,10 +115,10 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label3.Font = new System.Drawing.Font("Arial Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label3.Location = new System.Drawing.Point(176, 185);
+            this.label3.Font = new System.Drawing.Font("Arial Black", 14.25F, System.Drawing.FontStyle.Bold);
+            this.label3.Location = new System.Drawing.Point(168, 185);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 22);
+            this.label3.Size = new System.Drawing.Size(71, 27);
             this.label3.TabIndex = 26;
             this.label3.Text = "GİRİŞ";
             // 
@@ -203,6 +204,17 @@
             this.toolStripMenuItem1.Text = "_";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label5.Font = new System.Drawing.Font("Arial Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label5.Location = new System.Drawing.Point(72, 448);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(0, 22);
+            this.label5.TabIndex = 31;
+            // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
@@ -215,16 +227,20 @@
             this.pictureBox1.TabIndex = 19;
             this.pictureBox1.TabStop = false;
             // 
-            // label5
+            // buttonEllipse2
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label5.Font = new System.Drawing.Font("Arial Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label5.Location = new System.Drawing.Point(72, 448);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(0, 22);
-            this.label5.TabIndex = 31;
+            this.buttonEllipse2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(171)))), ((int)(((byte)(227)))));
+            this.buttonEllipse2.BackgroundImage = global::sp.Properties.Resources._refresh_55882;
+            this.buttonEllipse2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonEllipse2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(82)))), ((int)(((byte)(82)))));
+            this.buttonEllipse2.FlatAppearance.BorderSize = 0;
+            this.buttonEllipse2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEllipse2.Location = new System.Drawing.Point(336, 352);
+            this.buttonEllipse2.Name = "buttonEllipse2";
+            this.buttonEllipse2.Size = new System.Drawing.Size(32, 32);
+            this.buttonEllipse2.TabIndex = 32;
+            this.buttonEllipse2.UseVisualStyleBackColor = false;
+            this.buttonEllipse2.Click += new System.EventHandler(this.buttonEllipse2_Click);
             // 
             // buttonEllipse1
             // 
@@ -248,6 +264,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(408, 480);
+            this.Controls.Add(this.buttonEllipse2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.menuStrip2);
             this.Controls.Add(this.linkLabel1);
@@ -300,5 +317,6 @@
         private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.Label label5;
+        private ButtonEllipse buttonEllipse2;
     }
 }

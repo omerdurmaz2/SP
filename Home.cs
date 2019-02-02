@@ -21,7 +21,7 @@ namespace sp
         {
             Login giris = new Login();
             giris.ShowDialog(); //anasayfa açıldığında giris ekranını açma
-            if (Login.Session==false)
+            if (Login.Session == false)
             {
                 this.BeginInvoke(new MethodInvoker(this.Close));// formu zorla kapatma yolu
             }
@@ -32,6 +32,7 @@ namespace sp
             }
         }
         #endregion
+
         #region Tasarım için Yapılmış Değişiklikler
         #region Köşelerin Yuvarlanması
 
@@ -67,6 +68,7 @@ namespace sp
         #endregion
 
         #endregion
+
         #region Formun Sürüklenmesi
         #region Formun Üzerinde Tıklanınca
 
@@ -117,6 +119,7 @@ namespace sp
         #endregion
 
         #endregion
+
         #region Form Küçültme ve Kapatma
         private void xToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -130,7 +133,7 @@ namespace sp
 
         #endregion
 
-        #region Öğretim Elemanları Görüntüleme,Düzenleme ve Yeni Ekleme Butonu
+#region Öğretim Elemanları Görüntüleme,Düzenleme ve Yeni Ekleme Butonu
 
         private void button12_Click(object sender, EventArgs e)
         {
@@ -140,10 +143,13 @@ namespace sp
 
         }
         #endregion
+        #region Anasayfaya Geri Dönüldüğünde Bağlanıyor Yazısı Gitmesi İçin
 
         private void Home_Activated(object sender, EventArgs e)
         {
             label3.Visible = false;
         }
+        #endregion
+
     }
 }

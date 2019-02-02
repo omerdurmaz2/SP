@@ -63,6 +63,16 @@ namespace sp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _refresh_55882 {
+            get {
+                object obj = ResourceManager.GetObject("_refresh_55882", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap closedeye {
             get {
                 object obj = ResourceManager.GetObject("closedeye", resourceCulture);

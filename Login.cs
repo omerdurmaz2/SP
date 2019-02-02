@@ -17,15 +17,6 @@ namespace sp
             lblkod.Text = rsayi.ToString();
 
         }
-        //Veritabanı Connection Stringi
-        public string ConnectionString()
-        {   //orijinal
-            //"server=remotemysql.com; database= tDNQ1XRXlu; uid=tDNQ1XRXlu; pwd=F44eHROJZ1;";
-
-            //test
-            //"server=localhost; database= sp_test; uid=root; pwd=root;";
-            return "server=remotemysql.com; database= tDNQ1XRXlu; uid=tDNQ1XRXlu; pwd=F44eHROJZ1;";
-        }
 
         #region Yapıcı metot ve Form_Load
 
@@ -77,6 +68,7 @@ namespace sp
         }
         #endregion
         #endregion
+
         #region Formun Sürüklenmesi
         #region Formun Üzerinde Tıklanınca
 
@@ -126,6 +118,7 @@ namespace sp
         }
         #endregion
         #endregion
+
         #region Formu Kapatma ve Küçültme
 
         private void xToolStripMenuItem_Click(object sender, EventArgs e)
@@ -202,8 +195,7 @@ namespace sp
                     if (txtkod.Text == lblkod.Text)
                     {
                         #region Veritabanı Bağlantısı
-
-                        MySqlConnection cnn = new MySqlConnection(ConnectionString());
+                        MySqlConnection cnn = new MySqlConnection(ConnectionString.Al());
                         MySqlDataReader rd;
                         MySqlCommand cmd;
                         try
@@ -224,6 +216,7 @@ namespace sp
                             else
                             {
                                 label5.Text="";
+                                GuvenlikKodu();
                                 MessageBox.Show("E posta ya da şifre yanlış!");
                             }
 
@@ -249,6 +242,7 @@ namespace sp
 
 
         #endregion
+
         #region Şifremi Unuttum
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -256,6 +250,7 @@ namespace sp
 
         }
         #endregion
+
         #region Güvenlik Kodu(Sadece Sayı Girişi)
 
         private void txtkod_KeyPress(object sender, KeyPressEventArgs e)
@@ -265,8 +260,16 @@ namespace sp
                 e.Handled = true;
             }
         }
+
         #endregion
 
+        #region Guvenlik Kodu Yenile Butonu
+
+        private void buttonEllipse2_Click(object sender, EventArgs e)
+        {
+            GuvenlikKodu();
+        }
+        #endregion
 
     }
 }

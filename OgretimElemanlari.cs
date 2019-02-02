@@ -10,15 +10,6 @@ namespace sp
     {
         public static int sessionid; // session olarak duzenlenecek uyenin id sini tutuyor
 
-        //Connection String
-        public string ConnectionString()
-        {   //orijinal
-            //"server=remotemysql.com; database= tDNQ1XRXlu; uid=tDNQ1XRXlu; pwd=F44eHROJZ1;";
-
-            //test
-            //"server=localhost; database= sp_test; uid=root; pwd=root;";
-            return "server=remotemysql.com; database= tDNQ1XRXlu; uid=tDNQ1XRXlu; pwd=F44eHROJZ1;";
-        }
 
         #region Yapıcı Metot ve Form_Load
 
@@ -64,7 +55,7 @@ namespace sp
                 dt.Rows.Clear();
                 dt.Columns.Clear();
                 dataGridView1.Columns.Clear();
-                bag = new MySqlConnection(ConnectionString());
+                bag = new MySqlConnection(ConnectionString.Al());
                 bag.Open();
                 kmt = new MySqlCommand("select id as Sıra_No,unvan as Unvan,Ad_Soyad,eposta as E_posta,Kendi_Sinav_Sayisi ,Gozetmenlik_Sayisi from OgretimElemani", bag);
                 adp = new MySqlDataAdapter(kmt);
@@ -131,6 +122,7 @@ namespace sp
         #endregion
 
         #endregion
+
         #region Formun Sürüklenmesi
         #region Formun Üzerinde Tıklanınca
 
@@ -181,6 +173,7 @@ namespace sp
         #endregion
 
         #endregion
+
         #region Form Küçültme  ve Kapatma
         private void xToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -236,7 +229,7 @@ namespace sp
                             {
                                 MySqlConnection bag;
                                 MySqlCommand kmt;
-                                bag = new MySqlConnection(ConnectionString());
+                                bag = new MySqlConnection(ConnectionString.Al());
                                 bag.Open();
                                 kmt = new MySqlCommand("DELETE FROM OgretimElemani where id=" + userid + ";", bag);
                                 kmt.ExecuteNonQuery();

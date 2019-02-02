@@ -11,15 +11,6 @@ namespace sp
         public static bool iptal = false;
 
 
-        //Connection String
-        public string ConnectionString()
-        {   //orijinal
-            //"server=remotemysql.com; database= tDNQ1XRXlu; uid=tDNQ1XRXlu; pwd=F44eHROJZ1;";
-
-            //test
-            //"server=localhost; database= sp_test; uid=root; pwd=root;";
-            return "server=remotemysql.com; database= tDNQ1XRXlu; uid=tDNQ1XRXlu; pwd=F44eHROJZ1;";
-        }
 
         #region Kaydet Methodu
         MySqlConnection bag; // Form_Load 'da kullanabilmek için dışarıda tanımladık
@@ -29,7 +20,7 @@ namespace sp
 
             string komut = "";
             string mesaj = "";
-            bag = new MySqlConnection(ConnectionString());
+            bag = new MySqlConnection(ConnectionString.Al());
             if (islem)
             {
                 komut = "INSERT INTO OgretimElemani (unvan,Ad_Soyad,eposta,Kendi_Sinav_Sayisi,Gozetmenlik_Sayisi,sifre,yetki) VALUES ('" + unvan + "','" + adsoyad + "','" + eposta + "',0,0,'" + sifre + "'," + yetki + ") ";
@@ -57,6 +48,7 @@ namespace sp
             }
         }
         #endregion
+
         #region Form Kontrol Methodu
         public void FormKontrol(bool islem)
         {
@@ -98,6 +90,7 @@ namespace sp
         }
         private void YeniOgretimElemani_Load(object sender, EventArgs e)
         {
+            
             //session kontrolü
             if (Login.Session)
             {
@@ -111,7 +104,7 @@ namespace sp
                     label3.Text = " DÜZENLE";
                     button5.Text = "DEĞİŞTİR";
                     int id = OgretimElemanlari.sessionid;
-                    bag = new MySqlConnection(ConnectionString());
+                    bag = new MySqlConnection(ConnectionString.Al());
                     try
                     {
                         bag.Open();
@@ -186,6 +179,7 @@ namespace sp
         #endregion
 
         #endregion
+
         #region Formun Sürüklenmesi
         #region Formun Üzerinde Tıklanınca
 
@@ -236,6 +230,7 @@ namespace sp
         #endregion
 
         #endregion
+
         #region Form Küçültme ve Kapatma
         private void xToolStripMenuItem_Click(object sender, EventArgs e)
         {
