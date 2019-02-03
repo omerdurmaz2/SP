@@ -72,9 +72,6 @@ namespace sp
             }
         }
         #endregion
-
-        #endregion
-
         #region Formun Sürüklenmesi
         #region Formun Üzerinde Tıklanınca
 
@@ -139,6 +136,10 @@ namespace sp
 
         #endregion
 
+
+        #endregion
+
+
         #region Öğretim Elemanları Görüntüleme,Düzenleme ve Yeni Ekleme Butonu
 
         private void button12_Click(object sender, EventArgs e)
@@ -168,7 +169,8 @@ namespace sp
         private void button4_Click(object sender, EventArgs e)
         {
             label3.Visible = true;
-
+            Tarihler tarih = new Tarihler();
+            tarih.ShowDialog();
         }
     }
 }

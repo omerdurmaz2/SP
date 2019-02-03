@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using MySql.Data.MySqlClient;
-using System.Data;
 namespace sp
 {
     public partial class Derslikler : Form
@@ -64,9 +63,6 @@ namespace sp
             }
         }
         #endregion
-
-        #endregion
-
         #region Formun Sürüklenmesi
         #region Formun Üzerinde Tıklanınca
 
@@ -131,16 +127,15 @@ namespace sp
 
         #endregion
 
+        #endregion
+
         #region Dışarıda Tanımlananlar
 
-        MySqlConnection bag = new MySqlConnection(ConnectionString.Al());// tekrar tekrar tanımlamamak için dışarı tanımladık
-        MySqlCommand kmt;// tekrar tekrar tanımlamamak için dışarı tanımladık
-        MySqlDataAdapter adp;// tekrar tekrar tanımlamamak için dışarı tanımladık
-        DataTable dt = new DataTable(); // tekrar tekrar tanımlamamak için dışarı tanımladık
         DataGridViewButtonColumn duzenle;// tekrar tekrar tanımlamamak için dışarı tanımladık
         DataGridViewButtonColumn sil;// tekrar tekrar tanımlamamak için dışarı tanımladık
         MySqlDataReader rd;// tekrar tekrar tanımlamamak için dışarı tanımladık
-        private int derslikid=-1; // -1 ise yeni kayıt değilse id ye göre değiştirme
+        VeritabaniIslemler islemler = new VeritabaniIslemler();
+        private int derslikid = -1; // -1 ise yeni kayıt değilse id ye göre değiştirme
         string komut = "";
         string mesaj = "";
         #endregion
@@ -149,40 +144,27 @@ namespace sp
 
         public void Listele()
         {
-            try
-            {
-                dt.Clear();
                 dataGridView1.DataSource = null;
                 dataGridView1.Columns.Clear();
                 dataGridView1.Refresh();
-                bag = new MySqlConnection(ConnectionString.Al());
-                bag.Open();
-                kmt = new MySqlCommand("select id as Sıra_No, derslik as DERSLİK,sayi as KAPASİTE from sinavderslikleri", bag);
-                adp = new MySqlDataAdapter(kmt);
-                adp.Fill(dt);
-                dataGridView1.DataSource = dt;
-                bag.Close();
+                komut = "select id as Sıra_No, derslik as DERSLİK,sayi as KAPASİTE from sinavderslikleri";
 
-                duzenle = new DataGridViewButtonColumn();
-                duzenle.HeaderText = "DÜZENLE";
-                duzenle.Text = "DÜZENLE";
-                duzenle.UseColumnTextForButtonValue = true;
-                dataGridView1.Columns.Add(duzenle);
+                if (islemler.Al(komut)!=null)
+                {
+                    dataGridView1.DataSource = islemler.Al(komut); ;
 
-                sil = new DataGridViewButtonColumn();
-                sil.HeaderText = "SİL";
-                sil.Text = "SİL";
-                sil.UseColumnTextForButtonValue = true;
-                dataGridView1.Columns.Add(sil);
+                    duzenle = new DataGridViewButtonColumn();
+                    duzenle.HeaderText = "DÜZENLE";
+                    duzenle.Text = "DÜZENLE";
+                    duzenle.UseColumnTextForButtonValue = true;
+                    dataGridView1.Columns.Add(duzenle);
 
-
-            }
-            catch (Exception err)
-            {
-
-                MessageBox.Show("İşlem Gerçekleştirlemedi, Lütfen Sonra Tekrar Deneyin!" + err.ToString());
-                this.Close();
-            }
+                    sil = new DataGridViewButtonColumn();
+                    sil.HeaderText = "SİL";
+                    sil.Text = "SİL";
+                    sil.UseColumnTextForButtonValue = true;
+                    dataGridView1.Columns.Add(sil);
+                }
         }
 
         #endregion
@@ -215,7 +197,6 @@ namespace sp
         private void button5_Click(object sender, EventArgs e)
         {
             FormKontrol();
-            Listele();
 
         }
         #endregion
@@ -224,31 +205,19 @@ namespace sp
 
         public void Sorgu()
         {
-            try
+            komut = "select * from sinavderslikleri where derslik='" + txtad.Text + "';";
+            rd = islemler.Oku(komut);
+            if (rd.Read())
             {
-                bag.Open();
-                komut = "select * from sinavderslikleri where derslik='" + txtad.Text + "';";
-                kmt = new MySqlCommand(komut, bag);
-                rd = kmt.ExecuteReader();
-                if (rd.Read())
-                {
-                    MessageBox.Show("Aynı İsimde Sınıf Bulunmakta Lütfen Başka İsim Girin.." ,"HATA!!");
-                    bag.Close();
-
-                }
-                else
-                {
-                    bag.Close(); // aşağıdaki method da da veritabanına bağlantı açıldığı için burada bağlantıyı kapattık
-                    Kaydet(txtad.Text, int.Parse(txtkapasite.Text));
-                }
-
-
+                MessageBox.Show("Aynı İsimde Sınıf Bulunmakta Lütfen Başka İsim Girin..", "HATA!!");
+                islemler.Kapat();
             }
-            catch (Exception err)
+            else
             {
-
-                MessageBox.Show("İşlem Gerçekleştirilemedi. Lütfen Daha Sonra Tekrar Deneyin : \n" + err, "HATA!!");
+                islemler.Kapat();
+                Kaydet(txtad.Text, int.Parse(txtkapasite.Text));
             }
+
 
         }
         #endregion
@@ -267,25 +236,13 @@ namespace sp
 
                 komut = "UPDATE sinavderslikleri SET derslik = '" + ad + "' ,sayi = " + kapasite + "  WHERE id = " + derslikid + ";";
                 mesaj = "Kayıt Güncellendi";
-                button5.Text = "EKLE";
-                button1.Visible = false;
-                derslikid = -1;
-            }
 
-            try
-            {
-                bag.Open();
-                kmt = new MySqlCommand(komut, bag);
-                kmt.ExecuteNonQuery();
-                bag.Close();
-                txtad.Text = "";
-                txtkapasite.Text = "";
-                MessageBox.Show(mesaj);
             }
-            catch (Exception err)
-            {
-                MessageBox.Show("İşlem Gerçekleştirilemedi. Lütfen Daha Sonra Tekrar Deneyin" + err.Message, "HATA!!");
-            }
+            islemler.Degistir(komut);
+            MessageBox.Show(mesaj);
+            Temizle();
+            Listele();
+
         }
         #endregion
 
@@ -304,63 +261,43 @@ namespace sp
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex > 0 && e.ColumnIndex > 2) // sütun başlığına tıklayınca hata vermesini önlemek için...
+            if (e.RowIndex >=0 && e.ColumnIndex > 2) // sütun başlığına tıklayınca hata vermesini önlemek için...
             {
                 derslikid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
                 switch (e.ColumnIndex)
                 {
                     case 3:
-                        try
+                        button1.Visible = true;
+
+                        komut = "select * from sinavderslikleri where id=" + derslikid + ";";
+                        rd = islemler.Oku(komut);
+                        if (rd.Read())
                         {
-                            button1.Visible = true;
-                            bag.Open();
-                            kmt = new MySqlCommand("select * from sinavderslikleri where id=" + derslikid + ";", bag);
-                            rd = kmt.ExecuteReader();
-                            if (rd.Read())
-                            {
-                                txtad.Text = rd["derslik"].ToString();
-                                txtkapasite.Text = rd["sayi"].ToString();
-                                button5.Text = "DEĞİŞTİR";
-                            }
-                            else
-                            {
-                            MessageBox.Show("İşlem Gerçekleştirilemedi. Lütfen Daha Sonra Tekrar Deneyin" , "HATA!!");
-                            }
-                            bag.Close();
-
-
+                            txtad.Text = rd["derslik"].ToString();
+                            txtkapasite.Text = rd["sayi"].ToString();
+                            button5.Text = "DEĞİŞTİR";
                         }
-                        catch (Exception err)
+                        else
                         {
-                            MessageBox.Show("İşlem Gerçekleştirilemedi. Lütfen Daha Sonra Tekrar Deneyin" + err.Message, "HATA!!");
-                            
-
+                            MessageBox.Show("İşlem Gerçekleştirilemedi. Lütfen Daha Sonra Tekrar Deneyin", "HATA!!");
                         }
+                        islemler.Kapat();
+                        rd.Close(); //mysqldatareaderi temizliyoruz
                         break;
                     case 4:
-                        try
+                        DialogResult uyari = MessageBox.Show("Silmek İstiyor musunuz? ", "DİKKAT!", MessageBoxButtons.YesNo);
+                        if (uyari == DialogResult.Yes)
                         {
-                            DialogResult uyari = MessageBox.Show("Silmek İstiyor musunuz? ", "DİKKAT!", MessageBoxButtons.YesNo);
-                            if (uyari == DialogResult.Yes)
-                            {
-                                bag.Open();
-                                kmt = new MySqlCommand("DELETE FROM sinavderslikleri where id=" + derslikid + ";", bag);
-                                kmt.ExecuteNonQuery();
-                                bag.Close();
-                                MessageBox.Show("Silindi.");
-                                Listele();
-
-                            }
+                            komut = "DELETE FROM sinavderslikleri where id=" + derslikid + ";";
+                            islemler.Degistir(komut);
+                            MessageBox.Show("Silindi.");
+                            Listele();
+                            Temizle(); 
                         }
-                        catch (Exception err)
-                        {
-
-                            MessageBox.Show("Hata: " + err);
-                        }
-
                         break;
 
                 }
+
             }
 
         }
@@ -370,14 +307,19 @@ namespace sp
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Temizle();
+        }
+        #endregion
+
+        #region Temizle
+        public void Temizle()
+        {
             derslikid = -1;
             button5.Text = "EKLE";
             txtad.Text = "";
             txtkapasite.Text = "";
             button1.Visible = false;
-
         }
         #endregion
-
     }
 }

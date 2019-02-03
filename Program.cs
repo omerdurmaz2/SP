@@ -16,7 +16,7 @@ namespace sp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Tarihler());
+            Application.Run(new Home());
         }
     }
 }

@@ -94,6 +94,7 @@
     <Compile Include="TasarimOrnek.Designer.cs">
       <DependentUpon>TasarimOrnek.cs</DependentUpon>
     </Compile>
+    <Compile Include="VeritabaniIslemler.cs" />
     <EmbeddedResource Include="Derslikler.resx">
       <DependentUpon>Derslikler.cs</DependentUpon>
     </EmbeddedResource>

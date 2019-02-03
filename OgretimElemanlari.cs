@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
@@ -37,77 +36,6 @@ namespace sp
         }
         #endregion
 
-        #region Tablo Elemanları
-
-        MySqlConnection bag = new MySqlConnection(ConnectionString.Al());// tekrar tekrar tanımlamamak için dışarı tanımladık
-        MySqlCommand kmt;// tekrar tekrar tanımlamamak için dışarı tanımladık
-        MySqlDataAdapter adp;// tekrar tekrar tanımlamamak için dışarı tanımladık
-        DataTable dt = new DataTable(); // tekrar tekrar tanımlamamak için dışarı tanımladık
-        DataGridViewButtonColumn duzenle;// tekrar tekrar tanımlamamak için dışarı tanımladık
-        DataGridViewButtonColumn sil;// tekrar tekrar tanımlamamak için dışarı tanımladık
-        MySqlDataReader dr; // sorgu methodu için tablo okumaya yarayan class
-        string komut = "";
-        string mesaj = "";
-        #endregion
-
-        #region  Ekranı Temizle
-        public void Temizle() // textboxları ve butonları temizler
-        {
-            txtadsoyad.Clear();
-            txtsifre.Clear();
-            txteposta.Clear();
-            txtunvan.Clear();
-            comboBox1.SelectedIndex = 0;
-            button5.Text = "EKLE";
-            userid = -1;
-        }
-        #endregion
-
-        #region Veritabanından verilerin Çekilip Listelenmesi
-
-        public void Listele()
-        {
-            try
-            {
-
-                dt.Clear(); // tablonun aktarıldığı clas temizlenir.
-                dataGridView1.DataSource = null; // datagridview temizlenir
-                dataGridView1.Columns.Clear();// datagridview temizlenir
-                dataGridView1.Refresh(); // datagridview yenilenir
-                bag = new MySqlConnection(ConnectionString.Al());
-                bag.Open();
-                kmt = new MySqlCommand("select id as Sıra_No,unvan as Unvan,Ad_Soyad,eposta as E_posta,Kendi_Sinav_Sayisi ,Gozetmenlik_Sayisi from OgretimElemani", bag);
-                adp = new MySqlDataAdapter(kmt);
-                adp.Fill(dt);
-                dataGridView1.DataSource = dt;
-                bag.Close();
-
-                //değiştir butonu her satır için eklenir
-                duzenle = new DataGridViewButtonColumn(); 
-                duzenle.HeaderText = "DÜZENLE";
-                duzenle.Text = "DÜZENLE";
-                duzenle.UseColumnTextForButtonValue = true;
-                dataGridView1.Columns.Add(duzenle);
-
-                //sil butonu her satır için eklenir
-                sil = new DataGridViewButtonColumn();
-                sil.HeaderText = "SİL";
-                sil.Text = "SİL";
-                sil.UseColumnTextForButtonValue = true;
-                dataGridView1.Columns.Add(sil);
-
-
-            }
-            catch (Exception err)
-            {
-
-                MessageBox.Show("İşlem Gerçekleştirlemedi, Lütfen Sonra Tekrar Deneyin!" + err.ToString()); // eğer veritabanı işlemi gerçekleştirilemezse hata verir
-                this.Close(); 
-            }
-        }
-        #endregion
-
-
         #region Tasarım için Yapılmış Değişiklikler
         #region Köşelerin Yuvarlanması
 
@@ -141,9 +69,6 @@ namespace sp
             }
         }
         #endregion
-
-        #endregion
-
         #region Formun Sürüklenmesi
         #region Formun Üzerinde Tıklanınca
 
@@ -202,7 +127,7 @@ namespace sp
             if (txtunvan.Text != "" || txtsifre.Text != "" || txtadsoyad.Text != "" || txteposta.Text != "")
             {
                 DialogResult cevap = MessageBox.Show("Kaydedilmemiş ve var! Çıkmak istiyor musunuz ? ", "DİKKAT!", MessageBoxButtons.YesNo);
-                if (cevap==DialogResult.Yes)
+                if (cevap == DialogResult.Yes)
                 {
                     this.Close();
                 }
@@ -219,6 +144,67 @@ namespace sp
             this.WindowState = FormWindowState.Minimized;
         }
 
+        #endregion
+
+        #endregion
+
+        #region Tablo Elemanları
+        DataGridViewButtonColumn duzenle;// tekrar tekrar tanımlamamak için dışarı tanımladık
+        DataGridViewButtonColumn sil;// tekrar tekrar tanımlamamak için dışarı tanımladık
+        MySqlDataReader dr; // sorgu methodu için tablo okumaya yarayan class
+        VeritabaniIslemler islemler = new VeritabaniIslemler();
+        string komut = "";
+        string mesaj = "";
+        #endregion
+
+        #region  Ekranı Temizle
+        public void Temizle() // textboxları ve butonları temizler
+        {
+            txtadsoyad.Clear();
+            txtsifre.Clear();
+            txteposta.Clear();
+            txtunvan.Clear();
+            comboBox1.SelectedIndex = 0;
+            button5.Text = "EKLE";
+            userid = -1;
+        }
+        #endregion
+
+        #region Veritabanından verilerin Çekilip Listelenmesi
+
+        public void Listele()
+        {
+            dataGridView1.DataSource = null; // datagridview temizlenir
+            dataGridView1.Columns.Clear();// datagridview temizlenir
+            dataGridView1.Refresh(); // datagridview yenilenir
+
+            komut = "select id as Sıra_No,unvan as Unvan,Ad_Soyad,eposta as E_posta,Kendi_Sinav_Sayisi ,Gozetmenlik_Sayisi from OgretimElemani";
+            if (islemler.Al(komut) != null)
+            {
+                dataGridView1.DataSource = islemler.Al(komut);
+                //değiştir butonu her satır için eklenir
+                duzenle = new DataGridViewButtonColumn();
+                duzenle.HeaderText = "DÜZENLE";
+                duzenle.Text = "DÜZENLE";
+                duzenle.UseColumnTextForButtonValue = true;
+                dataGridView1.Columns.Add(duzenle);
+
+                //sil butonu her satır için eklenir
+                sil = new DataGridViewButtonColumn();
+                sil.HeaderText = "SİL";
+                sil.Text = "SİL";
+                sil.UseColumnTextForButtonValue = true;
+                dataGridView1.Columns.Add(sil);
+
+            }
+            else
+            {
+                MessageBox.Show("İşlem Gerçekleştirlemedi, Lütfen Sonra Tekrar Deneyin!"); // eğer veritabanı işlemi gerçekleştirilemezse hata verir
+                this.Close();
+            }
+
+
+        }
         #endregion
 
         #region Form Kontrol Methodu
@@ -253,31 +239,21 @@ namespace sp
         #region Veritabanı E posta Kontrolü
         public void Sorgu()
         {
-            try
+            komut = "select * from OgretimElemani where eposta='" + txteposta.Text + "' and id <> " + userid + ";";
+            if (islemler.Oku(komut).Read())
             {
-                komut = "select * from OgretimElemani where eposta='" + txteposta.Text + "' and id <> " + userid + ";";
-                bag.Open();
-                kmt = new MySqlCommand(komut, bag);
-                dr = kmt.ExecuteReader();
-                if (dr.Read())
-                {
-                    MessageBox.Show("Aynı E posta da başka üye bulunmakta. Lütfen başka bir e posta girin...", "HATA!");
-                    txteposta.Text = "";
-                    txteposta.Focus();
-                    bag.Close();
-                }
-                else
-                {
-                    Kaydet(txtunvan.Text, txteposta.Text, txtadsoyad.Text, txtsifre.Text, comboBox1.SelectedIndex);
-                    bag.Close();
+                MessageBox.Show("Aynı E posta da başka üye bulunmakta. Lütfen başka bir e posta girin...", "HATA!");
+                txteposta.Text = "";
+                txteposta.Focus();
 
-                }
+                islemler.Kapat();
             }
-            catch (Exception err)
+            else
             {
-
-                MessageBox.Show("İşlem Gerçekleştirilemedi. Lütfen Daha Sonra Tekrar Deneyin: \n" + err, "HATA!");
+                islemler.Kapat();
+                Kaydet(txtunvan.Text, txteposta.Text, txtadsoyad.Text, txtsifre.Text, comboBox1.SelectedIndex);
             }
+            dr.Close(); //datareader i temizliyoruz
         }
         #endregion
 
@@ -294,26 +270,18 @@ namespace sp
             {
                 button1.Visible = false;
                 button5.Text = "EKLE";
+
                 komut = "UPDATE OgretimElemani SET unvan = '" + unvan + "' ,Ad_Soyad = '" + adsoyad + "' ,eposta = '" + eposta + "',sifre = '" + sifre + "', yetki = " + yetki + "  WHERE id = " + userid + ";";
                 mesaj = "Kayıt Güncellendi";
 
             }
 
-            try
-            {
-                bag.Open();
-                kmt = new MySqlCommand(komut, bag);
-                kmt.ExecuteNonQuery();
-                bag.Close();
-                MessageBox.Show(mesaj);
-                Temizle();
-                Listele();
 
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show("İşlem Gerçekleştirilemedi. Lütfen Daha Sonra Tekrar Deneyin" + err.Message, "HATA!!");
-            }
+            islemler.Degistir(komut);
+            MessageBox.Show(mesaj);
+            Temizle();
+            Listele();
+
         }
 
         #endregion
@@ -340,59 +308,43 @@ namespace sp
                         button1.Visible = true; //iptal butonu görünür
                         button5.Text = "GÜNCELLE";
 
-                        try //id ye göre veri çekilir ve textboxlara yazdırılır
+                        komut = "select * from OgretimElemani where id=" + userid + ";";
+                        dr = islemler.Oku(komut);
+                        if (dr.Read())
                         {
-                            bag.Open();
-                            komut = "select * from OgretimElemani where id=" + userid + ";";
-                            kmt = new MySqlCommand(komut, bag);
-                            dr = kmt.ExecuteReader();
-                            if (dr.Read())
-                            {
-                                txtunvan.Text = dr["unvan"].ToString();
-                                txtadsoyad.Text = dr["Ad_Soyad"].ToString();
-                                txteposta.Text = dr["eposta"].ToString();
-                                txtsifre.Text = dr["sifre"].ToString();
-                                comboBox1.SelectedIndex = int.Parse(dr["yetki"].ToString());
-                            }
-                            else
-                            { // eğer kayıt buluanmazsa hata verir
-                                MessageBox.Show("İşlem Gerçekleştirilemedi. Lütfen Daha Sonra Tekrar Deneyin", "HATA!!");
-                                Temizle(); // ekranı temizler
+                            txtunvan.Text = dr["unvan"].ToString();
+                            txtadsoyad.Text = dr["Ad_Soyad"].ToString();
+                            txteposta.Text = dr["eposta"].ToString();
+                            txtsifre.Text = dr["sifre"].ToString();
+                            comboBox1.SelectedIndex = int.Parse(dr["yetki"].ToString());
+                        }
+                        else
+                        { // eğer kayıt buluanmazsa hata verir
+                            MessageBox.Show("İşlem Gerçekleştirilemedi. Lütfen Daha Sonra Tekrar Deneyin", "HATA!!");
 
-                            }
-                            bag.Close(); 
                         }
-                        catch (Exception err)
-                        {
-                            MessageBox.Show("İşlem Gerçekleştirilemedi. Lütfen Daha Sonra Tekrar Deneyin: \n" + err, "HATA!!"); // eğer veritabanı işlemi gerçekleştirilemezse hata verir
-                            //
-                        }
+                        islemler.Kapat();
+                        dr.Close(); //datareader i temizliyoruz
+
                         break;
                     case 7:
-                        try
+
+                        DialogResult uyari = MessageBox.Show("Silmek İstiyor musunuz? ", "DİKKAT!", MessageBoxButtons.YesNo);// silmek istenip istenmediği sorulur
+                        if (uyari == DialogResult.Yes)
                         {
-                            DialogResult uyari = MessageBox.Show("Silmek İstiyor musunuz? ", "DİKKAT!", MessageBoxButtons.YesNo);// silmek istenip istenmediği sorulur
-                            if (uyari == DialogResult.Yes)
-                            {
-                                bag.Open();
-                                kmt = new MySqlCommand("DELETE FROM OgretimElemani where id=" + userid + ";", bag);
-                                kmt.ExecuteNonQuery();
-                                bag.Close();
-                                MessageBox.Show("Silindi.");
+                            komut = "DELETE FROM OgretimElemani where id=" + userid + ";";
+                            islemler.Degistir(komut);
 
-                                Listele(); //tablo tekrar listelenir
+                            MessageBox.Show("Silindi.");
 
-                            }
+                            Temizle();
+                            Listele(); //tablo tekrar listelenir
+
                         }
-                        catch (Exception err)
-                        {
-
-                            MessageBox.Show("Hata: " + err); // eğer veritabanı işlemi gerçekleşmezse hata verir
-                        }
-
                         break;
 
                 }
+
 
             }
         }
