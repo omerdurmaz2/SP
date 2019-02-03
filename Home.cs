@@ -8,7 +8,6 @@ namespace sp
 {
     public partial class Home : Form
     {
-        //public static bool Session; // giris yapıldı mı sorgusu
         #region Yapıcı Metot ve Form_Load
         public Home()
         {
@@ -27,7 +26,14 @@ namespace sp
             }
             else
             {
-                //Session = true;
+                if (Login.Yetki!=0)
+                {
+                    button1.Visible = false;
+                    button12.Visible = false;
+                    button4.Visible = false;
+                    button5.Visible = false;
+
+                }
                 label1.Text = Login.Ad;
             }
         }
@@ -158,5 +164,11 @@ namespace sp
             ders.ShowDialog();
         }
         #endregion
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            label3.Visible = true;
+
+        }
     }
 }

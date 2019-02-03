@@ -82,6 +82,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Tarihler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tarihler.Designer.cs">
+      <DependentUpon>Tarihler.cs</DependentUpon>
+    </Compile>
     <Compile Include="TasarimOrnek.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +110,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tarihler.resx">
+      <DependentUpon>Tarihler.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TasarimOrnek.resx">
       <DependentUpon>TasarimOrnek.cs</DependentUpon>

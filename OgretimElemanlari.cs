@@ -285,7 +285,6 @@ namespace sp
         public void Kaydet(string unvan, string eposta, string adsoyad, string sifre, int yetki)
         {
 
-            bag = new MySqlConnection(ConnectionString.Al());
             if (userid == -1) //eğer id -1 ise yeni ekler
             {
                 komut = "INSERT INTO OgretimElemani (unvan,Ad_Soyad,eposta,Kendi_Sinav_Sayisi,Gozetmenlik_Sayisi,sifre,yetki) VALUES ('" + unvan + "','" + adsoyad + "','" + eposta + "',0,0,'" + sifre + "'," + yetki + ") ";

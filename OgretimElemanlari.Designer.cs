@@ -98,10 +98,10 @@
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 300);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 250);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(950, 400);
+            this.dataGridView1.Size = new System.Drawing.Size(950, 450);
             this.dataGridView1.TabIndex = 7;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -123,7 +123,7 @@
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button5.Location = new System.Drawing.Point(848, 232);
+            this.button5.Location = new System.Drawing.Point(848, 168);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(88, 32);
             this.button5.TabIndex = 6;
@@ -137,7 +137,7 @@
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button1.Location = new System.Drawing.Point(744, 232);
+            this.button1.Location = new System.Drawing.Point(744, 168);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(88, 32);
             this.button1.TabIndex = 40;
@@ -151,7 +151,7 @@
             this.label6.AutoSize = true;
             this.label6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline);
-            this.label6.Location = new System.Drawing.Point(16, 216);
+            this.label6.Location = new System.Drawing.Point(680, 80);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(37, 13);
             this.label6.TabIndex = 51;
@@ -165,7 +165,7 @@
             "Admin",
             "Bölüm Başkanı",
             "Öğretim Görevlisi"});
-            this.comboBox1.Location = new System.Drawing.Point(16, 240);
+            this.comboBox1.Location = new System.Drawing.Point(680, 104);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(256, 21);
             this.comboBox1.TabIndex = 5;
@@ -175,7 +175,7 @@
             this.label5.AutoSize = true;
             this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline);
-            this.label5.Location = new System.Drawing.Point(368, 144);
+            this.label5.Location = new System.Drawing.Point(344, 144);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(31, 13);
             this.label5.TabIndex = 49;
@@ -186,7 +186,7 @@
             this.txtsifre.BackColor = System.Drawing.Color.White;
             this.txtsifre.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtsifre.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.txtsifre.Location = new System.Drawing.Point(368, 168);
+            this.txtsifre.Location = new System.Drawing.Point(344, 168);
             this.txtsifre.Name = "txtsifre";
             this.txtsifre.Size = new System.Drawing.Size(256, 30);
             this.txtsifre.TabIndex = 4;
@@ -217,7 +217,7 @@
             this.label2.AutoSize = true;
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline);
-            this.label2.Location = new System.Drawing.Point(368, 80);
+            this.label2.Location = new System.Drawing.Point(344, 80);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 45;
@@ -228,7 +228,7 @@
             this.txtadsoyad.BackColor = System.Drawing.Color.White;
             this.txtadsoyad.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtadsoyad.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.txtadsoyad.Location = new System.Drawing.Point(368, 104);
+            this.txtadsoyad.Location = new System.Drawing.Point(344, 104);
             this.txtadsoyad.Name = "txtadsoyad";
             this.txtadsoyad.Size = new System.Drawing.Size(256, 30);
             this.txtadsoyad.TabIndex = 2;
