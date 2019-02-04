@@ -13,3 +13,4 @@ C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Debug\sp.Ogr
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Debug\sp.TasarimOrnek.resources
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Debug\sp.Derslikler.resources
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Debug\sp.Tarihler.resources
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Debug\sp.Bolumler.resources

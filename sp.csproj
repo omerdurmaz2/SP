@@ -87,6 +87,12 @@
     <Compile Include="Tarihler.Designer.cs">
       <DependentUpon>Tarihler.cs</DependentUpon>
     </Compile>
+    <Compile Include="Bolumler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bolumler.Designer.cs">
+      <DependentUpon>Bolumler.cs</DependentUpon>
+    </Compile>
     <Compile Include="TasarimOrnek.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Tarihler.resx">
       <DependentUpon>Tarihler.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bolumler.resx">
+      <DependentUpon>Bolumler.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TasarimOrnek.resx">
       <DependentUpon>TasarimOrnek.cs</DependentUpon>

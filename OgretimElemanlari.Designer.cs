@@ -46,6 +46,10 @@
             this.txtadsoyad = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtunvan = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -123,7 +127,7 @@
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button5.Location = new System.Drawing.Point(848, 168);
+            this.button5.Location = new System.Drawing.Point(848, 208);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(88, 32);
             this.button5.TabIndex = 6;
@@ -137,7 +141,7 @@
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button1.Location = new System.Drawing.Point(744, 168);
+            this.button1.Location = new System.Drawing.Point(744, 208);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(88, 32);
             this.button1.TabIndex = 40;
@@ -151,7 +155,7 @@
             this.label6.AutoSize = true;
             this.label6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline);
-            this.label6.Location = new System.Drawing.Point(680, 80);
+            this.label6.Location = new System.Drawing.Point(680, 144);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(37, 13);
             this.label6.TabIndex = 51;
@@ -165,7 +169,7 @@
             "Admin",
             "Bölüm Başkanı",
             "Öğretim Görevlisi"});
-            this.comboBox1.Location = new System.Drawing.Point(680, 104);
+            this.comboBox1.Location = new System.Drawing.Point(680, 168);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(256, 21);
             this.comboBox1.TabIndex = 5;
@@ -254,6 +258,49 @@
             this.txtunvan.Size = new System.Drawing.Size(256, 30);
             this.txtunvan.TabIndex = 1;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline);
+            this.label7.Location = new System.Drawing.Point(680, 80);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(36, 13);
+            this.label7.TabIndex = 53;
+            this.label7.Text = "Bölüm";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.comboBox2.Location = new System.Drawing.Point(680, 104);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(256, 21);
+            this.comboBox2.TabIndex = 52;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.comboBox3.Location = new System.Drawing.Point(680, 56);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(256, 21);
+            this.comboBox3.TabIndex = 54;
+            this.comboBox3.Visible = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline);
+            this.label8.Location = new System.Drawing.Point(680, 40);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(168, 13);
+            this.label8.TabIndex = 55;
+            this.label8.Text = "Seçilen bölümün id sini tutman için";
+            this.label8.Visible = false;
+            // 
             // OgretimElemanlari
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -262,6 +309,10 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(950, 700);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label5);
@@ -317,6 +368,10 @@
         private System.Windows.Forms.TextBox txtadsoyad;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtunvan;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Label label8;
     }
 }
 

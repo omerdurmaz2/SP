@@ -13,3 +13,4 @@ C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.T
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.csprojResolveAssemblyReference.cache
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.Derslikler.resources
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.Tarihler.resources
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.Bolumler.resources

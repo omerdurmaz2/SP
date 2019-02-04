@@ -26,7 +26,7 @@ namespace sp
             }
             else
             {
-                if (Login.Yetki!=0)
+                if (Login.Yetki != 0)
                 {
                     button1.Visible = false;
                     button12.Visible = false;
@@ -140,7 +140,15 @@ namespace sp
         #endregion
 
 
-        #region Öğretim Elemanları Görüntüleme,Düzenleme ve Yeni Ekleme Butonu
+        #region Anasayfaya Geri Dönüldüğünde Bağlanıyor Yazısı Gitmesi İçin
+
+        private void Home_Activated(object sender, EventArgs e)
+        {
+            label3.Visible = false;
+        }
+        #endregion
+
+        #region Öğretim Elemanları Sayfası
 
         private void button12_Click(object sender, EventArgs e)
         {
@@ -150,14 +158,8 @@ namespace sp
 
         }
         #endregion
-        #region Anasayfaya Geri Dönüldüğünde Bağlanıyor Yazısı Gitmesi İçin
 
-        private void Home_Activated(object sender, EventArgs e)
-        {
-            label3.Visible = false;
-        }
-        #endregion
-        #region Derslik Görüntüleme ve Ekleme Butonu
+        #region Derslikler Sayfası
         private void button1_Click(object sender, EventArgs e)
         {
             label3.Visible = true;
@@ -166,11 +168,20 @@ namespace sp
         }
         #endregion
 
+        #region Tarihler Sayfası
         private void button4_Click(object sender, EventArgs e)
         {
             label3.Visible = true;
             Tarihler tarih = new Tarihler();
             tarih.ShowDialog();
         }
+        #endregion
+
+        #region Bölümler Sayfası
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
     }
 }

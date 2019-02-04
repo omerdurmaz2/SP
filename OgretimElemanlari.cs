@@ -167,6 +167,15 @@ namespace sp
             comboBox1.SelectedIndex = 0;
             button5.Text = "EKLE";
             userid = -1;
+            comboBox2.SelectedIndex = 0;
+            comboBox3.SelectedIndex = 0;
+
+            dataGridView1.DataSource = null; // datagridview temizlenir
+            dataGridView1.Columns.Clear();// datagridview temizlenir
+            dataGridView1.Refresh(); // datagridview yenilenir
+            comboBox2.Items.Clear();
+            comboBox3.Items.Clear();
+
         }
         #endregion
 
@@ -174,11 +183,9 @@ namespace sp
 
         public void Listele()
         {
-            dataGridView1.DataSource = null; // datagridview temizlenir
-            dataGridView1.Columns.Clear();// datagridview temizlenir
-            dataGridView1.Refresh(); // datagridview yenilenir
 
-            komut = "select id as Sıra_No,unvan as Unvan,Ad_Soyad,eposta as E_posta,Kendi_Sinav_Sayisi ,Gozetmenlik_Sayisi from OgretimElemani";
+
+            komut = "select O.id as 'SIRA NO',O.unvan as 'ÜNVAN',O.Ad_Soyad as 'AD SOYAD',O.eposta as 'E POSTA',O.Kendi_Sinav_Sayisi as 'KENDİ SINAV SAYISI' ,O.Gozetmenlik_Sayisi as 'GÖZETMENLİK SAYISI' , B.bolum_adi as 'BÖLÜMÜ' from OgretimElemani O, bolumler B where O.bolumu = B.id";
             if (islemler.Al(komut) != null)
             {
                 dataGridView1.DataSource = islemler.Al(komut);
@@ -203,6 +210,18 @@ namespace sp
                 this.Close();
             }
 
+            //comboboxa veri basma 
+            komut = "select * from bolumler";
+            dr = islemler.Oku(komut);
+            while (dr.Read())
+            {
+                comboBox2.Items.Add(dr.GetString("bolum_adi"));
+                comboBox3.Items.Add(dr.GetString("id"));
+            }
+            islemler.Kapat();
+            comboBox3.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 0;
+            comboBox1.SelectedIndex = 0;
 
         }
         #endregion
@@ -251,18 +270,18 @@ namespace sp
             else
             {
                 islemler.Kapat();
-                Kaydet(txtunvan.Text, txteposta.Text, txtadsoyad.Text, txtsifre.Text, comboBox1.SelectedIndex);
+                Kaydet(txtunvan.Text, txteposta.Text, txtadsoyad.Text, txtsifre.Text, comboBox1.SelectedIndex, int.Parse(comboBox3.SelectedItem.ToString()));
             }
         }
         #endregion
 
         #region Kaydetme Methodu
-        public void Kaydet(string unvan, string eposta, string adsoyad, string sifre, int yetki)
+        public void Kaydet(string unvan, string eposta, string adsoyad, string sifre, int yetki, int bolumid)
         {
 
             if (userid == -1) //eğer id -1 ise yeni ekler
             {
-                komut = "INSERT INTO OgretimElemani (unvan,Ad_Soyad,eposta,Kendi_Sinav_Sayisi,Gozetmenlik_Sayisi,sifre,yetki) VALUES ('" + unvan + "','" + adsoyad + "','" + eposta + "',0,0,'" + sifre + "'," + yetki + ") ";
+                komut = "INSERT INTO OgretimElemani (unvan,Ad_Soyad,eposta,Kendi_Sinav_Sayisi,Gozetmenlik_Sayisi,sifre,yetki,bolumu) VALUES ('" + unvan + "','" + adsoyad + "','" + eposta + "',0,0,'" + sifre + "'," + yetki + ", " + bolumid + ") ";
                 mesaj = "Yeni Kayıt Eklendi";
             }
             else // eğer id -1 değilse id ye göre veri güncellenir
@@ -270,7 +289,7 @@ namespace sp
                 button1.Visible = false;
                 button5.Text = "EKLE";
 
-                komut = "UPDATE OgretimElemani SET unvan = '" + unvan + "' ,Ad_Soyad = '" + adsoyad + "' ,eposta = '" + eposta + "',sifre = '" + sifre + "', yetki = " + yetki + "  WHERE id = " + userid + ";";
+                komut = "UPDATE OgretimElemani SET unvan = '" + unvan + "' ,Ad_Soyad = '" + adsoyad + "' ,eposta = '" + eposta + "',sifre = '" + sifre + "', yetki = " + yetki + ", bolumu=" + bolumid + "  WHERE id = " + userid + ";";
                 mesaj = "Kayıt Güncellendi";
 
             }
@@ -297,13 +316,13 @@ namespace sp
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex > 5) // sütun başlığına tıklayınca hata vermesini önlemek için...
+            if (e.RowIndex >= 0 && e.ColumnIndex > 6) // sütun başlığına tıklayınca hata vermesini önlemek için...
             {
                 userid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()); //seçilen verinin idsini atıyor
 
                 switch (e.ColumnIndex)
                 {
-                    case 6: //değiştir
+                    case 7: //değiştir
                         button1.Visible = true; //iptal butonu görünür
                         button5.Text = "GÜNCELLE";
 
@@ -326,7 +345,7 @@ namespace sp
                         dr.Close(); //datareader i temizliyoruz
 
                         break;
-                    case 7:
+                    case 8:
 
                         DialogResult uyari = MessageBox.Show("Silmek İstiyor musunuz? ", "DİKKAT!", MessageBoxButtons.YesNo);// silmek istenip istenmediği sorulur
                         if (uyari == DialogResult.Yes)
@@ -359,5 +378,9 @@ namespace sp
         }
         #endregion
 
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBox3.SelectedIndex = comboBox2.SelectedIndex;
+        }
     }
 }
