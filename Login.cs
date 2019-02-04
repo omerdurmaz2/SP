@@ -196,38 +196,27 @@ namespace sp
                     if (txtkod.Text == lblkod.Text)
                     {
                         #region Veritabanı Bağlantısı
-                        MySqlConnection cnn = new MySqlConnection(ConnectionString.Al());
                         MySqlDataReader rd;
-                        MySqlCommand cmd;
-                        try
+                        VeritabaniIslemler sorgu = new VeritabaniIslemler();
+                        label5.Text = "Bağlanıyor...";
+                        string komut = "SELECT * FROM OgretimElemani WHERE eposta='" + eposta + "' AND sifre='" + sifre + "';";
+                        rd = sorgu.Oku(komut);
+                        if (rd.Read())
                         {
-                            label5.Text="Bağlanıyor...";
-                            cnn.Open();
-                            cmd = new MySqlCommand("SELECT * FROM OgretimElemani WHERE eposta='" + eposta + "' AND sifre='" + sifre + "';", cnn);
-                            rd = cmd.ExecuteReader();
-                            if (rd.Read())
-                            {
-                                Yetki = byte.Parse(rd["yetki"].ToString());
-                                Session = true;
-                                Ad = rd["Ad_Soyad"].ToString();
-                                this.Close();
+                            Yetki = byte.Parse(rd["yetki"].ToString());
+                            Session = true;
+                            Ad = rd["Ad_Soyad"].ToString();
+                            this.Close();
 
-
-                            }
-                            else
-                            {
-                                label5.Text="";
-                                GuvenlikKodu();
-                                MessageBox.Show("E posta ya da şifre yanlış!");
-                            }
 
                         }
-                        catch (Exception err)
+                        else
                         {
-                            label5.Text = "Bağlantı Hatası!";
-
-                            MessageBox.Show("Hata: " + err);
+                            label5.Text = "";
+                            GuvenlikKodu();
+                            MessageBox.Show("E posta ya da şifre yanlış!");
                         }
+
                         #endregion
                     }
                     else

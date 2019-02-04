@@ -174,6 +174,7 @@ namespace sp
             sil.UseColumnTextForButtonValue = true;
             dataGridView1.Columns.Add(sil);
 
+            dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirection.Ascending);
 
             //Tablodaki Tarihin yanına hangi gün olduğunu yazan kod (Tablo Sıralanmasından Dolayı Hata Veriyor)
             //for (int i = 0; i < dataGridView1.Rows.Count; i++)

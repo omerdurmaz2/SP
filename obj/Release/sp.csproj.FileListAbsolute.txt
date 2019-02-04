@@ -10,5 +10,6 @@ C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.p
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\bin\Release\MySql.Data.dll
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.OgretimElemanlari.resources
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.TasarimOrnek.resources
-C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.YeniOgretimElemani.resources
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.csprojResolveAssemblyReference.cache
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.Derslikler.resources
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\sp\sp\obj\Release\sp.Tarihler.resources

@@ -5,7 +5,16 @@ namespace sp
 {
     class VeritabaniIslemler
     {
-        public MySqlConnection bag = new MySqlConnection(ConnectionString.Al()); // tekrar tekrar tanımlamamak için dışarı tanımladık
+        public static string ConnectionString()
+        {
+            //orijinal
+            //return "server=remotemysql.com; database= tDNQ1XRXlu; uid=tDNQ1XRXlu; pwd=F44eHROJZ1;";
+
+            //test
+            return "server=localhost; database= sp_test; uid=root; pwd=root;";
+        }
+
+        public MySqlConnection bag = new MySqlConnection(ConnectionString()); // tekrar tekrar tanımlamamak için dışarı tanımladık
         public MySqlCommand kmt; // tekrar tekrar tanımlamamak için dışarı tanımladık
         public MySqlDataAdapter adp; // tekrar tekrar tanımlamamak için dışarı tanımladık
         public MySqlDataReader dr; // sorgu methodu için tablo okumaya yarayan class

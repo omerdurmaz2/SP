@@ -253,7 +253,6 @@ namespace sp
                 islemler.Kapat();
                 Kaydet(txtunvan.Text, txteposta.Text, txtadsoyad.Text, txtsifre.Text, comboBox1.SelectedIndex);
             }
-            dr.Close(); //datareader i temizliyoruz
         }
         #endregion
 

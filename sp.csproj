@@ -50,7 +50,6 @@
     <Compile Include="ButtonEllipse.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ConnectionString.cs" />
     <Compile Include="Derslikler.cs">
       <SubType>Form</SubType>
     </Compile>
