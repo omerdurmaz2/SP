@@ -3,36 +3,32 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using MySql.Data.MySqlClient;
-using System.Text.RegularExpressions;
+
 namespace sp
 {
-    public partial class OgretimElemanlari : Form
+    public partial class Dersler : Form
     {
-        public static int userid = -1; // session olarak duzenlenecek uyenin id sini tutuyor
-
-
         #region Yapıcı Metot ve Form_Load
 
-        public OgretimElemanlari()
+        public Dersler()
         {
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // border radius
             menuStrip1.Renderer = new MyRenderer(); // menü butonlarının hover rengi
 
-
         }
-        private void OgretimElemanlari_Load(object sender, EventArgs e)
+        private void Dersler_Load(object sender, EventArgs e)
         {
-            //session kontrolü
             if (Login.Session)
             {
-                comboBox1.SelectedIndex = 0;
+                cmbogretimsekli.SelectedIndex = 0;
                 Listele();
             }
             else
             {
-                this.BeginInvoke(new MethodInvoker(this.Close));// formu zorla kapatma yolu
+                this.Close();
             }
+
         }
         #endregion
 
@@ -119,15 +115,13 @@ namespace sp
         #endregion
 
         #endregion
-
-        #region Form Küçültme  ve Kapatma
+        #region Form Küçültme ve Kapatma
         private void xToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            if (txtunvan.Text != "" || txtsifre.Text != "" || txtadsoyad.Text != "" || txteposta.Text != "")
+            if (txtdad.Text != "" || txtdkod.Text != "" || txtos.Text != "")
             {
-                DialogResult cevap = MessageBox.Show("Kaydedilmemiş ve var! Çıkmak istiyor musunuz ? ", "DİKKAT!", MessageBoxButtons.YesNo);
-                if (cevap == DialogResult.Yes)
+                DialogResult cevap= MessageBox.Show("Kaydedilmemiş değişiklikler var. Çıkmak istiyor musunuz?", "UYARI!!", MessageBoxButtons.YesNo);
+                if (cevap==DialogResult.Yes)
                 {
                     this.Close();
                 }
@@ -135,7 +129,6 @@ namespace sp
             else
             {
                 this.Close();
-
             }
         }
 
@@ -144,52 +137,30 @@ namespace sp
             this.WindowState = FormWindowState.Minimized;
         }
 
-        #endregion
+
 
         #endregion
 
-        #region Dışarıda Tanımlananlar
+        #endregion
+
+        #region Dışarda Tanımlananlar
         DataGridViewButtonColumn duzenle;// tekrar tekrar tanımlamamak için dışarı tanımladık
         DataGridViewButtonColumn sil;// tekrar tekrar tanımlamamak için dışarı tanımladık
         MySqlDataReader dr; // sorgu methodu için tablo okumaya yarayan class
         VeritabaniIslemler islemler = new VeritabaniIslemler();
         string komut = "";
         string mesaj = "";
-        #endregion
-
-        #region  Ekranı Temizle
-        public void Temizle() // textboxları ve butonları temizler
-        {
-            txtadsoyad.Clear();
-            txtsifre.Clear();
-            txteposta.Clear();
-            txtunvan.Clear();
-            comboBox1.SelectedIndex = 0;
-            button5.Text = "EKLE";
-            userid = -1;
-            comboBox2.SelectedIndex = 0;
-            comboBox3.SelectedIndex = 0;
-
-            dataGridView1.DataSource = null; // datagridview temizlenir
-            dataGridView1.Columns.Clear();// datagridview temizlenir
-            dataGridView1.Refresh(); // datagridview yenilenir
-            comboBox2.Items.Clear();
-            comboBox3.Items.Clear();
-
-        }
+        int dersid = -1;
         #endregion
 
         #region Listele
-
         public void Listele()
         {
+            komut = "select D.id as 'SIRA NO',D.ders_kodu as 'DERS KODU',D.ders_adi as 'DERS ADI', D.ogr_sekli as 'ÖĞRETİM ŞEKLİ', D.ogr_sayisi as 'ÖĞRENCİ SAYISI',concat(O.unvan,' ',O.Ad_Soyad) as 'ÖĞRETİM ELEMANI', B.bolum_adi as 'BÖLÜM ADI' from ders D, ogretimelemani O,bolumler B where D.ogretim_elemani=O.id and D.bolum_id = B.id;";
 
-
-            komut = "select O.id as 'SIRA NO',O.unvan as 'ÜNVAN',O.Ad_Soyad as 'AD SOYAD',O.eposta as 'E POSTA',O.Kendi_Sinav_Sayisi as 'KENDİ SINAV SAYISI' ,O.Gozetmenlik_Sayisi as 'GÖZETMENLİK SAYISI' , B.bolum_adi as 'BÖLÜMÜ' from OgretimElemani O, bolumler B where O.bolumu = B.id";
             if (islemler.Al(komut) != null)
             {
                 dataGridView1.DataSource = islemler.Al(komut);
-
                 //değiştir butonu her satır için eklenir
                 duzenle = new DataGridViewButtonColumn();
                 duzenle.HeaderText = "DÜZENLE";
@@ -204,7 +175,6 @@ namespace sp
                 sil.UseColumnTextForButtonValue = true;
                 dataGridView1.Columns.Add(sil);
 
-
             }
             else
             {
@@ -217,81 +187,43 @@ namespace sp
             dr = islemler.Oku(komut);
             while (dr.Read())
             {
-                comboBox2.Items.Add(dr.GetString("bolum_adi"));
-                comboBox3.Items.Add(dr.GetString("id"));
+                cmbbolum.Items.Add(dr.GetString("bolum_adi"));
+                cmbbolumid.Items.Add(dr.GetString("id"));
             }
             islemler.Kapat();
+            cmbbolum.SelectedIndex = 0;
+            cmbbolumid.SelectedIndex = 0;
 
-            comboBox2.SelectedIndex = 0;
-            comboBox3.SelectedIndex = 0;
+
+            komut = "select * from ogretimelemani";
+            dr = islemler.Oku(komut);
+            while (dr.Read())
+            {
+                cmbogretmen.Items.Add(dr.GetString("unvan") + " " + dr.GetString("Ad_Soyad"));
+                cmbogretimelemaniid.Items.Add(dr.GetString("id"));
+            }
+            islemler.Kapat();
+            cmbogretmen.SelectedIndex = 0;
+            cmbogretimelemaniid.SelectedIndex = 0;
+
 
         }
         #endregion
 
-        #region Form Kontrol Methodu
-        public void FormKontrol()
+        #region Kaydet
+        public void Kaydet(string dersadi, string derskodu, int ogrsayisi, string ogretimsekli, int ogretimelemani, int bolumid)
         {
-            if (txtunvan.Text == "" || txtsifre.Text == "" || txtadsoyad.Text == "" || txteposta.Text == "")
+            if (dersid == -1) //eğer id -1 ise yeni ekler
             {
-                MessageBox.Show("Lütfen Boş Alanları Doldurunuz!");
-            }
-            else
-            {
-                if (txteposta.Text.Trim() != string.Empty)
-                {
-                    Regex duzenliifade = new Regex(@"^([a-zA-Z0-9_\-])([a-zA-Z0-9_\-\.]*)@(\[((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}|((([a-zA-Z0-9\-]+)\.)+))([a-zA-Z]{2,}|(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\])$");
-                    if (!duzenliifade.IsMatch(txteposta.Text.Trim()))
-                    {
-                        MessageBox.Show("Hatalı E posta Girişi Yaptınız!");
-                        txteposta.Focus();
-                        txteposta.SelectAll();
-                    }
-                    else
-                    {
-                        Sorgu();
-                    }
-                }
-
-            }
-
-        }
-        #endregion
-
-        #region Veritabanı E posta Kontrolü
-        public void Sorgu()
-        {
-            komut = "select * from OgretimElemani where eposta='" + txteposta.Text + "' and id <> " + userid + ";";
-            if (islemler.Oku(komut).Read())
-            {
-                MessageBox.Show("Aynı E posta da başka üye bulunmakta. Lütfen başka bir e posta girin...", "HATA!");
-                txteposta.Text = "";
-                txteposta.Focus();
-
-                islemler.Kapat();
-            }
-            else
-            {
-                islemler.Kapat();
-                Kaydet(txtunvan.Text, txteposta.Text, txtadsoyad.Text, txtsifre.Text, comboBox1.SelectedIndex, int.Parse(comboBox3.SelectedItem.ToString()));
-            }
-        }
-        #endregion
-
-        #region Kaydetme Methodu
-        public void Kaydet(string unvan, string eposta, string adsoyad, string sifre, int yetki, int bolumid)
-        {
-
-            if (userid == -1) //eğer id -1 ise yeni ekler
-            {
-                komut = "INSERT INTO OgretimElemani (unvan,Ad_Soyad,eposta,Kendi_Sinav_Sayisi,Gozetmenlik_Sayisi,sifre,yetki,bolumu) VALUES ('" + unvan + "','" + adsoyad + "','" + eposta + "',0,0,'" + sifre + "'," + yetki + ", " + bolumid + ") ";
+                komut = "INSERT INTO ders(ders_adi,ogr_sekli,ogr_sayisi,ogretim_elemani,ders_kodu,bolum_id) VALUES ('" + dersadi + "','" + ogretimsekli + "'," + ogrsayisi + "," + ogretimelemani + ",'" + derskodu + "'," + bolumid + ") ";
                 mesaj = "Yeni Kayıt Eklendi";
             }
             else // eğer id -1 değilse id ye göre veri güncellenir
             {
                 button1.Visible = false;
-                button5.Text = "EKLE";
+                button2.Text = "EKLE";
 
-                komut = "UPDATE OgretimElemani SET unvan = '" + unvan + "' ,Ad_Soyad = '" + adsoyad + "' ,eposta = '" + eposta + "',sifre = '" + sifre + "', yetki = " + yetki + ", bolumu=" + bolumid + "  WHERE id = " + userid + ";";
+                komut = "UPDATE ders SET ders_adi = '" + dersadi + "',ogr_sekli = '" + ogretimsekli + "' ,ogr_sayisi = " + ogrsayisi + ",ogretim_elemani = " + ogretimelemani + ", ders_kodu = '" + derskodu + "', bolum_id=" + bolumid + "  WHERE id = " + dersid + ";";
                 mesaj = "Kayıt Güncellendi";
 
             }
@@ -301,44 +233,124 @@ namespace sp
             MessageBox.Show(mesaj);
             Temizle();
             Listele();
-
         }
-
         #endregion
 
-        #region Yeni Kayıt Ekleme Butonu
-
-        private void button5_Click(object sender, EventArgs e)
+        #region Sorgu
+        public void Sorgu()
         {
-            FormKontrol(); // form kontrol metodundan textboxları kontrol eder sonra da sorgu metodunda girilen kayıt önceden girilmiş mi bakar ve en son kaydet metodundan kaydedilip ekran listelenir
+            komut = "select * from ders where ders_kodu='" + txtdkod.Text + "' and id <> " + dersid + ";";
+            if (islemler.Oku(komut).Read())
+            {
+                MessageBox.Show("Aynı ders kodunda ders kayıtlı. Lütfen Farklı bir ders kodu girin...", "HATA!");
+                txtdkod.Text = "";
+                txtdkod.Focus();
+
+                islemler.Kapat();
+            }
+            else
+            {
+                islemler.Kapat();
+                Kaydet(txtdad.Text, txtdkod.Text, int.Parse(txtos.Text), cmbogretimsekli.SelectedItem.ToString(), int.Parse(cmbogretimelemaniid.SelectedItem.ToString()), int.Parse(cmbbolumid.SelectedItem.ToString()));
+            }
         }
         #endregion
 
-        #region Tablodaki verileri Düzenleme ve Silme Butonları
+        #region Form Kontrol
+        public void FormKontrol()
+        {
+            if (txtdad.Text != "" || txtdkod.Text != "" || txtos.Text != "")
+            {
+                Sorgu();
+            }
+            else
+            {
+                MessageBox.Show("Lütfen Gerekli Alanları Doldurunuz!", "HATA!!");
+            }
+        }
+        #endregion
 
+        #region Ekle Butonu
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FormKontrol();
+        }
+        #endregion
+
+        #region Ogrenci Sayısı Sadece Sayı Girişi
+        private void txtos_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+        #endregion
+
+        #region Temizle
+        public void Temizle() // textboxları ve butonları temizler
+        {
+            txtdad.Clear();
+            txtdkod.Clear();
+            txtos.Clear();
+            cmbogretimsekli.SelectedIndex = 0;
+            button2.Text = "EKLE";
+            button1.Visible = false;
+            dersid = -1;
+
+            dataGridView1.DataSource = null; // datagridview temizlenir
+            dataGridView1.Columns.Clear();// datagridview temizlenir
+            dataGridView1.Refresh(); // datagridview yenilenir
+
+            //veritabanından basılan dropdownların temizlenmesi 
+            cmbbolum.Items.Clear();
+            cmbbolumid.Items.Clear();
+            cmbogretmen.Items.Clear();
+            cmbogretimelemaniid.Items.Clear();
+        }
+
+        #endregion
+
+        #region Öğretim Elemanı ve BÖlüm idlerinin Comboboxa göre Tutulduğu Yer
+
+        private void cmbogretmen_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmbogretimelemaniid.SelectedIndex = cmbogretmen.SelectedIndex;
+        }
+
+        private void cmbbolum_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmbbolumid.SelectedIndex = cmbbolum.SelectedIndex;
+        }
+
+        #endregion
+
+        #region Tabloda Değiştirme ve Silme İşlemleri
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex > 6) // sütun başlığına tıklayınca hata vermesini önlemek için...
             {
-                userid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()); //seçilen verinin idsini atıyor
+                dersid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()); //seçilen verinin idsini atıyor
 
                 switch (e.ColumnIndex)
                 {
                     case 7: //değiştir
                         button1.Visible = true; //iptal butonu görünür
-                        button5.Text = "GÜNCELLE";
+                        button2.Text = "GÜNCELLE";
 
-                        komut = "select * from OgretimElemani where id=" + userid + ";";
+                        komut = "select * from ders where id=" + dersid + ";";
                         dr = islemler.Oku(komut);
                         if (dr.Read())
                         {
-                            txtunvan.Text = dr["unvan"].ToString();
-                            txtadsoyad.Text = dr["Ad_Soyad"].ToString();
-                            txteposta.Text = dr["eposta"].ToString();
-                            txtsifre.Text = dr["sifre"].ToString();
-                            comboBox1.SelectedIndex = int.Parse(dr["yetki"].ToString());
-                            comboBox3.SelectedItem= dr["bolumu"].ToString();
-                            comboBox2.SelectedIndex = comboBox3.SelectedIndex;
+                            txtdad.Text = dr["ders_adi"].ToString();
+                            txtdkod.Text = dr["ders_kodu"].ToString();
+                            txtos.Text = dr["ogr_sayisi"].ToString();
+                            cmbogretimsekli.SelectedItem= dr["ogr_sekli"].ToString();
+                            cmbbolumid.SelectedItem = dr["bolum_id"].ToString();
+                            cmbbolum.SelectedIndex = cmbbolumid.SelectedIndex;
+
+                            cmbogretimelemaniid.SelectedItem = dr["ogretim_elemani"].ToString();
+                            cmbogretmen.SelectedIndex = cmbogretimelemaniid.SelectedIndex;
                         }
                         else
                         { // eğer kayıt buluanmazsa hata verir
@@ -354,7 +366,7 @@ namespace sp
                         DialogResult uyari = MessageBox.Show("Silmek İstiyor musunuz? ", "DİKKAT!", MessageBoxButtons.YesNo);// silmek istenip istenmediği sorulur
                         if (uyari == DialogResult.Yes)
                         {
-                            komut = "DELETE FROM OgretimElemani where id=" + userid + ";";
+                            komut = "DELETE FROM ders where id=" + dersid + ";";
                             islemler.Degistir(komut);
 
                             MessageBox.Show("Silindi.");
@@ -369,23 +381,16 @@ namespace sp
 
 
             }
-        }
 
+        }
         #endregion
 
         #region İptal Butonu
-
         private void button1_Click(object sender, EventArgs e)
         {
-            Temizle(); //textboxlar ve dropdown temizleme
-            button1.Visible = false; //iptal butonu kapat
+            Temizle();
+            Listele();
         }
         #endregion
-
-        //id yi alabilmek için id nin tutulduğu comboboxu değiştirme
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            comboBox3.SelectedIndex = comboBox2.SelectedIndex;
-        }
     }
 }

@@ -180,7 +180,17 @@ namespace sp
         #region Bölümler Sayfası
         private void button5_Click(object sender, EventArgs e)
         {
-
+            label3.Visible = true;
+            Bolumler bolum = new Bolumler();
+            bolum.ShowDialog();
+        }
+        #endregion
+        #region Dersler
+        private void button2_Click(object sender, EventArgs e)
+        {
+            label3.Visible = true;
+            Dersler ders = new Dersler();
+            ders.ShowDialog();
         }
         #endregion
     }
