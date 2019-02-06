@@ -1,12 +1,14 @@
 ﻿namespace sp
 {
-    partial class Login
+    partial class Login:Tasarim
     {
+        
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
+        
+        
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -39,14 +41,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtsifre = new System.Windows.Forms.TextBox();
             this.txteposta = new System.Windows.Forms.TextBox();
-            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
-            this.xToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonEllipse2 = new sp.ButtonEllipse();
             this.buttonEllipse1 = new sp.ButtonEllipse();
-            this.menuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -165,45 +163,6 @@
             this.txteposta.Size = new System.Drawing.Size(256, 30);
             this.txteposta.TabIndex = 20;
             // 
-            // menuStrip2
-            // 
-            this.menuStrip2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(171)))), ((int)(((byte)(227)))));
-            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.xToolStripMenuItem,
-            this.toolStripMenuItem1});
-            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.menuStrip2.Size = new System.Drawing.Size(408, 36);
-            this.menuStrip2.TabIndex = 30;
-            this.menuStrip2.Text = "menuStrip2";
-            this.menuStrip2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.menuStrip2_MouseDown);
-            this.menuStrip2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.menuStrip2_MouseMove);
-            this.menuStrip2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.menuStrip2_MouseUp);
-            // 
-            // xToolStripMenuItem
-            // 
-            this.xToolStripMenuItem.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuBar;
-            this.xToolStripMenuItem.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
-            this.xToolStripMenuItem.Name = "xToolStripMenuItem";
-            this.xToolStripMenuItem.Padding = new System.Windows.Forms.Padding(5);
-            this.xToolStripMenuItem.ShortcutKeyDisplayString = "Alt+F4";
-            this.xToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.xToolStripMenuItem.Size = new System.Drawing.Size(31, 32);
-            this.xToolStripMenuItem.Tag = "Kapat";
-            this.xToolStripMenuItem.Text = "X";
-            this.xToolStripMenuItem.Click += new System.EventHandler(this.xToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Padding = new System.Windows.Forms.Padding(5);
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(30, 32);
-            this.toolStripMenuItem1.Tag = "Küçült";
-            this.toolStripMenuItem1.Text = "_";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -261,12 +220,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(408, 480);
+            this.ClientSize = new System.Drawing.Size(408, 508);
             this.Controls.Add(this.buttonEllipse2);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.menuStrip2);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.txtkod);
             this.Controls.Add(this.lblkod);
@@ -279,21 +237,24 @@
             this.Controls.Add(this.txteposta);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.buttonEllipse1);
-            this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip2;
             this.Name = "Login";
-            this.Opacity = 0.95D;
-            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Opacity = 0.98D;
             this.Load += new System.EventHandler(this.Login_Load_1);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Login_MouseDown);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Login_MouseMove);
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Login_MouseUp);
-            this.menuStrip2.ResumeLayout(false);
-            this.menuStrip2.PerformLayout();
+            this.Controls.SetChildIndex(this.buttonEllipse1, 0);
+            this.Controls.SetChildIndex(this.pictureBox1, 0);
+            this.Controls.SetChildIndex(this.txteposta, 0);
+            this.Controls.SetChildIndex(this.txtsifre, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.button5, 0);
+            this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.lblkod, 0);
+            this.Controls.SetChildIndex(this.txtkod, 0);
+            this.Controls.SetChildIndex(this.linkLabel1, 0);
+            this.Controls.SetChildIndex(this.label5, 0);
+            this.Controls.SetChildIndex(this.buttonEllipse2, 0);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -313,9 +274,6 @@
         private System.Windows.Forms.TextBox txteposta;
         private System.Windows.Forms.PictureBox pictureBox1;
         private ButtonEllipse buttonEllipse1;
-        private System.Windows.Forms.MenuStrip menuStrip2;
-        private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.Label label5;
         private ButtonEllipse buttonEllipse2;
     }

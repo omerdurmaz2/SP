@@ -6,16 +6,17 @@ using System.Text.RegularExpressions;
 using MySql.Data.MySqlClient;
 namespace sp
 {
-    public partial class Login : Form
+    public partial class Login : Tasarim
     {
         #region Yapıcı metot ve Form_Load
 
         public Login()
         {
             InitializeComponent();
-            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // border radius
-            menuStrip2.Renderer = new MyRenderer(); // menü butonlarının hover rengi
 
+
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // border radius
+            this.yToolStripMenuItem.Visible = false;
         }
         private void Login_Load_1(object sender, EventArgs e)
         {
@@ -34,11 +35,9 @@ namespace sp
 
         }
 
-
-        #region Tasarım için Yapılmış Değişiklikler
         #region Köşelerin Yuvarlanması
 
-        //Köşelerin Yuvarlanması 
+        //Köşelerin Yuvarlanması
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
             (
@@ -51,23 +50,6 @@ namespace sp
             );
 
 
-        #endregion
-        #region Menü Butonlarının Hoverı
-
-        private class MyRenderer : ToolStripProfessionalRenderer
-        {
-            protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
-            {
-                if (!e.Item.Selected) base.OnRenderMenuItemBackground(e);
-                else
-                {
-                    Rectangle rc = new Rectangle(Point.Empty, e.Item.Size);
-                    Brush arkaplan = new SolidBrush(Color.FromArgb(35, 157, 211));
-                    e.Graphics.FillRectangle(arkaplan, rc);
-                }
-            }
-        }
-        #endregion
         #endregion
 
         #region Formun Sürüklenmesi
@@ -121,17 +103,17 @@ namespace sp
         #endregion
 
         #region Formu Kapatma ve Küçültme
+        private void toolStripMenuItem1_Click_1(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
 
-        private void xToolStripMenuItem_Click(object sender, EventArgs e)
+        private void xToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             Login.Session = false;
             this.Close();
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
         #endregion
 
         #region Diğer Formlara Gönderilen Bilgiler

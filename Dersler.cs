@@ -6,7 +6,7 @@ using MySql.Data.MySqlClient;
 
 namespace sp
 {
-    public partial class Dersler : Form
+    public partial class Dersler : Tasarim
     {
         #region Yapıcı Metot ve Form_Load
 
@@ -14,8 +14,7 @@ namespace sp
         {
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // border radius
-            menuStrip1.Renderer = new MyRenderer(); // menü butonlarının hover rengi
-
+            this.yToolStripMenuItem.Visible = false;
         }
         private void Dersler_Load(object sender, EventArgs e)
         {
@@ -31,8 +30,6 @@ namespace sp
 
         }
         #endregion
-
-        #region Tasarım için Yapılmış Değişiklikler
         #region Köşelerin Yuvarlanması
 
         //Köşelerin Yuvarlanması 
@@ -47,99 +44,6 @@ namespace sp
                 int nHeightEllipse // width of ellipse
             );
 
-
-        #endregion
-        #region Menü Butonlarının Hoverı
-
-        private class MyRenderer : ToolStripProfessionalRenderer
-        {
-            protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
-            {
-                if (!e.Item.Selected) base.OnRenderMenuItemBackground(e);
-                else
-                {
-                    Rectangle rc = new Rectangle(Point.Empty, e.Item.Size);
-                    Brush arkaplan = new SolidBrush(Color.FromArgb(35, 157, 211));
-                    e.Graphics.FillRectangle(arkaplan, rc);
-                }
-            }
-        }
-        #endregion
-        #region Formun Sürüklenmesi
-        #region Formun Üzerinde Tıklanınca
-
-        private bool mouseDown;
-        private Point _start_point = new Point(0, 0);
-
-        private void Home_MouseDown(object sender, MouseEventArgs e)
-        {
-            mouseDown = true;
-            _start_point = new Point(e.X, e.Y);
-        }
-        private void Home_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseDown)
-            {
-                Point p = PointToScreen(e.Location);
-                Location = new Point(p.X - this._start_point.X, p.Y - this._start_point.Y);
-            }
-        }
-        private void Home_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
-
-        }
-
-        #endregion
-        #region Menü Üzerinde Tıklanınca
-
-        private void menuStrip1_MouseDown(object sender, MouseEventArgs e)
-        {
-            mouseDown = true;
-            _start_point = new Point(e.X, e.Y);
-        }
-
-        private void menuStrip1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseDown)
-            {
-                Point p = PointToScreen(e.Location);
-                Location = new Point(p.X - this._start_point.X, p.Y - this._start_point.Y);
-            }
-        }
-
-        private void menuStrip1_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
-        }
-        #endregion
-
-        #endregion
-        #region Form Küçültme ve Kapatma
-        private void xToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (txtdad.Text != "" || txtdkod.Text != "" || txtos.Text != "")
-            {
-                DialogResult cevap= MessageBox.Show("Kaydedilmemiş değişiklikler var. Çıkmak istiyor musunuz?", "UYARI!!", MessageBoxButtons.YesNo);
-                if (cevap==DialogResult.Yes)
-                {
-                    this.Close();
-                }
-            }
-            else
-            {
-                this.Close();
-            }
-        }
-
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
-
-
-        #endregion
 
         #endregion
 

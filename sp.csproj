@@ -56,6 +56,12 @@
     <Compile Include="Derslikler.Designer.cs">
       <DependentUpon>Derslikler.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tasarim.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tasarim.Designer.cs">
+      <DependentUpon>Tasarim.cs</DependentUpon>
+    </Compile>
     <Compile Include="Home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,15 +105,18 @@
     <Compile Include="Dersler.Designer.cs">
       <DependentUpon>Dersler.cs</DependentUpon>
     </Compile>
-    <Compile Include="TasarimOrnek.cs">
+    <Compile Include="Sinavlar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TasarimOrnek.Designer.cs">
-      <DependentUpon>TasarimOrnek.cs</DependentUpon>
+    <Compile Include="Sinavlar.Designer.cs">
+      <DependentUpon>Sinavlar.cs</DependentUpon>
     </Compile>
     <Compile Include="VeritabaniIslemler.cs" />
     <EmbeddedResource Include="Derslikler.resx">
       <DependentUpon>Derslikler.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tasarim.resx">
+      <DependentUpon>Tasarim.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
@@ -132,8 +141,8 @@
     <EmbeddedResource Include="Dersler.resx">
       <DependentUpon>Dersler.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TasarimOrnek.resx">
-      <DependentUpon>TasarimOrnek.cs</DependentUpon>
+    <EmbeddedResource Include="Sinavlar.resx">
+      <DependentUpon>Sinavlar.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -159,6 +168,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\_refresh_55882.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minimize2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maximize.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
