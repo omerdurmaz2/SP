@@ -8,8 +8,9 @@ namespace sp
 {
     public partial class Tasarim : Form
     {
+
         #region Yapıcı Metot ve Form_Load
-        
+
         public Tasarim()
         {
             InitializeComponent();
@@ -20,13 +21,24 @@ namespace sp
 
             }
             menuStrip1.Renderer = new MyRenderer(); // menü butonlarının hover rengi
+
         }
+        
         private void Tasarim_Load(object sender, EventArgs e)
         {
 
-
         }
         #endregion
+        #region Formun Başlığının Hizalanması
+        public void baslikhizala()
+        {
+            int x = this.Width / 2 - lblbaslik.Width / 2;
+            int y = lblbaslik.Location.Y;
+            lblbaslik.Location = new Point(x, y);
+        }
+
+        #endregion
+
         #region Tasarım için Yapılmış Değişiklikler
         #region Köşelerin Yuvarlanması
 
@@ -44,6 +56,7 @@ namespace sp
 
 
         #endregion
+
         #region Menü Butonlarının Hoverı
 
         private class MyRenderer : ToolStripProfessionalRenderer
@@ -68,6 +81,7 @@ namespace sp
             }
         }
         #endregion
+
         #region Formun Sürüklenmesi
 
         private bool mouseDown;
@@ -138,7 +152,6 @@ namespace sp
 
         #endregion
 
-
         #region Form Küçültme, Kapatma ve Büyütme
         private void xToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -149,36 +162,55 @@ namespace sp
         {
             this.WindowState = FormWindowState.Minimized;
         }
-        #region Tam Ekran
+
+        //Büyütme
         private void yToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Maximized)
             {
                 this.WindowState = FormWindowState.Normal;
                 Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // border radius
+
             }
             else
             {
                 this.WindowState = FormWindowState.Maximized;
                 Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 0, 0)); // border radius
 
+
             }
+            baslikhizala();
 
         }
 
 
-        #endregion
 
         #endregion
 
         #endregion
 
-        public void boyut(int x,int y)
+        #region Dışarıda Tanımlananlar
+        //Datagridview butonlarını tasarımda bir kez tanımladıktan sonra diğer formlarda bu butonları direk çekeceğiz ve kod fazlalığı ortadan kalkmış olacak
+        public DataGridViewButtonColumn duzenle;
+        public DataGridViewButtonColumn sil;
+        #endregion
+        #region Diğer Sayfalardaki Tablolara Eklenen Butonların Tasarımları
+        public void ButonEkle()
         {
-            this.Width = x;
-            this.Height = y;
-            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // border radius
+            duzenle = new DataGridViewButtonColumn();
+            duzenle.HeaderText = "DÜZENLE";
+            duzenle.Text = "DÜZENLE";
+            duzenle.UseColumnTextForButtonValue = true;
+
+
+            sil = new DataGridViewButtonColumn();
+            sil.HeaderText = "SİL";
+            sil.Text = "SİL";
+            sil.UseColumnTextForButtonValue = true;
 
         }
+
+        #endregion
+
     }
 }

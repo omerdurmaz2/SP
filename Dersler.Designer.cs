@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dersler));
-            this.cmbbolum = new System.Windows.Forms.ComboBox();
             this.lblderskodu = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.cmbogretmen = new System.Windows.Forms.ComboBox();
@@ -38,9 +37,6 @@
             this.txtos = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtdad = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.txtdkod = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,18 +45,27 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.cmbbolumid = new System.Windows.Forms.ComboBox();
+            this.cmbbolum = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // cmbbolum
+            // lblbaslik
             // 
-            this.cmbbolum.FormattingEnabled = true;
-            this.cmbbolum.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.cmbbolum.Location = new System.Drawing.Point(672, 176);
-            this.cmbbolum.Name = "cmbbolum";
-            this.cmbbolum.Size = new System.Drawing.Size(256, 21);
-            this.cmbbolum.TabIndex = 6;
-            this.cmbbolum.SelectedIndexChanged += new System.EventHandler(this.cmbbolum_SelectedIndexChanged);
+            this.lblbaslik.Location = new System.Drawing.Point(528, 48);
+            this.lblbaslik.Size = new System.Drawing.Size(96, 22);
+            this.lblbaslik.Text = "DERSLER";
+            // 
+            // btnkirmizi1
+            // 
+            this.btnkirmizi1.FlatAppearance.BorderSize = 0;
+            this.btnkirmizi1.Location = new System.Drawing.Point(992, 208);
+            this.btnkirmizi1.Click += new System.EventHandler(this.btnkirmizi1_Click);
+            // 
+            // btnmavi1
+            // 
+            this.btnmavi1.FlatAppearance.BorderSize = 0;
+            this.btnmavi1.Location = new System.Drawing.Point(992, 168);
+            this.btnmavi1.Click += new System.EventHandler(this.btnmavi1_Click);
             // 
             // lblderskodu
             // 
@@ -92,6 +97,7 @@
             this.cmbogretmen.Name = "cmbogretmen";
             this.cmbogretmen.Size = new System.Drawing.Size(256, 21);
             this.cmbogretmen.TabIndex = 5;
+            this.cmbogretmen.Text = "Seçiniz...";
             this.cmbogretmen.SelectedIndexChanged += new System.EventHandler(this.cmbogretmen_SelectedIndexChanged);
             // 
             // label5
@@ -148,47 +154,6 @@
             this.txtdad.Size = new System.Drawing.Size(256, 30);
             this.txtdad.TabIndex = 1;
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(82)))), ((int)(((byte)(82)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button1.Location = new System.Drawing.Point(992, 208);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(88, 32);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "İPTAL";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(171)))), ((int)(((byte)(227)))));
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button2.Location = new System.Drawing.Point(992, 168);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(88, 32);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "EKLE";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.label9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label9.Font = new System.Drawing.Font("Arial Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label9.Location = new System.Drawing.Point(528, 48);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(89, 22);
-            this.label9.TabIndex = 63;
-            this.label9.Text = "DERSLER";
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
@@ -238,23 +203,26 @@
             this.cmbogretimsekli.Name = "cmbogretimsekli";
             this.cmbogretimsekli.Size = new System.Drawing.Size(256, 21);
             this.cmbogretimsekli.TabIndex = 4;
+            this.cmbogretimsekli.Text = "Seçiniz...";
             // 
             // cmbogretimelemaniid
             // 
             this.cmbogretimelemaniid.FormattingEnabled = true;
             this.cmbogretimelemaniid.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.cmbogretimelemaniid.Location = new System.Drawing.Point(176, 224);
+            this.cmbogretimelemaniid.Location = new System.Drawing.Point(16, 224);
             this.cmbogretimelemaniid.Name = "cmbogretimelemaniid";
             this.cmbogretimelemaniid.Size = new System.Drawing.Size(256, 21);
             this.cmbogretimelemaniid.TabIndex = 4;
+            this.cmbogretimelemaniid.Text = "Seçiniz...";
             this.cmbogretimelemaniid.Visible = false;
+            this.cmbogretimelemaniid.SelectedIndexChanged += new System.EventHandler(this.cmbogretimelemaniid_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline);
-            this.label3.Location = new System.Drawing.Point(176, 208);
+            this.label3.Location = new System.Drawing.Point(16, 208);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(85, 13);
             this.label3.TabIndex = 66;
@@ -266,7 +234,7 @@
             this.label7.AutoSize = true;
             this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline);
-            this.label7.Location = new System.Drawing.Point(464, 208);
+            this.label7.Location = new System.Drawing.Point(344, 208);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(43, 13);
             this.label7.TabIndex = 66;
@@ -277,11 +245,24 @@
             // 
             this.cmbbolumid.FormattingEnabled = true;
             this.cmbbolumid.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.cmbbolumid.Location = new System.Drawing.Point(464, 224);
+            this.cmbbolumid.Location = new System.Drawing.Point(344, 232);
             this.cmbbolumid.Name = "cmbbolumid";
             this.cmbbolumid.Size = new System.Drawing.Size(256, 21);
             this.cmbbolumid.TabIndex = 4;
+            this.cmbbolumid.Text = "Seçiniz...";
             this.cmbbolumid.Visible = false;
+            this.cmbbolumid.SelectedIndexChanged += new System.EventHandler(this.cmbbolumid_SelectedIndexChanged);
+            // 
+            // cmbbolum
+            // 
+            this.cmbbolum.FormattingEnabled = true;
+            this.cmbbolum.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.cmbbolum.Location = new System.Drawing.Point(672, 176);
+            this.cmbbolum.Name = "cmbbolum";
+            this.cmbbolum.Size = new System.Drawing.Size(256, 21);
+            this.cmbbolum.TabIndex = 4;
+            this.cmbbolum.Text = "Seçiniz...";
+            this.cmbbolum.SelectedIndexChanged += new System.EventHandler(this.cmbbolum_SelectedIndexChanged);
             // 
             // Dersler
             // 
@@ -289,8 +270,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.ClientSize = new System.Drawing.Size(1098, 660);
-            this.Controls.Add(this.cmbbolum);
             this.Controls.Add(this.lblderskodu);
+            this.Controls.Add(this.cmbbolum);
             this.Controls.Add(this.cmbbolumid);
             this.Controls.Add(this.cmbogretimelemaniid);
             this.Controls.Add(this.cmbogretimsekli);
@@ -305,18 +286,15 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtdkod);
             this.Controls.Add(this.txtdad);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.label9);
             this.Controls.Add(this.dataGridView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Dersler";
             this.Opacity = 0.99D;
             this.Load += new System.EventHandler(this.Dersler_Load);
+            this.Controls.SetChildIndex(this.btnmavi1, 0);
+            this.Controls.SetChildIndex(this.btnkirmizi1, 0);
+            this.Controls.SetChildIndex(this.lblbaslik, 0);
             this.Controls.SetChildIndex(this.dataGridView1, 0);
-            this.Controls.SetChildIndex(this.label9, 0);
-            this.Controls.SetChildIndex(this.button2, 0);
-            this.Controls.SetChildIndex(this.button1, 0);
             this.Controls.SetChildIndex(this.txtdad, 0);
             this.Controls.SetChildIndex(this.txtdkod, 0);
             this.Controls.SetChildIndex(this.label1, 0);
@@ -331,8 +309,8 @@
             this.Controls.SetChildIndex(this.cmbogretimsekli, 0);
             this.Controls.SetChildIndex(this.cmbogretimelemaniid, 0);
             this.Controls.SetChildIndex(this.cmbbolumid, 0);
-            this.Controls.SetChildIndex(this.lblderskodu, 0);
             this.Controls.SetChildIndex(this.cmbbolum, 0);
+            this.Controls.SetChildIndex(this.lblderskodu, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -340,7 +318,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.ComboBox cmbbolum;
         private System.Windows.Forms.Label lblderskodu;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cmbogretmen;
@@ -349,9 +326,6 @@
         private System.Windows.Forms.TextBox txtos;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtdad;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox txtdkod;
         private System.Windows.Forms.Label label2;
@@ -360,6 +334,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cmbbolumid;
+        private System.Windows.Forms.ComboBox cmbbolum;
     }
 }
 

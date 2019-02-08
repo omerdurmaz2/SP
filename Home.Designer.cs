@@ -40,6 +40,22 @@
             this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
+            // lblbaslik
+            // 
+            this.lblbaslik.Location = new System.Drawing.Point(304, 264);
+            this.lblbaslik.Text = "";
+            // 
+            // btnkirmizi1
+            // 
+            this.btnkirmizi1.FlatAppearance.BorderSize = 0;
+            this.btnkirmizi1.Location = new System.Drawing.Point(208, 264);
+            // 
+            // btnmavi1
+            // 
+            this.btnmavi1.FlatAppearance.BorderSize = 0;
+            this.btnmavi1.Location = new System.Drawing.Point(208, 224);
+            this.btnmavi1.Visible = false;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -160,7 +176,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.ClientSize = new System.Drawing.Size(473, 304);
+            this.ClientSize = new System.Drawing.Size(471, 304);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button5);
@@ -175,6 +191,9 @@
             this.Opacity = 0.95D;
             this.Activated += new System.EventHandler(this.Home_Activated);
             this.Load += new System.EventHandler(this.Home_Load);
+            this.Controls.SetChildIndex(this.btnmavi1, 0);
+            this.Controls.SetChildIndex(this.btnkirmizi1, 0);
+            this.Controls.SetChildIndex(this.lblbaslik, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.button12, 0);

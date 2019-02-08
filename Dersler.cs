@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using MySql.Data.MySqlClient;
+using System.Collections;
 
 namespace sp
 {
@@ -15,12 +16,12 @@ namespace sp
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // border radius
             this.yToolStripMenuItem.Visible = false;
+            baslikhizala();
         }
         private void Dersler_Load(object sender, EventArgs e)
         {
             if (Login.Session)
             {
-                cmbogretimsekli.SelectedIndex = 0;
                 Listele();
             }
             else
@@ -30,6 +31,7 @@ namespace sp
 
         }
         #endregion
+
         #region Köşelerin Yuvarlanması
 
         //Köşelerin Yuvarlanması 
@@ -48,8 +50,6 @@ namespace sp
         #endregion
 
         #region Dışarda Tanımlananlar
-        DataGridViewButtonColumn duzenle;// tekrar tekrar tanımlamamak için dışarı tanımladık
-        DataGridViewButtonColumn sil;// tekrar tekrar tanımlamamak için dışarı tanımladık
         MySqlDataReader dr; // sorgu methodu için tablo okumaya yarayan class
         VeritabaniIslemler islemler = new VeritabaniIslemler();
         string komut = "";
@@ -65,18 +65,12 @@ namespace sp
             if (islemler.Al(komut) != null)
             {
                 dataGridView1.DataSource = islemler.Al(komut);
+
+                ButonEkle();//Tasarımda hazır buluann butonları ekliyoruz
                 //değiştir butonu her satır için eklenir
-                duzenle = new DataGridViewButtonColumn();
-                duzenle.HeaderText = "DÜZENLE";
-                duzenle.Text = "DÜZENLE";
-                duzenle.UseColumnTextForButtonValue = true;
                 dataGridView1.Columns.Add(duzenle);
 
                 //sil butonu her satır için eklenir
-                sil = new DataGridViewButtonColumn();
-                sil.HeaderText = "SİL";
-                sil.Text = "SİL";
-                sil.UseColumnTextForButtonValue = true;
                 dataGridView1.Columns.Add(sil);
 
             }
@@ -91,13 +85,12 @@ namespace sp
             dr = islemler.Oku(komut);
             while (dr.Read())
             {
-                cmbbolum.Items.Add(dr.GetString("bolum_adi"));
+                cmbbolum.Items.Add(dr.GetString("bolum_adi") + " (" + dr.GetString("bolum_kodu") + ")");
                 cmbbolumid.Items.Add(dr.GetString("id"));
             }
             islemler.Kapat();
             cmbbolum.SelectedIndex = 0;
             cmbbolumid.SelectedIndex = 0;
-
 
             komut = "select * from ogretimelemani";
             dr = islemler.Oku(komut);
@@ -107,9 +100,8 @@ namespace sp
                 cmbogretimelemaniid.Items.Add(dr.GetString("id"));
             }
             islemler.Kapat();
-            cmbogretmen.SelectedIndex = 0;
             cmbogretimelemaniid.SelectedIndex = 0;
-
+            cmbogretmen.SelectedIndex = 0;
 
         }
         #endregion
@@ -124,8 +116,8 @@ namespace sp
             }
             else // eğer id -1 değilse id ye göre veri güncellenir
             {
-                button1.Visible = false;
-                button2.Text = "EKLE";
+                btnkirmizi1.Visible = false;
+                btnmavi1.Text = "EKLE";
 
                 komut = "UPDATE ders SET ders_adi = '" + dersadi + "',ogr_sekli = '" + ogretimsekli + "' ,ogr_sayisi = " + ogrsayisi + ",ogretim_elemani = " + ogretimelemani + ", ders_kodu = '" + derskodu + "', bolum_id=" + bolumid + "  WHERE id = " + dersid + ";";
                 mesaj = "Kayıt Güncellendi";
@@ -163,7 +155,7 @@ namespace sp
         #region Form Kontrol
         public void FormKontrol()
         {
-            if (txtdad.Text != "" || txtdkod.Text != "" || txtos.Text != "")
+            if (txtdad.Text != "" && txtdkod.Text != "" && txtos.Text != "" && cmbbolum.SelectedIndex != -1 && cmbogretmen.SelectedIndex != -1 && cmbogretimsekli.SelectedIndex != -1)
             {
                 Sorgu();
             }
@@ -175,9 +167,10 @@ namespace sp
         #endregion
 
         #region Ekle Butonu
-        private void button2_Click(object sender, EventArgs e)
+        private void btnmavi1_Click(object sender, EventArgs e)
         {
             FormKontrol();
+
         }
         #endregion
 
@@ -198,8 +191,8 @@ namespace sp
             txtdkod.Clear();
             txtos.Clear();
             cmbogretimsekli.SelectedIndex = 0;
-            button2.Text = "EKLE";
-            button1.Visible = false;
+            btnmavi1.Text = "EKLE";
+            btnkirmizi1.Visible = false;
             dersid = -1;
 
             dataGridView1.DataSource = null; // datagridview temizlenir
@@ -211,23 +204,11 @@ namespace sp
             cmbbolumid.Items.Clear();
             cmbogretmen.Items.Clear();
             cmbogretimelemaniid.Items.Clear();
+            
         }
 
         #endregion
 
-        #region Öğretim Elemanı ve BÖlüm idlerinin Comboboxa göre Tutulduğu Yer
-
-        private void cmbogretmen_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cmbogretimelemaniid.SelectedIndex = cmbogretmen.SelectedIndex;
-        }
-
-        private void cmbbolum_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cmbbolumid.SelectedIndex = cmbbolum.SelectedIndex;
-        }
-
-        #endregion
 
         #region Tabloda Değiştirme ve Silme İşlemleri
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -239,8 +220,8 @@ namespace sp
                 switch (e.ColumnIndex)
                 {
                     case 7: //değiştir
-                        button1.Visible = true; //iptal butonu görünür
-                        button2.Text = "GÜNCELLE";
+                        btnkirmizi1.Visible = true; //iptal butonu görünür
+                        btnmavi1.Text = "GÜNCELLE";
 
                         komut = "select * from ders where id=" + dersid + ";";
                         dr = islemler.Oku(komut);
@@ -249,9 +230,8 @@ namespace sp
                             txtdad.Text = dr["ders_adi"].ToString();
                             txtdkod.Text = dr["ders_kodu"].ToString();
                             txtos.Text = dr["ogr_sayisi"].ToString();
-                            cmbogretimsekli.SelectedItem= dr["ogr_sekli"].ToString();
+                            cmbogretimsekli.SelectedItem = dr["ogr_sekli"].ToString();
                             cmbbolumid.SelectedItem = dr["bolum_id"].ToString();
-                            cmbbolum.SelectedIndex = cmbbolumid.SelectedIndex;
 
                             cmbogretimelemaniid.SelectedItem = dr["ogretim_elemani"].ToString();
                             cmbogretmen.SelectedIndex = cmbogretimelemaniid.SelectedIndex;
@@ -290,11 +270,43 @@ namespace sp
         #endregion
 
         #region İptal Butonu
-        private void button1_Click(object sender, EventArgs e)
+        private void btnkirmizi1_Click(object sender, EventArgs e)
         {
             Temizle();
             Listele();
         }
+
+
         #endregion
+
+        #region Öğretim Elemanı Seçilen index Değiştiğinde Yapılacaklar
+        //görünen değiştiğinde görünmeyen indexi eşitlenir
+        private void cmbogretmen_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmbogretimelemaniid.SelectedIndex = cmbogretmen.SelectedIndex;
+        }
+        //görünmeyen indexi değiştiğinde görünen indexi de eşitlernir
+        private void cmbogretimelemaniid_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmbogretmen.SelectedIndex = cmbogretimelemaniid.SelectedIndex;
+        }
+
+        #endregion
+
+        #region Bölüm comboboxu Seçilen İndex Değiştiğinde Yapılacaklar
+        //görünen değiştiğinde görünmeyen indexi eşitlenir
+        private void cmbbolum_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmbbolumid.SelectedIndex = cmbbolum.SelectedIndex;
+        }
+        //görünmeyen indexi değiştiğinde görünen indexi de eşitlernir
+        private void cmbbolumid_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmbbolum.SelectedIndex = cmbbolumid.SelectedIndex;
+        }
+
+        #endregion
+
+
     }
 }

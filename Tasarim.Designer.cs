@@ -36,6 +36,9 @@
             this.xToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblbaslik = new System.Windows.Forms.Label();
+            this.btnkirmizi1 = new System.Windows.Forms.Button();
+            this.btnmavi1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,14 +91,54 @@
             this.toolStripMenuItem1.Tag = "Küçült";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
+            // lblbaslik
+            // 
+            this.lblbaslik.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.lblbaslik.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblbaslik.Font = new System.Drawing.Font("Arial Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblbaslik.Location = new System.Drawing.Point(8, 48);
+            this.lblbaslik.Name = "lblbaslik";
+            this.lblbaslik.Size = new System.Drawing.Size(161, 22);
+            this.lblbaslik.TabIndex = 31;
+            this.lblbaslik.Text = "SINAV PROGRAMI";
+            // 
+            // btnkirmizi1
+            // 
+            this.btnkirmizi1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(82)))), ((int)(((byte)(82)))));
+            this.btnkirmizi1.FlatAppearance.BorderSize = 0;
+            this.btnkirmizi1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnkirmizi1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnkirmizi1.Location = new System.Drawing.Point(8, 120);
+            this.btnkirmizi1.Name = "btnkirmizi1";
+            this.btnkirmizi1.Size = new System.Drawing.Size(88, 32);
+            this.btnkirmizi1.TabIndex = 50;
+            this.btnkirmizi1.Text = "İPTAL";
+            this.btnkirmizi1.UseVisualStyleBackColor = false;
+            this.btnkirmizi1.Visible = false;
+            // 
+            // btnmavi1
+            // 
+            this.btnmavi1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(171)))), ((int)(((byte)(227)))));
+            this.btnmavi1.FlatAppearance.BorderSize = 0;
+            this.btnmavi1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnmavi1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnmavi1.Location = new System.Drawing.Point(8, 80);
+            this.btnmavi1.Name = "btnmavi1";
+            this.btnmavi1.Size = new System.Drawing.Size(88, 32);
+            this.btnmavi1.TabIndex = 49;
+            this.btnmavi1.Text = "EKLE";
+            this.btnmavi1.UseVisualStyleBackColor = false;
+            // 
             // Tasarim
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1366, 768);
+            this.Controls.Add(this.btnkirmizi1);
+            this.Controls.Add(this.btnmavi1);
+            this.Controls.Add(this.lblbaslik);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -122,6 +165,9 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem yToolStripMenuItem;
+        public System.Windows.Forms.Label lblbaslik;
+        public System.Windows.Forms.Button btnkirmizi1;
+        public System.Windows.Forms.Button btnmavi1;
     }
 }
 

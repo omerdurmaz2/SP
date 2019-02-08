@@ -35,8 +35,6 @@
             this.txtkod = new System.Windows.Forms.TextBox();
             this.lblkod = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtsifre = new System.Windows.Forms.TextBox();
@@ -47,6 +45,25 @@
             this.buttonEllipse1 = new sp.ButtonEllipse();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // lblbaslik
+            // 
+            this.lblbaslik.Font = new System.Drawing.Font("Arial Black", 14.25F, System.Drawing.FontStyle.Bold);
+            this.lblbaslik.Location = new System.Drawing.Point(168, 184);
+            this.lblbaslik.Size = new System.Drawing.Size(72, 32);
+            this.lblbaslik.Text = "GİRİŞ";
+            // 
+            // btnkirmizi1
+            // 
+            this.btnkirmizi1.FlatAppearance.BorderSize = 0;
+            this.btnkirmizi1.Location = new System.Drawing.Point(240, 456);
+            // 
+            // btnmavi1
+            // 
+            this.btnmavi1.FlatAppearance.BorderSize = 0;
+            this.btnmavi1.Location = new System.Drawing.Point(240, 416);
+            this.btnmavi1.Text = "GİRİŞ";
+            this.btnmavi1.Click += new System.EventHandler(this.btnmavi1_Click);
             // 
             // linkLabel1
             // 
@@ -93,32 +110,6 @@
             this.label4.Size = new System.Drawing.Size(83, 13);
             this.label4.TabIndex = 27;
             this.label4.Text = "Güvenlik Kodu: ";
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(171)))), ((int)(((byte)(227)))));
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button5.Location = new System.Drawing.Point(240, 407);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(88, 32);
-            this.button5.TabIndex = 24;
-            this.button5.Text = "GİRİŞ";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label3.Font = new System.Drawing.Font("Arial Black", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(168, 185);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 27);
-            this.label3.TabIndex = 26;
-            this.label3.Text = "GİRİŞ";
             // 
             // label2
             // 
@@ -179,7 +170,7 @@
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.Image = global::sp.Properties.Resources.nku_logo3;
-            this.pictureBox1.Location = new System.Drawing.Point(128, 57);
+            this.pictureBox1.Location = new System.Drawing.Point(120, 57);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(147, 119);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -222,15 +213,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.ClientSize = new System.Drawing.Size(408, 508);
+            this.ClientSize = new System.Drawing.Size(393, 508);
             this.Controls.Add(this.buttonEllipse2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.txtkod);
             this.Controls.Add(this.lblkod);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtsifre);
@@ -241,14 +230,15 @@
             this.Name = "Login";
             this.Opacity = 0.98D;
             this.Load += new System.EventHandler(this.Login_Load_1);
+            this.Controls.SetChildIndex(this.btnmavi1, 0);
+            this.Controls.SetChildIndex(this.btnkirmizi1, 0);
+            this.Controls.SetChildIndex(this.lblbaslik, 0);
             this.Controls.SetChildIndex(this.buttonEllipse1, 0);
             this.Controls.SetChildIndex(this.pictureBox1, 0);
             this.Controls.SetChildIndex(this.txteposta, 0);
             this.Controls.SetChildIndex(this.txtsifre, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.label3, 0);
-            this.Controls.SetChildIndex(this.button5, 0);
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.lblkod, 0);
             this.Controls.SetChildIndex(this.txtkod, 0);
@@ -266,8 +256,6 @@
         private System.Windows.Forms.TextBox txtkod;
         private System.Windows.Forms.Label lblkod;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtsifre;

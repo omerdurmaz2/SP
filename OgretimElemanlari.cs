@@ -17,14 +17,13 @@ namespace sp
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // border radius
             this.yToolStripMenuItem.Visible = false;
-
+            baslikhizala();
         }
         private void OgretimElemanlari_Load(object sender, EventArgs e)
         {
             //session kontrolü
             if (Login.Session)
             {
-                comboBox1.SelectedIndex = 0;
                 Listele();
             }
             else
@@ -51,8 +50,6 @@ namespace sp
         #endregion
 
         #region Dışarıda Tanımlananlar
-        DataGridViewButtonColumn duzenle;// tekrar tekrar tanımlamamak için dışarı tanımladık
-        DataGridViewButtonColumn sil;// tekrar tekrar tanımlamamak için dışarı tanımladık
         MySqlDataReader dr; // sorgu methodu için tablo okumaya yarayan class
         VeritabaniIslemler islemler = new VeritabaniIslemler();
         string komut = "";
@@ -68,7 +65,7 @@ namespace sp
             txteposta.Clear();
             txtunvan.Clear();
             comboBox1.SelectedIndex = 0;
-            button5.Text = "EKLE";
+            btnmavi1.Text = "EKLE";
             userid = -1;
             comboBox2.SelectedIndex = 0;
             comboBox3.SelectedIndex = 0;
@@ -93,18 +90,11 @@ namespace sp
             {
                 dataGridView1.DataSource = islemler.Al(komut);
 
+                ButonEkle();//Tasarımda hazır bulunan tablo butonlarını ekliyoruz
                 //değiştir butonu her satır için eklenir
-                duzenle = new DataGridViewButtonColumn();
-                duzenle.HeaderText = "DÜZENLE";
-                duzenle.Text = "DÜZENLE";
-                duzenle.UseColumnTextForButtonValue = true;
                 dataGridView1.Columns.Add(duzenle);
 
                 //sil butonu her satır için eklenir
-                sil = new DataGridViewButtonColumn();
-                sil.HeaderText = "SİL";
-                sil.Text = "SİL";
-                sil.UseColumnTextForButtonValue = true;
                 dataGridView1.Columns.Add(sil);
 
 
@@ -125,8 +115,6 @@ namespace sp
             }
             islemler.Kapat();
 
-            comboBox2.SelectedIndex = 0;
-            comboBox3.SelectedIndex = 0;
 
         }
         #endregion
@@ -134,9 +122,9 @@ namespace sp
         #region Form Kontrol Methodu
         public void FormKontrol()
         {
-            if (txtunvan.Text == "" || txtsifre.Text == "" || txtadsoyad.Text == "" || txteposta.Text == "")
+            if (txtunvan.Text == "" || txtsifre.Text == "" || txtadsoyad.Text == "" || txteposta.Text == "" || comboBox1.SelectedIndex==-1 || comboBox2.SelectedIndex==-1)
             {
-                MessageBox.Show("Lütfen Boş Alanları Doldurunuz!");
+                MessageBox.Show("Lütfen Gerekli Alanları Doldurunuz!");
             }
             else
             {
@@ -191,8 +179,8 @@ namespace sp
             }
             else // eğer id -1 değilse id ye göre veri güncellenir
             {
-                button1.Visible = false;
-                button5.Text = "EKLE";
+                btnkirmizi1.Visible = false;
+                btnmavi1.Text = "EKLE";
 
                 komut = "UPDATE OgretimElemani SET unvan = '" + unvan + "' ,Ad_Soyad = '" + adsoyad + "' ,eposta = '" + eposta + "',sifre = '" + sifre + "', yetki = " + yetki + ", bolumu=" + bolumid + "  WHERE id = " + userid + ";";
                 mesaj = "Kayıt Güncellendi";
@@ -211,7 +199,7 @@ namespace sp
 
         #region Yeni Kayıt Ekleme Butonu
 
-        private void button5_Click(object sender, EventArgs e)
+        private void btnmavi1_Click(object sender, EventArgs e)
         {
             FormKontrol(); // form kontrol metodundan textboxları kontrol eder sonra da sorgu metodunda girilen kayıt önceden girilmiş mi bakar ve en son kaydet metodundan kaydedilip ekran listelenir
         }
@@ -228,8 +216,8 @@ namespace sp
                 switch (e.ColumnIndex)
                 {
                     case 7: //değiştir
-                        button1.Visible = true; //iptal butonu görünür
-                        button5.Text = "GÜNCELLE";
+                        btnkirmizi1.Visible = true; //iptal butonu görünür
+                        btnmavi1.Text = "GÜNCELLE";
 
                         komut = "select * from OgretimElemani where id=" + userid + ";";
                         dr = islemler.Oku(komut);
@@ -278,10 +266,10 @@ namespace sp
 
         #region İptal Butonu
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnkirmizi1_Click(object sender, EventArgs e)
         {
             Temizle(); //textboxlar ve dropdown temizleme
-            button1.Visible = false; //iptal butonu kapat
+            btnkirmizi1.Visible = false; //iptal butonu kapat
             Listele();
         }
         #endregion
@@ -291,5 +279,6 @@ namespace sp
         {
             comboBox3.SelectedIndex = comboBox2.SelectedIndex;
         }
+
     }
 }

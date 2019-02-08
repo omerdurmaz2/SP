@@ -14,6 +14,7 @@ namespace sp
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // border radius  
             this.yToolStripMenuItem.Visible = false;
+            baslikhizala();
         }
         private void Derslikler_Load(object sender, EventArgs e)
         {
@@ -47,8 +48,6 @@ namespace sp
 
         #region Dışarıda Tanımlananlar
 
-        DataGridViewButtonColumn duzenle;// tekrar tekrar tanımlamamak için dışarı tanımladık
-        DataGridViewButtonColumn sil;// tekrar tekrar tanımlamamak için dışarı tanımladık
         MySqlDataReader rd;// tekrar tekrar tanımlamamak için dışarı tanımladık
         VeritabaniIslemler islemler = new VeritabaniIslemler();
         private int derslikid = -1; // -1 ise yeni kayıt değilse id ye göre değiştirme
@@ -56,31 +55,24 @@ namespace sp
         string mesaj = "";
         #endregion
 
-        #region Veritabanından verilerin Çekilip Listelenmesi
+        #region Listele
 
         public void Listele()
         {
-                dataGridView1.DataSource = null;
-                dataGridView1.Columns.Clear();
-                dataGridView1.Refresh();
-                komut = "select id as Sıra_No, derslik as DERSLİK,sayi as KAPASİTE from sinavderslikleri";
+            dataGridView1.DataSource = null;
+            dataGridView1.Columns.Clear();
+            dataGridView1.Refresh();
+            komut = "select id as Sıra_No, derslik as DERSLİK,sayi as KAPASİTE from sinavderslikleri";
 
-                if (islemler.Al(komut)!=null)
-                {
-                    dataGridView1.DataSource = islemler.Al(komut); ;
+            if (islemler.Al(komut) != null)
+            {
+                dataGridView1.DataSource = islemler.Al(komut); ;
 
-                    duzenle = new DataGridViewButtonColumn();
-                    duzenle.HeaderText = "DÜZENLE";
-                    duzenle.Text = "DÜZENLE";
-                    duzenle.UseColumnTextForButtonValue = true;
-                    dataGridView1.Columns.Add(duzenle);
+                ButonEkle(); //tasarımda hazır bulunan butonları ekliyoruz
+                dataGridView1.Columns.Add(duzenle);
 
-                    sil = new DataGridViewButtonColumn();
-                    sil.HeaderText = "SİL";
-                    sil.Text = "SİL";
-                    sil.UseColumnTextForButtonValue = true;
-                    dataGridView1.Columns.Add(sil);
-                }
+                dataGridView1.Columns.Add(sil);
+            }
         }
 
         #endregion
@@ -110,7 +102,7 @@ namespace sp
         #endregion
 
         #region Ekle Butonu
-        private void button5_Click(object sender, EventArgs e)
+        private void btnmavi1_Click(object sender, EventArgs e)
         {
             FormKontrol();
 
@@ -177,13 +169,13 @@ namespace sp
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >=0 && e.ColumnIndex > 2) // sütun başlığına tıklayınca hata vermesini önlemek için...
+            if (e.RowIndex >= 0 && e.ColumnIndex > 2) // sütun başlığına tıklayınca hata vermesini önlemek için...
             {
                 derslikid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
                 switch (e.ColumnIndex)
                 {
                     case 3:
-                        button1.Visible = true;
+                        btnkirmizi1.Visible = true;
 
                         komut = "select * from sinavderslikleri where id=" + derslikid + ";";
                         rd = islemler.Oku(komut);
@@ -191,7 +183,7 @@ namespace sp
                         {
                             txtad.Text = rd["derslik"].ToString();
                             txtkapasite.Text = rd["sayi"].ToString();
-                            button5.Text = "DEĞİŞTİR";
+                            btnmavi1.Text = "DEĞİŞTİR";
                         }
                         else
                         {
@@ -208,7 +200,7 @@ namespace sp
                             islemler.Degistir(komut);
                             MessageBox.Show("Silindi.");
                             Listele();
-                            Temizle(); 
+                            Temizle();
                         }
                         break;
 
@@ -221,7 +213,7 @@ namespace sp
 
         #region İptal Butonu
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnkirmizi1_Click(object sender, EventArgs e)
         {
             Temizle();
         }
@@ -231,11 +223,12 @@ namespace sp
         public void Temizle()
         {
             derslikid = -1;
-            button5.Text = "EKLE";
+            btnmavi1.Text = "EKLE";
             txtad.Text = "";
             txtkapasite.Text = "";
-            button1.Visible = false;
+            btnkirmizi1.Visible = false;
         }
         #endregion
+
     }
 }

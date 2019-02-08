@@ -4,6 +4,8 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.Globalization;
+
 namespace sp
 {
     public partial class Tarihler : Tasarim
@@ -15,6 +17,7 @@ namespace sp
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // border radius
             this.yToolStripMenuItem.Visible = false;
+            baslikhizala();
         }
         private void TasarimOrnek_Load(object sender, EventArgs e)
         {
@@ -46,9 +49,7 @@ namespace sp
         #endregion
 
         #region Dışarıda Tanımlanan Değişkenler
-        DataGridViewButtonColumn sil;// tekrar tekrar tanımlamamak için dışarı tanımladık
         DataTable dt = new DataTable(); // tekrar tekrar tanımlamamak için dışarı tanımladık
-        DataGridViewButtonColumn duzenle;// tekrar tekrar tanımlamamak için dışarı tanımladık
         MySqlDataReader dr; // sorgu methodu için tablo okumaya yarayan class
         VeritabaniIslemler islemler = new VeritabaniIslemler();
 
@@ -71,36 +72,39 @@ namespace sp
             dataGridView1.Columns.Clear();// datagridview temizlenir
             dataGridView1.Refresh(); // datagridview yenilenir
 
-            komut = "select id as Sıra_No,tarih as Tarih from sinavtarihleri";
+            komut = "select id  as 'SIRA NO',tarih as 'TARİH 'from sinavtarihleri";
             dataGridView1.DataSource = islemler.Al(komut);
 
+            ButonEkle();//Tasarımda hazır bulunan buton özelliklerini buraya ekliyoruz
+            
             //değiştir butonu her satır için eklenir
-            duzenle = new DataGridViewButtonColumn();
-            duzenle.HeaderText = "DÜZENLE";
-            duzenle.Text = "DÜZENLE";
-            duzenle.UseColumnTextForButtonValue = true;
             dataGridView1.Columns.Add(duzenle);
-
             //sil butonu her satır için eklenir
-            sil = new DataGridViewButtonColumn();
-            sil.HeaderText = "SİL";
-            sil.Text = "SİL";
-            sil.UseColumnTextForButtonValue = true;
             dataGridView1.Columns.Add(sil);
 
-            dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirection.Ascending);
+            //yeni bir tarih aralığı eklendiğinde ya da bir tarih güncellendiğinde tabloda fazladan 'tarih' columnu oluşuyordu. Bu hatanın çözümü için aşağıdaki işlem yapıldı
+            if (dataGridView1.Columns[2].HeaderText=="tarih")
+            {
+                dataGridView1.Columns.Remove("tarih");
+            }
+            //-----
 
-            //Tablodaki Tarihin yanına hangi gün olduğunu yazan kod (Tablo Sıralanmasından Dolayı Hata Veriyor)
-            //for (int i = 0; i < dataGridView1.Rows.Count; i++)
-            //{
-            //    string gun = dataGridView1.Rows[i].Cells[1].Value.ToString();
+            dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirection.Ascending); // tablodaki tarihlerin sıralanması
 
 
-            //    string turkce = CultureInfo.GetCultureInfo("tr-TR").DateTimeFormat.DayNames[(int)Convert.ToDateTime(gun).DayOfWeek];
-            //    dataGridView1.Rows[i].Cells[1].Value = dataGridView1.Rows[i].Cells[1].Value + " (" + turkce + ")";
+            /*
+             Tablodaki Tarihin yanına hangi gün olduğunu yazan kod (Tablo Sıralanmasından Dolayı Hata Veriyor)
+            dataGridView1.Columns[1].ValueType = typeof(string); // tarih columunu stringe çevirmek için
 
-            //}
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                string gun = dataGridView1.Rows[i].Cells[1].Value.ToString();
 
+                string turkce = CultureInfo.GetCultureInfo("tr-TR").DateTimeFormat.DayNames[(int)Convert.ToDateTime(gun).DayOfWeek];
+                dataGridView1.Rows[i].Cells[1].Value = dataGridView1.Rows[i].Cells[1].Value + " - " + turkce;
+
+            }
+            */
 
 
         }
@@ -264,7 +268,7 @@ namespace sp
 
 
         #region Ekle Butonu
-        private void button5_Click(object sender, EventArgs e)
+        private void btnmavi1_Click(object sender, EventArgs e)
         {
             Kontrol(dateTimePicker1.Value, dateTimePicker2.Value);
         }
@@ -282,8 +286,8 @@ namespace sp
         #region Temizle Methodu
         public void Temizle()
         {
-            button1.Visible = false;
-            button5.Text = "EKLE";
+            btnkirmizi1.Visible = false;
+            btnmavi1.Text = "EKLE";
             dateTimePicker2.Visible = true;
             dateTimePicker1.Value = DateTime.Now;
             dateTimePicker2.Value = DateTime.Now;
@@ -313,10 +317,10 @@ namespace sp
                             dateTimePicker1.Value = Convert.ToDateTime(dr["tarih"].ToString());
 
                             dateTimePicker2.Visible = false;
-                            button1.Visible = true; //iptal butonu görünür
+                            btnkirmizi1.Visible = true; //iptal butonu görünür
                             label1.Visible = false;
                             label2.Text = "Tarih Seç:";
-                            button5.Text = "GÜNCELLE";
+                            btnmavi1.Text = "GÜNCELLE";
                         }
                         else
                         { // eğer kayıt buluanmazsa hata verir
@@ -352,12 +356,12 @@ namespace sp
 
         #region İptal Butonu
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnkirmizi1_Click(object sender, EventArgs e)
         {
             Temizle();
         }
-        #endregion
 
+        #endregion
 
     }
 }

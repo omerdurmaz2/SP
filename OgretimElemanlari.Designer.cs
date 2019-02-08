@@ -30,9 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OgretimElemanlari));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label3 = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -50,6 +47,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
+            // lblbaslik
+            // 
+            this.lblbaslik.Location = new System.Drawing.Point(400, 48);
+            this.lblbaslik.Size = new System.Drawing.Size(208, 22);
+            this.lblbaslik.Text = "ÖĞRETİM ELEMANLARI";
+            // 
+            // btnkirmizi1
+            // 
+            this.btnkirmizi1.FlatAppearance.BorderSize = 0;
+            this.btnkirmizi1.Location = new System.Drawing.Point(744, 208);
+            this.btnkirmizi1.Click += new System.EventHandler(this.btnkirmizi1_Click);
+            // 
+            // btnmavi1
+            // 
+            this.btnmavi1.FlatAppearance.BorderSize = 0;
+            this.btnmavi1.Location = new System.Drawing.Point(848, 208);
+            this.btnmavi1.Click += new System.EventHandler(this.btnmavi1_Click);
+            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
@@ -62,50 +77,10 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 250);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(950, 450);
             this.dataGridView1.TabIndex = 7;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label3.Font = new System.Drawing.Font("Arial Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label3.Location = new System.Drawing.Point(400, 48);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(206, 22);
-            this.label3.TabIndex = 27;
-            this.label3.Text = "ÖĞRETİM ELEMANLARI";
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(171)))), ((int)(((byte)(227)))));
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button5.Location = new System.Drawing.Point(848, 208);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(88, 32);
-            this.button5.TabIndex = 6;
-            this.button5.Text = "EKLE";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(82)))), ((int)(((byte)(82)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button1.Location = new System.Drawing.Point(744, 208);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(88, 32);
-            this.button1.TabIndex = 40;
-            this.button1.Text = "İPTAL";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label6
             // 
@@ -130,6 +105,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(256, 21);
             this.comboBox1.TabIndex = 5;
+            this.comboBox1.Text = "Seçiniz...";
             // 
             // label5
             // 
@@ -234,6 +210,7 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(256, 21);
             this.comboBox2.TabIndex = 52;
+            this.comboBox2.Text = "Seçiniz...";
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // comboBox3
@@ -244,6 +221,7 @@
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(256, 21);
             this.comboBox3.TabIndex = 54;
+            this.comboBox3.Text = "Seçiniz...";
             this.comboBox3.Visible = false;
             // 
             // label8
@@ -279,19 +257,16 @@
             this.Controls.Add(this.txtadsoyad);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtunvan);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.dataGridView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "OgretimElemanlari";
             this.Opacity = 0.99D;
             this.Text = "Öğretim Elemanları";
             this.Load += new System.EventHandler(this.OgretimElemanlari_Load);
+            this.Controls.SetChildIndex(this.btnmavi1, 0);
+            this.Controls.SetChildIndex(this.btnkirmizi1, 0);
+            this.Controls.SetChildIndex(this.lblbaslik, 0);
             this.Controls.SetChildIndex(this.dataGridView1, 0);
-            this.Controls.SetChildIndex(this.label3, 0);
-            this.Controls.SetChildIndex(this.button5, 0);
-            this.Controls.SetChildIndex(this.button1, 0);
             this.Controls.SetChildIndex(this.txtunvan, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.txtadsoyad, 0);
@@ -314,9 +289,6 @@
 
         #endregion
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label5;

@@ -14,7 +14,7 @@ namespace sp
         public Home()
         {
             InitializeComponent();
-            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 0, 0)); // border radius
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // border radius
             this.yToolStripMenuItem.Visible = false;
         }
 
@@ -122,5 +122,6 @@ namespace sp
             sinav.ShowDialog();
         }
         #endregion
+
     }
 }

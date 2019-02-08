@@ -15,6 +15,7 @@ namespace sp
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // border radius
             this.yToolStripMenuItem.Visible = false;
+            baslikhizala();
         }
         private void Bolumler_Load(object sender, EventArgs e)
         {
@@ -28,6 +29,7 @@ namespace sp
             }
         }
         #endregion
+        #region Tasarım için yapılmış değişiklikler
         #region Köşelerin Yuvarlanması
 
         //Köşelerin Yuvarlanması 
@@ -44,6 +46,7 @@ namespace sp
 
 
         #endregion
+        #endregion
 
         #region Dışarıda Tanımlananlar
         public int bolumid = -1;
@@ -52,8 +55,6 @@ namespace sp
         MySqlDataReader rd;
         DataTable dt = new DataTable();
         VeritabaniIslemler islemler = new VeritabaniIslemler();
-        DataGridViewButtonColumn duzenle;// tekrar tekrar tanımlamamak için dışarı tanımladık
-        DataGridViewButtonColumn sil;// tekrar tekrar tanımlamamak için dışarı tanımladık
 
         #endregion
 
@@ -67,20 +68,11 @@ namespace sp
 
             if (islemler.Al(komut) != null)
             {
-                dataGridView1.DataSource = islemler.Al(komut); ;
-
-                duzenle = new DataGridViewButtonColumn();
-                duzenle.HeaderText = "DÜZENLE";
-                duzenle.Text = "DÜZENLE";
-                duzenle.UseColumnTextForButtonValue = true;
+                dataGridView1.DataSource = islemler.Al(komut);
+                ButonEkle();
+                //tablodaki veriler için düzenle ve sil butonları
                 dataGridView1.Columns.Add(duzenle);
-
-                sil = new DataGridViewButtonColumn();
-                sil.HeaderText = "SİL";
-                sil.Text = "SİL";
-                sil.UseColumnTextForButtonValue = true;
                 dataGridView1.Columns.Add(sil);
-
 
             }
         }
@@ -132,7 +124,7 @@ namespace sp
         #endregion
 
         #region Ekle Butonu
-        private void button3_Click(object sender, EventArgs e)
+        private void btnmavi1_Click(object sender, EventArgs e)
         {
             if (txtad.Text != "" || txtbkod.Text != "")
             {
@@ -142,22 +134,24 @@ namespace sp
             {
                 MessageBox.Show("Lütfen Gerekli Alanları Doldurunuz!", "HATA!!");
             }
+
         }
 
         #endregion
 
         #region İptal Butonu
-        private void button2_Click(object sender, EventArgs e)
+        private void btnkirmizi1_Click(object sender, EventArgs e)
         {
             Temizle();
+
         }
         #endregion
 
         #region Temizle
         public void Temizle()
         {
-            button2.Visible = false;
-            button3.Text = "EKLE";
+            btnkirmizi1.Visible = false;
+            btnmavi1.Text = "EKLE";
             bolumid = -1;
             txtad.Text = "";
             txtbkod.Text = "";
@@ -174,7 +168,7 @@ namespace sp
                 switch (e.ColumnIndex)
                 {
                     case 3:
-                        button2.Visible = true;
+                        btnkirmizi1.Visible = true;
 
                         komut = "select * from bolumler where id=" + bolumid + ";";
                         rd = islemler.Oku(komut);
@@ -182,7 +176,7 @@ namespace sp
                         {
                             txtad.Text = rd["bolum_adi"].ToString();
                             txtbkod.Text = rd["bolum_kodu"].ToString();
-                            button3.Text = "DEĞİŞTİR";
+                            btnmavi1.Text = "DEĞİŞTİR";
                         }
                         else
                         {
@@ -209,6 +203,7 @@ namespace sp
 
         }
         #endregion
+
 
     }
 }

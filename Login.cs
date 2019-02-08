@@ -17,6 +17,7 @@ namespace sp
 
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // border radius
             this.yToolStripMenuItem.Visible = false;
+            baslikhizala();
         }
         private void Login_Load_1(object sender, EventArgs e)
         {
@@ -52,78 +53,12 @@ namespace sp
 
         #endregion
 
-        #region Formun Sürüklenmesi
-        #region Formun Üzerinde Tıklanınca
-
-        private bool mouseDown;
-        private Point _start_point = new Point(0, 0);
-
-        private void Login_MouseDown(object sender, MouseEventArgs e)
-        {
-            mouseDown = true;
-            _start_point = new Point(e.X, e.Y);
-        }
-        private void Login_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseDown)
-            {
-                Point p = PointToScreen(e.Location);
-                Location = new Point(p.X - this._start_point.X, p.Y - this._start_point.Y);
-            }
-        }
-        private void Login_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
-
-        }
-
-        #endregion
-        #region Menü Üzerinde Tıklanınca
-
-        private void menuStrip2_MouseDown(object sender, MouseEventArgs e)
-        {
-            mouseDown = true;
-            _start_point = new Point(e.X, e.Y);
-        }
-
-        private void menuStrip2_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseDown)
-            {
-                Point p = PointToScreen(e.Location);
-                Location = new Point(p.X - this._start_point.X, p.Y - this._start_point.Y);
-            }
-        }
-
-        private void menuStrip2_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
-        }
-        #endregion
-        #endregion
-
-        #region Formu Kapatma ve Küçültme
-        private void toolStripMenuItem1_Click_1(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
-        private void xToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            Login.Session = false;
-            this.Close();
-        }
-
-        #endregion
-
         #region Diğer Formlara Gönderilen Bilgiler
 
         public static bool Session; // giris kontrolü
         public static byte Yetki;  // Kullanıcı yetkisi
         public static string Ad;// Ad Soyad
         #endregion
-
-
 
         #region Şifreyi Göster Gizle Butonu
 
@@ -150,7 +85,7 @@ namespace sp
 
         #region Giriş Butonu
 
-        private void button5_Click(object sender, EventArgs e)
+        private void btnmavi1_Click(object sender, EventArgs e)
         {
 
             string eposta = txteposta.Text;
