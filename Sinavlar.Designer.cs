@@ -40,9 +40,9 @@
             this.cmbsaat = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cmbderslik1 = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lblderslik2 = new System.Windows.Forms.Label();
             this.cmbderslik2 = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lblderslik3 = new System.Windows.Forms.Label();
             this.cmbderslik3 = new System.Windows.Forms.ComboBox();
             this.lblgozetmen1 = new System.Windows.Forms.Label();
             this.cmbgozetmen1 = new System.Windows.Forms.ComboBox();
@@ -57,6 +57,9 @@
             this.cmbtarih = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.cmbderslik1id = new System.Windows.Forms.ComboBox();
+            this.cmbderslik2id = new System.Windows.Forms.ComboBox();
+            this.cmbderslik3id = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.gozetmensayisi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -124,6 +127,7 @@
             this.cmbders.TabIndex = 72;
             this.cmbders.Text = "Seçiniz...";
             this.cmbders.SelectedIndexChanged += new System.EventHandler(this.cmbders_SelectedIndexChanged);
+            this.cmbders.Click += new System.EventHandler(this.cmbders_Click);
             // 
             // label2
             // 
@@ -146,6 +150,7 @@
             this.cmbogretimelemani.TabIndex = 74;
             this.cmbogretimelemani.Text = "Seçiniz...";
             this.cmbogretimelemani.SelectedIndexChanged += new System.EventHandler(this.cmbogretimelemani_SelectedIndexChanged);
+            this.cmbogretimelemani.Click += new System.EventHandler(this.cmbogretimelemani_Click);
             // 
             // lblogretimgorevlisi
             // 
@@ -178,6 +183,8 @@
             this.cmbsaat.Size = new System.Drawing.Size(88, 21);
             this.cmbsaat.TabIndex = 76;
             this.cmbsaat.Text = "Seçiniz...";
+            this.cmbsaat.SelectedIndexChanged += new System.EventHandler(this.cmbsaat_SelectedIndexChanged);
+            this.cmbsaat.Click += new System.EventHandler(this.cmbsaat_Click);
             // 
             // label7
             // 
@@ -199,17 +206,20 @@
             this.cmbderslik1.Size = new System.Drawing.Size(80, 21);
             this.cmbderslik1.TabIndex = 76;
             this.cmbderslik1.Text = "Seçiniz...";
+            this.cmbderslik1.SelectedIndexChanged += new System.EventHandler(this.cmbderslik1_SelectedIndexChanged);
+            this.cmbderslik1.Click += new System.EventHandler(this.cmbderslik1_Click);
             // 
-            // label8
+            // lblderslik2
             // 
-            this.label8.AutoSize = true;
-            this.label8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline);
-            this.label8.Location = new System.Drawing.Point(112, 376);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(51, 13);
-            this.label8.TabIndex = 77;
-            this.label8.Text = "Derslik 2:";
+            this.lblderslik2.AutoSize = true;
+            this.lblderslik2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblderslik2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline);
+            this.lblderslik2.Location = new System.Drawing.Point(112, 376);
+            this.lblderslik2.Name = "lblderslik2";
+            this.lblderslik2.Size = new System.Drawing.Size(51, 13);
+            this.lblderslik2.TabIndex = 77;
+            this.lblderslik2.Text = "Derslik 2:";
+            this.lblderslik2.Visible = false;
             // 
             // cmbderslik2
             // 
@@ -220,17 +230,21 @@
             this.cmbderslik2.Size = new System.Drawing.Size(80, 21);
             this.cmbderslik2.TabIndex = 76;
             this.cmbderslik2.Text = "Seçiniz...";
+            this.cmbderslik2.Visible = false;
+            this.cmbderslik2.SelectedIndexChanged += new System.EventHandler(this.cmbderslik2_SelectedIndexChanged);
+            this.cmbderslik2.Click += new System.EventHandler(this.cmbderslik2_Click);
             // 
-            // label9
+            // lblderslik3
             // 
-            this.label9.AutoSize = true;
-            this.label9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline);
-            this.label9.Location = new System.Drawing.Point(200, 376);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(51, 13);
-            this.label9.TabIndex = 77;
-            this.label9.Text = "Derslik 3:";
+            this.lblderslik3.AutoSize = true;
+            this.lblderslik3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblderslik3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline);
+            this.lblderslik3.Location = new System.Drawing.Point(200, 376);
+            this.lblderslik3.Name = "lblderslik3";
+            this.lblderslik3.Size = new System.Drawing.Size(51, 13);
+            this.lblderslik3.TabIndex = 77;
+            this.lblderslik3.Text = "Derslik 3:";
+            this.lblderslik3.Visible = false;
             // 
             // cmbderslik3
             // 
@@ -241,6 +255,9 @@
             this.cmbderslik3.Size = new System.Drawing.Size(80, 21);
             this.cmbderslik3.TabIndex = 76;
             this.cmbderslik3.Text = "Seçiniz...";
+            this.cmbderslik3.Visible = false;
+            this.cmbderslik3.SelectedIndexChanged += new System.EventHandler(this.cmbderslik3_SelectedIndexChanged);
+            this.cmbderslik3.Click += new System.EventHandler(this.cmbderslik3_Click);
             // 
             // lblgozetmen1
             // 
@@ -398,6 +415,39 @@
             this.dataGridView1.Size = new System.Drawing.Size(1054, 688);
             this.dataGridView1.TabIndex = 79;
             // 
+            // cmbderslik1id
+            // 
+            this.cmbderslik1id.FormattingEnabled = true;
+            this.cmbderslik1id.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.cmbderslik1id.Location = new System.Drawing.Point(24, 416);
+            this.cmbderslik1id.Name = "cmbderslik1id";
+            this.cmbderslik1id.Size = new System.Drawing.Size(80, 21);
+            this.cmbderslik1id.TabIndex = 76;
+            this.cmbderslik1id.Text = "Seçiniz...";
+            this.cmbderslik1id.Visible = false;
+            // 
+            // cmbderslik2id
+            // 
+            this.cmbderslik2id.FormattingEnabled = true;
+            this.cmbderslik2id.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.cmbderslik2id.Location = new System.Drawing.Point(112, 416);
+            this.cmbderslik2id.Name = "cmbderslik2id";
+            this.cmbderslik2id.Size = new System.Drawing.Size(80, 21);
+            this.cmbderslik2id.TabIndex = 76;
+            this.cmbderslik2id.Text = "Seçiniz...";
+            this.cmbderslik2id.Visible = false;
+            // 
+            // cmbderslik3id
+            // 
+            this.cmbderslik3id.FormattingEnabled = true;
+            this.cmbderslik3id.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.cmbderslik3id.Location = new System.Drawing.Point(200, 416);
+            this.cmbderslik3id.Name = "cmbderslik3id";
+            this.cmbderslik3id.Size = new System.Drawing.Size(80, 21);
+            this.cmbderslik3id.TabIndex = 76;
+            this.cmbderslik3id.Text = "Seçiniz...";
+            this.cmbderslik3id.Visible = false;
+            // 
             // Sinavlar
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -410,9 +460,12 @@
             this.Controls.Add(this.cmbsaat);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cmbderslik3);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.lblderslik3);
             this.Controls.Add(this.cmbderslik2);
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.lblderslik2);
+            this.Controls.Add(this.cmbderslik3id);
+            this.Controls.Add(this.cmbderslik2id);
+            this.Controls.Add(this.cmbderslik1id);
             this.Controls.Add(this.cmbderslik1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.cmbgozetmen3);
@@ -455,9 +508,12 @@
             this.Controls.SetChildIndex(this.cmbgozetmen3, 0);
             this.Controls.SetChildIndex(this.label7, 0);
             this.Controls.SetChildIndex(this.cmbderslik1, 0);
-            this.Controls.SetChildIndex(this.label8, 0);
+            this.Controls.SetChildIndex(this.cmbderslik1id, 0);
+            this.Controls.SetChildIndex(this.cmbderslik2id, 0);
+            this.Controls.SetChildIndex(this.cmbderslik3id, 0);
+            this.Controls.SetChildIndex(this.lblderslik2, 0);
             this.Controls.SetChildIndex(this.cmbderslik2, 0);
-            this.Controls.SetChildIndex(this.label9, 0);
+            this.Controls.SetChildIndex(this.lblderslik3, 0);
             this.Controls.SetChildIndex(this.cmbderslik3, 0);
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.cmbsaat, 0);
@@ -487,9 +543,9 @@
         private System.Windows.Forms.ComboBox cmbsaat;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cmbderslik1;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblderslik2;
         private System.Windows.Forms.ComboBox cmbderslik2;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblderslik3;
         private System.Windows.Forms.ComboBox cmbderslik3;
         private System.Windows.Forms.Label lblgozetmen1;
         private System.Windows.Forms.ComboBox cmbgozetmen1;
@@ -504,6 +560,9 @@
         private System.Windows.Forms.ComboBox cmbtarih;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ComboBox cmbderslik1id;
+        private System.Windows.Forms.ComboBox cmbderslik2id;
+        private System.Windows.Forms.ComboBox cmbderslik3id;
     }
 }
 
