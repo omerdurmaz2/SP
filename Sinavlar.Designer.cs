@@ -60,6 +60,13 @@
             this.cmbderslik1id = new System.Windows.Forms.ComboBox();
             this.cmbderslik2id = new System.Windows.Forms.ComboBox();
             this.cmbderslik3id = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lblsinavagirenogrencisayisi = new System.Windows.Forms.Label();
+            this.lblderslikkapasitesi = new System.Windows.Forms.Label();
+            this.cmbgozetmen1id = new System.Windows.Forms.ComboBox();
+            this.cmbgozetmen2id = new System.Windows.Forms.ComboBox();
+            this.cmbgozetmen3id = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.gozetmensayisi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -281,6 +288,8 @@
             this.cmbgozetmen1.TabIndex = 76;
             this.cmbgozetmen1.Text = "Seçiniz...";
             this.cmbgozetmen1.Visible = false;
+            this.cmbgozetmen1.SelectedIndexChanged += new System.EventHandler(this.cmbgozetmen1_SelectedIndexChanged);
+            this.cmbgozetmen1.Click += new System.EventHandler(this.cmbgozetmen1_Click);
             // 
             // gozetmensayisi
             // 
@@ -294,6 +303,7 @@
             this.gozetmensayisi.Size = new System.Drawing.Size(96, 20);
             this.gozetmensayisi.TabIndex = 78;
             this.gozetmensayisi.ValueChanged += new System.EventHandler(this.gozetmensayisi_ValueChanged);
+            this.gozetmensayisi.Click += new System.EventHandler(this.gozetmensayisi_Click);
             // 
             // lblgozetmen2
             // 
@@ -317,6 +327,8 @@
             this.cmbgozetmen2.TabIndex = 76;
             this.cmbgozetmen2.Text = "Seçiniz...";
             this.cmbgozetmen2.Visible = false;
+            this.cmbgozetmen2.SelectedIndexChanged += new System.EventHandler(this.cmbgozetmen2_SelectedIndexChanged);
+            this.cmbgozetmen2.Click += new System.EventHandler(this.cmbgozetmen2_Click);
             // 
             // lblgozetmen3
             // 
@@ -340,6 +352,8 @@
             this.cmbgozetmen3.TabIndex = 76;
             this.cmbgozetmen3.Text = "Seçiniz...";
             this.cmbgozetmen3.Visible = false;
+            this.cmbgozetmen3.SelectedIndexChanged += new System.EventHandler(this.cmbgozetmen3_SelectedIndexChanged);
+            this.cmbgozetmen3.Click += new System.EventHandler(this.cmbgozetmen3_Click);
             // 
             // cmbbolumid
             // 
@@ -353,6 +367,7 @@
             this.cmbbolumid.TabIndex = 70;
             this.cmbbolumid.Text = "bölüm idsi tutulduğu yer";
             this.cmbbolumid.Visible = false;
+            this.cmbbolumid.SelectedIndexChanged += new System.EventHandler(this.cmbbolumid_SelectedIndexChanged);
             // 
             // cmbdersid
             // 
@@ -364,6 +379,7 @@
             this.cmbdersid.TabIndex = 72;
             this.cmbdersid.Text = "dersidsinin tutulduğu yer";
             this.cmbdersid.Visible = false;
+            this.cmbdersid.SelectedIndexChanged += new System.EventHandler(this.cmbdersid_SelectedIndexChanged);
             // 
             // cmbogretimelemaniid
             // 
@@ -448,11 +464,87 @@
             this.cmbderslik3id.Text = "Seçiniz...";
             this.cmbderslik3id.Visible = false;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(120, 320);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(141, 13);
+            this.label5.TabIndex = 82;
+            this.label5.Text = "Sınava Giren Öğrenci Sayısı:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(120, 344);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(150, 13);
+            this.label8.TabIndex = 82;
+            this.label8.Text = "Dersliklerin Toplam Kapasitesi:";
+            // 
+            // lblsinavagirenogrencisayisi
+            // 
+            this.lblsinavagirenogrencisayisi.AutoSize = true;
+            this.lblsinavagirenogrencisayisi.Location = new System.Drawing.Point(264, 320);
+            this.lblsinavagirenogrencisayisi.Name = "lblsinavagirenogrencisayisi";
+            this.lblsinavagirenogrencisayisi.Size = new System.Drawing.Size(13, 13);
+            this.lblsinavagirenogrencisayisi.TabIndex = 82;
+            this.lblsinavagirenogrencisayisi.Text = "0";
+            // 
+            // lblderslikkapasitesi
+            // 
+            this.lblderslikkapasitesi.AutoSize = true;
+            this.lblderslikkapasitesi.Location = new System.Drawing.Point(272, 344);
+            this.lblderslikkapasitesi.Name = "lblderslikkapasitesi";
+            this.lblderslikkapasitesi.Size = new System.Drawing.Size(13, 13);
+            this.lblderslikkapasitesi.TabIndex = 82;
+            this.lblderslikkapasitesi.Text = "0";
+            // 
+            // cmbgozetmen1id
+            // 
+            this.cmbgozetmen1id.FormattingEnabled = true;
+            this.cmbgozetmen1id.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.cmbgozetmen1id.Location = new System.Drawing.Point(56, 528);
+            this.cmbgozetmen1id.Name = "cmbgozetmen1id";
+            this.cmbgozetmen1id.Size = new System.Drawing.Size(256, 21);
+            this.cmbgozetmen1id.TabIndex = 76;
+            this.cmbgozetmen1id.Text = "Seçiniz...";
+            this.cmbgozetmen1id.Visible = false;
+            this.cmbgozetmen1id.SelectedIndexChanged += new System.EventHandler(this.cmbgozetmen1id_SelectedIndexChanged);
+            // 
+            // cmbgozetmen2id
+            // 
+            this.cmbgozetmen2id.FormattingEnabled = true;
+            this.cmbgozetmen2id.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.cmbgozetmen2id.Location = new System.Drawing.Point(56, 584);
+            this.cmbgozetmen2id.Name = "cmbgozetmen2id";
+            this.cmbgozetmen2id.Size = new System.Drawing.Size(256, 21);
+            this.cmbgozetmen2id.TabIndex = 76;
+            this.cmbgozetmen2id.Text = "Seçiniz...";
+            this.cmbgozetmen2id.Visible = false;
+            this.cmbgozetmen2id.SelectedIndexChanged += new System.EventHandler(this.cmbgozetmen2id_SelectedIndexChanged);
+            // 
+            // cmbgozetmen3id
+            // 
+            this.cmbgozetmen3id.FormattingEnabled = true;
+            this.cmbgozetmen3id.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.cmbgozetmen3id.Location = new System.Drawing.Point(56, 640);
+            this.cmbgozetmen3id.Name = "cmbgozetmen3id";
+            this.cmbgozetmen3id.Size = new System.Drawing.Size(256, 21);
+            this.cmbgozetmen3id.TabIndex = 76;
+            this.cmbgozetmen3id.Text = "Seçiniz...";
+            this.cmbgozetmen3id.Visible = false;
+            this.cmbgozetmen3id.SelectedIndexChanged += new System.EventHandler(this.cmbgozetmen3id_SelectedIndexChanged);
+            // 
             // Sinavlar
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.ClientSize = new System.Drawing.Size(1366, 768);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.lblderslikkapasitesi);
+            this.Controls.Add(this.lblsinavagirenogrencisayisi);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.cmbtarih);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dataGridView1);
@@ -472,6 +564,9 @@
             this.Controls.Add(this.lblgozetmen3);
             this.Controls.Add(this.cmbgozetmen2);
             this.Controls.Add(this.lblgozetmen2);
+            this.Controls.Add(this.cmbgozetmen3id);
+            this.Controls.Add(this.cmbgozetmen2id);
+            this.Controls.Add(this.cmbgozetmen1id);
             this.Controls.Add(this.cmbgozetmen1);
             this.Controls.Add(this.lblgozetmen1);
             this.Controls.Add(this.cmbogretimelemaniid);
@@ -488,7 +583,7 @@
             this.Name = "Sinavlar";
             this.Opacity = 0.99D;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.Text = "";
+            this.Text = "0";
             this.Load += new System.EventHandler(this.Sinavlar_Load);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label6, 0);
@@ -502,6 +597,9 @@
             this.Controls.SetChildIndex(this.cmbogretimelemaniid, 0);
             this.Controls.SetChildIndex(this.lblgozetmen1, 0);
             this.Controls.SetChildIndex(this.cmbgozetmen1, 0);
+            this.Controls.SetChildIndex(this.cmbgozetmen1id, 0);
+            this.Controls.SetChildIndex(this.cmbgozetmen2id, 0);
+            this.Controls.SetChildIndex(this.cmbgozetmen3id, 0);
             this.Controls.SetChildIndex(this.lblgozetmen2, 0);
             this.Controls.SetChildIndex(this.cmbgozetmen2, 0);
             this.Controls.SetChildIndex(this.lblgozetmen3, 0);
@@ -521,6 +619,10 @@
             this.Controls.SetChildIndex(this.dataGridView1, 0);
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.cmbtarih, 0);
+            this.Controls.SetChildIndex(this.label5, 0);
+            this.Controls.SetChildIndex(this.lblsinavagirenogrencisayisi, 0);
+            this.Controls.SetChildIndex(this.lblderslikkapasitesi, 0);
+            this.Controls.SetChildIndex(this.label8, 0);
             this.Controls.SetChildIndex(this.btnmavi1, 0);
             this.Controls.SetChildIndex(this.btnkirmizi1, 0);
             this.Controls.SetChildIndex(this.lblbaslik, 0);
@@ -563,6 +665,13 @@
         private System.Windows.Forms.ComboBox cmbderslik1id;
         private System.Windows.Forms.ComboBox cmbderslik2id;
         private System.Windows.Forms.ComboBox cmbderslik3id;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblsinavagirenogrencisayisi;
+        private System.Windows.Forms.Label lblderslikkapasitesi;
+        private System.Windows.Forms.ComboBox cmbgozetmen1id;
+        private System.Windows.Forms.ComboBox cmbgozetmen2id;
+        private System.Windows.Forms.ComboBox cmbgozetmen3id;
     }
 }
 
