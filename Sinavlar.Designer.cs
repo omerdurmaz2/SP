@@ -81,11 +81,13 @@
             // 
             this.btnkirmizi1.FlatAppearance.BorderSize = 0;
             this.btnkirmizi1.Location = new System.Drawing.Point(96, 496);
+            this.btnkirmizi1.Click += new System.EventHandler(this.btnkirmizi1_Click);
             // 
             // btnmavi1
             // 
             this.btnmavi1.FlatAppearance.BorderSize = 0;
             this.btnmavi1.Location = new System.Drawing.Point(192, 496);
+            this.btnmavi1.Click += new System.EventHandler(this.btnmavi1_Click);
             // 
             // label1
             // 

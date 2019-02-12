@@ -60,7 +60,7 @@ namespace sp
         #region Listele
         public void Listele()
         {
-            komut = "select D.id as 'SIRA NO',D.ders_kodu as 'DERS KODU',D.ders_adi as 'DERS ADI', D.ogr_sekli as 'ÖĞRETİM ŞEKLİ', D.ogr_sayisi as 'ÖĞRENCİ SAYISI',concat(O.unvan,' ',O.Ad_Soyad) as 'ÖĞRETİM ELEMANI', B.bolum_adi as 'BÖLÜM ADI' from ders D, ogretimelemani O,bolumler B where D.ogretim_elemani=O.id and D.bolum_id = B.id;";
+            komut = "select id as 'SIRA NO',ders_kodu as 'DERS KODU',ders_adi as 'DERS ADI', bolum as 'BÖLÜM', donem as 'DÖNEM' from ders ";
 
             if (islemler.Al(komut) != null)
             {
@@ -79,39 +79,26 @@ namespace sp
                 MessageBox.Show("İşlem Gerçekleştirlemedi, Lütfen Sonra Tekrar Deneyin!"); // eğer veritabanı işlemi gerçekleştirilemezse hata verir
                 this.Close();
             }
+            cmbbolum.Items.Add("ORTAK DERS");
 
-            //comboboxa veri basma 
             komut = "select * from bolumler";
             dr = islemler.Oku(komut);
             while (dr.Read())
             {
-                cmbbolum.Items.Add(dr.GetString("bolum_adi") + " (" + dr.GetString("bolum_kodu") + ")");
-                cmbbolumid.Items.Add(dr.GetString("id"));
+                cmbbolum.Items.Add(dr.GetString("program_kodu") + " " + dr.GetString("program_adi"));
             }
             islemler.Kapat();
-            cmbbolum.SelectedIndex = 0;
-            cmbbolumid.SelectedIndex = 0;
-
-            komut = "select * from ogretimelemani";
-            dr = islemler.Oku(komut);
-            while (dr.Read())
-            {
-                cmbogretmen.Items.Add(dr.GetString("unvan") + " " + dr.GetString("Ad_Soyad"));
-                cmbogretimelemaniid.Items.Add(dr.GetString("id"));
-            }
-            islemler.Kapat();
-            cmbogretimelemaniid.SelectedIndex = 0;
-            cmbogretmen.SelectedIndex = 0;
-
+            cmbbolum.SelectedIndex = -1;
+            cmbbolum.Text = "Seçiniz..";
         }
         #endregion
 
         #region Kaydet
-        public void Kaydet(string dersadi, string derskodu, int ogrsayisi, string ogretimsekli, int ogretimelemani, int bolumid)
+        public void Kaydet(string dersadi, string derskodu, string bolum, string donem)
         {
             if (dersid == -1) //eğer id -1 ise yeni ekler
             {
-                komut = "INSERT INTO ders(ders_adi,ogr_sekli,ogr_sayisi,ogretim_elemani,ders_kodu,bolum_id) VALUES ('" + dersadi + "','" + ogretimsekli + "'," + ogrsayisi + "," + ogretimelemani + ",'" + derskodu + "'," + bolumid + ") ";
+                komut = "INSERT INTO ders(ders_adi,ders_kodu,bolum,donem) VALUES ('" + dersadi + "','" + derskodu + "','" + bolum + "','" + donem + "')";
                 mesaj = "Yeni Kayıt Eklendi";
             }
             else // eğer id -1 değilse id ye göre veri güncellenir
@@ -119,7 +106,7 @@ namespace sp
                 btnkirmizi1.Visible = false;
                 btnmavi1.Text = "EKLE";
 
-                komut = "UPDATE ders SET ders_adi = '" + dersadi + "',ogr_sekli = '" + ogretimsekli + "' ,ogr_sayisi = " + ogrsayisi + ",ogretim_elemani = " + ogretimelemani + ", ders_kodu = '" + derskodu + "', bolum_id=" + bolumid + "  WHERE id = " + dersid + ";";
+                komut = "UPDATE ders SET ders_adi = '" + dersadi + "', ders_kodu = '" + derskodu + "', bolum='" + bolum + "' , donem='" + donem + "'  WHERE id = " + dersid + ";";
                 mesaj = "Kayıt Güncellendi";
 
             }
@@ -147,7 +134,7 @@ namespace sp
             else
             {
                 islemler.Kapat();
-                Kaydet(txtdad.Text, txtdkod.Text, int.Parse(txtos.Text), cmbogretimsekli.SelectedItem.ToString(), int.Parse(cmbogretimelemaniid.SelectedItem.ToString()), int.Parse(cmbbolumid.SelectedItem.ToString()));
+                Kaydet(txtdad.Text, txtdkod.Text,cmbbolum.SelectedItem.ToString(),cmbdonem.SelectedItem.ToString());
             }
         }
         #endregion
@@ -155,7 +142,7 @@ namespace sp
         #region Form Kontrol
         public void FormKontrol()
         {
-            if (txtdad.Text != "" && txtdkod.Text != "" && txtos.Text != "" && cmbbolum.SelectedIndex != -1 && cmbogretmen.SelectedIndex != -1 && cmbogretimsekli.SelectedIndex != -1)
+            if (txtdad.Text != "" && txtdkod.Text != "" && cmbbolum.SelectedIndex != -1 && cmbdonem.SelectedIndex != -1)
             {
                 Sorgu();
             }
@@ -174,23 +161,12 @@ namespace sp
         }
         #endregion
 
-        #region Ogrenci Sayısı Sadece Sayı Girişi
-        private void txtos_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
-        #endregion
-
         #region Temizle
         public void Temizle() // textboxları ve butonları temizler
         {
             txtdad.Clear();
             txtdkod.Clear();
-            txtos.Clear();
-            cmbogretimsekli.SelectedIndex = 0;
+
             btnmavi1.Text = "EKLE";
             btnkirmizi1.Visible = false;
             dersid = -1;
@@ -201,10 +177,10 @@ namespace sp
 
             //veritabanından basılan dropdownların temizlenmesi 
             cmbbolum.Items.Clear();
-            cmbbolumid.Items.Clear();
-            cmbogretmen.Items.Clear();
-            cmbogretimelemaniid.Items.Clear();
-            
+
+
+            cmbdonem.SelectedIndex = -1;
+            cmbdonem.Text = "Seçiniz..";
         }
 
         #endregion
@@ -213,13 +189,13 @@ namespace sp
         #region Tabloda Değiştirme ve Silme İşlemleri
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex > 6) // sütun başlığına tıklayınca hata vermesini önlemek için...
+            if (e.RowIndex >= 0 && e.ColumnIndex > 4) // sütun başlığına tıklayınca hata vermesini önlemek için...
             {
                 dersid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()); //seçilen verinin idsini atıyor
 
                 switch (e.ColumnIndex)
                 {
-                    case 7: //değiştir
+                    case 5: //değiştir
                         btnkirmizi1.Visible = true; //iptal butonu görünür
                         btnmavi1.Text = "GÜNCELLE";
 
@@ -229,12 +205,8 @@ namespace sp
                         {
                             txtdad.Text = dr["ders_adi"].ToString();
                             txtdkod.Text = dr["ders_kodu"].ToString();
-                            txtos.Text = dr["ogr_sayisi"].ToString();
-                            cmbogretimsekli.SelectedItem = dr["ogr_sekli"].ToString();
-                            cmbbolumid.SelectedItem = dr["bolum_id"].ToString();
-
-                            cmbogretimelemaniid.SelectedItem = dr["ogretim_elemani"].ToString();
-                            cmbogretmen.SelectedIndex = cmbogretimelemaniid.SelectedIndex;
+                            cmbdonem.SelectedItem = dr["donem"].ToString();
+                            cmbbolum.SelectedItem = dr["bolum"].ToString();
                         }
                         else
                         { // eğer kayıt buluanmazsa hata verir
@@ -245,7 +217,7 @@ namespace sp
                         dr.Close(); //datareader i temizliyoruz
 
                         break;
-                    case 8:
+                    case 6:
 
                         DialogResult uyari = MessageBox.Show("Silmek İstiyor musunuz? ", "DİKKAT!", MessageBoxButtons.YesNo);// silmek istenip istenmediği sorulur
                         if (uyari == DialogResult.Yes)
@@ -276,34 +248,6 @@ namespace sp
             Listele();
         }
 
-
-        #endregion
-
-        #region Öğretim Elemanı Seçilen index Değiştiğinde Yapılacaklar
-        //görünen değiştiğinde görünmeyen indexi eşitlenir
-        private void cmbogretmen_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cmbogretimelemaniid.SelectedIndex = cmbogretmen.SelectedIndex;
-        }
-        //görünmeyen indexi değiştiğinde görünen indexi de eşitlernir
-        private void cmbogretimelemaniid_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cmbogretmen.SelectedIndex = cmbogretimelemaniid.SelectedIndex;
-        }
-
-        #endregion
-
-        #region Bölüm comboboxu Seçilen İndex Değiştiğinde Yapılacaklar
-        //görünen değiştiğinde görünmeyen indexi eşitlenir
-        private void cmbbolum_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cmbbolumid.SelectedIndex = cmbbolum.SelectedIndex;
-        }
-        //görünmeyen indexi değiştiğinde görünen indexi de eşitlernir
-        private void cmbbolumid_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cmbbolum.SelectedIndex = cmbbolumid.SelectedIndex;
-        }
 
         #endregion
 

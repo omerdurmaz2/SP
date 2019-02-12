@@ -63,10 +63,11 @@ namespace sp
         #region Dışarıda Tanımlananlar
         MySqlDataReader dr; // sorgu methodu için tablo okumaya yarayan class
         VeritabaniIslemler islemler = new VeritabaniIslemler();
+
         DataTable dt = new DataTable();
         string komut = "";
         string mesaj = "";
-        int sinavid = -1;
+
         string donem = "";
         // Seçili dersliklerin id leri tutulmak için 
         string derslik1 = "0";
@@ -86,6 +87,9 @@ namespace sp
         string gozetmen1 = "0";
         string gozetmen2 = "0";
         string gozetmen3 = "0";
+
+        //Sınav Tablosu İçin Tanımlananlar
+        int sinavid = -1;
 
         #endregion
 
@@ -562,6 +566,10 @@ namespace sp
                             {
                                 DerslikGizleGöster(true, 3);
                             }
+                            else
+                            {
+                                DerslikGizleGöster(false, 3);
+                            }
                         }
                         else
                         {
@@ -602,7 +610,7 @@ namespace sp
         public void DerslikIdKaydet()
         {
             derslik1 = "0";
-            derslik2 = "0";
+            derslik2 = "0"; 
             derslik3 = "0";
             try
             {
@@ -876,6 +884,7 @@ namespace sp
                         cmbderslik2.Text = "Seçiniz:";
                         cmbderslik2.Visible = true;
                         lblderslik2.Visible = true;
+                        derslik1 = "";
                         break;
                     case 3:
                         cmbderslik3.Items.Clear();
@@ -883,6 +892,7 @@ namespace sp
                         cmbderslik2.Text = "Seçiniz:";
                         cmbderslik3.Visible = true;
                         lblderslik3.Visible = true;
+                        derslik1 = "";
                         break;
                 }
             }
@@ -894,18 +904,21 @@ namespace sp
                         cmbderslik1.Items.Clear();
                         cmbderslik1.Items.Clear();
                         cmbderslik2.Text = "Seçiniz:";
+                        derslik1 = "";
                         break;
                     case 2:
                         cmbderslik2.Items.Clear();
                         cmbderslik2.Items.Clear();
                         cmbderslik2.Visible = false;
                         lblderslik2.Visible = false;
+                        derslik2 = "";
                         break;
                     case 3:
                         cmbderslik3.Items.Clear();
                         cmbderslik3.Items.Clear();
                         cmbderslik3.Visible = false;
                         lblderslik3.Visible = false;
+                        derslik3 = "";
                         break;
                 }
             }
@@ -1303,8 +1316,102 @@ namespace sp
         {
             cmbgozetmen3.SelectedIndex = cmbgozetmen3id.SelectedIndex;
         }
+
         #endregion
 
+        #endregion
+
+        #region Kaydetme İşlemi
+
+        #region Form Kontrol
+        public string FormKontrol()
+        {
+            mesaj = "";
+            try
+            {
+
+                int dersliksayisi = 1;
+                if (cmbtarih.SelectedIndex == -1 || cmbtarih.Items.Count == 0) { mesaj = "Lütfen Tarihi Seçiniz!"; return mesaj; }
+                else if (cmbbolumid.SelectedIndex == -1 || cmbbolumid.Items.Count == 0) { mesaj = "Lütfen Bölümü Seçiniz!"; return mesaj; }
+                else if (cmbdersid.SelectedIndex == -1 && cmbdersid.Items.Count == 0) { mesaj = "Lütfen Dersi Seçiniz!"; return mesaj; }
+                else if (cmbogretimelemaniid.SelectedIndex == -1 || cmbogretimelemaniid.Items.Count == 0) { mesaj = "Lütfen Öğretim Elemanını Seçiniz!"; return mesaj; }
+                else if (cmbsaat.SelectedIndex == -1 || cmbsaat.Items.Count == 0) { mesaj = "Lütfen Saati Seçiniz!"; return mesaj; }
+                if (cmbderslik3.Visible == true)
+                {
+                    dersliksayisi = 3;
+                    if (cmbderslik3id.SelectedIndex == -1 || cmbderslik3id.Items.Count == 0) { mesaj = "Lütfen 3. Dersliği Seçiniz Seçiniz!"; return mesaj; }
+                    if (cmbderslik2id.SelectedIndex == -1 || cmbderslik2id.Items.Count == 0) { mesaj = "Lütfen 2. Dersliği Seçiniz Seçiniz!"; return mesaj; }
+                    if (cmbderslik1id.SelectedIndex == -1 || cmbderslik1id.Items.Count == 0) { mesaj = "Lütfen 1. Dersliği Seçiniz Seçiniz!"; return mesaj; }
+                }
+                else if (cmbderslik2.Visible == true)
+                {
+                    dersliksayisi = 2;
+                    if (cmbderslik2id.SelectedIndex == -1 || cmbderslik2id.Items.Count == 0) { mesaj = "Lütfen 2. Dersliği Seçiniz Seçiniz!"; return mesaj; }
+                    if (cmbderslik1id.SelectedIndex == -1 || cmbderslik1id.Items.Count == 0) { mesaj = "Lütfen 1. Dersliği Seçiniz Seçiniz!"; return mesaj; }
+                }
+                else
+                {
+                    dersliksayisi = 1;
+                    if (cmbderslik1id.SelectedIndex == -1 || cmbderslik1id.Items.Count == 0) { mesaj = "Lütfen 1. Dersliği Seçiniz Seçiniz!"; return mesaj; }
+                }
+                switch (int.Parse(gozetmensayisi.Value.ToString()))
+                {
+                    case 1:
+                        if (cmbgozetmen1id.SelectedIndex == -1 || cmbgozetmen1id.Items.Count == 0) { mesaj = "Lütfen 1. Gözetmeni Seçiniz!"; return mesaj; }
+                        break;
+                    case 2:
+                        if (cmbgozetmen1id.SelectedIndex == -1 || cmbgozetmen1id.Items.Count == 0) { mesaj = "Lütfen 1. Gözetmeni Seçiniz!"; return mesaj; }
+                        if (cmbgozetmen2id.SelectedIndex == -1 || cmbgozetmen2id.Items.Count == 0) { mesaj = "Lütfen 2. Gözetmeni Seçiniz!"; return mesaj; }
+                        break;
+                    case 3:
+                        if (cmbgozetmen1id.SelectedIndex == -1 || cmbgozetmen1id.Items.Count == 0) { mesaj = "Lütfen 1. Gözetmeni Seçiniz!"; return mesaj; }
+                        if (cmbgozetmen2id.SelectedIndex == -1 || cmbgozetmen2id.Items.Count == 0) { mesaj = "Lütfen 2. Gözetmeni Seçiniz!"; return mesaj; }
+                        if (cmbgozetmen3id.SelectedIndex == -1 || cmbgozetmen3id.Items.Count == 0) { mesaj = "Lütfen 3. Gözetmeni Seçiniz!"; return mesaj; }
+                        break;
+                }
+
+                if (dersliksayisi > int.Parse(gozetmensayisi.Value.ToString()) + 1)
+                {
+                    DialogResult cevap = MessageBox.Show("Derslik Sayısı gözetmen sayısından fazla!", "UYARI!!", MessageBoxButtons.YesNo);
+                    if (cevap == DialogResult.Yes) { mesaj = ""; return mesaj; }
+                    else { mesaj = ""; return mesaj; }
+                }
+                return mesaj;
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Form Kontrol Hatası! Hata Kodu: " + err);
+                return mesaj = err.ToString();
+            }
+
+
+        }
+        #endregion
+
+
+        #endregion
+
+        #region Kaydet Butonu
+        private void btnmavi1_Click(object sender, EventArgs e)
+        {
+            mesaj = FormKontrol();
+            if (mesaj == "")
+            {
+
+            }
+            else
+            {
+                MessageBox.Show(mesaj, "HATA!");
+            }
+        }
+        #endregion
+
+        #region İptal Butonu
+        private void btnkirmizi1_Click(object sender, EventArgs e)
+        {
+            gozetmensayisi.Value = 0;
+
+        }
         #endregion
 
 

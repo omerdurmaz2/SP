@@ -64,7 +64,7 @@ namespace sp
             dataGridView1.DataSource = null;
             dataGridView1.Columns.Clear();
             dataGridView1.Refresh();
-            komut = "select id as 'SIRA NO',bolum_kodu as 'BÖLÜM KODU', bolum_adi as 'BÖLÜM ADI' from bolumler";
+            komut = "select id as 'SIRA NO',program_kodu as 'BÖLÜM KODU', bolum_adi as 'BÖLÜM ADI', program_adi as 'PROGRAM ADI' from bolumler";
 
             if (islemler.Al(komut) != null)
             {
@@ -80,18 +80,18 @@ namespace sp
         #endregion
 
         #region Kaydet Methodu
-        public void Kaydet(string ad, string bolumkod)
+        public void Kaydet(string ad, string bolumkod, string programadi)
         {
 
             if (bolumid == -1)
             {
-                komut = "INSERT INTO bolumler (bolum_adi,bolum_kodu) VALUES ('" + ad + "', '" + bolumkod + "') ";
+                komut = "INSERT INTO bolumler (bolum_adi,program_kodu,program_adi) VALUES ('" + ad + "', '" + bolumkod + "' , '" + programadi + "') ";
                 mesaj = "Yeni Kayıt Eklendi";
             }
             else
             {
 
-                komut = "UPDATE bolumler SET bolum_adi = '" + ad + "', bolum_kodu='" + bolumkod + "' WHERE id = " + bolumid + ";";
+                komut = "UPDATE bolumler SET bolum_adi = '" + ad + "', program_kodu='" + bolumkod + "' , program_adi='" + programadi + "' WHERE id = " + bolumid + ";";
                 mesaj = "Kayıt Güncellendi";
 
             }
@@ -107,7 +107,7 @@ namespace sp
         #region Sorgu
         public void Sorgu()
         {
-            komut = "select * from bolumler where bolum_kodu='" + txtbkod.Text + "' and id <>" + bolumid + " ;";
+            komut = "select * from bolumler where program_kodu='" + txtbkod.Text + "' and id <>" + bolumid + " ;";
             rd = islemler.Oku(komut);
             if (rd.Read())
             {
@@ -117,7 +117,7 @@ namespace sp
             else
             {
                 islemler.Kapat();
-                Kaydet(txtad.Text, txtbkod.Text);
+                Kaydet(txtad.Text, txtbkod.Text, txtprogramadi.Text);
             }
 
         }
@@ -126,7 +126,7 @@ namespace sp
         #region Ekle Butonu
         private void btnmavi1_Click(object sender, EventArgs e)
         {
-            if (txtad.Text != "" || txtbkod.Text != "")
+            if (txtad.Text != "" || txtbkod.Text != "" || txtprogramadi.Text != "")
             {
                 Sorgu();
             }
@@ -155,6 +155,7 @@ namespace sp
             bolumid = -1;
             txtad.Text = "";
             txtbkod.Text = "";
+            txtprogramadi.Text = "";
         }
         #endregion
 
@@ -162,12 +163,12 @@ namespace sp
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex > 2) // sütun başlığına tıklayınca hata vermesini önlemek için...
+            if (e.RowIndex >= 0 && e.ColumnIndex > 3) // sütun başlığına tıklayınca hata vermesini önlemek için...
             {
                 bolumid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
                 switch (e.ColumnIndex)
                 {
-                    case 3:
+                    case 4:
                         btnkirmizi1.Visible = true;
 
                         komut = "select * from bolumler where id=" + bolumid + ";";
@@ -175,7 +176,8 @@ namespace sp
                         if (rd.Read())
                         {
                             txtad.Text = rd["bolum_adi"].ToString();
-                            txtbkod.Text = rd["bolum_kodu"].ToString();
+                            txtbkod.Text = rd["program_kodu"].ToString();
+                            txtprogramadi.Text = rd["program_adi"].ToString();
                             btnmavi1.Text = "DEĞİŞTİR";
                         }
                         else
@@ -183,9 +185,8 @@ namespace sp
                             MessageBox.Show("İşlem Gerçekleştirilemedi. Lütfen Daha Sonra Tekrar Deneyin", "HATA!!");
                         }
                         islemler.Kapat();
-                        rd.Close(); //mysqldatareaderi temizliyoruz
                         break;
-                    case 4:
+                    case 5:
                         DialogResult uyari = MessageBox.Show("Silmek İstiyor musunuz? ", "DİKKAT!", MessageBoxButtons.YesNo);
                         if (uyari == DialogResult.Yes)
                         {
@@ -202,8 +203,8 @@ namespace sp
             }
 
         }
-        #endregion
 
+        #endregion
 
     }
 }

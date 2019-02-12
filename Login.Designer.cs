@@ -31,7 +31,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.txtkod = new System.Windows.Forms.TextBox();
             this.lblkod = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -64,19 +63,6 @@
             this.btnmavi1.Location = new System.Drawing.Point(240, 416);
             this.btnmavi1.Text = "GİRİŞ";
             this.btnmavi1.Click += new System.EventHandler(this.btnmavi1_Click);
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.linkLabel1.LinkColor = System.Drawing.Color.Black;
-            this.linkLabel1.Location = new System.Drawing.Point(72, 416);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(98, 20);
-            this.linkLabel1.TabIndex = 29;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Şifremi Unuttum";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // txtkod
             // 
@@ -216,7 +202,6 @@
             this.ClientSize = new System.Drawing.Size(393, 508);
             this.Controls.Add(this.buttonEllipse2);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.txtkod);
             this.Controls.Add(this.lblkod);
             this.Controls.Add(this.label4);
@@ -242,7 +227,6 @@
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.lblkod, 0);
             this.Controls.SetChildIndex(this.txtkod, 0);
-            this.Controls.SetChildIndex(this.linkLabel1, 0);
             this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.buttonEllipse2, 0);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -252,7 +236,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.TextBox txtkod;
         private System.Windows.Forms.Label lblkod;
         private System.Windows.Forms.Label label4;
