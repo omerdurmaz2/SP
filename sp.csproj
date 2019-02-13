@@ -56,6 +56,18 @@
     <Compile Include="Derslikler.Designer.cs">
       <DependentUpon>Derslikler.cs</DependentUpon>
     </Compile>
+    <Compile Include="DonemBelirle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DonemBelirle.Designer.cs">
+      <DependentUpon>DonemBelirle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SinavEkleDüzenle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SinavEkleDüzenle.Designer.cs">
+      <DependentUpon>SinavEkleDüzenle.cs</DependentUpon>
+    </Compile>
     <Compile Include="SinavProgrami.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +132,12 @@
     <Compile Include="VeritabaniIslemler.cs" />
     <EmbeddedResource Include="Derslikler.resx">
       <DependentUpon>Derslikler.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DonemBelirle.resx">
+      <DependentUpon>DonemBelirle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SinavEkleDüzenle.resx">
+      <DependentUpon>SinavEkleDüzenle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SinavProgrami.resx">
       <DependentUpon>SinavProgrami.cs</DependentUpon>

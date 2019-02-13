@@ -18,21 +18,36 @@ namespace sp
             Width = Screen.PrimaryScreen.WorkingArea.Width;
             Height = Screen.PrimaryScreen.WorkingArea.Height;
             baslikhizala();
-            DonemBelirle();
         }
         private void SinavProgrami_Load(object sender, EventArgs e)
         {
             //if (Login.Session)
             //{
             //Filtrelerin Basıldığı Yer
+            DonemBelirle donem = new DonemBelirle();
+            DialogResult cevap;
+            do
+            {
+                cevap= donem.ShowDialog();
+                if (cevap == DialogResult.None || cevap == DialogResult.No || cevap == DialogResult.Cancel)
+                {
+                    MessageBox.Show("Lütfen Dönemi Seçiniz!", "UYARI!");
+                }
+                else
+                {
+                    break;
+                }
+
+            } while (cevap == DialogResult.None || cevap == DialogResult.No || cevap==DialogResult.Cancel);
             OgretimGorevlileriListele();
             FiltreTarihBas();
             FiltreSaatBas();
             FiltreOgretimGorevlisiBas();
             FiltreBolumKoduAdıBas();
+
             //-----
 
-            //    Listele();
+            Listele();
             //}
             //else
             //{
@@ -65,16 +80,34 @@ namespace sp
 
         #region Dışarıda Tanımlananlar
         MySqlDataReader dr; // sorgu methodu için tablo okumaya yarayan class
-        VeritabaniIslemler islemler = new VeritabaniIslemler(); // veritabanı classına giderek yapmak istediğimiz işleme göre kolaylıklar sağlıyor
+        VeritabaniIslemler islemler; // veritabanı classına giderek yapmak istediğimiz işleme göre kolaylıklar sağlıyor
 
         DataTable dt = new DataTable(); // veritabanından getirilen tabloların geçici olarak tutulduğu yer
 
         string komut = "";  //veritabanı komutlarının tutulduğu yer
         string mesaj = "";  //Hata ve bildirim durumlarında mesajların kaydedildiği yer
-        string donem = "";  //dönemim belirlenip içine atıldığı değişken
+
+        public static string donem = "";
+        public static string eklebaslik = "";
 
 
         #endregion
+
+        public void Listele()
+        {
+            islemler = new VeritabaniIslemler();
+            komut = "select * from " + donem + " ;";
+
+            if (islemler.Al(komut)!=null)
+            {
+                dataGridView1.DataSource = islemler.Al(komut);
+                ButonEkle();
+
+                dataGridView1.Columns.Add(duzenle);
+                dataGridView1.Columns.Add(sil);
+            }
+
+        }
 
         #region Filtre İşlemleri
         #region Tarihin Basıldığı Yer
@@ -111,7 +144,7 @@ namespace sp
                 dr = islemler.Oku(komut);
                 while (dr.Read())
                 {
-                        cmbfiltresaat.Items.Add(dr.GetString("saat"));
+                    cmbfiltresaat.Items.Add(dr.GetString("saat"));
                 }
                 islemler.Kapat();
             }
@@ -132,7 +165,7 @@ namespace sp
                 dr = islemler.Oku(komut);
                 while (dr.Read())
                 {
-                    cmbfiltreogretimgorevlisi.Items.Add(dr.GetString("unvan")+" "+ dr.GetString("Ad_Soyad"));
+                    cmbfiltreogretimgorevlisi.Items.Add(dr.GetString("unvan") + " " + dr.GetString("Ad_Soyad"));
                 }
                 islemler.Kapat();
             }
@@ -156,8 +189,8 @@ namespace sp
                 dr = islemler.Oku(komut);
                 while (dr.Read())
                 {
-                    cmbfiltrebolumadi.Items.Add(dr.GetString("bolum_adi"));
-                    cmbfiltrebolumkodu.Items.Add(dr.GetString("bolum_kodu"));
+                    cmbfiltrebolumadi.Items.Add(dr.GetString("program_adi"));
+                    cmbfiltrebolumkodu.Items.Add(dr.GetString("program_kodu"));
                     cmbfiltrebolumid.Items.Add(dr.GetString("id"));
                 }
                 islemler.Kapat();
@@ -179,6 +212,7 @@ namespace sp
         #region Filtrelerin Temizlendiği Yer
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+
             cmbfiltrebolumadi.SelectedIndex = -1;
             cmbfiltrebolumadi.Text = "Bölüm Adı:";
 
@@ -208,6 +242,7 @@ namespace sp
         #region Öğretim Elemanları Listelendiği Yer
         public void OgretimGorevlileriListele()
         {
+            islemler = new VeritabaniIslemler();
             komut = "select unvan as 'Ünvanı', Ad_Soyad as 'Ad Soyad',Kendi_Sinav_Sayisi as 'Kendi Sınav Sayısı',Gozetmenlik_Sayisi as 'Gözetmenlik Sayısı' from ogretimelemani";
             dataGridView2.Rows.Clear();
             if (islemler.Al(komut) != null)
@@ -217,16 +252,39 @@ namespace sp
         }
         #endregion
 
-        #region Dönem Belirleme
-        //Bu sayede kullanıcı güz dönemi girdiğine güz dönemindeki veriler listelenecek ve kaydedilecektir. Aynı şekilde bahar dönemi de              
-        public void DonemBelirle()
-        {
-            DateTime donemtarihi = new DateTime(DateTime.Now.Year, 1, 30);
-            if (DateTime.Now < donemtarihi) donem = "guz";
-            else donem = "bahar";
 
+        #region Ekleme Butonu
+        private void btnmavi1_Click(object sender, EventArgs e)
+        {
+            eklebaslik = "YENİ KAYIT";
+            SinavEkleDüzenle ekle = new SinavEkleDüzenle();
+            ekle.ShowDialog();
+            if (ekle.DialogResult == DialogResult.None || ekle.DialogResult == DialogResult.No)
+            {
+                MessageBox.Show("Kayıt Eklendi");
+            }
+            else
+            {
+                MessageBox.Show("İşlem Gerçekleştirilemedi", "HATA!");
+            }
         }
         #endregion
 
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex>17 && e.RowIndex>=0 )
+            {
+                switch (e.ColumnIndex)
+                {
+                    case 18:
+                        eklebaslik = "KAYIT DÜZENLE";
+                        SinavEkleDüzenle goster = new SinavEkleDüzenle();
+                        goster.ShowDialog();
+                        break;
+                    case 19:
+                        break;
+                }
+            }
+        }
     }
 }
