@@ -114,6 +114,7 @@ namespace sp
             ders.ShowDialog();
         }
         #endregion
+        
         #region Sınav Programı Sayfası
         private void button6_Click(object sender, EventArgs e)
         {
@@ -123,5 +124,13 @@ namespace sp
         }
         #endregion
 
+        #region Sınav Saatleri
+        private void button3_Click(object sender, EventArgs e)
+        {
+            label3.Visible = true;
+            Saatler saat = new Saatler();
+            saat.Show();
+        }
+        #endregion
     }
 }

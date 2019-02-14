@@ -257,6 +257,7 @@ namespace sp
         private void btnmavi1_Click(object sender, EventArgs e)
         {
             eklebaslik = "YENİ KAYIT";
+            SinavEkleDüzenle.sinavid = -1;
             SinavEkleDüzenle ekle = new SinavEkleDüzenle();
             ekle.ShowDialog();
             if (ekle.DialogResult == DialogResult.None || ekle.DialogResult == DialogResult.No)
@@ -272,16 +273,17 @@ namespace sp
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex>17 && e.RowIndex>=0 )
+            if (e.ColumnIndex>18 && e.RowIndex>=0 )
             {
                 switch (e.ColumnIndex)
                 {
-                    case 18:
+                    case 19:
                         eklebaslik = "KAYIT DÜZENLE";
+                        SinavEkleDüzenle.sinavid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
                         SinavEkleDüzenle goster = new SinavEkleDüzenle();
                         goster.ShowDialog();
                         break;
-                    case 19:
+                    case 20:
                         break;
                 }
             }

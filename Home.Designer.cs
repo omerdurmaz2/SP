@@ -38,6 +38,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblbaslik
@@ -124,7 +125,7 @@
             this.button4.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.button4.Location = new System.Drawing.Point(16, 152);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(136, 64);
+            this.button4.Size = new System.Drawing.Size(64, 64);
             this.button4.TabIndex = 36;
             this.button4.Text = "Sınav Tarihleri";
             this.button4.UseVisualStyleBackColor = false;
@@ -171,6 +172,20 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(82)))), ((int)(((byte)(82)))));
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.button3.Location = new System.Drawing.Point(80, 152);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(72, 64);
+            this.button3.TabIndex = 36;
+            this.button3.Text = "Sınav Saatleri";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -180,6 +195,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button5);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button1);
@@ -200,6 +216,7 @@
             this.Controls.SetChildIndex(this.button1, 0);
             this.Controls.SetChildIndex(this.button6, 0);
             this.Controls.SetChildIndex(this.button4, 0);
+            this.Controls.SetChildIndex(this.button3, 0);
             this.Controls.SetChildIndex(this.button5, 0);
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.button2, 0);
@@ -218,6 +235,7 @@
         private System.Windows.Forms.Button button5;
         public  System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 

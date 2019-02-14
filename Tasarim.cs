@@ -40,6 +40,7 @@ namespace sp
         #endregion
 
         #region Tasarım için Yapılmış Değişiklikler
+
         #region Köşelerin Yuvarlanması
 
         //Köşelerin Yuvarlanması 

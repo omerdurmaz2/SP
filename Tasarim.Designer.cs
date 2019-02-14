@@ -152,6 +152,7 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Tasarim_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Tasarim_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Tasarim_MouseUp);
+            
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
