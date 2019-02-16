@@ -25,12 +25,27 @@ namespace sp
         }
         private void SinavEkleDüzenle_Load(object sender, EventArgs e)
         {
-            BolumBas();
-            DersBas();
-            OgretimGorevlisiBas();
-            TarihBas();
-            SaatBas();
-            İslemKontrol();
+            try
+            {
+                if (sinavid!=-1)
+                {
+                    //Düzenlenecek sınav tabloya atılıyor
+                    DuzenlenecekSinav = new DataTable();
+                    komut = "select * from " + SinavProgrami.donem + " where id= " + sinavid + ";";
+                    DuzenlenecekSinav = islemler.Al(komut);
+                }
+                BolumBas();
+                DersBas();
+                OgretimGorevlisiBas();
+                TarihBas();
+                SaatBas();
+                İslemKontrol();
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Form Yüklenirken Hata! \nHata Kodu: " + err, "HATA!");
+                this.Close();
+            }
         }
         #endregion
 
@@ -59,7 +74,9 @@ namespace sp
         MySqlDataReader dr; // sorgu methodu için tablo okumaya yarayan class
         VeritabaniIslemler islemler = new VeritabaniIslemler();
 
-        DataTable dt;
+        DataTable DerslikTablo;
+        DataTable OgretmenTablo;
+        DataTable DuzenlenecekSinav;
 
         public static int sinavid = -1;
         string komut = "";
@@ -69,140 +86,130 @@ namespace sp
         string Derslik2 = "0";
         string Derslik3 = "0";
         string Derslik4 = "0";
+
+        string gozetmen1 = "0";
+        string gozetmen2 = "0";
+        string gozetmen3 = "0";
+
         #endregion
 
         #region Bolum / Bolum Kodu Bas
         public void BolumBas()
         {
-            komut = "select program_kodu,program_adi from bolumler;";
-            dr = islemler.Oku(komut);
-            if (dr != null)
+            try
             {
-                while (dr.Read())
-                {
-                    cmbbolumkod.Items.Add(dr.GetString("program_kodu"));
-                    cmbbolumad.Items.Add(dr.GetString("program_adi"));
-                }
-            }
-            islemler.Kapat();
-        }
-        #endregion
-
-        #region Gözetmenlerin Gösterilip Gizlenmesi
-        private void gozetmensayisi_ValueChanged(object sender, EventArgs e)
-        {
-            switch (int.Parse(gozetmensayisi.Value.ToString()))
-            {
-                case 0:
-                    GozetmenGosterGizle(true, 0);
-                    GozetmenGosterGizle(false, 0);
-                    break;
-                case 1:
-                    GozetmenGosterGizle(true, 1);
-                    GozetmenGosterGizle(false, 1);
-                    break;
-                case 2:
-                    GozetmenGosterGizle(true, 2);
-                    GozetmenGosterGizle(false, 2);
-                    break;
-                case 3:
-                    GozetmenGosterGizle(true, 3);
-                    break;
-            }
-
-        }
-
-        //Gözetmenlerin Gösterilip Gizlenmesi
-        public void GozetmenGosterGizle(bool islem, int gozetmen)
-        {
-            if (islem)
-            {
-                switch (gozetmen)
-                {
-                    case 1:
-                        cmbgozetmen1.Items.Clear();
-                        cmbgozetmen1id.Items.Clear();
-                        lblgozetmen1.Visible = true;
-                        cmbgozetmen1.Visible = true;
-                        cmbgozetmen1.Text = "Seçiniz...";
-                        break;
-                    case 2:
-                        cmbgozetmen2.Items.Clear();
-                        cmbgozetmen2id.Items.Clear();
-                        lblgozetmen2.Visible = true;
-                        cmbgozetmen2.Visible = true;
-                        cmbgozetmen2.Text = "Seçiniz...";
-
-
-                        break;
-                    case 3:
-                        cmbgozetmen3.Items.Clear();
-                        cmbgozetmen3id.Items.Clear();
-                        lblgozetmen3.Visible = true;
-                        cmbgozetmen3.Visible = true;
-                        cmbgozetmen3.Text = "Seçiniz...";
-                        break;
-                }
-            }
-            else
-            {
-                switch (gozetmen)
-                {
-                    case 0:
-                        cmbgozetmen1.Items.Clear();
-                        cmbgozetmen1id.Items.Clear();
-                        lblgozetmen1.Visible = false;
-                        cmbgozetmen1.Visible = false;
-                        break;
-                    case 1:
-                        cmbgozetmen2.Items.Clear();
-                        cmbgozetmen2id.Items.Clear();
-                        lblgozetmen2.Visible = false;
-                        cmbgozetmen2.Visible = false;
-                        break;
-                    case 2:
-                        cmbgozetmen3.Items.Clear();
-                        cmbgozetmen3id.Items.Clear();
-                        lblgozetmen3.Visible = false;
-                        cmbgozetmen3.Visible = false;
-                        break;
-                }
-            }
-        }
-        #endregion
-
-        #region Eğer Kayıt Değiştirme Yapılmıyorsa Program_Kodu Değiştirildiğinde Bölümün de otomatik seçildiği alan
-
-        private void cmbbolumkod_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (sinavid == -1)
-            {
-                komut = "select * from bolumler where program_kodu='" + cmbbolumkod.SelectedItem.ToString() + "';";
+                komut = "select program_kodu,program_adi from bolumler;";
                 dr = islemler.Oku(komut);
-                if (dr.Read())
+                if (dr != null)
                 {
-                    cmbbolumad.SelectedItem = dr.GetString("program_adi");
+                    while (dr.Read())
+                    {
+                        cmbbolumkod.Items.Add(dr.GetString("program_kodu"));
+                        cmbbolumad.Items.Add(dr.GetString("program_adi"));
+                    }
                 }
                 islemler.Kapat();
             }
+            catch (Exception err)
+            {
+                islemler.Kapat();
+                MessageBox.Show("Bölümler Basılırken Hata! \nHata Kodu: " + err, "HATA!");
+                this.Close();
+            }
+
+        }
+        #endregion
+
+
+        
+        //Eğer kayıt değiştirme yapılmıyorsa prg_kod değiştiğinde otomatik olarak prg_adın seçildiği kısım
+        private void cmbbolumkod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (sinavid == -1)
+                {
+                    komut = "select * from bolumler where program_kodu='" + cmbbolumkod.SelectedItem.ToString() + "';";
+                    dr = islemler.Oku(komut);
+                    if (dr.Read())
+                    {
+                        cmbbolumad.SelectedItem = dr.GetString("program_adi");
+                    }
+                    islemler.Kapat();
+                    DersBas();
+                }
+                else
+                {
+                    DersBas();
+                }
+            }
+            catch (Exception err)
+            {
+                islemler.Kapat();
+                MessageBox.Show("Otomatik Program Kodu Seçimi Yapılırken Hata! \nHata Kodu: " + err, "HATA!");
+                this.Close();
+            }
+
         }
 
 
-        #endregion
+
+        //Bölüm adı değiştiğinde yapılacaklar
+        private void cmbbolumad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DersBas();//bu sayede sadece bölümün derslerini ve ortak dersleri listelemiş olacağız
+        }
+
+        //Derse Tıklandığında Yapılacaklar
+        private void cmbders_Click(object sender, EventArgs e)
+        {
+            if (cmbbolumad.SelectedIndex == -1 || cmbbolumkod.SelectedIndex == -1)//bu sayede bölüme göre dersleri listeleyeceğiz
+            {
+                MessageBox.Show("Lütfen Önce Program Adını ve Program Kodunu Seçiniz");
+            }
+        }
 
         #region Ders Bas
         public void DersBas()
         {
-            komut = "select ders_adi from ders;";
-            dr = islemler.Oku(komut);
-            if (dr != null)
+            cmbders.Items.Clear();
+            try
             {
-                while (dr.Read())
+                if (sinavid==-1) // eğer düzenleme yapılmıyorsa bölüm seçili olmasına göre komut değişiyor
                 {
-                    cmbders.Items.Add(dr.GetString("ders_adi"));
+                    if (cmbbolumad.SelectedItem != null && cmbbolumkod.SelectedItem != null)
+                    {
+                        string birlesik = cmbbolumkod.SelectedItem.ToString() + " " + cmbbolumad.SelectedItem.ToString();
+                        komut = "select ders_adi from ders where bolum='" + birlesik + "' or bolum='ORTAK DERS'";
+                    }
+                    else 
+                    {
+                        komut = "select ders_adi from ders where bolum='ORTAK DERS'";
+                    }
+
                 }
+                else // eğer düzenleme yapılıyorsa düzenleneceksınav tablosundan prg_kod ve prg_ad alınıyor ve ona göre derslikler listeleniyor
+                {
+                    string birlesik = DuzenlenecekSinav.Rows[0]["Prg_Kod"].ToString() + " " + DuzenlenecekSinav.Rows[0]["Prg_Ad"].ToString();
+                    komut = "select ders_adi from ders where bolum='" + birlesik + "' or bolum='ORTAK DERS'";
+                }
+                dr = islemler.Oku(komut);
+                if (dr != null)
+                {
+                    while (dr.Read())
+                    {
+                        cmbders.Items.Add(dr.GetString("ders_adi"));
+                    }
+                }
+                islemler.Kapat();
             }
-            islemler.Kapat();
+            catch (Exception err)
+            {
+                islemler.Kapat();
+                MessageBox.Show("Ders Basılırken Hata! \nHata Kodu: " + err, "HATA!");
+                this.Close();
+            }
+
         }
         #endregion
 
@@ -220,22 +227,27 @@ namespace sp
         #region Öğretim Görevlisi Basıldığı Yer
         public void OgretimGorevlisiBas()
         {
-            komut = "select id,unvan,Ad_Soyad from ogretimelemani;";
-            dr = islemler.Oku(komut);
-            if (dr != null)
+            try
             {
-                while (dr.Read())
+                komut = "select id,unvan,Ad_Soyad from ogretimelemani;";
+                dr = islemler.Oku(komut);
+                if (dr != null)
                 {
-                    cmbogretimelemani.Items.Add(dr.GetString("unvan") + " " + dr.GetString("Ad_Soyad"));
-                    cmbogretimelemaniid.Items.Add(dr.GetString("id"));
+                    while (dr.Read())
+                    {
+                        cmbogretimelemani.Items.Add(dr.GetString("unvan") + " " + dr.GetString("Ad_Soyad"));
+                    }
                 }
+                islemler.Kapat();
             }
-            islemler.Kapat();
+            catch (Exception err)
+            {
+                islemler.Kapat();
+                MessageBox.Show("Öğretim Görevlisi Basılırken Hata! \nHata Kodu: " + err, "HATA!");
+                this.Close();
+            }
 
-        }
-        private void cmbogretimelemani_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cmbogretimelemaniid.SelectedIndex = cmbogretimelemani.SelectedIndex;
+
         }
 
         #endregion
@@ -374,8 +386,9 @@ namespace sp
             }
             catch (Exception err)
             {
-                MessageBox.Show("Derslikler Listesi Alınırken Hata! Hata Kodu:" + err);
+                MessageBox.Show("Derslikler Listesi Alınırken Hata! \nHata Kodu:" + err);
                 islemler.Kapat();
+                this.Close();
 
             }
 
@@ -393,103 +406,71 @@ namespace sp
             {
                 if (cmbderslik4.SelectedIndex != -1 && cmbderslik4.SelectedItem != null)
                 {
-                    try
-                    {
-                        ayrilmis = cmbderslik1.SelectedItem.ToString().Split('-');
-                        Derslik1 = ayrilmis[0].Trim();
-                        ayrilmis = ayrilmis[1].Trim().Split(' ');
-                        tk += int.Parse(ayrilmis[0]);
-                        ayrilmis = cmbderslik2.SelectedItem.ToString().Split('-');
-                        Derslik2 = ayrilmis[0].Trim();
-                        ayrilmis = ayrilmis[1].Trim().Split(' ');
-                        tk += int.Parse(ayrilmis[0]);
-                        ayrilmis = cmbderslik3.SelectedItem.ToString().Split('-');
-                        Derslik3 = ayrilmis[0].Trim();
-                        ayrilmis = ayrilmis[1].Trim().Split(' ');
-                        tk += int.Parse(ayrilmis[0]);
-                        ayrilmis = cmbderslik4.SelectedItem.ToString().Split('-');
-                        Derslik4 = ayrilmis[0].Trim();
-                        ayrilmis = ayrilmis[1].Trim().Split(' ');
-                        tk += int.Parse(ayrilmis[0]);
 
-                    }
-                    catch (Exception)
-                    {
-
-                        lblderslikkapasitesi.Text = "err";
-                    }
+                    ayrilmis = cmbderslik1.SelectedItem.ToString().Split('-');
+                    Derslik1 = ayrilmis[0].Trim();
+                    ayrilmis = ayrilmis[1].Trim().Split(' ');
+                    tk += int.Parse(ayrilmis[0]);
+                    ayrilmis = cmbderslik2.SelectedItem.ToString().Split('-');
+                    Derslik2 = ayrilmis[0].Trim();
+                    ayrilmis = ayrilmis[1].Trim().Split(' ');
+                    tk += int.Parse(ayrilmis[0]);
+                    ayrilmis = cmbderslik3.SelectedItem.ToString().Split('-');
+                    Derslik3 = ayrilmis[0].Trim();
+                    ayrilmis = ayrilmis[1].Trim().Split(' ');
+                    tk += int.Parse(ayrilmis[0]);
+                    ayrilmis = cmbderslik4.SelectedItem.ToString().Split('-');
+                    Derslik4 = ayrilmis[0].Trim();
+                    ayrilmis = ayrilmis[1].Trim().Split(' ');
+                    tk += int.Parse(ayrilmis[0]);
                 }
                 else if (cmbderslik3.SelectedIndex != -1 && cmbderslik3.SelectedItem != null)
                 {
-                    try
-                    {
-                        ayrilmis = cmbderslik1.SelectedItem.ToString().Split('-');
-                        Derslik1 = ayrilmis[0].Trim();
-                        ayrilmis = ayrilmis[1].Trim().Split(' ');
-                        tk += int.Parse(ayrilmis[0]);
-                        ayrilmis = cmbderslik2.SelectedItem.ToString().Split('-');
-                        Derslik2 = ayrilmis[0].Trim();
-                        ayrilmis = ayrilmis[1].Trim().Split(' ');
-                        tk += int.Parse(ayrilmis[0]);
-                        ayrilmis = cmbderslik3.SelectedItem.ToString().Split('-');
-                        Derslik3 = ayrilmis[0].Trim();
-                        ayrilmis = ayrilmis[1].Trim().Split(' ');
-                        tk += int.Parse(ayrilmis[0]);
+                    ayrilmis = cmbderslik1.SelectedItem.ToString().Split('-');
+                    Derslik1 = ayrilmis[0].Trim();
+                    ayrilmis = ayrilmis[1].Trim().Split(' ');
+                    tk += int.Parse(ayrilmis[0]);
+                    ayrilmis = cmbderslik2.SelectedItem.ToString().Split('-');
+                    Derslik2 = ayrilmis[0].Trim();
+                    ayrilmis = ayrilmis[1].Trim().Split(' ');
+                    tk += int.Parse(ayrilmis[0]);
+                    ayrilmis = cmbderslik3.SelectedItem.ToString().Split('-');
+                    Derslik3 = ayrilmis[0].Trim();
+                    ayrilmis = ayrilmis[1].Trim().Split(' ');
+                    tk += int.Parse(ayrilmis[0]);
 
-                    }
-                    catch (Exception)
-                    {
-
-                        lblderslikkapasitesi.Text = "err";
-                    }
 
                 }
                 else if (cmbderslik2.SelectedIndex != -1 && cmbderslik2.SelectedItem != null)
                 {
-                    try
-                    {
-                        ayrilmis = cmbderslik1.SelectedItem.ToString().Split('-');
-                        Derslik1 = ayrilmis[0].Trim();
-                        ayrilmis = ayrilmis[1].Trim().Split(' ');
-                        tk += int.Parse(ayrilmis[0]);
-                        ayrilmis = cmbderslik2.SelectedItem.ToString().Split('-');
-                        Derslik2 = ayrilmis[0].Trim();
-                        ayrilmis = ayrilmis[1].Trim().Split(' ');
-                        tk += int.Parse(ayrilmis[0]);
-
-                    }
-                    catch (Exception)
-                    {
-
-                        lblderslikkapasitesi.Text = "err";
-                    }
+                    ayrilmis = cmbderslik1.SelectedItem.ToString().Split('-');
+                    Derslik1 = ayrilmis[0].Trim();
+                    ayrilmis = ayrilmis[1].Trim().Split(' ');
+                    tk += int.Parse(ayrilmis[0]);
+                    ayrilmis = cmbderslik2.SelectedItem.ToString().Split('-');
+                    Derslik2 = ayrilmis[0].Trim();
+                    ayrilmis = ayrilmis[1].Trim().Split(' ');
+                    tk += int.Parse(ayrilmis[0]);
 
                 }
                 else if (cmbderslik1.SelectedIndex != -1 && cmbderslik1.SelectedItem != null)
                 {
-                    try
-                    {
-                        ayrilmis = cmbderslik1.SelectedItem.ToString().Split('-');
-                        Derslik1 = ayrilmis[0].Trim();
-                        ayrilmis = ayrilmis[1].Trim().Split(' ');
-                        tk += int.Parse(ayrilmis[0]);
-                    }
-                    catch (Exception)
-                    {
-
-                        lblderslikkapasitesi.Text = "err";
-                    }
+                    ayrilmis = cmbderslik1.SelectedItem.ToString().Split('-');
+                    Derslik1 = ayrilmis[0].Trim();
+                    ayrilmis = ayrilmis[1].Trim().Split(' ');
+                    tk += int.Parse(ayrilmis[0]);
 
                 }
 
             }
             catch (Exception err)
             {
-                MessageBox.Show("Derslik id Alınamadı.. Hata Kodu: " + err);
+                MessageBox.Show("Derslik id Alınamadı.. \nHata Kodu: " + err);
+
+                this.Close();
             }
-
+            //Eğer Yukarıdaki "a54 - 60 kişilik" gibi değer split işleminde hata oluşursa ve kapasitede sadece sayı yerine string değer tutarsa lblkapasiteyi err yap
             lblderslikkapasitesi.Text = tk.ToString();
-
         }
 
         #region Derslik 1 İşlemleri
@@ -506,7 +487,6 @@ namespace sp
             {
                 cmbderslik1.SelectedItem = Derslik1;
             }
-
         }
 
         #endregion
@@ -598,154 +578,217 @@ namespace sp
         {
             if (sinavid != -1)
             {
-                //Dersli yazdırma Komutları
-                dt = new DataTable();
-                komut = "select * from sinavderslikleri";
-                dt = islemler.Al(komut);
-                int[] listelenecekler = { 0, 0, 0, 0 }; //dizinin 0. elemanı 1. derslik olarak düşünerek eğer herhangi bir eleman 1 ise listeleme yapılacak
-                //---------------
-
-                komut = "select * from " + SinavProgrami.donem + " where id= " + sinavid + ";";
-                dr = islemler.Oku(komut);
-                if (dr.Read())
+                try
                 {
-                    cmbders.SelectedItem = dr.GetString("Ders_Adi");
-                    cmbdonem.SelectedItem = dr.GetString("donem");
-                    cmbders.SelectedItem = dr.GetString("Ders_Adi");
-                    cmbbolumad.SelectedItem = dr.GetString("Prg_Ad");
-                    cmbbolumkod.SelectedItem = dr.GetString("Prg_Kod");
-                    txtogrencisayisi.Text = dr.GetString("Ogr_Sayisi");
-                    cmbogretimelemani.SelectedItem = dr.GetString("Unvan") + " " + dr.GetString("Ad_Soyad");
 
-                    DateTime tarih = Convert.ToDateTime(dr.GetString("Tarih"));
-                    cmbtarih.SelectedItem = tarih.ToShortDateString();
+                    //Derslikler tabloya atılıyor
+                    DerslikTablo = new DataTable();
+                    komut = "select * from sinavderslikleri";
+                    DerslikTablo = islemler.Al(komut);
 
-                    DateTime saat = Convert.ToDateTime(dr.GetString("Saat"));
-                    cmbsaat.SelectedItem = saat.ToShortTimeString();
+                    //Öğretim Görevlileri Tabloya Atılıyor
+                    OgretmenTablo = new DataTable();
+                    komut = "select * from ogretimelemani";
+                    OgretmenTablo = islemler.Al(komut);
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show("Derslik, Öğretim Elemanı, Sınav Tabloya Aktarılırken Hata! \nHata Kodu: " + err, "HATA!");
+                }
 
-                    cmbogretimsekli.SelectedItem = dr.GetString("Ogr_Sekli");
 
 
-                    //Derslik Yazdırma Komutları
-                    if (dt.Rows.Count != 0)
+
+                if (DuzenlenecekSinav.Rows.Count != 0)
+                {
+                    int[] listelenecekler = { 0, 0, 0, 0 }; //dizinin 0. elemanı 1. derslik olarak düşünerek eğer herhangi bir eleman 1 ise listeleme yapılacak
+
+                    try
                     {
-                        for (int i = 0; i < dt.Rows.Count; i++)
+                        cmbders.SelectedItem = DuzenlenecekSinav.Rows[0]["Ders_Adi"].ToString(); // dersin seçildiği yer
+                        cmbdonem.SelectedItem = DuzenlenecekSinav.Rows[0]["donem"].ToString(); // donemin seçildiği yer
+                        cmbbolumad.SelectedItem = DuzenlenecekSinav.Rows[0]["Prg_Ad"].ToString(); //program adının seçildiği yer
+                        cmbbolumkod.SelectedItem = DuzenlenecekSinav.Rows[0]["Prg_Kod"].ToString(); //program kodunun seçildiği yer
+                        txtogrencisayisi.Text = DuzenlenecekSinav.Rows[0]["Ogr_Sayisi"].ToString();  //öğrenci sayısının yazıldığı yer
+
+                        string ogretimgorevlisiua = "";
+                        ogretimgorevlisiua = DuzenlenecekSinav.Rows[0]["Unvan"].ToString() + " " + DuzenlenecekSinav.Rows[0]["Ad_Soyad"].ToString();
+                        cmbogretimelemani.SelectedItem = ogretimgorevlisiua; //öğretim elemanının seçildiği yer
+
+                        DateTime tarih = Convert.ToDateTime(DuzenlenecekSinav.Rows[0]["Tarih"].ToString());
+                        cmbtarih.SelectedItem = tarih.ToShortDateString();//tarihin seçildiği yer
+
+                        DateTime saat = Convert.ToDateTime(DuzenlenecekSinav.Rows[0]["Saat"].ToString());
+                        cmbsaat.SelectedItem = saat.ToShortTimeString();//saatin seçildiği yer
+
+                        cmbogretimsekli.SelectedItem = DuzenlenecekSinav.Rows[0]["Ogr_Sekli"].ToString(); // öğretim şeklinin seçildiği yer
+                    }
+                    catch (Exception err)
+                    {
+                        MessageBox.Show("Düzenlenecek sınavın verileri seçilirken Hata! \nHata Kodu: " + err, "HATA!");
+                    }
+
+                    try
+                    {
+                        //Derslik İşlemleri
+                        //Dersliklerin Basılıp Seçildiği Alan
+                        if (DerslikTablo.Rows.Count != 0)
                         {
-                            if (!dr.IsDBNull(11))
+                            for (int i = 0; i < DerslikTablo.Rows.Count; i++)
                             {
-                                if (dt.Rows[i]["derslik"].ToString() == dr.GetString("Derslik1"))
+                                if (DuzenlenecekSinav.Rows[0]["Derslik1"] != null)
                                 {
-                                    listelenecekler[0] = 1;
+                                    if (DerslikTablo.Rows[i]["derslik"].ToString() == DuzenlenecekSinav.Rows[0]["Derslik1"].ToString())
+                                    {
+                                        DerslikBas(1);
+                                        cmbderslik1.SelectedItem = DerslikKapasiteAl(DuzenlenecekSinav.Rows[0]["Derslik1"].ToString());
+                                    }
                                 }
-                            }
-                            if (!dr.IsDBNull(12))
-                            {
-                                if (dt.Rows[i]["derslik"].ToString() == dr.GetString("Derslik2"))
+                                if (DuzenlenecekSinav.Rows[0]["Derslik2"] != null)
                                 {
-                                    dersliksayisi.Value++;
-                                    listelenecekler[1] = 1;
+                                    if (DerslikTablo.Rows[i]["derslik"].ToString() == DuzenlenecekSinav.Rows[0]["Derslik2"].ToString())
+                                    {
+                                        dersliksayisi.Value++;
+                                        DerslikBas(2);
+                                        cmbderslik2.SelectedItem = DerslikKapasiteAl(DuzenlenecekSinav.Rows[0]["Derslik2"].ToString());
+                                    }
                                 }
-                            }
-                            if (!dr.IsDBNull(13))
-                            {
-                                if (dt.Rows[i]["derslik"].ToString() == dr.GetString
-                                ("Derslik3"))
+                                if (DuzenlenecekSinav.Rows[0]["Derslik3"] != null)
                                 {
-                                    dersliksayisi.Value++;
-                                    listelenecekler[2] = 1;
+                                    if (DerslikTablo.Rows[i]["derslik"].ToString() == DuzenlenecekSinav.Rows[0]["Derslik3"].ToString())
+                                    {
+                                        dersliksayisi.Value++;
+                                        DerslikBas(3);
+                                        cmbderslik3.SelectedItem = DerslikKapasiteAl(DuzenlenecekSinav.Rows[0]["Derslik3"].ToString());
+                                    }
                                 }
-                            }
-                            if (!dr.IsDBNull(14))
-                            {
-                                if (dt.Rows[i]["derslik"].ToString() == dr.GetString("Derslik4"))
+                                if (DuzenlenecekSinav.Rows[0]["Derslik4"] != null)
                                 {
-                                    dersliksayisi.Value++;
-                                    listelenecekler[3] = 1;
+                                    if (DerslikTablo.Rows[i]["derslik"].ToString() == DuzenlenecekSinav.Rows[0]["Derslik4"].ToString())
+                                    {
+                                        dersliksayisi.Value++;
+                                        DerslikBas(4);
+                                        cmbderslik4.SelectedItem = DerslikKapasiteAl(DuzenlenecekSinav.Rows[0]["Derslik4"].ToString());
+                                    }
                                 }
                             }
                         }
+                        //----------------------
                     }
-                    //----------------------
-
-
-
-
-                }
-                islemler.Kapat();
-                //Derslikler Yazıma Komutları
-
-                for (int i = 0; i < listelenecekler.Length; i++)
-                {
-                    if (listelenecekler[i] == 1)
+                    catch (Exception err)
                     {
-                        DerslikBas(i + 1);
+                        MessageBox.Show("Düzenlenecek sınavın derslikleri seçilirken Hata! \nHata Kodu: " + err, "HATA!");
                     }
-                }
-                //üstteki datareaderden ayrı yapmamızın sebebi başka bir methodda tekrardan veritabanına bağlandığı için öncelikle bağlantıyı kapatmamız gerekiyor
-                komut = "select * from " + SinavProgrami.donem + " where id= " + sinavid + ";";
-                dr = islemler.Oku(komut);
 
-                if (dr.Read())
-                {
-
-                    if (dt.Rows.Count != 0)
+                    try
                     {
-                        for (int i = 0; i < dt.Rows.Count; i++)
+                        //Gözetmen İşlemleri
+                        int gozetmens = int.Parse(DuzenlenecekSinav.Rows[0]["Y_Ogr_Sayisi"].ToString()); // gözetmen sayısı alınıyor
+
+                        //Gözetmenlerin Basıldığı Alan
+                        for (int i = 0; i < gozetmens; i++)
                         {
-                            if (!dr.IsDBNull(11))
-                            {
-                                if (dt.Rows[i]["derslik"].ToString() == dr.GetString("Derslik1"))
-                                {
-                                    cmbderslik1.SelectedItem = dt.Rows[i]["derslik"].ToString() + " - " + dt.Rows[i]["sayi"].ToString() + " Kişilik";
-                                }
-                            }
-                            if (!dr.IsDBNull(12))
-                            {
-                                if (dt.Rows[i]["derslik"].ToString() == dr.GetString("Derslik2"))
-                                {
-                                    cmbderslik2.SelectedItem = dt.Rows[i]["derslik"].ToString() + " - " + dt.Rows[i]["sayi"].ToString() + " Kişilik";
-                                }
-                            }
-                            if (!dr.IsDBNull(13))
-                            {
-                                if (dt.Rows[i]["derslik"].ToString() == dr.GetString
-                                ("Derslik3"))
-                                {
-                                    cmbderslik3.SelectedItem = dt.Rows[i]["derslik"].ToString() + " - " + dt.Rows[i]["sayi"].ToString() + " Kişilik";
-                                }
-                            }
-                            if (!dr.IsDBNull(14))
-                            {
-                                if (dt.Rows[i]["derslik"].ToString() == dr.GetString("Derslik4"))
-                                {
-                                    cmbderslik4.SelectedItem = dt.Rows[i]["derslik"].ToString() + " - " + dt.Rows[i]["sayi"].ToString() + " Kişilik";
-                                }
-                            }
-
+                            gozetmensayisi.Value++;
+                            GozetmenBas(i + 1);
                         }
+                        //Basılmış Gözetmenlerin Seçildiği Yer
+                        if (OgretmenTablo.Rows.Count != 0)
+                        {
+                            for (int i = 0; i < OgretmenTablo.Rows.Count; i++)
+                            {
+                                string unvanvead = OgretmenTablo.Rows[i]["unvan"] + " " + OgretmenTablo.Rows[i]["Ad_Soyad"];
+                                if (DuzenlenecekSinav.Rows[0]["Gozetmen1"].ToString() != null)
+                                {
+                                    if (unvanvead == DuzenlenecekSinav.Rows[0]["Gozetmen1"].ToString())
+                                    {
+                                        cmbgozetmen1.SelectedItem = unvanvead;
+                                    }
+                                }
+                                if (DuzenlenecekSinav.Rows[0]["Gozetmen2"].ToString() != null)
+                                {
+                                    if (unvanvead == DuzenlenecekSinav.Rows[0]["Gozetmen2"].ToString())
+                                    {
+                                        cmbgozetmen2.SelectedItem = unvanvead;
+                                    }
+                                }
+                                if (DuzenlenecekSinav.Rows[0]["Gozetmen3"].ToString() != null)
+                                {
+                                    if (unvanvead == DuzenlenecekSinav.Rows[0]["Gozetmen3"].ToString())
+                                    {
+                                        cmbgozetmen3.SelectedItem = unvanvead;
+                                    }
+                                }
+                            }
+                        }
+                        //-------------------
                     }
-
+                    catch (Exception err)
+                    {
+                        MessageBox.Show("Düzenlenecek Sınavın Gözetmenleri Seçilirken Hata! \nHata Kodu: " + err, "HATA!");
+                        this.Close();
+                    }
                 }
-                islemler.Kapat();
-                //--------------------------
             }
-
         }
         #endregion
+
+
+        public string DerslikKapasiteAl(string derslik)
+        {
+            try
+            {
+                string kapasite = "";
+                string komut = "select * from sinavderslikleri";
+                dr = islemler.Oku(komut);
+                while (dr.Read())
+                {
+                    if (dr.GetString("derslik") == derslik)
+                    {
+                        kapasite = dr.GetString("derslik") + " - " + dr.GetString("sayi") + " Kişilik";
+                    }
+                }
+                islemler.Kapat();
+                return kapasite;
+
+            }
+            catch (Exception err)
+            {
+                islemler.Kapat();
+                MessageBox.Show("Derslik Kapasite Alınırken Hata! \nHata Kodu: " + err, "HATA!");
+                this.Close();
+                return "";
+            }
+        }
+
 
         #region Kayıt Butonu
         private void btnmavi1_Click(object sender, EventArgs e)
         {
-            Form_Kontrol();
-
-
-            DialogResult cevap = DialogResult.Yes;
-            komut = "select * from bolumler where program_adi='" + cmbbolumad.SelectedItem.ToString() + "' and program_kodu='" + cmbbolumkod.SelectedItem.ToString() + "';";
-            dr = islemler.Oku(komut);
-            if (dr.Read() == false) cevap = MessageBox.Show("Program Kodu ve Program Adı birbiriyle uyuşmuyor!\nDevam Etmek İstiyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
-            if (cevap == DialogResult.Yes)
+            bool cevap = Form_Kontrol();
+            if (cevap)
             {
 
+            }
+            else
+            {
+
+            }
+            try
+            {
+                //DialogResult cevap = DialogResult.Yes;
+                //komut = "select * from bolumler where program_adi='" + cmbbolumad.SelectedItem.ToString() + "' and program_kodu='" + cmbbolumkod.SelectedItem.ToString() + "';";
+                //dr = islemler.Oku(komut);
+                //if (dr.Read() == false) cevap = MessageBox.Show("Program Kodu ve Program Adı birbiriyle uyuşmuyor!\nDevam Etmek İstiyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
+                //if (cevap == DialogResult.Yes)
+                //{
+
+                //}
+
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Veriler Kaydedilirken Hata! \nHata Kodu:" + err, "HATA!");
+                this.Close();
             }
 
         }
@@ -753,11 +796,102 @@ namespace sp
         #endregion
 
         #region Form Kontrol
-        public void Form_Kontrol()
+        public bool Form_Kontrol()
         {
+            try
+            {
+                if (cmbbolumkod.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Lütfen Bölüm Kodunu Seçiniz!", "UYARI!");
+                    return false;
+                }
+                if (cmbbolumad.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Lütfen Bölüm Adını Seçiniz!", "UYARI!");
+                    return false;
+                }
+                if (cmbders.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Lütfen Dersi Seçiniz!", "UYARI!");
+                    return false;
+                }
+                if (txtogrencisayisi.Text == "")
+                {
+                    MessageBox.Show("Lütfen Öğrenci Sayısını Yazınız!", "UYARI!");
+                    return false;
+                }
+                if (cmbdonem.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Lütfen Dönemi Seçiniz!", "UYARI!");
+                    return false;
+                }
+                if (cmbogretimelemani.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Lütfen Öğretim Görevlisini Seçiniz!", "UYARI!");
+                    return false;
+                }
+                if (cmbtarih.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Lütfen Tarihi Seçiniz!", "UYARI!");
+                    return false;
+                }
 
+                if (cmbsaat.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Lütfen Saati Seçiniz!", "UYARI!");
+                    return false;
+                }
+
+                if (cmbogretimsekli.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Lütfen Öğretim Şeklini Seçiniz!", "UYARI!");
+                    return false;
+                }
+
+                if (cmbderslik1.Visible == true && cmbderslik1.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Lütfen 1. Dersliği Seçiniz!", "UYARI!");
+                    return false;
+                }
+                if (cmbderslik2.Visible == true && cmbderslik2.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Lütfen 2. Dersliği Seçiniz ya da Derslik Sayısını Düşürünüz!", "UYARI!");
+                    return false;
+                }
+                if (cmbderslik3.Visible == true && cmbderslik3.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Lütfen 3. Dersliği Seçiniz ya da Derslik Sayısını Düşürünüz!", "UYARI!");
+                    return false;
+                }
+                if (cmbderslik4.Visible == true && cmbderslik4.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Lütfen 4. Dersliği Seçiniz ya da Derslik Sayısını Düşürünüz!", "UYARI!");
+                    return false;
+                }
+                if (cmbgozetmen1.Visible == true && cmbgozetmen1.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Lütfen 1. Gözetmeni Seçiniz ya da Gözetmen Sayısını Düşürünüz!", "UYARI!");
+                    return false;
+                }
+                if (cmbgozetmen2.Visible == true && cmbgozetmen2.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Lütfen 2. Gözetmeni Seçiniz ya da Gözetmen Sayısını Düşürünüz!", "UYARI!");
+                    return false;
+                }
+                if (cmbgozetmen3.Visible == true && cmbgozetmen3.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Lütfen 3. Gözetmeni Seçiniz ya da Gözetmen Sayısını Düşürünüz!", "UYARI!");
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Form Kontrol Edilirken Hata! \nHata Kodu:" + err, "HATA!");
+                this.Close();
+                return false;
+            }
         }
-
         #endregion
 
         //Öğrenci Sayısının Yazdırıldığı Yer
@@ -765,5 +899,208 @@ namespace sp
         {
             lblsinavagirenogrencisayisi.Text = txtogrencisayisi.Text;
         }
+
+        #region Gözetmen İşlemleri
+
+        #region Gözetmenlerin Gösterilip Gizlenmesi
+
+        private void gozetmensayisi_ValueChanged(object sender, EventArgs e)
+        {
+            switch (int.Parse(gozetmensayisi.Value.ToString()))
+            {
+                case 0:
+                    cmbgozetmen1.Items.Clear();
+                    cmbgozetmen1.SelectedIndex = -1;
+                    gozetmen1 = "0";
+                    cmbgozetmen1.Visible = false;
+                    lblgozetmen1.Visible = false;
+                    cmbgozetmen1.Text = "Seçiniz..";
+                    break;
+                case 1:
+                    cmbgozetmen1.Visible = true;
+                    lblgozetmen1.Visible = true;
+                    gozetmen2 = "0";
+                    cmbgozetmen2.Items.Clear();
+                    cmbgozetmen2.SelectedIndex = -1;
+                    cmbgozetmen2.Visible = false;
+                    lblgozetmen2.Visible = false;
+                    cmbgozetmen2.Text = "Seçiniz..";
+                    break;
+                case 2:
+                    cmbgozetmen2.Visible = true;
+                    lblgozetmen2.Visible = true;
+                    gozetmen3 = "0";
+                    cmbgozetmen3.Items.Clear();
+                    cmbgozetmen3.SelectedIndex = -1;
+                    cmbgozetmen3.Visible = false;
+                    lblgozetmen3.Visible = false;
+                    cmbgozetmen3.Text = "Seçiniz..";
+                    break;
+                case 3:
+                    cmbgozetmen3.Visible = true;
+                    lblgozetmen3.Visible = true;
+                    break;
+            }
+
+        }
+
+        #endregion
+
+        public void GozetmenBas(int gozetmens)
+        {
+            komut = "select * from ogretimelemani";
+            dr = islemler.Oku(komut);
+            try
+            {
+                ArrayList gozetmenler = new ArrayList();
+                while (dr.Read())
+                {
+                    gozetmenler.Add(dr.GetString("unvan") + " " + dr.GetString("Ad_Soyad"));
+                }
+                islemler.Kapat();
+                foreach (var item in gozetmenler)
+                {
+                    switch (gozetmens)
+                    {
+                        case 1:
+                            if (item.ToString() != gozetmen2 && item.ToString() != gozetmen3)
+                            {
+                                cmbgozetmen1.Items.Add(item.ToString());
+                            }
+                            break;
+                        case 2:
+                            if (item.ToString() != gozetmen1 && item.ToString() != gozetmen3)
+                            {
+                                cmbgozetmen2.Items.Add(item.ToString());
+                            }
+
+                            break;
+                        case 3:
+                            if (item.ToString() != gozetmen1 && item.ToString() != gozetmen2)
+                            {
+                                cmbgozetmen3.Items.Add(item.ToString());
+                            }
+                            break;
+                    }
+
+                }
+
+            }
+            catch (Exception err)
+            {
+                islemler.Kapat();
+                MessageBox.Show("Gözetmenler Basılırken Hata! Hata Kodu: " + err, "HATA");
+                this.Close();
+            }
+        }
+
+        public void GozetmenTut()
+        {
+            try
+            {
+                gozetmen1 = "0";
+                gozetmen2 = "0";
+                gozetmen3 = "0";
+                if (cmbgozetmen3.SelectedIndex != -1 && cmbgozetmen3.SelectedItem != null)
+                {
+                    gozetmen1 = cmbgozetmen1.SelectedItem.ToString();
+                    gozetmen2 = cmbgozetmen2.SelectedItem.ToString();
+                    gozetmen3 = cmbgozetmen3.SelectedItem.ToString();
+                }
+                else if (cmbgozetmen2.SelectedIndex != -1 && cmbgozetmen2.SelectedItem != null)
+                {
+                    gozetmen1 = cmbgozetmen1.SelectedItem.ToString();
+                    gozetmen2 = cmbgozetmen2.SelectedItem.ToString();
+                }
+                else if (cmbgozetmen1.SelectedIndex != -1 && cmbgozetmen1.SelectedItem != null)
+                {
+                    gozetmen1 = cmbgozetmen1.SelectedItem.ToString();
+                }
+
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Seçilmiş Gözetmenler Tutulurken Hata! \nHata Kodu:" + err, "HATA!");
+                this.Close();
+            }
+        }
+
+        #region Gozetmen 1
+        private void cmbgozetmen1_Click(object sender, EventArgs e)
+        {
+            cmbgozetmen1.Items.Clear();
+            GozetmenBas(1);
+            if (cmbgozetmen1.SelectedIndex != -1 && cmbgozetmen1.SelectedItem != null)
+            {
+                cmbgozetmen1.SelectedItem = gozetmen1;
+            }
+        }
+
+        private void cmbgozetmen1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GozetmenTut();
+        }
+        #endregion
+        #region Gozetmen 2
+
+        private void cmbgozetmen2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GozetmenTut();
+        }
+
+        private void cmbgozetmen2_Click(object sender, EventArgs e)
+        {
+            if (cmbgozetmen1.SelectedIndex != -1)
+            {
+                cmbgozetmen2.Items.Clear();
+                GozetmenBas(2);
+
+                if (cmbgozetmen2.SelectedIndex != -1 && cmbgozetmen2.SelectedItem != null)
+                {
+                    cmbgozetmen2.SelectedItem = gozetmen2;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Lütfen önce 1. Gözetmeni Seçiniz", "UYARI!");
+            }
+
+        }
+        #endregion
+        #region Gozetmen 3
+
+        private void cmbgozetmen3_Click(object sender, EventArgs e)
+        {
+            if (cmbgozetmen2.SelectedIndex != -1)
+            {
+                cmbgozetmen3.Items.Clear();
+                GozetmenBas(3);
+
+                if (cmbgozetmen3.SelectedIndex != -1 && cmbgozetmen3.SelectedItem != null)
+                {
+                    cmbgozetmen3.SelectedItem = gozetmen3;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Lütfen önce 2. Gözetmeni Seçiniz", "UYARI!");
+            }
+        }
+
+        private void cmbgozetmen3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GozetmenTut();
+        }
+        #endregion
+
+        #endregion
+        #region İptal Butonu
+
+        private void btnkirmizi1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        #endregion
+
     }
 }

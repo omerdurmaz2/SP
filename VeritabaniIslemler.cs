@@ -15,19 +15,19 @@ namespace sp
         }
 
 
-        public MySqlConnection bag = new MySqlConnection(ConnectionString()); // tekrar tekrar tanımlamamak için dışarı tanımladık
-        public MySqlCommand kmt; // tekrar tekrar tanımlamamak için dışarı tanımladık
-        public MySqlDataAdapter adp; // tekrar tekrar tanımlamamak için dışarı tanımladık
-        public MySqlDataReader dr; // sorgu methodu için tablo okumaya yarayan class
-        public DataTable dt = new DataTable(); //Veritabanından çekilen tablo verileri öncelikle buradaki tabloya aktarılıyor ve ardından methodun çağırıldığı yerdeki tabloya bunun içinden veri gönderiliyor
+        private MySqlConnection bag = new MySqlConnection(ConnectionString()); // tekrar tekrar tanımlamamak için dışarı tanımladık
+        private MySqlCommand kmt; // tekrar tekrar tanımlamamak için dışarı tanımladık
+        private MySqlDataAdapter adp; // tekrar tekrar tanımlamamak için dışarı tanımladık
+        private MySqlDataReader dr; // sorgu methodu için tablo okumaya yarayan class
+        private DataTable dt = new DataTable(); //Veritabanından çekilen tablo verileri öncelikle buradaki tabloya aktarılıyor ve ardından methodun çağırıldığı yerdeki tabloya bunun içinden veri gönderiliyor
 
 
         public DataTable Al(string komut)
         {
-            dt.Clear();
+            dt = new DataTable();
             try
             {
-                
+
                 bag.Open();
                 kmt = new MySqlCommand(komut, bag);
                 adp = new MySqlDataAdapter(kmt);
@@ -41,8 +41,9 @@ namespace sp
                 return null;
             }
         }
-        public  MySqlDataReader Oku(string komut)
+        public MySqlDataReader Oku(string komut)
         {
+            Kapat();
             try
             {
                 bag.Open();

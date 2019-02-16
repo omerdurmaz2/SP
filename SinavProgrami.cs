@@ -3,6 +3,8 @@ using System.Data;
 using System.Runtime.InteropServices;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
+using System.Drawing;
+
 namespace sp
 {
     public partial class SinavProgrami : Tasarim
@@ -18,6 +20,7 @@ namespace sp
             Width = Screen.PrimaryScreen.WorkingArea.Width;
             Height = Screen.PrimaryScreen.WorkingArea.Height;
             baslikhizala();
+            
         }
         private void SinavProgrami_Load(object sender, EventArgs e)
         {
@@ -28,7 +31,7 @@ namespace sp
             DialogResult cevap;
             do
             {
-                cevap= donem.ShowDialog();
+                cevap = donem.ShowDialog();
                 if (cevap == DialogResult.None || cevap == DialogResult.No || cevap == DialogResult.Cancel)
                 {
                     MessageBox.Show("Lütfen Dönemi Seçiniz!", "UYARI!");
@@ -38,7 +41,7 @@ namespace sp
                     break;
                 }
 
-            } while (cevap == DialogResult.None || cevap == DialogResult.No || cevap==DialogResult.Cancel);
+            } while (cevap == DialogResult.None || cevap == DialogResult.No || cevap == DialogResult.Cancel);
             OgretimGorevlileriListele();
             FiltreTarihBas();
             FiltreSaatBas();
@@ -98,13 +101,16 @@ namespace sp
             islemler = new VeritabaniIslemler();
             komut = "select * from " + donem + " ;";
 
-            if (islemler.Al(komut)!=null)
+            if (islemler.Al(komut) != null)
             {
-                dataGridView1.DataSource = islemler.Al(komut);
                 ButonEkle();
 
                 dataGridView1.Columns.Add(duzenle);
                 dataGridView1.Columns.Add(sil);
+
+                dataGridView1.DataSource = islemler.Al(komut);
+
+                dataGridView1.PerformLayout();
             }
 
         }
@@ -273,17 +279,17 @@ namespace sp
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex>18 && e.RowIndex>=0 )
+            if (e.ColumnIndex < 2 && e.RowIndex >= 0)
             {
                 switch (e.ColumnIndex)
                 {
-                    case 19:
+                    case 0:
                         eklebaslik = "KAYIT DÜZENLE";
-                        SinavEkleDüzenle.sinavid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        SinavEkleDüzenle.sinavid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString());
                         SinavEkleDüzenle goster = new SinavEkleDüzenle();
                         goster.ShowDialog();
                         break;
-                    case 20:
+                    case 1:
                         break;
                 }
             }
