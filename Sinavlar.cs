@@ -89,7 +89,6 @@ namespace sp
         string gozetmen3 = "0";
 
         //Sınav Tablosu İçin Tanımlananlar
-        int sinavid = -1;
 
         #endregion
 

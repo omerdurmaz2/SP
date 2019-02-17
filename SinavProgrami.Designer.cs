@@ -112,7 +112,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(320, 392);
+            this.label1.Location = new System.Drawing.Point(8, 408);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 19);
             this.label1.TabIndex = 52;
@@ -123,7 +123,7 @@
             this.cmbfiltrebolumadi.DropDownHeight = 100;
             this.cmbfiltrebolumadi.FormattingEnabled = true;
             this.cmbfiltrebolumadi.IntegralHeight = false;
-            this.cmbfiltrebolumadi.Location = new System.Drawing.Point(408, 392);
+            this.cmbfiltrebolumadi.Location = new System.Drawing.Point(96, 408);
             this.cmbfiltrebolumadi.Name = "cmbfiltrebolumadi";
             this.cmbfiltrebolumadi.Size = new System.Drawing.Size(168, 21);
             this.cmbfiltrebolumadi.TabIndex = 53;
@@ -135,7 +135,7 @@
             this.cmbfiltretarih.DropDownHeight = 100;
             this.cmbfiltretarih.FormattingEnabled = true;
             this.cmbfiltretarih.IntegralHeight = false;
-            this.cmbfiltretarih.Location = new System.Drawing.Point(992, 392);
+            this.cmbfiltretarih.Location = new System.Drawing.Point(680, 408);
             this.cmbfiltretarih.Name = "cmbfiltretarih";
             this.cmbfiltretarih.Size = new System.Drawing.Size(136, 21);
             this.cmbfiltretarih.TabIndex = 53;
@@ -148,7 +148,7 @@
             this.cmbfiltreogretimsekli.Items.AddRange(new object[] {
             "G",
             "IO"});
-            this.cmbfiltreogretimsekli.Location = new System.Drawing.Point(680, 392);
+            this.cmbfiltreogretimsekli.Location = new System.Drawing.Point(368, 408);
             this.cmbfiltreogretimsekli.Name = "cmbfiltreogretimsekli";
             this.cmbfiltreogretimsekli.Size = new System.Drawing.Size(88, 21);
             this.cmbfiltreogretimsekli.TabIndex = 54;
@@ -159,7 +159,7 @@
             this.cmbfiltrebolumkodu.DropDownHeight = 100;
             this.cmbfiltrebolumkodu.FormattingEnabled = true;
             this.cmbfiltrebolumkodu.IntegralHeight = false;
-            this.cmbfiltrebolumkodu.Location = new System.Drawing.Point(584, 392);
+            this.cmbfiltrebolumkodu.Location = new System.Drawing.Point(272, 408);
             this.cmbfiltrebolumkodu.Name = "cmbfiltrebolumkodu";
             this.cmbfiltrebolumkodu.Size = new System.Drawing.Size(88, 21);
             this.cmbfiltrebolumkodu.TabIndex = 53;
@@ -170,7 +170,7 @@
             this.cmbfiltresaat.DropDownHeight = 100;
             this.cmbfiltresaat.FormattingEnabled = true;
             this.cmbfiltresaat.IntegralHeight = false;
-            this.cmbfiltresaat.Location = new System.Drawing.Point(1136, 392);
+            this.cmbfiltresaat.Location = new System.Drawing.Point(824, 408);
             this.cmbfiltresaat.Name = "cmbfiltresaat";
             this.cmbfiltresaat.Size = new System.Drawing.Size(88, 21);
             this.cmbfiltresaat.TabIndex = 53;
@@ -181,7 +181,7 @@
             this.cmbfiltreogretimgorevlisi.DropDownHeight = 100;
             this.cmbfiltreogretimgorevlisi.FormattingEnabled = true;
             this.cmbfiltreogretimgorevlisi.IntegralHeight = false;
-            this.cmbfiltreogretimgorevlisi.Location = new System.Drawing.Point(776, 392);
+            this.cmbfiltreogretimgorevlisi.Location = new System.Drawing.Point(464, 408);
             this.cmbfiltreogretimgorevlisi.Name = "cmbfiltreogretimgorevlisi";
             this.cmbfiltreogretimgorevlisi.Size = new System.Drawing.Size(208, 21);
             this.cmbfiltreogretimgorevlisi.TabIndex = 53;
@@ -202,7 +202,7 @@
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
             this.linkLabel1.LinkColor = System.Drawing.Color.Black;
-            this.linkLabel1.Location = new System.Drawing.Point(1240, 392);
+            this.linkLabel1.Location = new System.Drawing.Point(928, 408);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(114, 18);
             this.linkLabel1.TabIndex = 55;
@@ -216,7 +216,7 @@
             this.cmbfiltrebolumid.DropDownHeight = 100;
             this.cmbfiltrebolumid.FormattingEnabled = true;
             this.cmbfiltrebolumid.IntegralHeight = false;
-            this.cmbfiltrebolumid.Location = new System.Drawing.Point(408, 376);
+            this.cmbfiltrebolumid.Location = new System.Drawing.Point(96, 392);
             this.cmbfiltrebolumid.Name = "cmbfiltrebolumid";
             this.cmbfiltrebolumid.Size = new System.Drawing.Size(168, 21);
             this.cmbfiltrebolumid.TabIndex = 53;

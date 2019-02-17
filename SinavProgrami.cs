@@ -88,7 +88,6 @@ namespace sp
         DataTable dt = new DataTable(); // veritabanından getirilen tabloların geçici olarak tutulduğu yer
 
         string komut = "";  //veritabanı komutlarının tutulduğu yer
-        string mesaj = "";  //Hata ve bildirim durumlarında mesajların kaydedildiği yer
 
         public static string donem = "";
         public static string eklebaslik = "";
@@ -99,15 +98,19 @@ namespace sp
         public void Listele()
         {
             islemler = new VeritabaniIslemler();
-            komut = "select * from " + donem + " ;";
+            komut = "select * from " + donem + " order by id desc;";
 
             if (islemler.Al(komut) != null)
             {
-                ButonEkle();
 
+                dataGridView1.Columns.Clear();
+                dataGridView1.DataSource = null;
+                dataGridView1.Refresh();
+
+                ButonEkle();
                 dataGridView1.Columns.Add(duzenle);
                 dataGridView1.Columns.Add(sil);
-
+            
                 dataGridView1.DataSource = islemler.Al(komut);
 
                 dataGridView1.PerformLayout();
@@ -250,9 +253,10 @@ namespace sp
         {
             islemler = new VeritabaniIslemler();
             komut = "select unvan as 'Ünvanı', Ad_Soyad as 'Ad Soyad',Kendi_Sinav_Sayisi as 'Kendi Sınav Sayısı',Gozetmenlik_Sayisi as 'Gözetmenlik Sayısı' from ogretimelemani";
-            dataGridView2.Rows.Clear();
             if (islemler.Al(komut) != null)
             {
+                dataGridView2.DataSource = null;
+                dataGridView2.Refresh();
                 dataGridView2.DataSource = islemler.Al(komut);
             }
         }
@@ -268,11 +272,13 @@ namespace sp
             ekle.ShowDialog();
             if (ekle.DialogResult == DialogResult.None || ekle.DialogResult == DialogResult.No)
             {
-                MessageBox.Show("Kayıt Eklendi");
+                MessageBox.Show("İşlem Gerçekleştirilemedi", "HATA!");
             }
             else
             {
-                MessageBox.Show("İşlem Gerçekleştirilemedi", "HATA!");
+                MessageBox.Show("Kayıt Eklendi");
+                Listele();
+                OgretimGorevlileriListele();
             }
         }
         #endregion
@@ -288,6 +294,16 @@ namespace sp
                         SinavEkleDüzenle.sinavid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString());
                         SinavEkleDüzenle goster = new SinavEkleDüzenle();
                         goster.ShowDialog();
+                        if (goster.DialogResult == DialogResult.None || goster.DialogResult == DialogResult.No)
+                        {
+                            MessageBox.Show("İşlem Gerçekleştirilemedi", "HATA!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Kayıt Güncellendi");
+                            Listele();
+                            OgretimGorevlileriListele();
+                        }
                         break;
                     case 1:
                         break;

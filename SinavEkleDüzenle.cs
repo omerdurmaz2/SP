@@ -10,6 +10,37 @@ namespace sp
 {
     public partial class SinavEkleDüzenle : Tasarim
     {
+        #region Dışarıda Tanımlananlar
+        MySqlDataReader dr; // sorgu methodu için tablo okumaya yarayan class
+        VeritabaniIslemler islemler = new VeritabaniIslemler();
+
+        DataTable DerslikTablo;
+        DataTable OgretmenTablo;
+        DataTable DuzenlenecekSinav;
+        DataTable Sinavlar;
+        DataTable Bolumler;
+        public static int sinavid { get; set; }
+        string komut = "";
+        string mesaj = "";
+
+        string Derslik1 = "0";
+        string Derslik2 = "0";
+        string Derslik3 = "0";
+        string Derslik4 = "0";
+
+        string gozetmen1 = "0";
+        string gozetmen2 = "0";
+        string gozetmen3 = "0";
+
+        //Sorgu İçin Tanımlananlar
+        bool kapasitekontrol = false;
+        bool ogretimelemanikontrol = false;
+        bool bolumkontrol = false;
+        bool derslikkontrol = false;
+        bool gozetmenkontrol = false;
+        bool ogretmengozetmenkontrol = false;
+        bool programadkodkontrol = false;
+        #endregion
 
         #region Yapıcı metot ve Form_Load
 
@@ -27,15 +58,36 @@ namespace sp
         {
             try
             {
-                if (sinavid!=-1)
+                if (sinavid > 0)
                 {
                     //Düzenlenecek sınav tabloya atılıyor
                     DuzenlenecekSinav = new DataTable();
                     komut = "select * from " + SinavProgrami.donem + " where id= " + sinavid + ";";
                     DuzenlenecekSinav = islemler.Al(komut);
+
                 }
+                Sinavlar = new DataTable();
+                komut = "select * from " + SinavProgrami.donem + ";";
+                Sinavlar = islemler.Al(komut);
+
+                //Derslikler tabloya atılıyor
+                DerslikTablo = new DataTable();
+                komut = "select * from sinavderslikleri";
+                DerslikTablo = islemler.Al(komut);
+
+                //Öğretim Görevlileri Tabloya Atılıyor
+                OgretmenTablo = new DataTable();
+                komut = "select * from ogretimelemani";
+                OgretmenTablo = islemler.Al(komut);
+
+                //Bölümlerin Tabloya Tutulduğu Yer
+                komut = "select * from bolumler";
+                Bolumler = new DataTable();
+                Bolumler = islemler.Al(komut);
+
+
+
                 BolumBas();
-                DersBas();
                 OgretimGorevlisiBas();
                 TarihBas();
                 SaatBas();
@@ -70,28 +122,6 @@ namespace sp
 
         #endregion
 
-        #region Dışarıda Tanımlananlar
-        MySqlDataReader dr; // sorgu methodu için tablo okumaya yarayan class
-        VeritabaniIslemler islemler = new VeritabaniIslemler();
-
-        DataTable DerslikTablo;
-        DataTable OgretmenTablo;
-        DataTable DuzenlenecekSinav;
-
-        public static int sinavid = -1;
-        string komut = "";
-        string mesaj = "";
-
-        string Derslik1 = "0";
-        string Derslik2 = "0";
-        string Derslik3 = "0";
-        string Derslik4 = "0";
-
-        string gozetmen1 = "0";
-        string gozetmen2 = "0";
-        string gozetmen3 = "0";
-
-        #endregion
 
         #region Bolum / Bolum Kodu Bas
         public void BolumBas()
@@ -109,6 +139,7 @@ namespace sp
                     }
                 }
                 islemler.Kapat();
+
             }
             catch (Exception err)
             {
@@ -121,13 +152,14 @@ namespace sp
         #endregion
 
 
-        
+
         //Eğer kayıt değiştirme yapılmıyorsa prg_kod değiştiğinde otomatik olarak prg_adın seçildiği kısım
         private void cmbbolumkod_SelectedIndexChanged(object sender, EventArgs e)
         {
+            bolumkontrol = false;
             try
             {
-                if (sinavid == -1)
+                if (sinavid > 0)
                 {
                     komut = "select * from bolumler where program_kodu='" + cmbbolumkod.SelectedItem.ToString() + "';";
                     dr = islemler.Oku(komut);
@@ -157,6 +189,7 @@ namespace sp
         //Bölüm adı değiştiğinde yapılacaklar
         private void cmbbolumad_SelectedIndexChanged(object sender, EventArgs e)
         {
+            bolumkontrol = false; // bu sayede tekrardan sınavlar tablosunda seçilen bölümün sınavı var mı kontrol ediyoruz
             DersBas();//bu sayede sadece bölümün derslerini ve ortak dersleri listelemiş olacağız
         }
 
@@ -175,23 +208,26 @@ namespace sp
             cmbders.Items.Clear();
             try
             {
-                if (sinavid==-1) // eğer düzenleme yapılmıyorsa bölüm seçili olmasına göre komut değişiyor
+
+                if (sinavid > 0) // eğer düzenleme yapılmıyorsa bölüm seçili olmasına göre komut değişiyor
+                {
+                    string birlesik = DuzenlenecekSinav.Rows[0]["Prg_Kod"].ToString() + " " + DuzenlenecekSinav.Rows[0]["Prg_Ad"].ToString();
+                    komut = "select ders_adi from ders where bolum='" + birlesik + "' or bolum='ORTAK DERS'";
+
+
+                }
+                else // eğer düzenleme yapılıyorsa düzenleneceksınav tablosundan prg_kod ve prg_ad alınıyor ve ona göre derslikler listeleniyor
                 {
                     if (cmbbolumad.SelectedItem != null && cmbbolumkod.SelectedItem != null)
                     {
                         string birlesik = cmbbolumkod.SelectedItem.ToString() + " " + cmbbolumad.SelectedItem.ToString();
                         komut = "select ders_adi from ders where bolum='" + birlesik + "' or bolum='ORTAK DERS'";
                     }
-                    else 
+                    else
                     {
                         komut = "select ders_adi from ders where bolum='ORTAK DERS'";
                     }
 
-                }
-                else // eğer düzenleme yapılıyorsa düzenleneceksınav tablosundan prg_kod ve prg_ad alınıyor ve ona göre derslikler listeleniyor
-                {
-                    string birlesik = DuzenlenecekSinav.Rows[0]["Prg_Kod"].ToString() + " " + DuzenlenecekSinav.Rows[0]["Prg_Ad"].ToString();
-                    komut = "select ders_adi from ders where bolum='" + birlesik + "' or bolum='ORTAK DERS'";
                 }
                 dr = islemler.Oku(komut);
                 if (dr != null)
@@ -202,6 +238,12 @@ namespace sp
                     }
                 }
                 islemler.Kapat();
+                if (cmbders.Items.Count > 0)
+                {
+                    cmbders.SelectedIndex = -1;
+                    cmbders.Text = "Seçiniz..";
+                }
+
             }
             catch (Exception err)
             {
@@ -476,6 +518,7 @@ namespace sp
         #region Derslik 1 İşlemleri
         private void cmbderslik1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            derslikkontrol = false;
             DerslikTut();
         }
         private void cmbderslik1_Click(object sender, EventArgs e)
@@ -493,6 +536,8 @@ namespace sp
         #region Derslik 2 İşlemleri
         private void cmbderslik2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            derslikkontrol = false;
+
             DerslikTut();
         }
 
@@ -519,6 +564,8 @@ namespace sp
         #region Derslik 3 İşlemleri
         private void cmbderslik3_SelectedIndexChanged(object sender, EventArgs e)
         {
+            derslikkontrol = false;
+
             DerslikTut();
         }
 
@@ -546,6 +593,8 @@ namespace sp
         #region Derslik 4 İşlemleri
         private void cmbderslik4_SelectedIndexChanged(object sender, EventArgs e)
         {
+            derslikkontrol = false;
+
             DerslikTut();
         }
 
@@ -576,25 +625,8 @@ namespace sp
         #region İşlem Kontrol Yeni Kayıt / Düzenleme
         public void İslemKontrol()
         {
-            if (sinavid != -1)
+            if (sinavid > 0)
             {
-                try
-                {
-
-                    //Derslikler tabloya atılıyor
-                    DerslikTablo = new DataTable();
-                    komut = "select * from sinavderslikleri";
-                    DerslikTablo = islemler.Al(komut);
-
-                    //Öğretim Görevlileri Tabloya Atılıyor
-                    OgretmenTablo = new DataTable();
-                    komut = "select * from ogretimelemani";
-                    OgretmenTablo = islemler.Al(komut);
-                }
-                catch (Exception err)
-                {
-                    MessageBox.Show("Derslik, Öğretim Elemanı, Sınav Tabloya Aktarılırken Hata! \nHata Kodu: " + err, "HATA!");
-                }
 
 
 
@@ -767,30 +799,190 @@ namespace sp
             bool cevap = Form_Kontrol();
             if (cevap)
             {
+                cevap = Sorgu();
+                if (cevap)
+                {
+                    try
+                    {
 
+                        string unvan = "", adsoyad = "";
+                        DateTime tarih, saat;
+                        tarih = Convert.ToDateTime(cmbtarih.SelectedItem);
+                        saat = Convert.ToDateTime(cmbsaat.SelectedItem);
+
+
+                        for (int i = 0; i < OgretmenTablo.Rows.Count; i++)
+                        {
+                            string birlesik = OgretmenTablo.Rows[i]["unvan"] + " " + OgretmenTablo.Rows[i]["Ad_Soyad"];
+                            if (birlesik == cmbogretimelemani.SelectedItem.ToString())
+                            {
+                                unvan = OgretmenTablo.Rows[i]["unvan"].ToString();
+                                adsoyad = OgretmenTablo.Rows[i]["Ad_Soyad"].ToString();
+                            }
+                        }
+
+                        #region Sınav Kaydetme / Güncelleme
+
+                        if (sinavid > 0)
+                        {
+                            komut = "UPDATE " + SinavProgrami.donem + " SET Prg_Ad='" + cmbbolumad.SelectedItem.ToString() + "', Prg_Kod='" + cmbbolumkod.SelectedItem.ToString() + "', Ogr_Sekli='" + cmbogretimsekli.SelectedItem.ToString() + "', donem='" + cmbdonem.SelectedItem.ToString() + "', Ders_Adi='" + cmbders.SelectedItem.ToString() + "',Ogr_Sayisi=" + txtogrencisayisi.Text + " ,Unvan='" + unvan + "' , Ad_Soyad='" + adsoyad + "', Tarih='" + tarih.ToString("yyyy-MM-dd") + "' , Saat='" + saat.ToShortTimeString() + "' , ";
+
+                            if (Derslik1 != "0") komut += "Derslik1= '" + Derslik1 + "' ,";
+                            else komut += "Derslik1= null ,";
+                            if (Derslik2 != "0") komut += "Derslik2= '" + Derslik2 + "' ,";
+                            else komut += "Derslik2= null ,";
+                            if (Derslik3 != "0") komut += "Derslik3= '" + Derslik3 + "' ,";
+                            else komut += "Derslik3= null ,";
+                            if (Derslik4 != "0") komut += "Derslik4= '" + Derslik4 + "' ,";
+                            else komut += "Derslik4= null ,";
+
+                            komut += "Y_Ogr_Sayisi=" + gozetmensayisi.Value + " ,";
+                            if (gozetmensayisi.Value == 0) komut += "Gozetmen1=null, Gozetmen2=null, Gozetmen3=null ";
+                            else if (gozetmensayisi.Value == 1) komut += "Gozetmen1= '" + gozetmen1 + "' ,Gozetmen2=null, Gozetmen3=null ";
+                            else if (gozetmensayisi.Value == 2) komut += "Gozetmen1= '" + gozetmen1 + "' ,Gozetmen2='" + gozetmen2 + "', Gozetmen3=null ";
+                            else if (gozetmensayisi.Value == 3) komut += "Gozetmen1= '" + gozetmen1 + "' ,Gozetmen2='" + gozetmen2 + "', Gozetmen3='" + gozetmen3 + "' ";
+
+                            komut += "where id=" + sinavid + ";";
+                        }
+                        else
+                        {
+                            komut = "INSERT INTO " + SinavProgrami.donem + " (Prg_Ad,Prg_Kod,Ogr_Sekli,donem,Ders_Adi,Ogr_Sayisi,Unvan,Ad_Soyad,Tarih,Saat,Derslik1,Derslik2,Derslik3,Derslik4,Y_Ogr_Sayisi,Gozetmen1,Gozetmen2,Gozetmen3) VALUES ('" + cmbbolumad.SelectedItem.ToString() + "','" + cmbbolumkod.SelectedItem.ToString() + "','" + cmbogretimsekli.SelectedItem.ToString() + "','" + cmbdonem.SelectedItem.ToString() + "','" + cmbders.SelectedItem.ToString() + "'," + txtogrencisayisi.Text + ",'" + unvan + "' ,'" + adsoyad + "','" + tarih.ToString("yyyy-MM-dd") + "' ,'" + saat.ToShortTimeString() + "' ,";
+
+                            if (Derslik1 != "0") komut += "'" + Derslik1 + "' ,";
+                            else komut += "null ,";
+                            if (Derslik2 != "0") komut += "'" + Derslik2 + "' ,";
+                            else komut += "null ,";
+                            if (Derslik3 != "0") komut += "'" + Derslik3 + "' ,";
+                            else komut += "null ,";
+                            if (Derslik4 != "0") komut += "'" + Derslik4 + "' ,";
+                            else komut += "null ,";
+
+                            komut += "" + gozetmensayisi.Value + ", ";
+
+                            if (gozetmensayisi.Value == 0) komut += "null, null,null ";
+                            else if (gozetmensayisi.Value == 1) komut += "'" + gozetmen1 + "' , null, null );";
+                            else if (gozetmensayisi.Value == 2) komut += "'" + gozetmen1 + "' , '" + gozetmen2 + "', null );";
+                            else if (gozetmensayisi.Value == 3) komut += "'" + gozetmen1 + "' , '" + gozetmen2 + "', '" + gozetmen3 + "' );";
+                        }
+                        islemler.Degistir(komut);
+                        #endregion
+
+                        #region Gözetmenlik Sayısı ve Kendi Sınav Sayısı Arttıma
+
+                        //Kendi Sınav Sayısı Arttırma
+                        if (sinavid < 0)
+                        {
+                            komut = "UPDATE ogretimelemani SET Kendi_Sinav_Sayisi=Kendi_Sinav_Sayisi+1 where unvan='" + unvan + "' and Ad_Soyad='" + adsoyad + "'";
+                            islemler.Degistir(komut);
+                        }
+                        //Gözetmenlik Sayısını Arttırma
+                        int gozetmenid = 0;
+                        if (sinavid > 0)
+                        {
+
+                            //Gözetmen 1 
+                            if (DuzenlenecekSinav.Rows[0]["Gozetmen1"].ToString() != gozetmen1 && DuzenlenecekSinav.Rows[0]["Gozetmen2"].ToString() != gozetmen1 && DuzenlenecekSinav.Rows[0]["Gozetmen3"].ToString() != gozetmen1 && gozetmen1 != "0")
+                            {
+                                for (int i = 0; i < OgretmenTablo.Rows.Count; i++)
+                                {
+                                    string birlesik = OgretmenTablo.Rows[i]["unvan"] + " " + OgretmenTablo.Rows[i]["Ad_Soyad"];
+                                    if (birlesik == gozetmen1)
+                                    {
+                                        gozetmenid = int.Parse(OgretmenTablo.Rows[i]["id"].ToString());
+                                    }
+                                }
+                                komut = "UPDATE ogretimelemani SET Gozetmenlik_Sayisi=Gozetmenlik_Sayisi+1 WHERE id=" + gozetmenid + "";
+                                islemler.Degistir(komut);
+                            }
+                            //Gözetmen 2
+
+                            if (DuzenlenecekSinav.Rows[0]["Gozetmen1"].ToString() != gozetmen2 && DuzenlenecekSinav.Rows[0]["Gozetmen2"].ToString() != gozetmen2 && DuzenlenecekSinav.Rows[0]["Gozetmen3"].ToString() != gozetmen2 && gozetmen2 != "0")
+                            {
+                                for (int i = 0; i < OgretmenTablo.Rows.Count; i++)
+                                {
+                                    string birlesik = OgretmenTablo.Rows[i]["unvan"] + " " + OgretmenTablo.Rows[i]["Ad_Soyad"];
+                                    if (birlesik == gozetmen2)
+                                    {
+                                        gozetmenid = int.Parse(OgretmenTablo.Rows[i]["id"].ToString());
+                                    }
+                                }
+                                komut = "UPDATE ogretimelemani SET Gozetmenlik_Sayisi=Gozetmenlik_Sayisi+1 WHERE id=" + gozetmenid + "";
+                                islemler.Degistir(komut);
+                            }
+
+                            //Gözetmen 3
+
+                            if (DuzenlenecekSinav.Rows[0]["Gozetmen1"].ToString() != gozetmen3 && DuzenlenecekSinav.Rows[0]["Gozetmen2"].ToString() != gozetmen3 && DuzenlenecekSinav.Rows[0]["Gozetmen3"].ToString() != gozetmen3 && gozetmen3 != "0")
+                            {
+                                for (int i = 0; i < OgretmenTablo.Rows.Count; i++)
+                                {
+                                    string birlesik = OgretmenTablo.Rows[i]["unvan"] + " " + OgretmenTablo.Rows[i]["Ad_Soyad"];
+                                    if (birlesik == gozetmen3)
+                                    {
+                                        gozetmenid = int.Parse(OgretmenTablo.Rows[i]["id"].ToString());
+                                    }
+                                }
+                                komut = "UPDATE ogretimelemani SET Gozetmenlik_Sayisi=Gozetmenlik_Sayisi+1 WHERE id=" + gozetmenid + "";
+                                islemler.Degistir(komut);
+                            }
+                        }
+                        else // Eğer Yeni Kayıt Yapılıyorsa
+                        {
+                            if (gozetmen1!="0")
+                            {
+                                for (int i = 0; i < OgretmenTablo.Rows.Count; i++)
+                                {
+                                    string birlesik = OgretmenTablo.Rows[i]["unvan"] + " " + OgretmenTablo.Rows[i]["Ad_Soyad"];
+                                    if (birlesik == gozetmen1)
+                                    {
+                                        gozetmenid = int.Parse(OgretmenTablo.Rows[i]["id"].ToString());
+                                    }
+                                }
+                                komut = "UPDATE ogretimelemani SET Gozetmenlik_Sayisi=Gozetmenlik_Sayisi+1 WHERE id=" + gozetmenid + "";
+                                islemler.Degistir(komut);
+                            }
+                            if (gozetmen2 != "0")
+                            {
+                                for (int i = 0; i < OgretmenTablo.Rows.Count; i++)
+                                {
+                                    string birlesik = OgretmenTablo.Rows[i]["unvan"] + " " + OgretmenTablo.Rows[i]["Ad_Soyad"];
+                                    if (birlesik == gozetmen2)
+                                    {
+                                        gozetmenid = int.Parse(OgretmenTablo.Rows[i]["id"].ToString());
+                                    }
+                                }
+                                komut = "UPDATE ogretimelemani SET Gozetmenlik_Sayisi=Gozetmenlik_Sayisi+1 WHERE id=" + gozetmenid + "";
+                                islemler.Degistir(komut);
+                            }
+                            if (gozetmen3 != "0")
+                            {
+                                for (int i = 0; i < OgretmenTablo.Rows.Count; i++)
+                                {
+                                    string birlesik = OgretmenTablo.Rows[i]["unvan"] + " " + OgretmenTablo.Rows[i]["Ad_Soyad"];
+                                    if (birlesik == gozetmen3)
+                                    {
+                                        gozetmenid = int.Parse(OgretmenTablo.Rows[i]["id"].ToString());
+                                    }
+                                }
+                                komut = "UPDATE ogretimelemani SET Gozetmenlik_Sayisi=Gozetmenlik_Sayisi+1 WHERE id=" + gozetmenid + "";
+                                islemler.Degistir(komut);
+                            }
+
+                        }
+
+                        #endregion
+
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                    catch (Exception err)
+                    {
+                        this.DialogResult = DialogResult.None;
+                        MessageBox.Show("Veriler Kaydedilirken Hata! \nHata Kodu:" + err, "HATA!");
+                        this.Close();
+                    }
+                }
             }
-            else
-            {
-
-            }
-            try
-            {
-                //DialogResult cevap = DialogResult.Yes;
-                //komut = "select * from bolumler where program_adi='" + cmbbolumad.SelectedItem.ToString() + "' and program_kodu='" + cmbbolumkod.SelectedItem.ToString() + "';";
-                //dr = islemler.Oku(komut);
-                //if (dr.Read() == false) cevap = MessageBox.Show("Program Kodu ve Program Adı birbiriyle uyuşmuyor!\nDevam Etmek İstiyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
-                //if (cevap == DialogResult.Yes)
-                //{
-
-                //}
-
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show("Veriler Kaydedilirken Hata! \nHata Kodu:" + err, "HATA!");
-                this.Close();
-            }
-
         }
 
         #endregion
@@ -883,6 +1075,7 @@ namespace sp
                     MessageBox.Show("Lütfen 3. Gözetmeni Seçiniz ya da Gözetmen Sayısını Düşürünüz!", "UYARI!");
                     return false;
                 }
+
                 return true;
             }
             catch (Exception err)
@@ -892,6 +1085,306 @@ namespace sp
                 return false;
             }
         }
+        #endregion
+
+        #region Sorgu
+        public bool Sorgu()
+        {
+            //Sorgu İçin Dışarıda Tanımlananlar
+            DialogResult cevap;
+            DateTime secilitarih = Convert.ToDateTime(cmbtarih.SelectedItem);
+            DateTime tablotarih;
+            DateTime secilisaat = Convert.ToDateTime(cmbsaat.SelectedItem);
+            DateTime tablosaat;
+
+            string ogretmen = "";
+            int id = -1;
+
+            //öğrenci sayısı derslik kapasitesinden büyük mü kontrol..
+            if (kapasitekontrol == false)
+            {
+                if (int.Parse(lblsinavagirenogrencisayisi.Text) > int.Parse(lblderslikkapasitesi.Text))
+                {
+                    cevap = MessageBox.Show("Seçilen Dersin Öğrenci Sayısı Dersliklerin Toplam Kapasitesinden Fazla! \nKabul Ediyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
+                    if (cevap == DialogResult.Yes)
+                    {
+                        kapasitekontrol = true;
+                    }
+                    else
+                    {
+                        kapasitekontrol = false;
+                    }
+                }
+                else
+                {
+                    kapasitekontrol = true;
+                }
+
+            }
+            //Seçilen Öğretim Elamnının Seçilen Tarih ve Saatte Sınavı Olması Sorgusu
+            if (ogretimelemanikontrol == false)
+            {
+
+                for (int i = 0; i < Sinavlar.Rows.Count; i++)
+                {
+                    tablosaat = Convert.ToDateTime(Sinavlar.Rows[i]["Saat"].ToString());
+                    tablotarih = Convert.ToDateTime(Sinavlar.Rows[i]["Tarih"].ToString());
+                    ogretmen = Sinavlar.Rows[i]["Unvan"].ToString() + " " + Sinavlar.Rows[i]["Ad_Soyad"].ToString();
+                    id = int.Parse(Sinavlar.Rows[i]["id"].ToString());
+                    if (tablotarih.ToShortDateString() == secilitarih.ToShortDateString() && secilisaat.ToShortTimeString() == tablosaat.ToShortTimeString() && ogretmen == cmbogretimelemani.SelectedItem.ToString() && sinavid != id)
+                    {
+                        cevap = MessageBox.Show("Seçilen Tarih ve Saatte Öğretim Görevlisinin Başka Bir Sınavı Bulunmakta! \nKabul Ediyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
+                        if (cevap == DialogResult.Yes)
+                        {
+                            ogretimelemanikontrol = true;
+                            break;
+
+                        }
+                        else
+                        {
+                            ogretimelemanikontrol = false;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        ogretimelemanikontrol = true;
+                    }
+
+                }
+            }
+            //Seçilen Bölümün Seçilen Tarih ve Saatte Sınavı Olması Sorgusu
+            if (bolumkontrol == false)
+            {
+                string secilmisbolumbirlesik = cmbbolumkod.SelectedItem.ToString() + " " + cmbbolumad.SelectedItem.ToString();
+
+                for (int i = 0; i < Sinavlar.Rows.Count; i++)
+                {
+                    tablosaat = Convert.ToDateTime(Sinavlar.Rows[i]["Saat"].ToString());
+                    tablotarih = Convert.ToDateTime(Sinavlar.Rows[i]["Tarih"].ToString());
+                    id = int.Parse(Sinavlar.Rows[i]["id"].ToString());
+
+                    if (cmbbolumkod.SelectedItem.ToString() == Sinavlar.Rows[i]["Prg_Kod"].ToString() && cmbbolumad.SelectedItem.ToString() == Sinavlar.Rows[i]["Prg_Ad"].ToString() &&
+                        cmbogretimsekli.SelectedItem.ToString() == Sinavlar.Rows[i]["Ogr_Sekli"].ToString() && tablotarih == secilitarih && tablosaat == secilisaat && sinavid != id)
+                    {
+                        cevap = MessageBox.Show("Seçilen Tarih ve Saatte Bölümün Başka Bir Sınavı Bulunmakta! \nKabul Ediyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
+                        if (cevap == DialogResult.Yes)
+                        {
+                            bolumkontrol = true;
+                            break;
+
+                        }
+                        else
+                        {
+                            bolumkontrol = false;
+                            break;
+                        }
+
+                    }
+                    else
+                    {
+                        bolumkontrol = true;
+                    }
+                }
+            }
+            //Seçilen Dersliklerin Seçilen Tarih ve Saatte Kullanılması Sorgusu
+            if (derslikkontrol == false)
+            {
+                mesaj = "";
+                int[] olanlar = { 0, 0, 0, 0 };
+                for (int i = 0; i < Sinavlar.Rows.Count; i++)
+                {
+                    tablosaat = Convert.ToDateTime(Sinavlar.Rows[i]["Saat"].ToString());
+                    tablotarih = Convert.ToDateTime(Sinavlar.Rows[i]["Tarih"].ToString());
+                    id = int.Parse(Sinavlar.Rows[i]["id"].ToString());
+                    if (Sinavlar.Rows[i]["Derslik1"].ToString() == Derslik1 && tablotarih == secilitarih && tablosaat == secilisaat && sinavid != id)
+                    {
+                        olanlar[0] = 1;
+                    }
+                    if (Sinavlar.Rows[i]["Derslik2"].ToString() == Derslik2 && tablotarih == secilitarih && tablosaat == secilisaat && sinavid != id)
+                    {
+                        olanlar[1] = 1;
+                    }
+                    if (Sinavlar.Rows[i]["Derslik3"].ToString() == Derslik3 && tablotarih == secilitarih && tablosaat == secilisaat && sinavid != id)
+                    {
+                        olanlar[2] = 1;
+                    }
+                    if (Sinavlar.Rows[i]["Derslik4"].ToString() == Derslik4 && tablotarih == secilitarih && tablosaat == secilisaat && sinavid != id)
+                    {
+                        olanlar[3] = 1;
+                    }
+                    int toplam = 0;
+                    for (int j = 0; j < olanlar.Length; j++)
+                    {
+                        toplam += olanlar[j];
+                    }
+                    if (toplam == 4) break;
+
+                }
+
+                for (int i = 0; i < olanlar.Length; i++)
+                {
+                    if (olanlar[i] == 1)
+                    {
+                        mesaj += +(i + 1) + ". Derslik, ";
+                    }
+                }
+                if (mesaj != "")
+                {
+                    mesaj += " <== Bu Derslikler Seçilen Tarih ve Saatte Kullanılmakta!";
+                    cevap = MessageBox.Show(mesaj + "\nKabul Ediyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
+                    if (cevap == DialogResult.Yes)
+                    {
+                        derslikkontrol = true;
+
+                    }
+                    else
+                    {
+                        derslikkontrol = false;
+                    }
+
+                }
+                else
+                {
+                    derslikkontrol = true;
+                }
+
+            }
+            //Seçilen Gözetmenlerin Seçilen Tarihte ve Saatte Sınavı Olup Olmadığı Sorgusu
+            if (gozetmenkontrol == false)
+            {
+                int[] olanlar = { 0, 0, 0 };
+                mesaj = "";
+                for (int i = 0; i < Sinavlar.Rows.Count; i++)
+                {
+                    tablosaat = Convert.ToDateTime(Sinavlar.Rows[i]["Saat"].ToString());
+                    tablotarih = Convert.ToDateTime(Sinavlar.Rows[i]["Tarih"].ToString());
+                    id = int.Parse(Sinavlar.Rows[i]["id"].ToString());
+                    if (Sinavlar.Rows[i]["Gozetmen1"].ToString() == gozetmen1 && tablotarih == secilitarih && tablosaat == secilisaat && sinavid != id)
+                    {
+                        olanlar[0] = 1;
+                    }
+                    if (Sinavlar.Rows[i]["Gozetmen2"].ToString() == gozetmen2 && tablotarih == secilitarih && tablosaat == secilisaat && sinavid != id)
+                    {
+                        olanlar[1] = 1;
+                    }
+                    if (Sinavlar.Rows[i]["Gozetmen3"].ToString() == gozetmen3 && tablotarih == secilitarih && tablosaat == secilisaat && sinavid != id)
+                    {
+                        olanlar[2] = 1;
+                    }
+                    int toplam = 0;
+                    for (int j = 0; j < olanlar.Length; j++)
+                    {
+                        toplam += olanlar[j];
+                    }
+                    if (toplam == 3) break;
+
+                }
+                for (int i = 0; i < olanlar.Length; i++)
+                {
+                    if (olanlar[i] == 1)
+                    {
+                        mesaj += (i + 1) + ". Gözetmen, ";
+                    }
+                }
+                if (mesaj != "")
+                {
+                    mesaj += " <== Gözetmenlerin Seçilen Tarih ve Saatte Sınavı Bulunmakta!";
+                    cevap = MessageBox.Show(mesaj + "\nKabul Ediyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
+                    if (cevap == DialogResult.Yes)
+                    {
+                        gozetmenkontrol = true;
+
+                    }
+                    else
+                    {
+                        gozetmenkontrol = false;
+                    }
+
+                }
+                else
+                {
+                    gozetmenkontrol = true;
+                }
+            }
+            if (ogretmengozetmenkontrol == false)
+            {
+                if (cmbogretimelemani.SelectedItem.ToString() == gozetmen1 || cmbogretimelemani.SelectedItem.ToString() == gozetmen2 || cmbogretimelemani.SelectedItem.ToString() == gozetmen3)
+                {
+                    cevap = MessageBox.Show("Öğretim Elemanını Gözetmen Olarak Seçtiniz! \nKabul Ediyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
+                    if (cevap == DialogResult.Yes)
+                    {
+                        ogretmengozetmenkontrol = true;
+
+                    }
+                    else
+                    {
+                        ogretmengozetmenkontrol = false;
+                    }
+                }
+                else
+                {
+                    ogretmengozetmenkontrol = true;
+                }
+            }
+            if (programadkodkontrol == false)
+            {
+                bool kontrol = false;
+                string seciliprogkod = cmbbolumkod.SelectedItem.ToString();
+                string seciliprogad = cmbbolumad.SelectedItem.ToString();
+                for (int i = 0; i < Bolumler.Rows.Count; i++)
+                {
+
+                    string tabloprogkod = Bolumler.Rows[i]["program_kodu"].ToString();
+                    string tabloprogad = Bolumler.Rows[i]["program_adi"].ToString();
+                    if (seciliprogkod == tabloprogkod)
+                    {
+                        if (seciliprogad != tabloprogad)
+                        {
+                            kontrol = true;
+                            break;
+                        }
+                    }
+                    else if (seciliprogad == tabloprogad)
+                    {
+                        if (seciliprogkod != tabloprogkod)
+                        {
+                            kontrol = true;
+                            break;
+                        }
+                    }
+                }
+                if (kontrol)
+                {
+                    cevap = MessageBox.Show("Program Adı ve Kodu Eşleşmemekte! \nKabul Ediyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
+                    if (cevap == DialogResult.Yes)
+                    {
+                        programadkodkontrol = true;
+                    }
+                    else
+                    {
+                        programadkodkontrol = false;
+                    }
+                }
+                else
+                {
+                    programadkodkontrol = true;
+                }
+
+            }
+
+            //Eğer Bütün Sorgular True İse Ekle Butonuna True Gönder, Değilse False Gönder
+            if (kapasitekontrol && ogretimelemanikontrol && bolumkontrol && derslikkontrol && gozetmenkontrol && ogretmengozetmenkontrol && programadkodkontrol)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
         #endregion
 
         //Öğrenci Sayısının Yazdırıldığı Yer
@@ -1038,6 +1531,8 @@ namespace sp
 
         private void cmbgozetmen1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ogretmengozetmenkontrol = false;
+            gozetmenkontrol = false;
             GozetmenTut();
         }
         #endregion
@@ -1045,6 +1540,8 @@ namespace sp
 
         private void cmbgozetmen2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ogretmengozetmenkontrol = false;
+            gozetmenkontrol = false;
             GozetmenTut();
         }
 
@@ -1089,11 +1586,14 @@ namespace sp
 
         private void cmbgozetmen3_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ogretmengozetmenkontrol = false;
+            gozetmenkontrol = false;
             GozetmenTut();
         }
         #endregion
 
         #endregion
+
         #region İptal Butonu
 
         private void btnkirmizi1_Click(object sender, EventArgs e)
@@ -1102,5 +1602,37 @@ namespace sp
         }
         #endregion
 
+        #region Sorgu İçin Yapılmış Ayarlamalar
+        //Eğer Öğrenci Sayısı Ya da Derslik Kapasitesi Değişirse kapasite kontrolü sıfırla ki değerler uyuşmadığına kullanıcıya tekrar sorulabilsin
+        private void lblsinavagirenogrencisayisi_TextChanged(object sender, EventArgs e)
+        {
+            kapasitekontrol = false;
+        }
+        private void cmbogretimelemani_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ogretmengozetmenkontrol = false;
+            ogretimelemanikontrol = false;
+            gozetmenkontrol = false;
+        }
+
+        private void cmbtarih_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ogretimelemanikontrol = false;
+            bolumkontrol = false;
+        }
+
+        private void cmbsaat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ogretimelemanikontrol = false;
+            bolumkontrol = false;
+        }
+
+        private void cmbogretimsekli_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            bolumkontrol = false;
+        }
     }
+
+    #endregion
+
 }

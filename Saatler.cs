@@ -51,7 +51,6 @@ namespace sp
         #endregion
 
         #region Dışarıda Tanımlananlar
-        MySqlDataReader dr; // sorgu methodu için tablo okumaya yarayan class
         VeritabaniIslemler islemler = new VeritabaniIslemler();
         private int saatid = -1;
         string komut = "";

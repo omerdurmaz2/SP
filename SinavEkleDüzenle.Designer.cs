@@ -99,6 +99,7 @@
             this.cmbtarih.Size = new System.Drawing.Size(256, 21);
             this.cmbtarih.TabIndex = 115;
             this.cmbtarih.Text = "Seçiniz...";
+            this.cmbtarih.SelectedIndexChanged += new System.EventHandler(this.cmbtarih_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -129,18 +130,19 @@
             // 
             this.cmbsaat.FormattingEnabled = true;
             this.cmbsaat.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.cmbsaat.Location = new System.Drawing.Point(560, 176);
+            this.cmbsaat.Location = new System.Drawing.Point(560, 232);
             this.cmbsaat.Name = "cmbsaat";
             this.cmbsaat.Size = new System.Drawing.Size(112, 21);
             this.cmbsaat.TabIndex = 104;
             this.cmbsaat.Text = "Seçiniz...";
+            this.cmbsaat.SelectedIndexChanged += new System.EventHandler(this.cmbsaat_SelectedIndexChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline);
-            this.label4.Location = new System.Drawing.Point(560, 152);
+            this.label4.Location = new System.Drawing.Point(560, 208);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(64, 13);
             this.label4.TabIndex = 111;
@@ -303,6 +305,7 @@
             this.cmbogretimelemani.Size = new System.Drawing.Size(256, 21);
             this.cmbogretimelemani.TabIndex = 90;
             this.cmbogretimelemani.Text = "Seçiniz...";
+            this.cmbogretimelemani.SelectedIndexChanged += new System.EventHandler(this.cmbogretimelemani_SelectedIndexChanged);
             // 
             // lblogretimgorevlisi
             // 
@@ -405,7 +408,7 @@
             this.label10.AutoSize = true;
             this.label10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline);
-            this.label10.Location = new System.Drawing.Point(560, 208);
+            this.label10.Location = new System.Drawing.Point(560, 152);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(69, 13);
             this.label10.TabIndex = 111;
@@ -418,11 +421,12 @@
             this.cmbogretimsekli.Items.AddRange(new object[] {
             "G",
             "IO"});
-            this.cmbogretimsekli.Location = new System.Drawing.Point(560, 232);
+            this.cmbogretimsekli.Location = new System.Drawing.Point(560, 176);
             this.cmbogretimsekli.Name = "cmbogretimsekli";
             this.cmbogretimsekli.Size = new System.Drawing.Size(112, 21);
             this.cmbogretimsekli.TabIndex = 104;
             this.cmbogretimsekli.Text = "Seçiniz..";
+            this.cmbogretimsekli.SelectedIndexChanged += new System.EventHandler(this.cmbogretimsekli_SelectedIndexChanged);
             // 
             // label11
             // 
@@ -445,7 +449,7 @@
             "2. Dönem",
             "3. Dönem",
             "4. Dönem"});
-            this.cmbdonem.Location = new System.Drawing.Point(424, 112);
+            this.cmbdonem.Location = new System.Drawing.Point(424, 111);
             this.cmbdonem.Name = "cmbdonem";
             this.cmbdonem.Size = new System.Drawing.Size(120, 21);
             this.cmbdonem.TabIndex = 104;
@@ -552,6 +556,7 @@
             this.lblderslikkapasitesi.Size = new System.Drawing.Size(13, 13);
             this.lblderslikkapasitesi.TabIndex = 123;
             this.lblderslikkapasitesi.Text = "0";
+            this.lblderslikkapasitesi.TextChanged += new System.EventHandler(this.lblsinavagirenogrencisayisi_TextChanged);
             // 
             // lblsinavagirenogrencisayisi
             // 
@@ -561,6 +566,7 @@
             this.lblsinavagirenogrencisayisi.Size = new System.Drawing.Size(13, 13);
             this.lblsinavagirenogrencisayisi.TabIndex = 124;
             this.lblsinavagirenogrencisayisi.Text = "0";
+            this.lblsinavagirenogrencisayisi.TextChanged += new System.EventHandler(this.lblsinavagirenogrencisayisi_TextChanged);
             // 
             // label13
             // 
