@@ -52,12 +52,12 @@
             // btnkirmizi1
             // 
             this.btnkirmizi1.FlatAppearance.BorderSize = 0;
-            this.btnkirmizi1.Location = new System.Drawing.Point(1128, 224);
+            this.btnkirmizi1.Location = new System.Drawing.Point(1176, 392);
             // 
             // btnmavi1
             // 
             this.btnmavi1.FlatAppearance.BorderSize = 0;
-            this.btnmavi1.Location = new System.Drawing.Point(1232, 328);
+            this.btnmavi1.Location = new System.Drawing.Point(1272, 392);
             this.btnmavi1.Click += new System.EventHandler(this.btnmavi1_Click);
             // 
             // dataGridView1

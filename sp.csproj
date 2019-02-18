@@ -129,12 +129,6 @@
     <Compile Include="Dersler.Designer.cs">
       <DependentUpon>Dersler.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sinavlar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sinavlar.Designer.cs">
-      <DependentUpon>Sinavlar.cs</DependentUpon>
-    </Compile>
     <Compile Include="VeritabaniIslemler.cs" />
     <EmbeddedResource Include="Derslikler.resx">
       <DependentUpon>Derslikler.cs</DependentUpon>
@@ -176,9 +170,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dersler.resx">
       <DependentUpon>Dersler.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sinavlar.resx">
-      <DependentUpon>Sinavlar.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

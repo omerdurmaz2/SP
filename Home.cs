@@ -119,7 +119,7 @@ namespace sp
         private void button6_Click(object sender, EventArgs e)
         {
             label3.Visible = true;
-            Sinavlar sinav = new Sinavlar();
+            SinavProgrami sinav = new SinavProgrami();
             sinav.ShowDialog();
         }
         #endregion
