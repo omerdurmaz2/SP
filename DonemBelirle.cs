@@ -54,14 +54,15 @@ namespace sp
         private void btnmavi1_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
-            SinavProgrami.donem = "guz";
+            Home.donem = "guz";
+            
             this.Close();
         }
 
         private void btnkirmizi1_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
-            SinavProgrami.donem = "bahar";
+            Home.donem = "bahar";
             this.Close();
 
         }

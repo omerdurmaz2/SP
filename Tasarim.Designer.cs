@@ -152,7 +152,6 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Tasarim_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Tasarim_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Tasarim_MouseUp);
-            
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -162,9 +161,9 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem;
+        public System.Windows.Forms.MenuStrip menuStrip1;
+        public System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        public System.Windows.Forms.ToolStripMenuItem xToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem yToolStripMenuItem;
         public System.Windows.Forms.Label lblbaslik;
         public System.Windows.Forms.Button btnkirmizi1;

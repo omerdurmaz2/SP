@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using MySql.Data.MySqlClient;
 using System.Collections;
+using System.Data;
 
 namespace sp
 {
@@ -20,14 +21,27 @@ namespace sp
         }
         private void Dersler_Load(object sender, EventArgs e)
         {
-            if (Login.Session)
+            //if (Login.Session)
+            //{
+            try
             {
-                Listele();
+                //Bölümlerin Tabloya Basıldığı Yer
+                komut = "select * from bolumler";
+                Bolumler = islemler.Al(komut);
+
             }
-            else
+            catch (Exception err)
             {
-                this.Close();
+                MessageBox.Show("DÖnem Belirlenirken Hata! Hata Kodu:" + err, "HATA!");
             }
+
+
+            Listele();
+            //}
+            //else
+            //{
+            //    this.Close();
+            //}
 
         }
         #endregion
@@ -52,9 +66,13 @@ namespace sp
         #region Dışarda Tanımlananlar
         MySqlDataReader dr; // sorgu methodu için tablo okumaya yarayan class
         VeritabaniIslemler islemler = new VeritabaniIslemler();
+        DataTable Bolumler = new DataTable();
         string komut = "";
         string mesaj = "";
         int dersid = -1;
+        string eskiderskodu = "";
+
+        string ilkdonem = "", ilkbolum = "";
         #endregion
 
         #region Listele
@@ -98,11 +116,15 @@ namespace sp
         {
             if (dersid == -1) //eğer id -1 ise yeni ekler
             {
+
                 komut = "INSERT INTO ders(ders_adi,ders_kodu,bolum,donem) VALUES ('" + dersadi + "','" + derskodu + "','" + bolum + "','" + donem + "')";
                 mesaj = "Yeni Kayıt Eklendi";
+
+
             }
             else // eğer id -1 değilse id ye göre veri güncellenir
             {
+
                 btnkirmizi1.Visible = false;
                 btnmavi1.Text = "EKLE";
 
@@ -110,9 +132,433 @@ namespace sp
                 mesaj = "Kayıt Güncellendi";
 
             }
-
-
             islemler.Degistir(komut);
+
+
+            string progad = "", progkod = "";
+            ProgramaEkle program = new ProgramaEkle();
+            DataTable SınavTablosu;
+
+            //Aşağıdaki alanda dersin eklenmesi ya da güncellenmesine göre bahar ve güz tablosunda yapılacak değişiklikleri ayarlıyoruz
+            if (dersid == -1) //eğer id -1 ise yeni ekler
+            {
+                if (cmbbolum.SelectedItem.ToString() == "ORTAK DERS")
+                {
+                    if (Bolumler.Rows.Count != 0)
+                    {
+                        for (int i = 0; i < Bolumler.Rows.Count; i++)
+                        {
+                            progkod = Bolumler.Rows[i]["program_kodu"].ToString();
+                            progad = Bolumler.Rows[i]["program_adi"].ToString();
+
+
+                            if (Home.donem == "ORTAK")
+                            {
+                                program.YeniKayit("bahar", progkod, progad, cmbdonem.SelectedItem.ToString(), txtdkod.Text, txtdad.Text);
+
+                                program.YeniKayit("güz", progkod, progad, cmbdonem.SelectedItem.ToString(), txtdkod.Text, txtdad.Text);
+
+                            }
+                            else
+                            {
+                                program.YeniKayit(Home.donem, progkod, progad, cmbdonem.SelectedItem.ToString(), txtdkod.Text, txtdad.Text);
+
+                            }
+                        }
+
+                    }
+                }
+                else
+                {
+
+                    for (int i = 0; i < Bolumler.Rows.Count; i++)
+                    {
+                        string birlesik = Bolumler.Rows[i]["program_kodu"].ToString() + " " + Bolumler.Rows[i]["program_adi"].ToString();
+                        if (birlesik == cmbbolum.SelectedItem.ToString())
+                        {
+                            progkod = Bolumler.Rows[i]["program_kodu"].ToString();
+                            progad = Bolumler.Rows[i]["program_adi"].ToString();
+                        }
+                    }
+                    program.YeniKayit(Home.donem, progkod, progad, cmbdonem.SelectedItem.ToString(), txtdkod.Text, txtdad.Text);
+
+                }
+
+            }
+            else // eğer id -1 değilse id ye göre veri güncellenir
+            {
+                if (ilkdonem == "1. Dönem" || ilkdonem == "3. Dönem")
+                {
+                    if (ilkdonem == cmbdonem.SelectedItem.ToString())
+                    {
+                        if (ilkbolum == "ORTAK DERS")
+                        {
+                            if (cmbbolum.SelectedItem.ToString() == ilkbolum) 
+                            {
+                                //Güz Tablosunda Ders Kodu Düzenlenen Ders Koduna Eşit Olan Bütün Kayıtları Güncelle
+                                komut = "UPDATE guz SET  donem='" + cmbdonem.SelectedItem.ToString() + "',Ders_Kodu='" + txtdkod.Text + "',Ders_Adi='" + txtdad.Text + "' where Ders_Kodu='" + eskiderskodu + "'";
+                                islemler.Degistir(komut);
+
+                            }
+                            else
+                            {
+                                for (int i = 0; i < Bolumler.Rows.Count; i++)
+                                {
+                                    string birlesik = Bolumler.Rows[i]["program_kodu"].ToString() + " " + Bolumler.Rows[i]["program_adi"].ToString();
+                                    if (birlesik == cmbbolum.SelectedItem.ToString())
+                                    {
+                                        progkod = Bolumler.Rows[i]["program_kodu"].ToString();
+                                        progad = Bolumler.Rows[i]["program_adi"].ToString();
+                                    }
+                                }
+                                //Güz Tablsonda Seçilmiş Olan BÖlüm Hariç Bütün Bölümleri Sil
+                                komut = "DELETE FROM guz where Ders_Kodu='" + eskiderskodu + "' and Prg_Kod<>'" + progkod + "' and Prg_Ad<>'" + progad + "';";
+                                islemler.Degistir(komut);
+                                
+                                //Güz Tablosunda Ders Kodu Düzenlenen Ders Koduna Eşit Olan Kaydı Güncelle
+                                komut = "UPDATE guz SET Prg_Ad='" + progad + "',Prg_Kod='" + progkod + "', donem='" + cmbdonem.SelectedItem.ToString() + "',Ders_Kodu='" + txtdkod.Text + "',Ders_Adi='" + txtdad.Text + "' where Ders_Kodu='" + eskiderskodu + "'";
+                                islemler.Degistir(komut);
+
+
+                            }
+                        }
+                        else
+                        {
+                            if (cmbbolum.SelectedItem.ToString() == ilkbolum)
+                            {
+
+                            }
+                            else if (cmbbolum.SelectedItem.ToString() == "ORTAK DERS")
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    }
+                    else if (cmbdonem.SelectedItem.ToString() == "2. Dönem" || cmbdonem.SelectedItem.ToString() == "4. Dönem")
+                    {
+                        if (ilkbolum == "ORTAK DERS")
+                        {
+                            if (cmbbolum.SelectedItem.ToString() == ilkbolum)
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                        else
+                        {
+                            if (cmbbolum.SelectedItem.ToString() == ilkbolum)
+                            {
+
+                            }
+                            else if (cmbbolum.SelectedItem.ToString() == "ORTAK DERS")
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (ilkbolum == "ORTAK DERS")
+                        {
+                            if (cmbbolum.SelectedItem.ToString() == ilkbolum)
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                        else
+                        {
+                            if (cmbbolum.SelectedItem.ToString() == ilkbolum)
+                            {
+
+                            }
+                            else if (cmbbolum.SelectedItem.ToString() == "ORTAK DERS")
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    }
+
+                }
+                else if (ilkdonem == "2. Dönem" || ilkdonem == "4. Dönem")
+                {
+                    if (ilkdonem == cmbdonem.SelectedItem.ToString())
+                    {
+                        if (ilkbolum == "ORTAK DERS")
+                        {
+                            if (cmbbolum.SelectedItem.ToString() == ilkbolum)
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                        else
+                        {
+                            if (cmbbolum.SelectedItem.ToString() == ilkbolum)
+                            {
+
+                            }
+                            else if (cmbbolum.SelectedItem.ToString() == "ORTAK DERS")
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    }
+                    else if (cmbdonem.SelectedItem.ToString() == "1. Dönem" || cmbdonem.SelectedItem.ToString() == "3. Dönem")
+                    {
+                        if (ilkbolum == "ORTAK DERS")
+                        {
+                            if (cmbbolum.SelectedItem.ToString() == ilkbolum)
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                        else
+                        {
+                            if (cmbbolum.SelectedItem.ToString() == ilkbolum)
+                            {
+
+                            }
+                            else if (cmbbolum.SelectedItem.ToString() == "ORTAK DERS")
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (ilkbolum == "ORTAK DERS")
+                        {
+                            if (cmbbolum.SelectedItem.ToString() == ilkbolum)
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                        else
+                        {
+                            if (cmbbolum.SelectedItem.ToString() == ilkbolum)
+                            {
+
+                            }
+                            else if (cmbbolum.SelectedItem.ToString() == "ORTAK DERS")
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (ilkdonem == cmbdonem.SelectedItem.ToString())
+                    {
+                        if (ilkbolum == "ORTAK DERS")
+                        {
+                            if (cmbbolum.SelectedItem.ToString() == ilkbolum)
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                        else
+                        {
+                            if (cmbbolum.SelectedItem.ToString() == ilkbolum)
+                            {
+
+                            }
+                            else if (cmbbolum.SelectedItem.ToString() == "ORTAK DERS")
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    }
+                    else if (cmbdonem.SelectedItem.ToString() == "1. Dönem" || cmbdonem.SelectedItem.ToString() == "3. Dönem")
+                    {
+                        if (ilkbolum == "ORTAK DERS")
+                        {
+                            if (cmbbolum.SelectedItem.ToString() == ilkbolum)
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                        else
+                        {
+                            if (cmbbolum.SelectedItem.ToString() == ilkbolum)
+                            {
+
+                            }
+                            else if (cmbbolum.SelectedItem.ToString() == "ORTAK DERS")
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    }
+                    else if (cmbdonem.SelectedItem.ToString() == "2. Dönem" || cmbdonem.SelectedItem.ToString() == "4. Dönem")
+                    {
+                        if (ilkbolum == "ORTAK DERS")
+                        {
+                            if (cmbbolum.SelectedItem.ToString() == ilkbolum)
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                        else
+                        {
+                            if (cmbbolum.SelectedItem.ToString() == ilkbolum)
+                            {
+
+                            }
+                            else if (cmbbolum.SelectedItem.ToString() == "ORTAK DERS")
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    }
+
+                }
+
+
+                // Güz > Güz
+
+                //Secili Bolum > Seçili Bölüm
+                //Seçili Bölüm > Ortak Bölüm
+                //Ortak Bölüm > Ortak Bölüm 
+                //Ortak Bölüm > Seçili Bölüm
+
+
+                // Güz > Bahar
+
+                //Secili Bolum > Seçili Bölüm
+                //Seçili Bölüm > Ortak Bölüm
+                //Ortak Bölüm > Ortak Bölüm 
+                //Ortak Bölüm > Seçili Bölüm
+
+                // Güz > Ortak
+
+                //Secili Bolum > Seçili Bölüm
+                //Seçili Bölüm > Ortak Bölüm
+                //Ortak Bölüm > Ortak Bölüm 
+                //Ortak Bölüm > Seçili Bölüm
+
+
+                // Bahar > Bahar 
+
+                //Secili Bolum > Seçili Bölüm
+                //Seçili Bölüm > Ortak Bölüm
+                //Ortak Bölüm > Ortak Bölüm 
+                //Ortak Bölüm > Seçili Bölüm
+
+
+                // Bahar > Güz
+
+                //Secili Bolum > Seçili Bölüm
+                //Seçili Bölüm > Ortak Bölüm
+                //Ortak Bölüm > Ortak Bölüm 
+                //Ortak Bölüm > Seçili Bölüm
+
+
+                // Bahar >> Ortak
+
+                //Secili Bolum > Seçili Bölüm
+                //Seçili Bölüm > Ortak Bölüm
+                //Ortak Bölüm > Ortak Bölüm 
+                //Ortak Bölüm > Seçili Bölüm
+
+
+                // Ortak > Ortak 
+
+                //Secili Bolum > Seçili Bölüm
+                //Seçili Bölüm > Ortak Bölüm
+                //Ortak Bölüm > Ortak Bölüm 
+                //Ortak Bölüm > Seçili Bölüm
+
+
+                // Ortak > Güz 
+
+                //Secili Bolum > Seçili Bölüm
+                //Seçili Bölüm > Ortak Bölüm
+                //Ortak Bölüm > Ortak Bölüm 
+                //Ortak Bölüm > Seçili Bölüm
+
+
+                // Ortak > Bahar
+
+                //Secili Bolum > Seçili Bölüm
+                //Seçili Bölüm > Ortak Bölüm
+                //Ortak Bölüm > Ortak Bölüm 
+                //Ortak Bölüm > Seçili Bölüm
+
+
+
+                komut = "UPDATE ders SET ders_adi = '" + dersadi + "', ders_kodu = '" + derskodu + "', bolum='" + bolum + "' , donem='" + donem + "'  WHERE id = " + dersid + ";";
+
+            }
+
+
+
             MessageBox.Show(mesaj);
             Temizle();
             Listele();
@@ -134,7 +580,7 @@ namespace sp
             else
             {
                 islemler.Kapat();
-                Kaydet(txtdad.Text, txtdkod.Text,cmbbolum.SelectedItem.ToString(),cmbdonem.SelectedItem.ToString());
+                Kaydet(txtdad.Text, txtdkod.Text, cmbbolum.SelectedItem.ToString(), cmbdonem.SelectedItem.ToString());
             }
         }
         #endregion
@@ -144,6 +590,19 @@ namespace sp
         {
             if (txtdad.Text != "" && txtdkod.Text != "" && cmbbolum.SelectedIndex != -1 && cmbdonem.SelectedIndex != -1)
             {
+                if (cmbdonem.SelectedItem.ToString() == "1. Dönem" || cmbdonem.SelectedItem.ToString() == "3. Dönem")
+                {
+                    Home.donem = "guz";
+                }
+                else if (cmbdonem.SelectedItem.ToString() == "2. Dönem" || cmbdonem.SelectedItem.ToString() == "4. Dönem")
+                {
+                    Home.donem = "bahar";
+                }
+                else
+                {
+                    Home.donem = "ORTAK";
+                }
+
                 Sorgu();
             }
             else
@@ -185,7 +644,6 @@ namespace sp
 
         #endregion
 
-
         #region Tabloda Değiştirme ve Silme İşlemleri
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -207,6 +665,10 @@ namespace sp
                             txtdkod.Text = dr["ders_kodu"].ToString();
                             cmbdonem.SelectedItem = dr["donem"].ToString();
                             cmbbolum.SelectedItem = dr["bolum"].ToString();
+
+                            ilkdonem = dr["donem"].ToString();
+                            ilkbolum = dr["bolum"].ToString();
+
                         }
                         else
                         { // eğer kayıt buluanmazsa hata verir
@@ -215,7 +677,7 @@ namespace sp
                         }
                         islemler.Kapat();
                         dr.Close(); //datareader i temizliyoruz
-
+                        eskiderskodu = txtdkod.Text;
                         break;
                     case 6:
 

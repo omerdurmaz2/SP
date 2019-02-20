@@ -20,7 +20,7 @@ namespace sp
             Width = Screen.PrimaryScreen.WorkingArea.Width;
             Height = Screen.PrimaryScreen.WorkingArea.Height;
             baslikhizala();
-            
+
         }
         private void SinavProgrami_Load(object sender, EventArgs e)
         {
@@ -49,7 +49,7 @@ namespace sp
             FiltreBolumKoduAdıBas();
 
             //-----
-
+            sinavid = -1;
             Listele();
             //}
             //else
@@ -85,37 +85,82 @@ namespace sp
         MySqlDataReader dr; // sorgu methodu için tablo okumaya yarayan class
         VeritabaniIslemler islemler; // veritabanı classına giderek yapmak istediğimiz işleme göre kolaylıklar sağlıyor
 
-        DataTable dt = new DataTable(); // veritabanından getirilen tabloların geçici olarak tutulduğu yer
+        DataTable dt; // veritabanından getirilen tabloların geçici olarak tutulduğu yer
 
         string komut = "";  //veritabanı komutlarının tutulduğu yer
 
-        public static string donem = "";
         public static string eklebaslik = "";
+        public static int sinavid { get; set; }
 
+        public static int KonumX { get; set; }
+        public static int KonumY { get; set; }
 
+        Rectangle rect;
+
+        int rowindex = 0;
+        int colindex = 0;
         #endregion
 
         public void Listele()
         {
             islemler = new VeritabaniIslemler();
-            komut = "select * from " + donem + " order by id desc;";
 
-            if (islemler.Al(komut) != null)
+            //Eğer Bir Sınav Güncellenmiş İse Sadece Düzenlenen Satır Güncelleniyor
+            if (sinavid > 0)
             {
+                //Veritabanından Çekilen Yeni Satırın Verilerinin Eskisi İle Değiştirildiği yer
 
-                dataGridView1.Columns.Clear();
-                dataGridView1.DataSource = null;
-                dataGridView1.Refresh();
+                komut = "select * from " + Home.donem + " where id=" + sinavid + ";";
+                dr = islemler.Oku(komut);
 
-                ButonEkle();
-                dataGridView1.Columns.Add(duzenle);
-                dataGridView1.Columns.Add(sil);
-            
-                dataGridView1.DataSource = islemler.Al(komut);
+                if (dr.Read())
+                {
+                    if (!dr.IsDBNull(1)) { dataGridView1.Rows[rowindex].Cells[1].Value = dr.GetString("Prg_Kod"); }
+                    if (!dr.IsDBNull(2)) { dataGridView1.Rows[rowindex].Cells[2].Value = dr.GetString("Prg_Ad"); }
+                    if (!dr.IsDBNull(3)) { dataGridView1.Rows[rowindex].Cells[3].Value = dr.GetString("Ogr_Sekli"); }
+                    if (!dr.IsDBNull(4)) { dataGridView1.Rows[rowindex].Cells[4].Value = dr.GetString("donem"); }
+                    if (!dr.IsDBNull(5)) { dataGridView1.Rows[rowindex].Cells[5].Value = dr.GetString("Ders_Kodu"); }
+                    if (!dr.IsDBNull(6)) { dataGridView1.Rows[rowindex].Cells[6].Value = dr.GetString("Ders_Adi"); }
+                    if (!dr.IsDBNull(7)) { dataGridView1.Rows[rowindex].Cells[7].Value = dr.GetString("Ogr_Sayisi"); }
+                    if (!dr.IsDBNull(8)) { dataGridView1.Rows[rowindex].Cells[8].Value = dr.GetString("Tarih"); }
+                    if (!dr.IsDBNull(9)) { dataGridView1.Rows[rowindex].Cells[9].Value = dr.GetString("Saat"); }
+                    if (!dr.IsDBNull(10)) { dataGridView1.Rows[rowindex].Cells[10].Value = dr.GetString("Unvan"); }
+                    if (!dr.IsDBNull(11)) { dataGridView1.Rows[rowindex].Cells[11].Value = dr.GetString("Ad_Soyad"); }
+                    if (!dr.IsDBNull(12)) { dataGridView1.Rows[rowindex].Cells[12].Value = dr.GetString("Derslik1"); }
+                    if (!dr.IsDBNull(13)) { dataGridView1.Rows[rowindex].Cells[13].Value = dr.GetString("Derslik2"); }
+                    if (!dr.IsDBNull(14)) { dataGridView1.Rows[rowindex].Cells[14].Value = dr.GetString("Derslik3"); }
+                    if (!dr.IsDBNull(15)) { dataGridView1.Rows[rowindex].Cells[15].Value = dr.GetString("Derslik4"); }
+                    if (!dr.IsDBNull(16)) { dataGridView1.Rows[rowindex].Cells[16].Value = dr.GetString("Y_Ogr_Sayisi"); }
+                    if (!dr.IsDBNull(17)) { dataGridView1.Rows[rowindex].Cells[17].Value = dr.GetString("Gozetmen1"); }
+                    if (!dr.IsDBNull(18)) { dataGridView1.Rows[rowindex].Cells[18].Value = dr.GetString("Gozetmen2"); }
+                    if (!dr.IsDBNull(19)) { dataGridView1.Rows[rowindex].Cells[19].Value = dr.GetString("Gozetmen3"); }
 
-                dataGridView1.PerformLayout();
+
+                }
+                islemler.Kapat();
+                dataGridView1.CurrentCell = dataGridView1.Rows[rowindex].Cells[colindex];
+
+
+            }
+            else
+            {
+                komut = "select id as 'SIRA NO', Prg_Kod as 'Program Kodu', Prg_Ad as 'Program Adı', Ogr_Sekli as 'ÖĞRETİM ŞEKLİ',donem as 'DÖNEM',Ders_Kodu as 'DERS KODU',Ders_Adi as 'DERS ADI',Ogr_Sayisi as 'ÖĞRENCİ SAYISI',Tarih as 'TARİH',Saat as 'SAAT',Unvan as 'ÜNVAN' , Ad_Soyad as 'AD SOYAD',Derslik1 as 'DERSLİK 1',Derslik2 as 'DERSLİK 2',Derslik3 as 'DERSLİK 3',Derslik4 as 'DERSLİK 4',Y_Ogr_Sayisi as 'YERLEŞEN ÖĞRENCİ SAYISI', Gozetmen1 as 'GÖZETMEN 1', Gozetmen2 as 'GÖZETMEN 2', Gozetmen3 as 'GÖZETMEN 3' from " + Home.donem + " order by id desc;";
+
+                if (islemler.Al(komut) != null)
+                {
+
+                    dataGridView1.Columns.Clear();
+                    dataGridView1.DataSource = null;
+                    dataGridView1.Refresh();
+
+                    dataGridView1.DataSource = islemler.Al(komut);
+                    dataGridView1.CurrentCell = dataGridView1.Rows[rowindex].Cells[colindex];
+                }
+
+
             }
 
+            sinavid = -1;
         }
 
         #region Filtre İşlemleri
@@ -283,32 +328,166 @@ namespace sp
         }
         #endregion
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        public void Ac()
         {
-            if (e.ColumnIndex < 2 && e.RowIndex >= 0)
+            rect = dataGridView1.GetCellDisplayRectangle(dataGridView1.CurrentCell.ColumnIndex, dataGridView1.CurrentCell.RowIndex, true);
+            KonumX = rect.X + dataGridView1.Columns[dataGridView1.CurrentCell.ColumnIndex].Width;
+            KonumY = rect.Y + 455;
+            DialogResult cevap;
+
+            SınavProgramıDüzenleFormu duzenle = new SınavProgramıDüzenleFormu();
+
+            cevap = duzenle.ShowDialog();
+            if (cevap != DialogResult.Abort && cevap != DialogResult.Cancel && cevap != DialogResult.None)
             {
-                switch (e.ColumnIndex)
+                Listele();
+                if (SınavProgramıDüzenleFormu.YapilanIslem == 5)
                 {
-                    case 0:
-                        eklebaslik = "KAYIT DÜZENLE";
-                        SinavEkleDüzenle.sinavid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString());
-                        SinavEkleDüzenle goster = new SinavEkleDüzenle();
-                        goster.ShowDialog();
-                        if (goster.DialogResult == DialogResult.None || goster.DialogResult == DialogResult.No)
-                        {
-                            MessageBox.Show("İşlem Gerçekleştirilemedi", "HATA!");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Kayıt Güncellendi");
-                            Listele();
-                            OgretimGorevlileriListele();
-                        }
-                        break;
-                    case 1:
-                        break;
+                    OgretimGorevlileriListele();
                 }
             }
+
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                colindex = e.ColumnIndex;
+                rowindex = e.RowIndex;
+
+                sinavid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+
+                switch (e.ColumnIndex)
+                {
+                    case 3:
+                        SınavProgramıDüzenleFormu.YapilanIslem = 1; //Öğretim Şekli
+                        Ac();
+                        break;
+                    case 7:
+                        SınavProgramıDüzenleFormu.YapilanIslem = 2; //Öğrenci Sayısı
+                        Ac();
+                        break;
+                    case 8:
+                        SınavProgramıDüzenleFormu.YapilanIslem = 3; //Tarih
+                        Ac();
+                        break;
+                    case 9:
+                        SınavProgramıDüzenleFormu.YapilanIslem = 4; //Saat
+                        Ac();
+                        break;
+                    case 10:
+                        SınavProgramıDüzenleFormu.YapilanIslem = 5; //Öğretim Elemanı
+                        Ac();
+                        break;
+                    case 11:
+                        SınavProgramıDüzenleFormu.YapilanIslem = 5; //Öğretim Elemanı
+                        Ac();
+                        break;
+                    case 12:
+                        SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 1 
+                        SınavProgramıDüzenleFormu.Derslik = 1; 
+
+                        Ac();
+                        break;
+
+                    case 13:
+                        SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 2
+                        SınavProgramıDüzenleFormu.Derslik = 2; 
+                        Ac();
+                        break;
+
+                    case 14:
+                        SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 3
+                        SınavProgramıDüzenleFormu.Derslik = 3; 
+                        Ac();
+                        break;
+                    case 15:
+                        SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 4
+                        SınavProgramıDüzenleFormu.Derslik = 4; 
+                        Ac();
+                        break;
+
+                }
+            }
+        }
+        private void dataGridView1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                //Enter a Basıldığında alt satıra inmesi sorunu için yapılmış değişiklikler
+                if (rowindex >= (dataGridView1.Rows.Count - 1)) { }
+                else
+                {
+                    dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex - 1].Cells[dataGridView1.CurrentCell.ColumnIndex];
+                }
+                colindex = dataGridView1.CurrentCell.ColumnIndex;
+                rowindex = dataGridView1.CurrentCell.RowIndex;
+                //----------------------
+
+                sinavid = int.Parse(dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString());
+
+
+                switch (dataGridView1.CurrentCell.ColumnIndex)
+                {
+                    case 3:
+                        SınavProgramıDüzenleFormu.YapilanIslem = 1; //Öğretim Şekli
+                        Ac();
+                        break;
+                    case 7:
+                        SınavProgramıDüzenleFormu.YapilanIslem = 2; //Öğrenci Sayısı
+                        Ac();
+                        break;
+                    case 8:
+                        SınavProgramıDüzenleFormu.YapilanIslem = 3; //Tarih
+                        Ac();
+                        break;
+                    case 9:
+                        SınavProgramıDüzenleFormu.YapilanIslem = 4; //Saat
+                        Ac();
+                        break;
+                    case 10:
+                        SınavProgramıDüzenleFormu.YapilanIslem = 5; //Öğretim Elemanı
+                        Ac();
+                        break;
+                    case 11:
+                        SınavProgramıDüzenleFormu.YapilanIslem = 5; //Öğretim Elemanı
+                        Ac();
+                        break;
+                    case 12:
+                        SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 1 
+                        SınavProgramıDüzenleFormu.Derslik = 1; 
+
+                        Ac();
+                        break;
+
+                    case 13:
+                        SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 2
+                        SınavProgramıDüzenleFormu.Derslik = 2;
+                        Ac();
+                        break;
+
+                    case 14:
+                        SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 3
+                        SınavProgramıDüzenleFormu.Derslik = 3; 
+                        Ac();
+                        break;
+                    case 15:
+                        SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 4
+                        SınavProgramıDüzenleFormu.Derslik = 4; 
+                        Ac();
+                        break;
+
+                }
+            }
+        }
+
+
+        private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            //Seçili hücrenin indexini keydownda alıyoruz çünkü enter a basıldığında seçili hücre değişiyor.
+            //ancak bize entera basılmadan önceki hücre indexi lazım
+            rowindex = dataGridView1.CurrentCell.RowIndex;
         }
     }
 }

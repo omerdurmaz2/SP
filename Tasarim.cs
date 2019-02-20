@@ -195,6 +195,7 @@ namespace sp
         public DataGridViewButtonColumn duzenle;
         public DataGridViewButtonColumn sil;
         #endregion
+
         #region Diğer Sayfalardaki Tablolara Eklenen Butonların Tasarımları
         public void ButonEkle()
         {
@@ -208,6 +209,8 @@ namespace sp
             sil.HeaderText = "SİL";
             sil.Text = "SİL";
             sil.UseColumnTextForButtonValue = true;
+
+
 
         }
 

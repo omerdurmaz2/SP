@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 namespace sp
 {
 
-    public partial class Home :Tasarim
+    public partial class Home : Tasarim
     {
 
         #region Yapıcı Metot ve Form_Load
@@ -42,6 +42,7 @@ namespace sp
         }
         #endregion
 
+        public static string donem { get; set; }
         #region Köşelerin Yuvarlanması
 
         //Köşelerin Yuvarlanması 
@@ -114,7 +115,7 @@ namespace sp
             ders.ShowDialog();
         }
         #endregion
-        
+
         #region Sınav Programı Sayfası
         private void button6_Click(object sender, EventArgs e)
         {

@@ -53,8 +53,10 @@ namespace sp
         string komut = "";
         string mesaj = "";
         MySqlDataReader rd;
-        DataTable dt = new DataTable();
+        DataTable dt;
         VeritabaniIslemler islemler = new VeritabaniIslemler();
+
+        string progkod = "", progad = "";
 
         #endregion
 
@@ -90,6 +92,23 @@ namespace sp
             }
             else
             {
+                //Bölümün Bahar ve Güz Tablosundaki Kayıtlarının Güncellenmesi
+
+                komut = "select * from bolumler where id=" + bolumid + "";
+                dt = new DataTable();
+                dt = islemler.Al(komut);
+
+                if (dt.Rows.Count != 0)
+                {
+                    progkod = dt.Rows[0]["program_kodu"].ToString();
+                    progad = dt.Rows[0]["program_adi"].ToString();
+                }
+                komut = "UPDATE bahar SET Prg_Ad='" + programadi + "', Prg_Kod='" + bolumkod + "' where Prg_Ad='" + progad + "' and Prg_Kod='" + progkod + "'";
+                islemler.Degistir(komut);
+
+                komut = "UPDATE guz SET Prg_Ad='" + programadi + "', Prg_Kod='" + bolumkod + "' where Prg_Ad='" + progad + "' and Prg_Kod='" + progkod + "'";
+                islemler.Degistir(komut);
+                //-------------------
 
                 komut = "UPDATE bolumler SET bolum_adi = '" + ad + "', program_kodu='" + bolumkod + "' , program_adi='" + programadi + "' WHERE id = " + bolumid + ";";
                 mesaj = "Kayıt Güncellendi";
@@ -190,8 +209,29 @@ namespace sp
                         DialogResult uyari = MessageBox.Show("Silmek İstiyor musunuz? ", "DİKKAT!", MessageBoxButtons.YesNo);
                         if (uyari == DialogResult.Yes)
                         {
+
+                            //Bölümün Sınav ve Güz Tablosundaki Kayıtlarının Silinmesi
+                            komut = "select * from bolumler where id=" + bolumid + "";
+                            dt = new DataTable();
+                            dt = islemler.Al(komut);
+
+                            if (dt.Rows.Count != 0)
+                            {
+                                progkod = dt.Rows[0]["program_kodu"].ToString();
+                                progad = dt.Rows[0]["program_adi"].ToString();
+                            }
+                            komut = "DELETE FROM guz WHERE Prg_Ad='" + progad + "' and Prg_Kod='" + progkod + "'";
+                            islemler.Degistir(komut);
+
+                            komut = "DELETE FROM bahar WHERE Prg_Ad='" + progad + "' and Prg_Kod='" + progkod + "'";
+                            islemler.Degistir(komut);
+                            //-------------------
+
+                            //BÖlümün Bölümler Tablosundan silinmesi
                             komut = "DELETE FROM bolumler where id=" + bolumid + ";";
                             islemler.Degistir(komut);
+                            //------------
+
                             MessageBox.Show("Silindi.");
                             Listele();
                             Temizle();

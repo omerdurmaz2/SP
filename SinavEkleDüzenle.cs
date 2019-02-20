@@ -62,12 +62,12 @@ namespace sp
                 {
                     //Düzenlenecek sınav tabloya atılıyor
                     DuzenlenecekSinav = new DataTable();
-                    komut = "select * from " + SinavProgrami.donem + " where id= " + sinavid + ";";
+                    komut = "select * from " + Home.donem + " where id= " + sinavid + ";";
                     DuzenlenecekSinav = islemler.Al(komut);
 
                 }
                 Sinavlar = new DataTable();
-                komut = "select * from " + SinavProgrami.donem + ";";
+                komut = "select * from " + Home.donem + ";";
                 Sinavlar = islemler.Al(komut);
 
                 //Derslikler tabloya atılıyor
@@ -825,7 +825,7 @@ namespace sp
 
                         if (sinavid > 0)
                         {
-                            komut = "UPDATE " + SinavProgrami.donem + " SET Prg_Ad='" + cmbbolumad.SelectedItem.ToString() + "', Prg_Kod='" + cmbbolumkod.SelectedItem.ToString() + "', Ogr_Sekli='" + cmbogretimsekli.SelectedItem.ToString() + "', donem='" + cmbdonem.SelectedItem.ToString() + "', Ders_Adi='" + cmbders.SelectedItem.ToString() + "',Ogr_Sayisi=" + txtogrencisayisi.Text + " ,Unvan='" + unvan + "' , Ad_Soyad='" + adsoyad + "', Tarih='" + tarih.ToString("yyyy-MM-dd") + "' , Saat='" + saat.ToShortTimeString() + "' , ";
+                            komut = "UPDATE " + Home.donem + " SET Prg_Ad='" + cmbbolumad.SelectedItem.ToString() + "', Prg_Kod='" + cmbbolumkod.SelectedItem.ToString() + "', Ogr_Sekli='" + cmbogretimsekli.SelectedItem.ToString() + "', donem='" + cmbdonem.SelectedItem.ToString() + "', Ders_Adi='" + cmbders.SelectedItem.ToString() + "',Ogr_Sayisi=" + txtogrencisayisi.Text + " ,Unvan='" + unvan + "' , Ad_Soyad='" + adsoyad + "', Tarih='" + tarih.ToString("yyyy-MM-dd") + "' , Saat='" + saat.ToShortTimeString() + "' , ";
 
                             if (Derslik1 != "0") komut += "Derslik1= '" + Derslik1 + "' ,";
                             else komut += "Derslik1= null ,";
@@ -846,7 +846,7 @@ namespace sp
                         }
                         else
                         {
-                            komut = "INSERT INTO " + SinavProgrami.donem + " (Prg_Ad,Prg_Kod,Ogr_Sekli,donem,Ders_Adi,Ogr_Sayisi,Unvan,Ad_Soyad,Tarih,Saat,Derslik1,Derslik2,Derslik3,Derslik4,Y_Ogr_Sayisi,Gozetmen1,Gozetmen2,Gozetmen3) VALUES ('" + cmbbolumad.SelectedItem.ToString() + "','" + cmbbolumkod.SelectedItem.ToString() + "','" + cmbogretimsekli.SelectedItem.ToString() + "','" + cmbdonem.SelectedItem.ToString() + "','" + cmbders.SelectedItem.ToString() + "'," + txtogrencisayisi.Text + ",'" + unvan + "' ,'" + adsoyad + "','" + tarih.ToString("yyyy-MM-dd") + "' ,'" + saat.ToShortTimeString() + "' ,";
+                            komut = "INSERT INTO " + Home.donem + " (Prg_Ad,Prg_Kod,Ogr_Sekli,donem,Ders_Adi,Ogr_Sayisi,Unvan,Ad_Soyad,Tarih,Saat,Derslik1,Derslik2,Derslik3,Derslik4,Y_Ogr_Sayisi,Gozetmen1,Gozetmen2,Gozetmen3) VALUES ('" + cmbbolumad.SelectedItem.ToString() + "','" + cmbbolumkod.SelectedItem.ToString() + "','" + cmbogretimsekli.SelectedItem.ToString() + "','" + cmbdonem.SelectedItem.ToString() + "','" + cmbders.SelectedItem.ToString() + "'," + txtogrencisayisi.Text + ",'" + unvan + "' ,'" + adsoyad + "','" + tarih.ToString("yyyy-MM-dd") + "' ,'" + saat.ToShortTimeString() + "' ,";
 
                             if (Derslik1 != "0") komut += "'" + Derslik1 + "' ,";
                             else komut += "null ,";

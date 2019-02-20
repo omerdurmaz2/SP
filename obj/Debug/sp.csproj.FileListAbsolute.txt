@@ -40,5 +40,5 @@ C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\o
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\obj\Debug\sp.Tarihler.resources
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\obj\Debug\sp.Bolumler.resources
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\obj\Debug\sp.Dersler.resources
-C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\obj\Debug\sp.Sinavlar.resources
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\obj\Debug\sp.csproj.GenerateResource.Cache
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\obj\Debug\sp.SınavProgramıDüzenleFormu.resources
