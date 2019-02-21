@@ -425,6 +425,7 @@ namespace sp
                             break;
                         case 11:
                             SınavProgramıDüzenleFormu.YapilanIslem = 5; //Öğretim Elemanı
+                            SınavProgramıDüzenleFormu.Gözetmen = 0;
                             Ac();
                             break;
                         case 12:
@@ -448,6 +449,21 @@ namespace sp
                         case 15:
                             SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 4
                             SınavProgramıDüzenleFormu.Derslik = 4;
+                            Ac();
+                            break;
+                        case 17:
+                            SınavProgramıDüzenleFormu.YapilanIslem = 5; //Gozetmen 1
+                            SınavProgramıDüzenleFormu.Gözetmen = 1;
+                            Ac();
+                            break;
+                        case 18:
+                            SınavProgramıDüzenleFormu.YapilanIslem = 5; //Gozetmen 2
+                            SınavProgramıDüzenleFormu.Gözetmen = 2;
+                            Ac();
+                            break;
+                        case 19:
+                            SınavProgramıDüzenleFormu.YapilanIslem = 5; //Gozetmen 3
+                            SınavProgramıDüzenleFormu.Gözetmen = 3;
                             Ac();
                             break;
 
@@ -527,6 +543,21 @@ namespace sp
                         case 15:
                             SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 4
                             SınavProgramıDüzenleFormu.Derslik = 4;
+                            Ac();
+                            break;
+                        case 17:
+                            SınavProgramıDüzenleFormu.YapilanIslem = 5; //Gozetmen 1
+                            SınavProgramıDüzenleFormu.Gözetmen = 1;
+                            Ac();
+                            break;
+                        case 18:
+                            SınavProgramıDüzenleFormu.YapilanIslem = 5; //Gozetmen 2
+                            SınavProgramıDüzenleFormu.Gözetmen = 2;
+                            Ac();
+                            break;
+                        case 19:
+                            SınavProgramıDüzenleFormu.YapilanIslem = 5; //Gozetmen 3
+                            SınavProgramıDüzenleFormu.Gözetmen = 3;
                             Ac();
                             break;
 

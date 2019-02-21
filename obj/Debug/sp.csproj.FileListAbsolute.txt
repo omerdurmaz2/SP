@@ -30,7 +30,6 @@ C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\o
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\obj\Debug\sp.Derslikler.resources
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\obj\Debug\sp.DonemBelirle.resources
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\obj\Debug\sp.Saatler.resources
-C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\obj\Debug\sp.SinavEkleDüzenle.resources
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\obj\Debug\sp.SinavProgrami.resources
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\obj\Debug\sp.Tasarim.resources
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\obj\Debug\sp.Home.resources

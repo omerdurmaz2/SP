@@ -73,7 +73,8 @@ namespace sp
                             cmbsaat.Focus();
                             break;
                         case 5:
-                            lblbaslik.Text = "ÖĞRETİM ELEMANI";
+                            if (Gözetmen == 0) { lblbaslik.Text = "ÖĞRETİM ELEMANI"; }
+                            else { lblbaslik.Text = "GÖZETMEN"; }
                             lblseciniz.Visible = true;
                             btnmavi1.Location = new Point(btnmavi1.Location.X, 48);
                             this.Size = new Size(380, 88);
@@ -170,6 +171,7 @@ namespace sp
         #region Dışarıda Tanımlananlar
         public static byte YapilanIslem { get; set; }
         public static byte Derslik { get; set; }
+        public static byte Gözetmen { get; set; }
 
         VeritabaniIslemler islemler = new VeritabaniIslemler();
 
@@ -178,6 +180,13 @@ namespace sp
         DataTable dt;
 
         string komut = "";
+        DateTime starih;
+        DateTime ssaat;
+        DialogResult cevap;
+
+        string Gozetmen1 = "0";
+        string Gozetmen2 = "0";
+        string Gozetmen3 = "0";
 
         #endregion
 
@@ -234,11 +243,43 @@ namespace sp
         #region Öğretim Elemanı Bas
         public void OgretimElemaniBas()
         {
+            islemler = new VeritabaniIslemler();
             try
             {
-                komut = "select * from ogretimelemani order by unvan asc";
-                dr = islemler.Oku(komut);
+                if (Gözetmen != 0)
+                {
+                    komut = "select Gozetmen1,Gozetmen2,Gozetmen3 from " + Home.donem + " where id=" + SinavProgrami.sinavid + ";";
+                    dr = islemler.Oku(komut);
+                    if (dr.Read())
+                    {
+                        if (!dr.IsDBNull(0)) { Gozetmen1 = dr.GetString("Gozetmen1"); }
+                        if (!dr.IsDBNull(1)) { Gozetmen2 = dr.GetString("Gozetmen2"); }
+                        if (!dr.IsDBNull(2)) { Gozetmen3 = dr.GetString("Gozetmen3"); }
+                    }
+                    islemler.Kapat();
+                }
 
+                switch (Gözetmen)
+                {
+                    case 0:
+                        komut = "select * from ogretimelemani order by unvan asc";
+                        break;
+                    case 1:
+                        komut = "select  unvan,Ad_Soyad from ogretimelemani where concat(unvan,' ',Ad_Soyad)<>'" + Gozetmen2 + "' and concat(unvan,' ',Ad_Soyad)<>'" + Gozetmen3 + "';";
+                        break;
+                    case 2:
+                        komut = "select  unvan,Ad_Soyad from ogretimelemani where concat(unvan,' ',Ad_Soyad)<>'" + Gozetmen1 + "' and concat(unvan,' ',Ad_Soyad)<>'" + Gozetmen3 + "';";
+                        break;
+                    case 3:
+                        komut = "select  unvan,Ad_Soyad from ogretimelemani where concat(unvan,' ',Ad_Soyad)<>'" + Gozetmen1 + "' and concat(unvan,' ',Ad_Soyad)<>'" + Gozetmen2 + "';";
+                        break;
+                }
+
+                dr = islemler.Oku(komut);
+                if (Gözetmen != 0)
+                {
+                    cmbogretimelemani.Items.Add("Hiçbiri..");
+                }
                 while (dr.Read())
                 {
                     string birlesik = dr.GetString("unvan") + " " + dr.GetString("Ad_Soyad");
@@ -434,7 +475,7 @@ namespace sp
 
         #endregion
 
-        #region Öğretim Şekli İşlemleri
+        #region Eski Veriyi Bas
 
         public void EskiVeriyiSec()
         {
@@ -485,17 +526,57 @@ namespace sp
                     case 5:
                         if (dr.Read())
                         {
-                            if (!dr.IsDBNull(8) && !dr.IsDBNull(9))
+                            switch (Gözetmen)
                             {
-                                cmbogretimelemani.SelectedItem = dr.GetString("Unvan") + " " + dr.GetString("Ad_Soyad");
+                                case 0:
+                                    if (!dr.IsDBNull(8) && !dr.IsDBNull(9))
+                                    {
+                                        cmbogretimelemani.SelectedItem = dr.GetString("Unvan") + " " + dr.GetString("Ad_Soyad");
+                                    }
+                                    if (dr.IsDBNull(11) || dr.IsDBNull(10))
+                                    {
+                                        MessageBox.Show("Lütfen Önce Tarih ve Saati Seçiniz!");
+                                        islemler.Kapat();
+                                        this.DialogResult = DialogResult.Abort;
+                                        this.Close();
+                                    }
+                                    break;
+                                case 1:
+                                    if (!dr.IsDBNull(17))
+                                    {
+                                        cmbogretimelemani.SelectedItem = dr.GetString("Gozetmen1");
+                                    }
+                                    break;
+                                case 2:
+                                    if (!dr.IsDBNull(18))
+                                    {
+                                        cmbogretimelemani.SelectedItem = dr.GetString("Gozetmen2");
+                                    }
+                                    if (dr.IsDBNull(17))
+                                    {
+                                        MessageBox.Show("Lütfen Önce 1. Gözetmeni Seçiniz!");
+                                        islemler.Kapat();
+                                        this.DialogResult = DialogResult.Abort;
+                                        this.Close();
+                                    }
+                                    break;
+                                case 3:
+                                    if (!dr.IsDBNull(19))
+                                    {
+                                        cmbogretimelemani.SelectedItem = dr.GetString("Gozetmen3");
+                                    }
+                                    if (dr.IsDBNull(18))
+                                    {
+                                        MessageBox.Show("Lütfen Önce 2. Gözetmeni Seçiniz!");
+                                        islemler.Kapat();
+                                        this.DialogResult = DialogResult.Abort;
+                                        this.Close();
+                                    }
+
+                                    break;
                             }
-                            else if (dr.IsDBNull(11) || dr.IsDBNull(10))
-                            {
-                                MessageBox.Show("Lütfen Önce Tarih ve Saati Seçiniz!");
-                                islemler.Kapat();
-                                this.DialogResult = DialogResult.Abort;
-                                this.Close();
-                            }
+
+
                         }
                         break;
                     case 6:
@@ -645,6 +726,62 @@ namespace sp
 
         }
         #endregion
+        #region Öğretim Elemanı Sayfasında GÖzetmenlik Sayısının Azaltılıp Arttırılması
+
+        public void GozetmenlikSayisiDuzenle(bool islem, string Gozetmen)
+        {
+            islemler = new VeritabaniIslemler();
+            if (islem) // Eğer işlem true ise öğretimelemanı tablosundaki seçili gözetmenin gözetmenlik sayısı arttırılıyor
+            {
+                komut = "UPDATE ogretimelemani SET Gozetmenlik_Sayisi=Gozetmenlik_Sayisi+1 where concat(unvan,' ', Ad_Soyad)='" + Gozetmen + "';";
+            }
+            else //false ise azaltılıyor
+            {
+                komut = "UPDATE ogretimelemani SET Gozetmenlik_Sayisi=Gozetmenlik_Sayisi-1 where concat(unvan,' ', Ad_Soyad)='" + Gozetmen + "';";
+            }
+            islemler.Degistir(komut);
+        }
+        #endregion
+
+        #region Gözetmen Kodları Kısaltması
+        public void SeciliGozetmeniKaydet(string seciliogretmen, string eskigozetmen, byte gozetmenno)
+        {
+
+            //Kod Tekrarı Olduğu İçin Bu kod Alanları Method İçinde Yazıldı
+            switch (gozetmenno) //Gözetmen numarasına göre tablodaki gözetmen değeri güncelleniyor
+            {
+                case 1:
+                    komut = "UPDATE " + Home.donem + " SET Gozetmen1='" + seciliogretmen + "' where id=" + SinavProgrami.sinavid + ";";
+                    islemler.Degistir(komut);
+                    break;
+                case 2:
+                    komut = "UPDATE " + Home.donem + " SET Gozetmen2='" + seciliogretmen + "' where id=" + SinavProgrami.sinavid + ";";
+                    islemler.Degistir(komut);
+                    break;
+                case 3:
+                    komut = "UPDATE " + Home.donem + " SET Gozetmen3='" + seciliogretmen + "' where id=" + SinavProgrami.sinavid + ";";
+                    islemler.Degistir(komut);
+                    break;
+            }
+
+
+            if (eskigozetmen != seciliogretmen) // Yeni Gözetmen Eski Gözetmen ile aynı aynı değil ise
+            {
+                if (eskigozetmen != "0") // ve eski gözetmen boş değil ise yapılacaklar
+                {
+                    GozetmenlikSayisiDuzenle(true, seciliogretmen); //yeni gözetmenin gözetmenlik sayısı arttırılıyor
+                    GozetmenlikSayisiDuzenle(false, eskigozetmen); // eski gözetmenin gözetmenlik sayısı azaltırlıyor
+                }
+                else // boş ise yapılacakalr
+                {
+                    GozetmenlikSayisiDuzenle(true, seciliogretmen); //yeni gözetmenin gözetmenlik sayısı arttırılıyor
+                }
+
+            }
+
+        }
+        #endregion
+
         #region Kaydet Methodu
 
         public void Kaydet()
@@ -700,13 +837,19 @@ namespace sp
                         this.DialogResult = DialogResult.OK;
                         this.Close();
                         break;
-                    case 5:
+                    case 5: // Öğretim Elemanı ve Gözetmenin Kaydedildiği Alan
 
-                        //Düzenlenen Sınav Satırındaki Tarih Saati ve Eski Öğretim Elamanı Verileri Alınıyor
+                        //Değişkenler Tannımlanıyor
                         string secilitarih = "";
                         string secilisaat = "";
                         string eskiogretmen = "";
                         string yeniogretmenunvan = "", yeniogretmenadsoyad = "";
+
+                        Gozetmen1 = "0";
+                        Gozetmen2 = "0";
+                        Gozetmen3 = "0";
+
+                        //Sınav Tablosundan Gözetmen Değerleri,Tarih,Saat ve Eski Öğretim Elamanı Bilgileri Alınıyor
                         komut = "select * from " + Home.donem + " where id=" + SinavProgrami.sinavid + ";";
                         dr = islemler.Oku(komut);
                         if (dr.Read())
@@ -717,60 +860,335 @@ namespace sp
                             {
                                 eskiogretmen = dr.GetString("Unvan") + " " + dr.GetString("Ad_Soyad");
                             }
+                            if (!dr.IsDBNull(17)) { Gozetmen1 = dr.GetString("Gozetmen1"); }
+                            if (!dr.IsDBNull(18)) { Gozetmen2 = dr.GetString("Gozetmen2"); }
+                            if (!dr.IsDBNull(19)) { Gozetmen3 = dr.GetString("Gozetmen3"); }
                         }
                         islemler.Kapat();
 
-                        DateTime starih = Convert.ToDateTime(secilitarih);
-                        DateTime ssaat = Convert.ToDateTime(secilisaat);
+                        //Sınav Tablosundan Alınan String Türündeki Tarih ve Saat Kendi Türlerine Dönüştürülüyor
+                        starih = Convert.ToDateTime(secilitarih);
+                        ssaat = Convert.ToDateTime(secilisaat);
 
-                        //Seçilen Öğretim Elemanının Sınav Tablsunda aynı tarih ve saatte başka sınavı var mı kontrol ediliyor
-                        komut = "Select * from " + Home.donem + " where Tarih='" + starih.ToString("yyyy-MM-dd") + "' and Saat='" + ssaat.ToShortTimeString() + "' and concat(Unvan,' ',Ad_Soyad)='" + cmbogretimelemani.SelectedItem.ToString() + "'";
-                        dr = islemler.Oku(komut);
-
-                        DialogResult cevap = DialogResult.Yes;
-                        if (dr.Read())
+                        switch (Gözetmen)
                         {
-                            cevap = MessageBox.Show("Seçilen Tarih ve Saatte Öğretim Görevlisinin Başka Bir Sınavı Bulunmakta! \nKabul Ediyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
+                            case 0: //Eğer 0 ise öğretim elemanı bilgileri kaydediliyor
+
+                                //Seçilen Öğretim Elemanının Sınav Tablsunda aynı tarih ve saatte başka sınavı var mı kontrol ediliyor
+                                komut = "Select * from " + Home.donem + " where Tarih='" + starih.ToString("yyyy-MM-dd") + "' and Saat='" + ssaat.ToShortTimeString() + "' and concat(Unvan,' ',Ad_Soyad)='" + cmbogretimelemani.SelectedItem.ToString() + "' and id<>" + SinavProgrami.sinavid + "";
+                                dr = islemler.Oku(komut);
+
+                                cevap = DialogResult.Yes;
+                                if (dr.Read())//Eğer Tabloda Seçilen tarihte ve saatte aynı öğretim elemanının sınavı var ise bu işlemleri yapacak
+                                {
+                                    islemler.Kapat();
+                                    cevap = MessageBox.Show("Seçilen Tarih ve Saatte Öğretim Görevlisinin Başka Bir Sınavı Bulunmakta! \nKabul Ediyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
+                                    if (cevap == DialogResult.Yes)
+                                    {
+                                        //yeni öğretim elemanının ünvanını ve adsoyadını ayrı ayrı almak
+                                        komut = "select * from ogretimelemani where concat(unvan,' ',Ad_Soyad)='" + cmbogretimelemani.SelectedItem.ToString() + "'";
+                                        dr = islemler.Oku(komut);
+                                        if (dr.Read())
+                                        {
+                                            yeniogretmenunvan = dr.GetString("unvan");
+                                            yeniogretmenadsoyad = dr.GetString("Ad_Soyad");
+                                        }
+                                        islemler.Kapat();
+                                        //-----------------
+
+
+                                        if (eskiogretmen != cmbogretimelemani.SelectedItem.ToString())
+                                        {
+                                            //eski öğretim elemanının kendi sınav sayısının düşürülmesi
+                                            komut = "UPDATE ogretimelemani SET Kendi_Sinav_Sayisi=Kendi_Sinav_Sayisi-1 where concat(unvan,' ',Ad_Soyad)='" + eskiogretmen + "';";
+                                            islemler.Degistir(komut);
+
+                                            //yeni öğretim elemanının kendi sınav sayısının arttırılması
+                                            komut = "UPDATE ogretimelemani SET Kendi_Sinav_Sayisi=Kendi_Sinav_Sayisi+1 where concat(unvan,' ',Ad_Soyad)='" + cmbogretimelemani.SelectedItem.ToString() + "';";
+                                            islemler.Degistir(komut);
+
+                                        }
+
+                                        //Sınav Tablosunda Kaydın Güncellenmesi
+                                        komut = "UPDATE " + Home.donem + " SET Unvan='" + yeniogretmenunvan + "', Ad_Soyad='" + yeniogretmenadsoyad + "' where id=" + SinavProgrami.sinavid + "";
+                                        islemler.Degistir(komut);
+                                        this.DialogResult = DialogResult.OK;
+                                        this.Close();
+
+                                    }
+
+                                }
+                                else
+                                {
+                                    //Eğer Tabloda Seçilen tarihte ve saatte aynı öğretim elemanının sınavı yok ise bu işlemleri yapacak
+
+                                    islemler.Kapat();
+                                    //yeni öğretim elemanının ünvanını ve adsoyadını ayrı ayrı almak
+                                    komut = "select * from ogretimelemani where concat(unvan,' ',Ad_Soyad)='" + cmbogretimelemani.SelectedItem.ToString() + "'";
+                                    dr = islemler.Oku(komut);
+                                    if (dr.Read())
+                                    {
+                                        yeniogretmenunvan = dr.GetString("unvan");
+                                        yeniogretmenadsoyad = dr.GetString("Ad_Soyad");
+                                    }
+                                    islemler.Kapat();
+                                    //-----------------
+
+
+                                    if (eskiogretmen != cmbogretimelemani.SelectedItem.ToString())
+                                    {
+                                        //eski öğretim elemanının kendi sınav sayısının düşürülmesi
+                                        komut = "UPDATE ogretimelemani SET Kendi_Sinav_Sayisi=Kendi_Sinav_Sayisi-1 where concat(unvan,' ',Ad_Soyad)='" + eskiogretmen + "';";
+                                        islemler.Degistir(komut);
+
+                                        //yeni öğretim elemanının kendi sınav sayısının arttırılması
+                                        komut = "UPDATE ogretimelemani SET Kendi_Sinav_Sayisi=Kendi_Sinav_Sayisi+1 where concat(unvan,' ',Ad_Soyad)='" + cmbogretimelemani.SelectedItem.ToString() + "';";
+                                        islemler.Degistir(komut);
+
+                                    }
+
+                                    //Sınav Tablosunda Kaydın Güncellenmesi
+                                    komut = "UPDATE " + Home.donem + " SET Unvan='" + yeniogretmenunvan + "', Ad_Soyad='" + yeniogretmenadsoyad + "' where id=" + SinavProgrami.sinavid + "";
+                                    islemler.Degistir(komut);
+                                    this.DialogResult = DialogResult.OK;
+                                    this.Close();
+
+                                }
+
+
+                                break;
+                            case 1: // 1. Gözetmen için Yapılan işlemler
+                                if (cmbogretimelemani.SelectedIndex == 0) // Eğer Gözetmen Hiçbiri Olarak Seçildiyse Yapılacaklar
+                                {
+
+                                    GozetmenlikSayisiDuzenle(false, Gozetmen1); //GÖzetmen 1 de kayıtlı olan öğretmenin gözetmenlik sayısı düşürülüyor
+                                    GozetmenlikSayisiDuzenle(false, Gozetmen2);//GÖzetmen 2 de kayıtlı olan öğretmenin gözetmenlik sayısı düşürülüyor
+                                    GozetmenlikSayisiDuzenle(false, Gozetmen3);//GÖzetmen 3 de kayıtlı olan öğretmenin gözetmenlik sayısı düşürülüyor
+
+                                    //Tablodaki Bütün Gözetmenlerin değerleri null yapılıyor
+                                    komut = "UPDATE " + Home.donem + " SET Gozetmen1=null,Gozetmen2=null,Gozetmen3=null where id=" + SinavProgrami.sinavid + ";";
+                                    islemler.Degistir(komut);
+
+                                    this.DialogResult = DialogResult.OK;
+                                    this.Close();
+                                }
+                                else
+                                {
+                                    //Sınav Tablosunda seçilen tarih ve saatte gözetmenin sınavı ya da gözetmenliği var mmı diye kontrol ediliyor
+                                    komut = "select * from " + Home.donem + " where Tarih='" + starih.ToString("yyyy-MM-dd") + "' and Saat='" + ssaat.ToShortTimeString() + "' and (concat(Unvan,' ',Ad_Soyad)='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen1='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen2='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen3='" + cmbogretimelemani.SelectedItem.ToString() + "') and id<>" + SinavProgrami.sinavid + ";";
+                                    dr = islemler.Oku(komut);
+                                    if (dr.Read()) // Eğer var ise Bu alandakiler Yapılacak
+                                    {
+                                        islemler.Kapat();
+                                        cevap = MessageBox.Show("Öğretim Görevlisinin Seçilen Tarih ve Saatte Başka Bir Sınavı ya da Gözetmenlik Görevi Bulunuyor! \nKabul Ediyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
+                                        if (cevap == DialogResult.Yes)
+                                        {
+                                            //Düzenlenen sınavın öğretim elemanı ile gözetmeni aynı mı diye bakılıyor
+                                            if (eskiogretmen == cmbogretimelemani.SelectedItem.ToString())
+                                            {   //aynı ise yapılacaklar
+                                                cevap = MessageBox.Show("Öğretim GÖrevlisini Kendi Sınavına GÖzetmen Olarak Seçtiniz! \nKabul Ediyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
+                                                if (cevap == DialogResult.Yes)
+                                                {
+                                                    //1. Gözetmen kaydediliyor ve gözetmenlik sayısı arttırılıyor
+                                                    SeciliGozetmeniKaydet(cmbogretimelemani.SelectedItem.ToString(), Gozetmen1, 1);
+
+                                                    this.DialogResult = DialogResult.OK;
+                                                    this.Close();
+                                                }
+                                            }
+                                            else
+                                            { //degil ise yapılacaklar
+
+                                              //1. Gözetmen kaydediliyor ve gözetmenlik sayısı arttırılıyor
+                                                SeciliGozetmeniKaydet(cmbogretimelemani.SelectedItem.ToString(), Gozetmen1, 1);
+
+                                                this.DialogResult = DialogResult.OK;
+                                                this.Close();
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {   //Eğer GÖzetmenin sınavı ya da gözetmenliği yok ise bu alandakiler yapılacak
+                                        islemler.Kapat();
+                                        if (eskiogretmen == cmbogretimelemani.SelectedItem.ToString())
+                                        {
+                                            cevap = MessageBox.Show("Öğretim GÖrevlisini Kendi Sınavına GÖzetmen Olarak Seçtiniz! \nKabul Ediyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
+                                            if (cevap == DialogResult.Yes)
+                                            {
+                                                //1. Gözetmen kaydediliyor ve gözetmenlik sayısı arttırılıyor
+                                                SeciliGozetmeniKaydet(cmbogretimelemani.SelectedItem.ToString(), Gozetmen1, 1);
+
+                                                this.DialogResult = DialogResult.OK;
+                                                this.Close();
+                                            }
+                                        }
+                                        else
+                                        {
+                                            //1. Gözetmen kaydediliyor ve gözetmenlik sayısı arttırılıyor
+                                            SeciliGozetmeniKaydet(cmbogretimelemani.SelectedItem.ToString(), Gozetmen1, 1);
+
+                                            this.DialogResult = DialogResult.OK;
+                                            this.Close();
+                                        }
+
+                                    }
+                                }
+                                break;
+                            case 2: // 2. Gözetmen için Yapılan işlemler
+                                if (cmbogretimelemani.SelectedIndex == 0)// Eğer Gözetmen Hiçbiri Olarak Seçildiyse Yapılacaklar
+                                {
+                                    GozetmenlikSayisiDuzenle(false, Gozetmen2);//GÖzetmen 2 de kayıtlı olan öğretmenin gözetmenlik sayısı düşürülüyor
+                                    GozetmenlikSayisiDuzenle(false, Gozetmen3);//GÖzetmen 3 de kayıtlı olan öğretmenin gözetmenlik sayısı düşürülüyor
+                                    //Tablodaki gözetmen 2 ve 3 değerleri null yapılıyor
+                                    komut = "UPDATE " + Home.donem + " SET Gozetmen2=null,Gozetmen3=null where id=" + SinavProgrami.sinavid + ";";
+                                    islemler.Degistir(komut);
+
+                                    this.DialogResult = DialogResult.OK;
+                                    this.Close();
+                                }
+                                else
+                                {
+                                    //Sınav Tablosunda seçilen tarih ve saatte gözetmenin sınavı ya da gözetmenliği var mmı diye kontrol ediliyor
+                                    komut = "select * from " + Home.donem + " where Tarih='" + starih.ToString("yyyy-MM-dd") + "' and Saat='" + ssaat.ToShortTimeString() + "' and (concat(Unvan,' ',Ad_Soyad)='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen1='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen2='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen3='" + cmbogretimelemani.SelectedItem.ToString() + "') and id<>" + SinavProgrami.sinavid + ";";
+                                    dr = islemler.Oku(komut);
+                                    if (dr.Read())// Eğer var ise Bu alandakiler Yapılacak
+                                    {
+                                        islemler.Kapat();
+                                        cevap = MessageBox.Show("Öğretim Görevlisinin Seçilen Tarih ve Saatte Başka Bir Sınavı ya da Gözetmenlik Görevi Bulunuyor! \nKabul Ediyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
+                                        if (cevap == DialogResult.Yes)
+                                        {//Düzenlenen sınavın öğretim elemanı ile gözetmeni aynı mı diye bakılıyor
+                                            if (eskiogretmen == cmbogretimelemani.SelectedItem.ToString())
+                                            {//aynı ise yapılacaklar
+                                                cevap = MessageBox.Show("Öğretim GÖrevlisini Kendi Sınavına GÖzetmen Olarak Seçtiniz! \nKabul Ediyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
+                                                if (cevap == DialogResult.Yes)
+                                                {
+                                                    //2. Gözetmen kaydediliyor ve gözetmenlik sayısı arttırılıyor
+                                                    SeciliGozetmeniKaydet(cmbogretimelemani.SelectedItem.ToString(), Gozetmen2, 2);
+
+                                                    this.DialogResult = DialogResult.OK;
+                                                    this.Close();
+                                                }
+                                            }
+                                            else
+                                            {//degil ise yapılacaklar
+
+                                                //2. Gözetmen kaydediliyor ve gözetmenlik sayısı arttırılıyor
+                                                SeciliGozetmeniKaydet(cmbogretimelemani.SelectedItem.ToString(), Gozetmen2, 2);
+
+                                                this.DialogResult = DialogResult.OK;
+                                                this.Close();
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        //Eğer GÖzetmenin sınavı ya da gözetmenliği yok ise bu alandakiler yapılacak
+                                        islemler.Kapat();
+                                        if (eskiogretmen == cmbogretimelemani.SelectedItem.ToString())
+                                        {
+                                            cevap = MessageBox.Show("Öğretim GÖrevlisini Kendi Sınavına GÖzetmen Olarak Seçtiniz! \nKabul Ediyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
+                                            if (cevap == DialogResult.Yes)
+                                            {
+                                                //2. Gözetmen kaydediliyor ve gözetmenlik sayısı arttırılıyor
+                                                SeciliGozetmeniKaydet(cmbogretimelemani.SelectedItem.ToString(), Gozetmen2, 2);
+
+                                                this.DialogResult = DialogResult.OK;
+                                                this.Close();
+                                            }
+                                        }
+                                        else
+                                        {
+                                            //2. Gözetmen kaydediliyor ve gözetmenlik sayısı arttırılıyor
+                                            SeciliGozetmeniKaydet(cmbogretimelemani.SelectedItem.ToString(), Gozetmen2, 2);
+
+                                            this.DialogResult = DialogResult.OK;
+                                            this.Close();
+                                        }
+
+                                    }
+                                }
+
+                                break;
+                            case 3: // 3. Gözetmen için Yapılan işlemler
+                                if (cmbogretimelemani.SelectedIndex == 0)// Eğer Gözetmen Hiçbiri Olarak Seçildiyse Yapılacaklar
+                                {
+                                    GozetmenlikSayisiDuzenle(false, Gozetmen3); //GÖzetmen 3 de kayıtlı olan öğretmenin gözetmenlik
+
+                                    //Tablodaki gözetmen  3 değeri null yapılıyor
+                                    komut = "UPDATE " + Home.donem + " SET Gozetmen3=null where id=" + SinavProgrami.sinavid + ";";
+                                    islemler.Degistir(komut);
+
+                                    this.DialogResult = DialogResult.OK;
+                                    this.Close();
+                                }
+                                else
+                                {
+                                    //Sınav Tablosunda seçilen tarih ve saatte gözetmenin sınavı ya da gözetmenliği var mmı diye kontrol ediliyor
+                                    komut = "select * from " + Home.donem + " where Tarih='" + starih.ToString("yyyy-MM-dd") + "' and Saat='" + ssaat.ToShortTimeString() + "' and (concat(Unvan,' ',Ad_Soyad)='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen1='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen2='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen3='" + cmbogretimelemani.SelectedItem.ToString() + "') and id<>" + SinavProgrami.sinavid + ";";
+                                    dr = islemler.Oku(komut);
+                                    if (dr.Read()) // Eğer var ise Bu alandakiler Yapılacak
+                                    {
+                                        islemler.Kapat();
+                                        cevap = MessageBox.Show("Öğretim Görevlisinin Seçilen Tarih ve Saatte Başka Bir Sınavı ya da Gözetmenlik Görevi Bulunuyor! \nKabul Ediyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
+                                        if (cevap == DialogResult.Yes)
+                                        {  //Düzenlenen sınavın öğretim elemanı ile gözetmeni aynı mı diye bakılıyor
+                                            if (eskiogretmen == cmbogretimelemani.SelectedItem.ToString())
+                                            { //aynı ise yapılacaklar
+                                                cevap = MessageBox.Show("Öğretim GÖrevlisini Kendi Sınavına GÖzetmen Olarak Seçtiniz! \nKabul Ediyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
+                                                if (cevap == DialogResult.Yes)
+                                                { //3. Gözetmen kaydediliyor ve gözetmenlik sayısı arttırılıyor
+                                                    SeciliGozetmeniKaydet(cmbogretimelemani.SelectedItem.ToString(), Gozetmen3, 3);
+
+                                                    this.DialogResult = DialogResult.OK;
+                                                    this.Close();
+                                                }
+                                            }
+                                            else
+                                            {//degil ise yapılacaklar 
+
+                                                //3. Gözetmen kaydediliyor ve gözetmenlik sayısı arttırılıyor
+                                                SeciliGozetmeniKaydet(cmbogretimelemani.SelectedItem.ToString(), Gozetmen3, 3);
+
+                                                this.DialogResult = DialogResult.OK;
+                                                this.Close();
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        //Eğer GÖzetmenin sınavı ya da gözetmenliği yok ise bu alandakiler yapılacak
+                                        islemler.Kapat();
+                                        if (eskiogretmen == cmbogretimelemani.SelectedItem.ToString())
+                                        {
+                                            cevap = MessageBox.Show("Öğretim GÖrevlisini Kendi Sınavına GÖzetmen Olarak Seçtiniz! \nKabul Ediyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
+                                            if (cevap == DialogResult.Yes)
+                                            {
+                                                //3. Gözetmen kaydediliyor ve gözetmenlik sayısı arttırılıyor
+                                                SeciliGozetmeniKaydet(cmbogretimelemani.SelectedItem.ToString(), Gozetmen3, 3);
+
+                                                this.DialogResult = DialogResult.OK;
+                                                this.Close();
+                                            }
+                                        }
+                                        else
+                                        {
+                                            //3. Gözetmen kaydediliyor ve gözetmenlik sayısı arttırılıyor
+                                            SeciliGozetmeniKaydet(cmbogretimelemani.SelectedItem.ToString(), Gozetmen3, 3);
+
+                                            this.DialogResult = DialogResult.OK;
+                                            this.Close();
+                                        }
+
+                                    }
+                                }
+                                break;
                         }
-                        islemler.Kapat();
 
-                        if (cevap == DialogResult.Yes)
-                        {
-                            //yeni öğretim elemanının ünvanını ve adsoyadını ayrı ayrı almak
-                            komut = "select * from ogretimelemani where concat(unvan,' ',Ad_Soyad)='" + cmbogretimelemani.SelectedItem.ToString() + "'";
-                            dr = islemler.Oku(komut);
-                            if (dr.Read())
-                            {
-                                yeniogretmenunvan = dr.GetString("unvan");
-                                yeniogretmenadsoyad = dr.GetString("Ad_Soyad");
-                            }
-                            islemler.Kapat();
-                            //-----------------
-
-
-                            if (eskiogretmen != cmbogretimelemani.SelectedItem.ToString())
-                            {
-                                //eski öğretim elemanının kendi sınav sayısının düşürülmesi
-                                komut = "UPDATE ogretimelemani SET Kendi_Sinav_Sayisi=Kendi_Sinav_Sayisi-1 where concat(unvan,' ',Ad_Soyad)='" + eskiogretmen + "';";
-                                islemler.Degistir(komut);
-
-                                //yeni öğretim elemanının kendi sınav sayısının arttırılması
-                                komut = "UPDATE ogretimelemani SET Kendi_Sinav_Sayisi=Kendi_Sinav_Sayisi+1 where concat(unvan,' ',Ad_Soyad)='" + cmbogretimelemani.SelectedItem.ToString() + "';";
-                                islemler.Degistir(komut);
-
-                            }
-
-                            //Sınav Tablosunda Kaydın Güncellenmesi
-                            komut = "UPDATE " + Home.donem + " SET Unvan='" + yeniogretmenunvan + "', Ad_Soyad='" + yeniogretmenadsoyad + "' where id=" + SinavProgrami.sinavid + "";
-                            islemler.Degistir(komut);
-                            this.DialogResult = DialogResult.OK;
-                            this.Close();
-
-                        }
 
 
                         break;
                     case 6:
+
 
                         //Eğer Derslik Boş Seçilmişse Tablodan TEmizlendiği Alan
                         if (cmbderslik.SelectedIndex == 0)

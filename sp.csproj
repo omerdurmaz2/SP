@@ -75,12 +75,6 @@
     <Compile Include="Saatler.designer.cs">
       <DependentUpon>Saatler.cs</DependentUpon>
     </Compile>
-    <Compile Include="SinavEkleDüzenle.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SinavEkleDüzenle.Designer.cs">
-      <DependentUpon>SinavEkleDüzenle.cs</DependentUpon>
-    </Compile>
     <Compile Include="SinavProgrami.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,9 +142,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Saatler.resx">
       <DependentUpon>Saatler.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SinavEkleDüzenle.resx">
-      <DependentUpon>SinavEkleDüzenle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SinavProgrami.resx">
       <DependentUpon>SinavProgrami.cs</DependentUpon>

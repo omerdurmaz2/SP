@@ -61,6 +61,7 @@
             this.btnmavi1.FlatAppearance.BorderSize = 0;
             this.btnmavi1.Location = new System.Drawing.Point(288, 40);
             this.btnmavi1.Size = new System.Drawing.Size(80, 33);
+            this.btnmavi1.TabIndex = 7;
             this.btnmavi1.Text = "KAYDET";
             this.btnmavi1.Click += new System.EventHandler(this.btnmavi1_Click);
             this.btnmavi1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormOgretimSekli_KeyPress);
@@ -78,7 +79,7 @@
             this.cmbogretimsekli.Location = new System.Drawing.Point(8, 80);
             this.cmbogretimsekli.Name = "cmbogretimsekli";
             this.cmbogretimsekli.Size = new System.Drawing.Size(112, 21);
-            this.cmbogretimsekli.TabIndex = 112;
+            this.cmbogretimsekli.TabIndex = 1;
             this.cmbogretimsekli.Visible = false;
             this.cmbogretimsekli.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormOgretimSekli_KeyPress);
             // 
@@ -91,7 +92,7 @@
             this.txtogrencisayisi.MaxLength = 4;
             this.txtogrencisayisi.Name = "txtogrencisayisi";
             this.txtogrencisayisi.Size = new System.Drawing.Size(88, 30);
-            this.txtogrencisayisi.TabIndex = 122;
+            this.txtogrencisayisi.TabIndex = 2;
             this.txtogrencisayisi.Visible = false;
             this.txtogrencisayisi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtogrencisayisi_KeyPress);
             // 
@@ -105,7 +106,7 @@
             this.cmbogretimelemani.Location = new System.Drawing.Point(8, 216);
             this.cmbogretimelemani.Name = "cmbogretimelemani";
             this.cmbogretimelemani.Size = new System.Drawing.Size(256, 21);
-            this.cmbogretimelemani.TabIndex = 123;
+            this.cmbogretimelemani.TabIndex = 5;
             this.cmbogretimelemani.Visible = false;
             this.cmbogretimelemani.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormOgretimSekli_KeyPress);
             // 
@@ -155,7 +156,7 @@
             this.cmbtarih.Location = new System.Drawing.Point(8, 152);
             this.cmbtarih.Name = "cmbtarih";
             this.cmbtarih.Size = new System.Drawing.Size(256, 21);
-            this.cmbtarih.TabIndex = 126;
+            this.cmbtarih.TabIndex = 3;
             this.cmbtarih.Visible = false;
             this.cmbtarih.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormOgretimSekli_KeyPress);
             // 
@@ -181,7 +182,7 @@
             this.cmbsaat.Location = new System.Drawing.Point(8, 184);
             this.cmbsaat.Name = "cmbsaat";
             this.cmbsaat.Size = new System.Drawing.Size(112, 21);
-            this.cmbsaat.TabIndex = 127;
+            this.cmbsaat.TabIndex = 4;
             this.cmbsaat.Visible = false;
             this.cmbsaat.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormOgretimSekli_KeyPress);
             // 
@@ -207,7 +208,7 @@
             this.cmbderslik.Location = new System.Drawing.Point(8, 248);
             this.cmbderslik.Name = "cmbderslik";
             this.cmbderslik.Size = new System.Drawing.Size(112, 21);
-            this.cmbderslik.TabIndex = 128;
+            this.cmbderslik.TabIndex = 6;
             this.cmbderslik.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormOgretimSekli_KeyPress);
             // 
             // label5

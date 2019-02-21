@@ -38,7 +38,7 @@ namespace sp
         {
             try
             {
-                komut = "INSERT INTO " + tablo + " (Prg_Ad,Prg_Kod,Ogr_Sekli,donem,Ders_Kodu,Ders_Adi,Ogr_Sayisi,Unvan,Ad_Soyad,Tarih,Saat,Derslik1,Derslik2,Derslik3,Derslik4,Y_Ogr_Sayisi,Gozetmen1,Gozetmen2,Gozetmen3) VALUES ('" + progad + "','" + progkod + "',null,'" + donem + "','" + dkod + "','" + dad + "',null,null,null ,null ,null,null,null ,null,null,null,null ,null,null);";
+                komut = "INSERT INTO " + tablo + " (Prg_Ad,Prg_Kod,Ogr_Sekli,donem,Ders_Kodu,Ders_Adi,Ogr_Sayisi,Unvan,Ad_Soyad,Tarih,Saat,Derslik1,Derslik2,Derslik3,Derslik4,Y_Ogr_Sayisi,Gozetmen1,Gozetmen2,Gozetmen3) VALUES ('" + progad + "','" + progkod + "',null,'" + donem + "','" + dkod + "','" + dad + "',null,null,null ,null ,null,null,null ,null,null,0,null ,null,null);";
                 islemler.Degistir(komut);
             }
             catch (Exception err)
