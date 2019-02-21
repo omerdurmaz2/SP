@@ -59,7 +59,7 @@
             // 
             this.btnmavi1.FlatAppearance.BorderSize = 0;
             this.btnmavi1.Location = new System.Drawing.Point(1272, 376);
-            this.btnmavi1.Click += new System.EventHandler(this.btnmavi1_Click);
+            this.btnmavi1.Visible = false;
             // 
             // dataGridView1
             // 
@@ -97,6 +97,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(1366, 313);
             this.dataGridView1.TabIndex = 51;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
             this.dataGridView1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridView1_KeyPress);
             // 

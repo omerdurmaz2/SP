@@ -40,6 +40,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cmbderslik = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.lblseciniz = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblbaslik
@@ -68,6 +69,7 @@
             // 
             // cmbogretimsekli
             // 
+            this.cmbogretimsekli.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbogretimsekli.FormattingEnabled = true;
             this.cmbogretimsekli.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.cmbogretimsekli.Items.AddRange(new object[] {
@@ -77,7 +79,6 @@
             this.cmbogretimsekli.Name = "cmbogretimsekli";
             this.cmbogretimsekli.Size = new System.Drawing.Size(112, 21);
             this.cmbogretimsekli.TabIndex = 112;
-            this.cmbogretimsekli.Text = "Seçiniz..";
             this.cmbogretimsekli.Visible = false;
             this.cmbogretimsekli.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormOgretimSekli_KeyPress);
             // 
@@ -97,6 +98,7 @@
             // cmbogretimelemani
             // 
             this.cmbogretimelemani.DropDownHeight = 100;
+            this.cmbogretimelemani.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbogretimelemani.FormattingEnabled = true;
             this.cmbogretimelemani.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.cmbogretimelemani.IntegralHeight = false;
@@ -104,7 +106,6 @@
             this.cmbogretimelemani.Name = "cmbogretimelemani";
             this.cmbogretimelemani.Size = new System.Drawing.Size(256, 21);
             this.cmbogretimelemani.TabIndex = 123;
-            this.cmbogretimelemani.Text = "Seçiniz...";
             this.cmbogretimelemani.Visible = false;
             this.cmbogretimelemani.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormOgretimSekli_KeyPress);
             // 
@@ -147,6 +148,7 @@
             // cmbtarih
             // 
             this.cmbtarih.DropDownHeight = 100;
+            this.cmbtarih.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbtarih.FormattingEnabled = true;
             this.cmbtarih.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.cmbtarih.IntegralHeight = false;
@@ -154,7 +156,6 @@
             this.cmbtarih.Name = "cmbtarih";
             this.cmbtarih.Size = new System.Drawing.Size(256, 21);
             this.cmbtarih.TabIndex = 126;
-            this.cmbtarih.Text = "Seçiniz...";
             this.cmbtarih.Visible = false;
             this.cmbtarih.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormOgretimSekli_KeyPress);
             // 
@@ -173,6 +174,7 @@
             // cmbsaat
             // 
             this.cmbsaat.DropDownHeight = 100;
+            this.cmbsaat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbsaat.FormattingEnabled = true;
             this.cmbsaat.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.cmbsaat.IntegralHeight = false;
@@ -180,7 +182,6 @@
             this.cmbsaat.Name = "cmbsaat";
             this.cmbsaat.Size = new System.Drawing.Size(112, 21);
             this.cmbsaat.TabIndex = 127;
-            this.cmbsaat.Text = "Seçiniz...";
             this.cmbsaat.Visible = false;
             this.cmbsaat.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormOgretimSekli_KeyPress);
             // 
@@ -198,13 +199,16 @@
             // 
             // cmbderslik
             // 
+            this.cmbderslik.DropDownHeight = 100;
+            this.cmbderslik.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbderslik.FormattingEnabled = true;
             this.cmbderslik.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.cmbderslik.IntegralHeight = false;
             this.cmbderslik.Location = new System.Drawing.Point(8, 248);
             this.cmbderslik.Name = "cmbderslik";
             this.cmbderslik.Size = new System.Drawing.Size(112, 21);
             this.cmbderslik.TabIndex = 128;
-            this.cmbderslik.Text = "Seçiniz...";
+            this.cmbderslik.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormOgretimSekli_KeyPress);
             // 
             // label5
             // 
@@ -217,6 +221,18 @@
             this.label5.TabIndex = 124;
             this.label5.Text = "<< derslik";
             this.label5.Visible = false;
+            // 
+            // lblseciniz
+            // 
+            this.lblseciniz.AutoSize = true;
+            this.lblseciniz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblseciniz.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline);
+            this.lblseciniz.Location = new System.Drawing.Point(8, 40);
+            this.lblseciniz.Name = "lblseciniz";
+            this.lblseciniz.Size = new System.Drawing.Size(44, 13);
+            this.lblseciniz.TabIndex = 124;
+            this.lblseciniz.Text = "Seçiniz:";
+            this.lblseciniz.Visible = false;
             // 
             // SınavProgramıDüzenleFormu
             // 
@@ -232,6 +248,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblseciniz);
             this.Controls.Add(this.lblogretimgorevlisi);
             this.Controls.Add(this.cmbogretimelemani);
             this.Controls.Add(this.txtogrencisayisi);
@@ -245,17 +262,18 @@
             this.Controls.SetChildIndex(this.txtogrencisayisi, 0);
             this.Controls.SetChildIndex(this.cmbogretimelemani, 0);
             this.Controls.SetChildIndex(this.lblogretimgorevlisi, 0);
+            this.Controls.SetChildIndex(this.lblseciniz, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.cmbtarih, 0);
+            this.Controls.SetChildIndex(this.cmbsaat, 0);
+            this.Controls.SetChildIndex(this.cmbderslik, 0);
             this.Controls.SetChildIndex(this.lblbaslik, 0);
             this.Controls.SetChildIndex(this.btnmavi1, 0);
             this.Controls.SetChildIndex(this.btnkirmizi1, 0);
-            this.Controls.SetChildIndex(this.cmbsaat, 0);
-            this.Controls.SetChildIndex(this.cmbderslik, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -275,5 +293,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmbderslik;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblseciniz;
     }
 }
