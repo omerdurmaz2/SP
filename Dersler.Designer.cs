@@ -111,6 +111,7 @@
             // txtdkod
             // 
             this.txtdkod.BackColor = System.Drawing.Color.White;
+            this.txtdkod.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtdkod.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtdkod.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.txtdkod.Location = new System.Drawing.Point(8, 104);
@@ -157,7 +158,6 @@
             this.cmbdonem.FormattingEnabled = true;
             this.cmbdonem.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.cmbdonem.Items.AddRange(new object[] {
-            "ORTAK",
             "1. Dönem",
             "2. Dönem",
             "3. Dönem",

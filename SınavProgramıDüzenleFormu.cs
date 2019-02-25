@@ -546,6 +546,13 @@ namespace sp
                                     {
                                         cmbogretimelemani.SelectedItem = dr.GetString("Gozetmen1");
                                     }
+                                    if (dr.IsDBNull(11) || dr.IsDBNull(10))
+                                    {
+                                        MessageBox.Show("Lütfen Önce Tarih ve Saati Seçiniz!");
+                                        islemler.Kapat();
+                                        this.DialogResult = DialogResult.Abort;
+                                        this.Close();
+                                    }
                                     break;
                                 case 2:
                                     if (!dr.IsDBNull(18))
@@ -999,7 +1006,7 @@ namespace sp
                                             else
                                             { //degil ise yapılacaklar
 
-                                              //1. Gözetmen kaydediliyor ve gözetmenlik sayısı arttırılıyor
+                                                //1. Gözetmen kaydediliyor ve gözetmenlik sayısı arttırılıyor
                                                 SeciliGozetmeniKaydet(cmbogretimelemani.SelectedItem.ToString(), Gozetmen1, 1);
 
                                                 this.DialogResult = DialogResult.OK;
@@ -1198,7 +1205,7 @@ namespace sp
                             switch (Derslik)
                             {
                                 case 1:
-                                    komut += "Derslik1=null, Derslik2=null, Derslik3=null, Derslik4=null, Y_Ogr_Sayisi=null ";
+                                    komut += "Derslik1=null, Derslik2=null, Derslik3=null, Derslik4=null, Y_Ogr_Sayisi=0 ";
                                     break;
                                 case 2:
                                     komut += "Derslik2=null, Derslik3=null, Derslik4=null";
@@ -1249,7 +1256,7 @@ namespace sp
 
 
                             //Tabloda Seçilen Tarih ve Saatte Seçilen Derslik Kullanılıyor mu Diye Bakılıyor
-                            komut = "Select * from " + Home.donem + " where Tarih='" + starih.ToString("yyyy-MM-dd") + "' and Saat='" + ssaat.ToShortTimeString() + "' and (Derslik1='" + seciliderslik[0] + "' or Derslik2='" + seciliderslik[0] + "' or Derslik3='" + seciliderslik[0] + "' or Derslik4='" + seciliderslik[0] + "'); ";
+                            komut = "Select * from " + Home.donem + " where Tarih='" + starih.ToString("yyyy-MM-dd") + "' and Saat='" + ssaat.ToShortTimeString() + "' and (Derslik1='" + seciliderslik[0] + "' or Derslik2='" + seciliderslik[0] + "' or Derslik3='" + seciliderslik[0] + "' or Derslik4='" + seciliderslik[0] + "') and id<>" + SinavProgrami.sinavid + "; ";
                             dr = islemler.Oku(komut);
 
                             //Eğer Kullanılıyorsa Kullanıcıya Kabul Ediyor musunuz diye soruluyor

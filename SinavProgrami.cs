@@ -94,7 +94,6 @@ namespace sp
         MySqlDataReader dr; // sorgu methodu için tablo okumaya yarayan class
         VeritabaniIslemler islemler; // veritabanı classına giderek yapmak istediğimiz işleme göre kolaylıklar sağlıyor
 
-        DataTable dt; // veritabanından getirilen tabloların geçici olarak tutulduğu yer
 
         string komut = "";  //veritabanı komutlarının tutulduğu yer
 
@@ -103,6 +102,8 @@ namespace sp
 
         public static int KonumX { get; set; }
         public static int KonumY { get; set; }
+
+        public static int DuzenlenenAlan { get; set; }
 
         Rectangle rect;
 
@@ -143,48 +144,134 @@ namespace sp
 
             try
             {
-                islemler = new VeritabaniIslemler();
-                if (sinavid > 0)
+                komut = "select * from " + Home.donem + " where id=" + sinavid + ";";
+                dr = islemler.Oku(komut);
+                if (dr.Read())
                 {
-                    komut = "select Ogr_Sekli,Ogr_Sayisi,Tarih,Saat,Unvan,Ad_Soyad,Derslik1,Derslik2,Derslik3,Derslik4,Y_Ogr_Sayisi,Gozetmen1,Gozetmen2,Gozetmen3 from " + Home.donem + " where id=" + sinavid + ";";
-                    dr = islemler.Oku(komut);
-
-                    if (dr.Read())
+                    switch (DuzenlenenAlan)
                     {
-                        if (!dr.IsDBNull(0)) { dataGridView1.Rows[rowindex].Cells[3].Value = dr.GetString("Ogr_Sekli"); }
-                        else { dataGridView1.Rows[rowindex].Cells[3].Value = string.Empty; }
-                        if (!dr.IsDBNull(1)) { dataGridView1.Rows[rowindex].Cells[7].Value = dr.GetString("Ogr_Sayisi"); }
-                        else { dataGridView1.Rows[rowindex].Cells[7].Value = string.Empty; }
-                        if (!dr.IsDBNull(2)) { dataGridView1.Rows[rowindex].Cells[8].Value = dr.GetString("Tarih"); }
-                        else { dataGridView1.Rows[rowindex].Cells[8].Value = string.Empty; }
-                        if (!dr.IsDBNull(3)) { dataGridView1.Rows[rowindex].Cells[9].Value = dr.GetString("Saat"); }
-                        else { dataGridView1.Rows[rowindex].Cells[9].Value = string.Empty; }
-                        if (!dr.IsDBNull(4)) { dataGridView1.Rows[rowindex].Cells[10].Value = dr.GetString("Unvan"); }
-                        else { dataGridView1.Rows[rowindex].Cells[10].Value = string.Empty; }
-                        if (!dr.IsDBNull(5)) { dataGridView1.Rows[rowindex].Cells[11].Value = dr.GetString("Ad_Soyad"); }
-                        else { dataGridView1.Rows[rowindex].Cells[11].Value = string.Empty; }
-                        if (!dr.IsDBNull(6)) { dataGridView1.Rows[rowindex].Cells[12].Value = dr.GetString("Derslik1"); }
-                        else { dataGridView1.Rows[rowindex].Cells[12].Value = string.Empty; }
-                        if (!dr.IsDBNull(7)) { dataGridView1.Rows[rowindex].Cells[13].Value = dr.GetString("Derslik2"); }
-                        else { dataGridView1.Rows[rowindex].Cells[13].Value = string.Empty; }
-                        if (!dr.IsDBNull(8)) { dataGridView1.Rows[rowindex].Cells[14].Value = dr.GetString("Derslik3"); }
-                        else { dataGridView1.Rows[rowindex].Cells[14].Value = string.Empty; }
-                        if (!dr.IsDBNull(9)) { dataGridView1.Rows[rowindex].Cells[15].Value = dr.GetString("Derslik4"); }
-                        else { dataGridView1.Rows[rowindex].Cells[15].Value = string.Empty; }
-                        if (!dr.IsDBNull(10)) { dataGridView1.Rows[rowindex].Cells[16].Value = dr.GetString("Y_Ogr_Sayisi"); }
-                        else { dataGridView1.Rows[rowindex].Cells[16].Value = string.Empty; }
-                        if (!dr.IsDBNull(11)) { dataGridView1.Rows[rowindex].Cells[17].Value = dr.GetString("Gozetmen1"); }
-                        else { dataGridView1.Rows[rowindex].Cells[17].Value = string.Empty; }
-                        if (!dr.IsDBNull(12)) { dataGridView1.Rows[rowindex].Cells[18].Value = dr.GetString("Gozetmen2"); }
-                        else { dataGridView1.Rows[rowindex].Cells[18].Value = string.Empty; }
-                        if (!dr.IsDBNull(13)) { dataGridView1.Rows[rowindex].Cells[19].Value = dr.GetString("Gozetmen3"); }
-                        else { dataGridView1.Rows[rowindex].Cells[19].Value = string.Empty; }
+                        case 1:
+                            dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Ogr_Sekli");
+                            break;
+                        case 2:
+                            if (!dr.IsDBNull(7))
+                            {
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Ogr_Sayisi");
+                                dataGridView1.Rows[rowindex].Cells[16].Value = dr.GetString("Y_Ogr_Sayisi");
+                            }
+                            else
+                            {
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = DBNull.Value;
+                                dataGridView1.Rows[rowindex].Cells[12].Value = DBNull.Value;
+                                dataGridView1.Rows[rowindex].Cells[13].Value = DBNull.Value;
+                                dataGridView1.Rows[rowindex].Cells[14].Value = DBNull.Value;
+                                dataGridView1.Rows[rowindex].Cells[15].Value = DBNull.Value;
+                                dataGridView1.Rows[rowindex].Cells[16].Value = DBNull.Value;
+                            }
 
+                            break;
+                        case 3:
+                            dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Tarih");
+                            break;
+                        case 4:
+                            dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Saat");
+                            break;
+                        case 5:
+                            dataGridView1.Rows[rowindex].Cells[10].Value = dr.GetString("Unvan");
+                            dataGridView1.Rows[rowindex].Cells[11].Value = dr.GetString("Ad_Soyad");
+                            break;
+                        case 6:
+                            if (!dr.IsDBNull(12))
+                            {
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Derslik1");
+                                dataGridView1.Rows[rowindex].Cells[16].Value = dr.GetString("Y_Ogr_Sayisi");
+                            }
+                            else
+                            {
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = DBNull.Value;
+                                dataGridView1.Rows[rowindex].Cells[13].Value = DBNull.Value;
+                                dataGridView1.Rows[rowindex].Cells[14].Value = DBNull.Value;
+                                dataGridView1.Rows[rowindex].Cells[15].Value = DBNull.Value;
+                                dataGridView1.Rows[rowindex].Cells[16].Value = dr.GetString("Y_Ogr_Sayisi");
+                            }
+
+                            break;
+                        case 7:
+                            if (!dr.IsDBNull(13))
+                            {
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Derslik2");
+                                dataGridView1.Rows[rowindex].Cells[16].Value = dr.GetString("Y_Ogr_Sayisi");
+                            }
+                            else
+                            {
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = DBNull.Value;
+                                dataGridView1.Rows[rowindex].Cells[14].Value = DBNull.Value;
+                                dataGridView1.Rows[rowindex].Cells[15].Value = DBNull.Value;
+
+                            }
+                            break;
+                        case 8:
+                            if (!dr.IsDBNull(14))
+                            {
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Derslik3");
+                                dataGridView1.Rows[rowindex].Cells[16].Value = dr.GetString("Y_Ogr_Sayisi");
+                            }
+                            else
+                            {
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = DBNull.Value;
+                                dataGridView1.Rows[rowindex].Cells[15].Value = DBNull.Value;
+
+                            }
+                            break;
+                        case 9:
+                            if (!dr.IsDBNull(15))
+                            {
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Derslik4");
+                                dataGridView1.Rows[rowindex].Cells[16].Value = dr.GetString("Y_Ogr_Sayisi");
+                            }
+                            else
+                            {
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = DBNull.Value;
+
+                            }
+                            break;
+                        case 10:
+                            if (!dr.IsDBNull(17))
+                            {
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Gozetmen1");
+                            }
+                            else
+                            {
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = DBNull.Value;
+                                dataGridView1.Rows[rowindex].Cells[18].Value = DBNull.Value;
+                                dataGridView1.Rows[rowindex].Cells[19].Value = DBNull.Value;
+                            }
+                            break;
+                        case 11:
+                            if (!dr.IsDBNull(18))
+                            {
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Gozetmen2");
+                            }
+                            else
+                            {
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = DBNull.Value;
+                                dataGridView1.Rows[rowindex].Cells[19].Value = DBNull.Value;
+                            }
+                            break;
+                        case 12:
+                            if (!dr.IsDBNull(19))
+                            {
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Gozetmen3");
+                            }
+                            else
+                            {
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = DBNull.Value;
+                            }
+                            break;
                     }
-                    islemler.Kapat();
-                    dataGridView1.CurrentCell = dataGridView1.Rows[rowindex].Cells[colindex];
-
                 }
+                islemler.Kapat();
+
             }
             catch (Exception err)
             {
@@ -401,73 +488,85 @@ namespace sp
 
                     sinavid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
 
-                    switch (e.ColumnIndex)
+                    switch (dataGridView1.CurrentCell.ColumnIndex)
                     {
                         case 3:
                             SınavProgramıDüzenleFormu.YapilanIslem = 1; //Öğretim Şekli
+                            DuzenlenenAlan = 1;
                             Ac();
                             break;
                         case 7:
                             SınavProgramıDüzenleFormu.YapilanIslem = 2; //Öğrenci Sayısı
+                            DuzenlenenAlan = 2;
                             Ac();
                             break;
                         case 8:
                             SınavProgramıDüzenleFormu.YapilanIslem = 3; //Tarih
+                            DuzenlenenAlan = 3;
                             Ac();
                             break;
                         case 9:
                             SınavProgramıDüzenleFormu.YapilanIslem = 4; //Saat
+                            DuzenlenenAlan = 4;
                             Ac();
                             break;
                         case 10:
                             SınavProgramıDüzenleFormu.YapilanIslem = 5; //Öğretim Elemanı
+                            DuzenlenenAlan = 5;
                             Ac();
                             break;
                         case 11:
                             SınavProgramıDüzenleFormu.YapilanIslem = 5; //Öğretim Elemanı
-                            SınavProgramıDüzenleFormu.Gözetmen = 0;
+                            DuzenlenenAlan = 5;
                             Ac();
                             break;
                         case 12:
                             SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 1 
+                            DuzenlenenAlan = 6;
                             SınavProgramıDüzenleFormu.Derslik = 1;
-
                             Ac();
                             break;
 
                         case 13:
                             SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 2
                             SınavProgramıDüzenleFormu.Derslik = 2;
+                            DuzenlenenAlan = 7;
                             Ac();
                             break;
 
                         case 14:
                             SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 3
                             SınavProgramıDüzenleFormu.Derslik = 3;
+                            DuzenlenenAlan = 8;
                             Ac();
                             break;
                         case 15:
                             SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 4
                             SınavProgramıDüzenleFormu.Derslik = 4;
+                            DuzenlenenAlan = 9;
                             Ac();
                             break;
                         case 17:
                             SınavProgramıDüzenleFormu.YapilanIslem = 5; //Gozetmen 1
                             SınavProgramıDüzenleFormu.Gözetmen = 1;
+                            DuzenlenenAlan = 10;
                             Ac();
                             break;
                         case 18:
                             SınavProgramıDüzenleFormu.YapilanIslem = 5; //Gozetmen 2
                             SınavProgramıDüzenleFormu.Gözetmen = 2;
+                            DuzenlenenAlan = 11;
                             Ac();
                             break;
                         case 19:
                             SınavProgramıDüzenleFormu.YapilanIslem = 5; //Gozetmen 3
                             SınavProgramıDüzenleFormu.Gözetmen = 3;
+                            DuzenlenenAlan = 12;
                             Ac();
                             break;
 
                     }
+
                 }
 
             }
@@ -500,30 +599,37 @@ namespace sp
                     {
                         case 3:
                             SınavProgramıDüzenleFormu.YapilanIslem = 1; //Öğretim Şekli
+                            DuzenlenenAlan = 1;
                             Ac();
                             break;
                         case 7:
                             SınavProgramıDüzenleFormu.YapilanIslem = 2; //Öğrenci Sayısı
+                            DuzenlenenAlan = 2;
                             Ac();
                             break;
                         case 8:
                             SınavProgramıDüzenleFormu.YapilanIslem = 3; //Tarih
+                            DuzenlenenAlan = 3;
                             Ac();
                             break;
                         case 9:
                             SınavProgramıDüzenleFormu.YapilanIslem = 4; //Saat
+                            DuzenlenenAlan = 4;
                             Ac();
                             break;
                         case 10:
                             SınavProgramıDüzenleFormu.YapilanIslem = 5; //Öğretim Elemanı
+                            DuzenlenenAlan = 5;
                             Ac();
                             break;
                         case 11:
                             SınavProgramıDüzenleFormu.YapilanIslem = 5; //Öğretim Elemanı
+                            DuzenlenenAlan = 5;
                             Ac();
                             break;
                         case 12:
                             SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 1 
+                            DuzenlenenAlan = 6;
                             SınavProgramıDüzenleFormu.Derslik = 1;
 
                             Ac();
@@ -532,32 +638,38 @@ namespace sp
                         case 13:
                             SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 2
                             SınavProgramıDüzenleFormu.Derslik = 2;
+                            DuzenlenenAlan = 7;
                             Ac();
                             break;
 
                         case 14:
                             SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 3
                             SınavProgramıDüzenleFormu.Derslik = 3;
+                            DuzenlenenAlan = 8;
                             Ac();
                             break;
                         case 15:
                             SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 4
                             SınavProgramıDüzenleFormu.Derslik = 4;
+                            DuzenlenenAlan = 9;
                             Ac();
                             break;
                         case 17:
                             SınavProgramıDüzenleFormu.YapilanIslem = 5; //Gozetmen 1
                             SınavProgramıDüzenleFormu.Gözetmen = 1;
+                            DuzenlenenAlan = 10;
                             Ac();
                             break;
                         case 18:
                             SınavProgramıDüzenleFormu.YapilanIslem = 5; //Gozetmen 2
                             SınavProgramıDüzenleFormu.Gözetmen = 2;
+                            DuzenlenenAlan = 11;
                             Ac();
                             break;
                         case 19:
                             SınavProgramıDüzenleFormu.YapilanIslem = 5; //Gozetmen 3
                             SınavProgramıDüzenleFormu.Gözetmen = 3;
+                            DuzenlenenAlan = 12;
                             Ac();
                             break;
 
@@ -594,36 +706,57 @@ namespace sp
                 if (sinavid > 0)
                 {
                     komut = "select id,Ogr_Sayisi,Y_Ogr_Sayisi from " + Home.donem + " where id=" + sinavid + "";
-                    sinavid = -1;
                 }
                 else
                 {
                     komut = "select id,Ogr_Sayisi,Y_Ogr_Sayisi from " + Home.donem + " order by id desc";
                 }
 
-                int ogrencisayisi = 0;
-                int yerlesenogrencisayisi = 0;
+
 
                 dr = islemler.Oku(komut);
-                while (dr.Read())
+                if (sinavid > 0)
                 {
-                    if (!dr.IsDBNull(1)) { ogrencisayisi = int.Parse(dr.GetString("Ogr_Sayisi")); }
-                    if (!dr.IsDBNull(2)) { yerlesenogrencisayisi = int.Parse(dr.GetString("Y_Ogr_Sayisi")); }
-
-                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                    if (dr.Read())
                     {
-                        if (dataGridView1.Rows[i].Cells[0].Value.ToString() == dr.GetString("id"))
-                        {
-                            if (ogrencisayisi > yerlesenogrencisayisi) { dataGridView1.Rows[i].Cells[16].Style.BackColor = Color.FromArgb(244, 67, 54); }
-                            else { dataGridView1.Rows[i].Cells[16].Style.BackColor = Color.FromArgb(165, 214, 167); }
+                        int ogrencisayisi = 0;
+                        int yerlesenogrencisayisi = 0;
+                        if (!dr.IsDBNull(1)) { ogrencisayisi = int.Parse(dr.GetString("Ogr_Sayisi")); }
+                        if (!dr.IsDBNull(2)) { yerlesenogrencisayisi = int.Parse(dr.GetString("Y_Ogr_Sayisi")); }
 
-                        }
+                        if (ogrencisayisi == 0 && yerlesenogrencisayisi == 0) { dataGridView1.Rows[rowindex].Cells[16].Style.BackColor = Color.White; }
+                        else if (ogrencisayisi > yerlesenogrencisayisi) { dataGridView1.Rows[rowindex].Cells[16].Style.BackColor = Color.FromArgb(244, 67, 54); }
+                        else { dataGridView1.Rows[rowindex].Cells[16].Style.BackColor = Color.FromArgb(165, 214, 167); }
                     }
 
+                }
+                else
+                {
+                    while (dr.Read())
+                    {
+                        int ogrencisayisi = 0;
+                        int yerlesenogrencisayisi = 0;
+                        if (!dr.IsDBNull(1)) { ogrencisayisi = int.Parse(dr.GetString("Ogr_Sayisi")); }
+                        if (!dr.IsDBNull(2)) { yerlesenogrencisayisi = int.Parse(dr.GetString("Y_Ogr_Sayisi")); }
+
+                        for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                        {
+                            if (dataGridView1.Rows[i].Cells[0].Value.ToString() == dr.GetString("id"))
+                            {
+
+                                if (ogrencisayisi == 0 && yerlesenogrencisayisi == 0) { dataGridView1.Rows[i].Cells[16].Style.BackColor = Color.White; break; }
+                                else if (ogrencisayisi > yerlesenogrencisayisi) { dataGridView1.Rows[i].Cells[16].Style.BackColor = Color.FromArgb(244, 67, 54); break; }
+                                else { dataGridView1.Rows[i].Cells[16].Style.BackColor = Color.FromArgb(165, 214, 167); break; }
+
+                            }
+                        }
+
+
+                    }
 
                 }
                 islemler.Kapat();
-
+                sinavid = -1;
             }
             catch (Exception err)
             {
