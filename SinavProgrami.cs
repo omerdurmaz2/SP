@@ -20,7 +20,6 @@ namespace sp
                                                 //this.WindowState = FormWindowState.Maximized;
             Width = Screen.PrimaryScreen.WorkingArea.Width;
             Height = Screen.PrimaryScreen.WorkingArea.Height;
-            baslikhizala();
 
         }
         private void SinavProgrami_Load(object sender, EventArgs e)
@@ -144,20 +143,23 @@ namespace sp
 
             try
             {
+                DataTable guncelleme = new DataTable();
+
                 komut = "select * from " + Home.donem + " where id=" + sinavid + ";";
-                dr = islemler.Oku(komut);
-                if (dr.Read())
+                guncelleme = islemler.Al(komut);
+                if (guncelleme.Rows.Count == 1)
                 {
                     switch (DuzenlenenAlan)
                     {
                         case 1:
-                            dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Ogr_Sekli");
+                            dataGridView1.Rows[rowindex].Cells[colindex].Value = guncelleme.Rows[0]["Ogr_Sekli"];
                             break;
                         case 2:
-                            if (!dr.IsDBNull(7))
+                            if (guncelleme.Rows[0]["Ogr_Sayisi"] != DBNull.Value)
                             {
-                                dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Ogr_Sayisi");
-                                dataGridView1.Rows[rowindex].Cells[16].Value = dr.GetString("Y_Ogr_Sayisi");
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = guncelleme.Rows[0]["Ogr_Sayisi"];
+
+                                dataGridView1.Rows[rowindex].Cells[16].Value = guncelleme.Rows[0]["Y_Ogr_Sayisi"];
                             }
                             else
                             {
@@ -171,20 +173,22 @@ namespace sp
 
                             break;
                         case 3:
-                            dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Tarih");
+                            dataGridView1.Rows[rowindex].Cells[colindex].Value = guncelleme.Rows[0]["Tarih"];
                             break;
                         case 4:
-                            dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Saat");
+
+                            dataGridView1.Rows[rowindex].Cells[colindex].Value = guncelleme.Rows[0]["Saat"];
                             break;
                         case 5:
-                            dataGridView1.Rows[rowindex].Cells[10].Value = dr.GetString("Unvan");
-                            dataGridView1.Rows[rowindex].Cells[11].Value = dr.GetString("Ad_Soyad");
+                            dataGridView1.Rows[rowindex].Cells[10].Value = guncelleme.Rows[0]["Unvan"];
+                            dataGridView1.Rows[rowindex].Cells[11].Value = guncelleme.Rows[0]["Ad_Soyad"];
                             break;
                         case 6:
-                            if (!dr.IsDBNull(12))
+                            if (guncelleme.Rows[0]["Derslik1"] != DBNull.Value)
                             {
-                                dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Derslik1");
-                                dataGridView1.Rows[rowindex].Cells[16].Value = dr.GetString("Y_Ogr_Sayisi");
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = guncelleme.Rows[0]["Derslik1"];
+
+                                dataGridView1.Rows[rowindex].Cells[16].Value = guncelleme.Rows[0]["Y_Ogr_Sayisi"];
                             }
                             else
                             {
@@ -192,15 +196,17 @@ namespace sp
                                 dataGridView1.Rows[rowindex].Cells[13].Value = DBNull.Value;
                                 dataGridView1.Rows[rowindex].Cells[14].Value = DBNull.Value;
                                 dataGridView1.Rows[rowindex].Cells[15].Value = DBNull.Value;
-                                dataGridView1.Rows[rowindex].Cells[16].Value = dr.GetString("Y_Ogr_Sayisi");
+
+                                dataGridView1.Rows[rowindex].Cells[16].Value = guncelleme.Rows[0]["Y_Ogr_Sayisi"];
                             }
 
                             break;
                         case 7:
-                            if (!dr.IsDBNull(13))
+                            if (guncelleme.Rows[0]["Derslik2"] != DBNull.Value)
                             {
-                                dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Derslik2");
-                                dataGridView1.Rows[rowindex].Cells[16].Value = dr.GetString("Y_Ogr_Sayisi");
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = guncelleme.Rows[0]["Derslik2"];
+
+                                dataGridView1.Rows[rowindex].Cells[16].Value = guncelleme.Rows[0]["Y_Ogr_Sayisi"];
                             }
                             else
                             {
@@ -211,10 +217,11 @@ namespace sp
                             }
                             break;
                         case 8:
-                            if (!dr.IsDBNull(14))
+                            if (guncelleme.Rows[0]["Derslik3"] != DBNull.Value)
                             {
-                                dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Derslik3");
-                                dataGridView1.Rows[rowindex].Cells[16].Value = dr.GetString("Y_Ogr_Sayisi");
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = guncelleme.Rows[0]["Derslik3"];
+
+                                dataGridView1.Rows[rowindex].Cells[16].Value = guncelleme.Rows[0]["Y_Ogr_Sayisi"];
                             }
                             else
                             {
@@ -224,10 +231,13 @@ namespace sp
                             }
                             break;
                         case 9:
-                            if (!dr.IsDBNull(15))
+                            if (guncelleme.Rows[0]["Derslik4"] != DBNull.Value)
                             {
-                                dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Derslik4");
-                                dataGridView1.Rows[rowindex].Cells[16].Value = dr.GetString("Y_Ogr_Sayisi");
+                                //string derslik4 = dr.GetString("Derslik4");
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = guncelleme.Rows[0]["Derslik4"];
+                                //int yogrs = int.Parse(dr.GetString("Y_Ogr_Sayisi"));
+
+                                dataGridView1.Rows[rowindex].Cells[16].Value = guncelleme.Rows[0]["Y_Ogr_Sayisi"];
                             }
                             else
                             {
@@ -236,9 +246,9 @@ namespace sp
                             }
                             break;
                         case 10:
-                            if (!dr.IsDBNull(17))
+                            if (guncelleme.Rows[0]["Gozetmen1"] != DBNull.Value)
                             {
-                                dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Gozetmen1");
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = guncelleme.Rows[0]["Gozetmen1"];
                             }
                             else
                             {
@@ -248,9 +258,9 @@ namespace sp
                             }
                             break;
                         case 11:
-                            if (!dr.IsDBNull(18))
+                            if (guncelleme.Rows[0]["Gozetmen2"] != DBNull.Value)
                             {
-                                dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Gozetmen2");
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = guncelleme.Rows[0]["Gozetmen2"];
                             }
                             else
                             {
@@ -259,9 +269,9 @@ namespace sp
                             }
                             break;
                         case 12:
-                            if (!dr.IsDBNull(19))
+                            if (guncelleme.Rows[0]["Gozetmen3"] != DBNull.Value)
                             {
-                                dataGridView1.Rows[rowindex].Cells[colindex].Value = dr.GetString("Gozetmen3");
+                                dataGridView1.Rows[rowindex].Cells[colindex].Value = guncelleme.Rows[0]["Gozetmen3"];
                             }
                             else
                             {
@@ -270,7 +280,6 @@ namespace sp
                             break;
                     }
                 }
-                islemler.Kapat();
 
             }
             catch (Exception err)
@@ -764,5 +773,6 @@ namespace sp
             }
 
         }
+
     }
 }
