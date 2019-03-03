@@ -460,8 +460,8 @@ namespace sp
             try
             {
                 rect = dataGridView1.GetCellDisplayRectangle(dataGridView1.CurrentCell.ColumnIndex, dataGridView1.CurrentCell.RowIndex, true);
-                KonumX = rect.X + dataGridView1.Columns[dataGridView1.CurrentCell.ColumnIndex].Width;
-                KonumY = rect.Y + 455;
+                KonumX = rect.X + panel1.Location.X;
+                KonumY = rect.Y + panel1.Location.Y;
                 DialogResult cevap;
 
                 SınavProgramıDüzenleFormu duzenle = new SınavProgramıDüzenleFormu();

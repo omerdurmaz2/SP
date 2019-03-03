@@ -25,6 +25,7 @@ namespace sp
         }
         private void FormOgretimSekli_Load(object sender, EventArgs e)
         {
+            SinavProgrami sprogrm = new SinavProgrami();
             try
             {
                 if (SinavProgrami.sinavid > 0)
@@ -103,7 +104,7 @@ namespace sp
                         {
                             SinavProgrami.KonumY -= 10;
                         }
-                        this.Location = new Point(SinavProgrami.KonumX, SinavProgrami.KonumY);
+                        this.Location = new Point(SinavProgrami.KonumX , SinavProgrami.KonumY);
 
                     }
                     else //Çalışmıyor olabilir kontrol et
@@ -112,7 +113,7 @@ namespace sp
                         {
                             SinavProgrami.KonumY -= 10;
                         }
-                        this.Location = new Point(SinavProgrami.KonumX - 300, SinavProgrami.KonumY);
+                        this.Location = new Point(SinavProgrami.KonumX -this.Width, SinavProgrami.KonumY);
                     }
 
                 }

@@ -250,7 +250,7 @@
             this.panel1.Location = new System.Drawing.Point(320, 112);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1048, 626);
-            this.panel1.TabIndex = 56;
+            this.panel1.TabIndex = 1;
             // 
             // panel4
             // 
@@ -265,7 +265,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 112);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(320, 626);
-            this.panel2.TabIndex = 57;
+            this.panel2.TabIndex = 2;
             // 
             // SinavProgrami
             // 
@@ -313,7 +313,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        public  System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbfiltrebolumadi;
