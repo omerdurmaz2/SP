@@ -133,6 +133,7 @@
             // cmbbolum
             // 
             this.cmbbolum.DropDownHeight = 100;
+            this.cmbbolum.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbbolum.FormattingEnabled = true;
             this.cmbbolum.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.cmbbolum.IntegralHeight = false;
@@ -140,7 +141,6 @@
             this.cmbbolum.Name = "cmbbolum";
             this.cmbbolum.Size = new System.Drawing.Size(256, 21);
             this.cmbbolum.TabIndex = 5;
-            this.cmbbolum.Text = "Seçiniz...";
             // 
             // label2
             // 

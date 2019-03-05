@@ -18,6 +18,7 @@ namespace sp
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 0, 0)); // border radius  
             yToolStripMenuItem.Visible = false; // normal boyuta getir butonu kapalı
                                                 //this.WindowState = FormWindowState.Maximized;
+            baslikhizala();
             Width = Screen.PrimaryScreen.WorkingArea.Width;
             Height = Screen.PrimaryScreen.WorkingArea.Height;
 
@@ -118,7 +119,7 @@ namespace sp
                 islemler = new VeritabaniIslemler();
                 komut = "select id as 'SIRA NO', Prg_Kod as 'Program Kodu', Prg_Ad as 'Program Adı', Ogr_Sekli as 'ÖĞRETİM ŞEKLİ',donem as 'DÖNEM',Ders_Kodu as 'DERS KODU',Ders_Adi as 'DERS ADI',Ogr_Sayisi as 'ÖĞRENCİ SAYISI',Tarih as 'TARİH',Saat as 'SAAT',Unvan as 'ÜNVAN' , Ad_Soyad as 'AD SOYAD',Derslik1 as 'DERSLİK 1',Derslik2 as 'DERSLİK 2',Derslik3 as 'DERSLİK 3',Derslik4 as 'DERSLİK 4',Y_Ogr_Sayisi as 'YERLEŞEN ÖĞRENCİ SAYISI', Gozetmen1 as 'GÖZETMEN 1', Gozetmen2 as 'GÖZETMEN 2', Gozetmen3 as 'GÖZETMEN 3' from " + Home.donem + " order by id desc;";
 
-                if (islemler.Al(komut) != null)
+                if (islemler.Al(komut).Rows.Count>0)
                 {
 
                     dataGridView1.Columns.Clear();
@@ -126,7 +127,6 @@ namespace sp
                     dataGridView1.Refresh();
 
                     dataGridView1.DataSource = islemler.Al(komut);
-                    dataGridView1.CurrentCell = dataGridView1.Rows[rowindex].Cells[colindex];
                 }
 
             }

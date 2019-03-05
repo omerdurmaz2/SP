@@ -238,7 +238,7 @@ namespace sp
 
             //veritabanından basılan dropdownların temizlenmesi 
             cmbbolum.Items.Clear();
-
+            cmbbolum.Enabled=true;
 
             cmbdonem.SelectedIndex = -1;
             cmbdonem.Text = "Seçiniz..";

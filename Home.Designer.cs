@@ -54,7 +54,8 @@
             // btnmavi1
             // 
             this.btnmavi1.FlatAppearance.BorderSize = 0;
-            this.btnmavi1.Location = new System.Drawing.Point(208, 224);
+            this.btnmavi1.Location = new System.Drawing.Point(368, 224);
+            this.btnmavi1.Text = "DÖNEM BELİRLE";
             this.btnmavi1.Visible = false;
             // 
             // label1

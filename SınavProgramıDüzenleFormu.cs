@@ -98,6 +98,8 @@ namespace sp
                             break;
 
                     }
+
+                    //Formun ekrandaki konumunun belirlendiği yer
                     if (SinavProgrami.KonumX < Screen.PrimaryScreen.Bounds.Width / 2)
                     {
                         while (SinavProgrami.KonumY + 130 >= Screen.PrimaryScreen.Bounds.Height)

@@ -24,7 +24,7 @@ namespace sp
             Bolumler = new DataTable();
             komut = "select * from bolumler";
             Bolumler = islemler.Al(komut);
-
+            
             string progkod = "", progad = "";
             try
             {
