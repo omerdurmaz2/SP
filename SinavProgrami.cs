@@ -109,6 +109,9 @@ namespace sp
 
         int rowindex = 0;
         int colindex = 0;
+
+        DataTable tablo;
+
         #endregion
 
         public void Listele()
@@ -298,15 +301,21 @@ namespace sp
             try
             {
                 cmbfiltretarih.Items.Clear();
-                DateTime tarih = DateTime.Now;
+                DateTime tarih;
+                tablo=new DataTable();
                 komut = "select * from sinavtarihleri order by tarih asc;";
-                dr = islemler.Oku(komut);
-                while (dr.Read())
+                tablo = islemler.Al(komut);
+                if (tablo.Rows.Count>0)
                 {
-                    tarih = Convert.ToDateTime(dr.GetString("tarih"));
-                    cmbfiltretarih.Items.Add(tarih);
+                    for (int i = 0; i < tablo.Rows.Count; i++)
+                    {
+                        if (tablo.Rows[i]["tarih"]!=DBNull.Value)
+                        {
+                            tarih=Convert.ToDateTime(tablo.Rows[i]["tarih"]);
+                            cmbfiltretarih.Items.Add(tarih);
+                        }
+                    }
                 }
-                islemler.Kapat();
             }
             catch (Exception err)
             {
@@ -322,13 +331,20 @@ namespace sp
             try
             {
                 cmbfiltresaat.Items.Clear();
+                tablo=new DataTable();
                 komut = "select saat from sinavsaatleri order by saat asc";
-                dr = islemler.Oku(komut);
-                while (dr.Read())
+                tablo = islemler.Al(komut);
+                if (tablo.Rows.Count > 0)
                 {
-                    cmbfiltresaat.Items.Add(dr.GetString("saat"));
+                    for (int i = 0; i < tablo.Rows.Count; i++)
+                    {
+                        if (tablo.Rows[i]["saat"] != DBNull.Value)
+                        {
+                            cmbfiltresaat.Items.Add(tablo.Rows[i]["saat"]);
+                        }
+                    }
                 }
-                islemler.Kapat();
+
             }
             catch (Exception err)
             {
@@ -344,12 +360,17 @@ namespace sp
             {
                 cmbfiltreogretimgorevlisi.Items.Clear();
                 komut = "select * from ogretimelemani";
-                dr = islemler.Oku(komut);
-                while (dr.Read())
+                tablo = islemler.Al(komut);
+                if (tablo.Rows.Count > 0)
                 {
-                    cmbfiltreogretimgorevlisi.Items.Add(dr.GetString("unvan") + " " + dr.GetString("Ad_Soyad"));
-                }
-                islemler.Kapat();
+                    for (int i = 0; i < tablo.Rows.Count; i++)
+                    {
+                        if (tablo.Rows[i]["unvan"] != DBNull.Value && tablo.Rows[i]["Ad_Soyad"] != DBNull.Value)
+                        {
+                            cmbfiltreogretimgorevlisi.Items.Add(tablo.Rows[i]["unvan"] + " " + tablo.Rows[i]["Ad_Soyad"]);
+                        }
+                    }
+                } 
             }
             catch (Exception err)
             {
@@ -363,30 +384,27 @@ namespace sp
         {
             try
             {
-                cmbfiltrebolumid.Items.Clear();
                 cmbfiltrebolumadi.Items.Clear();
                 cmbfiltrebolumkodu.Items.Clear();
 
                 komut = "select * from bolumler";
-                dr = islemler.Oku(komut);
-                while (dr.Read())
+                tablo = islemler.Al(komut);
+                if (tablo.Rows.Count > 0)
                 {
-                    cmbfiltrebolumadi.Items.Add(dr.GetString("program_adi"));
-                    cmbfiltrebolumkodu.Items.Add(dr.GetString("program_kodu"));
-                    cmbfiltrebolumid.Items.Add(dr.GetString("id"));
+                    for (int i = 0; i < tablo.Rows.Count; i++)
+                    {
+                        if (tablo.Rows[i]["program_adi"] != DBNull.Value && tablo.Rows[i]["program_kodu"] != DBNull.Value)
+                        {
+                            cmbfiltrebolumadi.Items.Add(tablo.Rows[i]["program_adi"]);
+                            cmbfiltrebolumkodu.Items.Add(tablo.Rows[i]["program_kodu"]);
+                        }
+                    }
                 }
-                islemler.Kapat();
             }
             catch (Exception err)
             {
                 MessageBox.Show("Filtre Bölüm Listelenirken Hata! Hata Kodu:" + err);
             }
-        }
-
-        //bölüm değiştiğinde id si de değişecek
-        private void cmbfiltrebolumadi_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cmbfiltrebolumid.SelectedIndex = cmbfiltrebolumadi.SelectedIndex;
         }
 
         #endregion
@@ -587,110 +605,115 @@ namespace sp
         }
         private void dataGridView1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            try
+
+            if (dataGridView1.Rows.Count>0)
             {
-                if (e.KeyChar == (char)Keys.Enter)
+                try
                 {
-                    //Enter a Basıldığında alt satıra inmesi sorunu için yapılmış değişiklikler
-                    if (rowindex >= (dataGridView1.Rows.Count - 1)) { }
-                    else
+                    if (e.KeyChar == (char)Keys.Enter)
                     {
-                        dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex - 1].Cells[dataGridView1.CurrentCell.ColumnIndex];
+                        //Enter a Basıldığında alt satıra inmesi sorunu için yapılmış değişiklikler
+                        if (rowindex >= (dataGridView1.Rows.Count - 1)) { }
+                        else
+                        {
+                            dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex - 1].Cells[dataGridView1.CurrentCell.ColumnIndex];
+                        }
+                        colindex = dataGridView1.CurrentCell.ColumnIndex;
+                        rowindex = dataGridView1.CurrentCell.RowIndex;
+                        //----------------------
+
+                        sinavid = int.Parse(dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString());
+
+
+                        switch (dataGridView1.CurrentCell.ColumnIndex)
+                        {
+                            case 3:
+                                SınavProgramıDüzenleFormu.YapilanIslem = 1; //Öğretim Şekli
+                                DuzenlenenAlan = 1;
+                                Ac();
+                                break;
+                            case 7:
+                                SınavProgramıDüzenleFormu.YapilanIslem = 2; //Öğrenci Sayısı
+                                DuzenlenenAlan = 2;
+                                Ac();
+                                break;
+                            case 8:
+                                SınavProgramıDüzenleFormu.YapilanIslem = 3; //Tarih
+                                DuzenlenenAlan = 3;
+                                Ac();
+                                break;
+                            case 9:
+                                SınavProgramıDüzenleFormu.YapilanIslem = 4; //Saat
+                                DuzenlenenAlan = 4;
+                                Ac();
+                                break;
+                            case 10:
+                                SınavProgramıDüzenleFormu.YapilanIslem = 5; //Öğretim Elemanı
+                                DuzenlenenAlan = 5;
+                                Ac();
+                                break;
+                            case 11:
+                                SınavProgramıDüzenleFormu.YapilanIslem = 5; //Öğretim Elemanı
+                                DuzenlenenAlan = 5;
+                                Ac();
+                                break;
+                            case 12:
+                                SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 1 
+                                DuzenlenenAlan = 6;
+                                SınavProgramıDüzenleFormu.Derslik = 1;
+
+                                Ac();
+                                break;
+
+                            case 13:
+                                SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 2
+                                SınavProgramıDüzenleFormu.Derslik = 2;
+                                DuzenlenenAlan = 7;
+                                Ac();
+                                break;
+
+                            case 14:
+                                SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 3
+                                SınavProgramıDüzenleFormu.Derslik = 3;
+                                DuzenlenenAlan = 8;
+                                Ac();
+                                break;
+                            case 15:
+                                SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 4
+                                SınavProgramıDüzenleFormu.Derslik = 4;
+                                DuzenlenenAlan = 9;
+                                Ac();
+                                break;
+                            case 17:
+                                SınavProgramıDüzenleFormu.YapilanIslem = 5; //Gozetmen 1
+                                SınavProgramıDüzenleFormu.Gözetmen = 1;
+                                DuzenlenenAlan = 10;
+                                Ac();
+                                break;
+                            case 18:
+                                SınavProgramıDüzenleFormu.YapilanIslem = 5; //Gozetmen 2
+                                SınavProgramıDüzenleFormu.Gözetmen = 2;
+                                DuzenlenenAlan = 11;
+                                Ac();
+                                break;
+                            case 19:
+                                SınavProgramıDüzenleFormu.YapilanIslem = 5; //Gozetmen 3
+                                SınavProgramıDüzenleFormu.Gözetmen = 3;
+                                DuzenlenenAlan = 12;
+                                Ac();
+                                break;
+
+                        }
                     }
-                    colindex = dataGridView1.CurrentCell.ColumnIndex;
-                    rowindex = dataGridView1.CurrentCell.RowIndex;
-                    //----------------------
 
-                    sinavid = int.Parse(dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString());
-
-
-                    switch (dataGridView1.CurrentCell.ColumnIndex)
-                    {
-                        case 3:
-                            SınavProgramıDüzenleFormu.YapilanIslem = 1; //Öğretim Şekli
-                            DuzenlenenAlan = 1;
-                            Ac();
-                            break;
-                        case 7:
-                            SınavProgramıDüzenleFormu.YapilanIslem = 2; //Öğrenci Sayısı
-                            DuzenlenenAlan = 2;
-                            Ac();
-                            break;
-                        case 8:
-                            SınavProgramıDüzenleFormu.YapilanIslem = 3; //Tarih
-                            DuzenlenenAlan = 3;
-                            Ac();
-                            break;
-                        case 9:
-                            SınavProgramıDüzenleFormu.YapilanIslem = 4; //Saat
-                            DuzenlenenAlan = 4;
-                            Ac();
-                            break;
-                        case 10:
-                            SınavProgramıDüzenleFormu.YapilanIslem = 5; //Öğretim Elemanı
-                            DuzenlenenAlan = 5;
-                            Ac();
-                            break;
-                        case 11:
-                            SınavProgramıDüzenleFormu.YapilanIslem = 5; //Öğretim Elemanı
-                            DuzenlenenAlan = 5;
-                            Ac();
-                            break;
-                        case 12:
-                            SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 1 
-                            DuzenlenenAlan = 6;
-                            SınavProgramıDüzenleFormu.Derslik = 1;
-
-                            Ac();
-                            break;
-
-                        case 13:
-                            SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 2
-                            SınavProgramıDüzenleFormu.Derslik = 2;
-                            DuzenlenenAlan = 7;
-                            Ac();
-                            break;
-
-                        case 14:
-                            SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 3
-                            SınavProgramıDüzenleFormu.Derslik = 3;
-                            DuzenlenenAlan = 8;
-                            Ac();
-                            break;
-                        case 15:
-                            SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 4
-                            SınavProgramıDüzenleFormu.Derslik = 4;
-                            DuzenlenenAlan = 9;
-                            Ac();
-                            break;
-                        case 17:
-                            SınavProgramıDüzenleFormu.YapilanIslem = 5; //Gozetmen 1
-                            SınavProgramıDüzenleFormu.Gözetmen = 1;
-                            DuzenlenenAlan = 10;
-                            Ac();
-                            break;
-                        case 18:
-                            SınavProgramıDüzenleFormu.YapilanIslem = 5; //Gozetmen 2
-                            SınavProgramıDüzenleFormu.Gözetmen = 2;
-                            DuzenlenenAlan = 11;
-                            Ac();
-                            break;
-                        case 19:
-                            SınavProgramıDüzenleFormu.YapilanIslem = 5; //Gozetmen 3
-                            SınavProgramıDüzenleFormu.Gözetmen = 3;
-                            DuzenlenenAlan = 12;
-                            Ac();
-                            break;
-
-                    }
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show("Tablo Keypress Alınırken Hata! \nHata Kodu:" + err, "HATA!");
                 }
 
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show("Tablo Keypress Alınırken Hata! \nHata Kodu:" + err, "HATA!");
-            }
 
+            }
         }
 
 
@@ -698,7 +721,10 @@ namespace sp
         {
             //Seçili hücrenin indexini keydownda alıyoruz çünkü enter a basıldığında seçili hücre değişiyor.
             //ancak bize entera basılmadan önceki hücre indexi lazım
-            rowindex = dataGridView1.CurrentCell.RowIndex;
+            if (dataGridView1.Rows.Count>0)
+            {
+                rowindex = dataGridView1.CurrentCell.RowIndex;
+            }
         }
 
         //Veri Basıldıktan Sonra Hücre Rengi Değiştiriliyor

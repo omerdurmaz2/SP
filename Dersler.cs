@@ -80,7 +80,7 @@ namespace sp
         #region Listele
         public void Listele()
         {
-            komut = "select id as 'SIRA NO',ders_kodu as 'DERS KODU',ders_adi as 'DERS ADI', bolum as 'BÖLÜM', donem as 'DÖNEM' from ders ";
+            komut = "select id as 'SIRA NO',ders_kodu as 'DERS KODU',ders_adi as 'DERS ADI', bolum as 'BÖLÜM', donem as 'DÖNEM' from ders order by id desc ";
 
             if (islemler.Al(komut) != null)
             {
@@ -101,13 +101,13 @@ namespace sp
             }
             cmbbolum.Items.Add("ORTAK DERS");
 
-            komut = "select * from bolumler";
-            dr = islemler.Oku(komut);
-            while (dr.Read())
+            for (int i = 0; i < Bolumler.Rows.Count; i++)
             {
-                cmbbolum.Items.Add(dr.GetString("program_kodu") + " " + dr.GetString("program_adi"));
+                if (Bolumler.Rows[i]["program_adi"] != DBNull.Value && Bolumler.Rows[i]["program_kodu"] != DBNull.Value)
+                {
+                    cmbbolum.Items.Add(Bolumler.Rows[i]["program_adi"] + " " + Bolumler.Rows[i]["program_kodu"]);
+                }
             }
-            islemler.Kapat();
             cmbbolum.SelectedIndex = -1;
             cmbbolum.Text = "Seçiniz..";
         }
@@ -238,7 +238,7 @@ namespace sp
 
             //veritabanından basılan dropdownların temizlenmesi 
             cmbbolum.Items.Clear();
-            cmbbolum.Enabled=true;
+            cmbbolum.Enabled = true;
 
             cmbdonem.SelectedIndex = -1;
             cmbdonem.Text = "Seçiniz..";

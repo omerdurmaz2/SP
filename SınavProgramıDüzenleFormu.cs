@@ -106,7 +106,7 @@ namespace sp
                         {
                             SinavProgrami.KonumY -= 10;
                         }
-                        this.Location = new Point(SinavProgrami.KonumX , SinavProgrami.KonumY);
+                        this.Location = new Point(SinavProgrami.KonumX, SinavProgrami.KonumY);
 
                     }
                     else //Çalışmıyor olabilir kontrol et
@@ -115,7 +115,7 @@ namespace sp
                         {
                             SinavProgrami.KonumY -= 10;
                         }
-                        this.Location = new Point(SinavProgrami.KonumX -this.Width, SinavProgrami.KonumY);
+                        this.Location = new Point(SinavProgrami.KonumX - this.Width, SinavProgrami.KonumY);
                     }
 
                 }
@@ -198,15 +198,20 @@ namespace sp
         {
             try
             {
+                dt = new DataTable();
                 komut = "select * from sinavtarihleri order by tarih asc";
-                dr = islemler.Oku(komut);
-                while (dr.Read())
+                dt = islemler.Al(komut);
+                if (dt.Rows.Count > 0)
                 {
-                    DateTime tarih = Convert.ToDateTime(dr.GetString("tarih"));
-                    cmbtarih.Items.Add(tarih.ToShortDateString());
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        if (dt.Rows[i]["tarih"] != DBNull.Value)
+                        {
+                            DateTime tarih = Convert.ToDateTime(dt.Rows[i]["tarih"]);
+                            cmbtarih.Items.Add(tarih.ToShortDateString());
+                        }
+                    }
                 }
-                islemler.Kapat();
-
             }
             catch (Exception err)
             {
@@ -223,15 +228,20 @@ namespace sp
         {
             try
             {
+                dt = new DataTable();
                 komut = "select * from sinavsaatleri order by saat asc";
-                dr = islemler.Oku(komut);
-                while (dr.Read())
+                dt = islemler.Al(komut);
+                if (dt.Rows.Count > 0)
                 {
-                    DateTime saat = Convert.ToDateTime(dr.GetString("saat"));
-                    cmbsaat.Items.Add(saat.ToShortTimeString());
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        if (dt.Rows[i]["saat"] != DBNull.Value)
+                        {
+                            DateTime saat = Convert.ToDateTime(dt.Rows[i]["saat"].ToString());
+                            cmbsaat.Items.Add(saat.ToShortTimeString());
+                        }
+                    }
                 }
-                islemler.Kapat();
-
             }
             catch (Exception err)
             {
@@ -251,15 +261,15 @@ namespace sp
             {
                 if (Gözetmen != 0)
                 {
+                    dt = new DataTable();
                     komut = "select Gozetmen1,Gozetmen2,Gozetmen3 from " + Home.donem + " where id=" + SinavProgrami.sinavid + ";";
-                    dr = islemler.Oku(komut);
-                    if (dr.Read())
+                    dt = islemler.Al(komut);
+                    if (dt.Rows.Count > 0)
                     {
-                        if (!dr.IsDBNull(0)) { Gozetmen1 = dr.GetString("Gozetmen1"); }
-                        if (!dr.IsDBNull(1)) { Gozetmen2 = dr.GetString("Gozetmen2"); }
-                        if (!dr.IsDBNull(2)) { Gozetmen3 = dr.GetString("Gozetmen3"); }
+                        if (dt.Rows[0]["Gozetmen1"] != DBNull.Value) { Gozetmen1 = dt.Rows[0]["Gozetmen1"].ToString(); }
+                        if (dt.Rows[0]["Gozetmen2"] != DBNull.Value) { Gozetmen2 = dt.Rows[0]["Gozetmen2"].ToString(); }
+                        if (dt.Rows[0]["Gozetmen3"] != DBNull.Value) { Gozetmen3 = dt.Rows[0]["Gozetmen3"].ToString(); }
                     }
-                    islemler.Kapat();
                 }
 
                 switch (Gözetmen)
@@ -278,18 +288,23 @@ namespace sp
                         break;
                 }
 
-                dr = islemler.Oku(komut);
                 if (Gözetmen != 0)
                 {
                     cmbogretimelemani.Items.Add("Hiçbiri..");
                 }
-                while (dr.Read())
+                dt = new DataTable();
+                dt = islemler.Al(komut);
+                if (dt.Rows.Count > 0)
                 {
-                    string birlesik = dr.GetString("unvan") + " " + dr.GetString("Ad_Soyad");
-                    cmbogretimelemani.Items.Add(birlesik);
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        if (dt.Rows[i]["unvan"] != DBNull.Value && dt.Rows[i]["Ad_Soyad"] != DBNull.Value)
+                        {
+                            string birlesik = dt.Rows[i]["unvan"] + " " + dt.Rows[i]["Ad_Soyad"];
+                            cmbogretimelemani.Items.Add(birlesik);
+                        }
+                    }
                 }
-                islemler.Kapat();
-
             }
             catch (Exception err)
             {
@@ -308,16 +323,16 @@ namespace sp
             {
                 //Sınav Tablosundaki Seçili Dersliklerin Alındığı Yer
                 string Derslik1 = "0", Derslik2 = "0", Derslik3 = "0", Derslik4 = "0";
+                dt = new DataTable();
                 komut = "select Derslik1,Derslik2,Derslik3,Derslik4 from " + Home.donem + " where id=" + SinavProgrami.sinavid + ";";
-                dr = islemler.Oku(komut);
-                if (dr.Read())
+                dt = islemler.Al(komut);
+                if (dt.Rows.Count > 0)
                 {
-                    if (!dr.IsDBNull(0)) { Derslik1 = dr.GetString("Derslik1"); }
-                    if (!dr.IsDBNull(1)) { Derslik2 = dr.GetString("Derslik2"); }
-                    if (!dr.IsDBNull(2)) { Derslik3 = dr.GetString("Derslik3"); }
-                    if (!dr.IsDBNull(3)) { Derslik4 = dr.GetString("Derslik4"); }
+                    if (dt.Rows[0]["Derslik1"] != DBNull.Value) { Derslik1 = dt.Rows[0]["Derslik1"].ToString(); }
+                    if (dt.Rows[0]["Derslik2"] != DBNull.Value) { Derslik2 = dt.Rows[0]["Derslik2"].ToString(); }
+                    if (dt.Rows[0]["Derslik3"] != DBNull.Value) { Derslik3 = dt.Rows[0]["Derslik3"].ToString(); }
+                    if (dt.Rows[0]["Derslik4"] != DBNull.Value) { Derslik4 = dt.Rows[0]["Derslik4"].ToString(); }
                 }
-                islemler.Kapat();
 
                 //Derslik Tablosundaki verilerin geçici Tabloya Kopyalanması
                 komut = "select * from sinavderslikleri";
@@ -417,10 +432,7 @@ namespace sp
         {
             try
             {
-                //Derslik Tablosu Geçici Bir Tabloya Kopyalanıyor
-                komut = "select * from sinavderslikleri";
-                dt = new DataTable();
-                dt = islemler.Al(komut);
+                
 
                 int ogrencisayisi = 0;
                 string Derslik1 = "0";
@@ -429,19 +441,23 @@ namespace sp
                 string Derslik4 = "0";
 
                 //Sınav Tablosundan Düzenlenen Satırın Derslikleri Çekiliyor
+                dt = new DataTable();
                 komut = "select Ogr_Sayisi,Derslik1,Derslik2,Derslik3,Derslik4 from " + Home.donem + " where id=" + SinavProgrami.sinavid + ";";
-                dr = islemler.Oku(komut);
-                if (dr.Read())
+                dt = islemler.Al(komut);
+                if (dt.Rows.Count > 0)
                 {
-                    if (!dr.IsDBNull(0)) { ogrencisayisi = int.Parse(dr.GetString("Ogr_Sayisi")); }
-                    if (!dr.IsDBNull(1)) { Derslik1 = dr.GetString("Derslik1"); }
-                    if (!dr.IsDBNull(2)) { Derslik2 = dr.GetString("Derslik2"); }
-                    if (!dr.IsDBNull(3)) { Derslik3 = dr.GetString("Derslik3"); }
-                    if (!dr.IsDBNull(4)) { Derslik4 = dr.GetString("Derslik4"); }
+                    if (dt.Rows[0]["Ogr_Sayisi"] != DBNull.Value) { ogrencisayisi = int.Parse(dt.Rows[0]["Ogr_Sayisi"].ToString()); }
+                    if (dt.Rows[0]["Derslik1"] != DBNull.Value) { Derslik1 = dt.Rows[0]["Derslik1"].ToString(); }
+                    if (dt.Rows[0]["Derslik2"] != DBNull.Value) { Derslik2 = dt.Rows[0]["Derslik2"].ToString(); }
+                    if (dt.Rows[0]["Derslik3"] != DBNull.Value) { Derslik3 = dt.Rows[0]["Derslik3"].ToString(); }
+                    if (dt.Rows[0]["Derslik4"] != DBNull.Value) { Derslik4 = dt.Rows[0]["Derslik4"].ToString(); }
                 }
-                islemler.Kapat();
-
+                
                 //Sınav Tablosundan Çekilen Dersliklerin Kapasitesi Alınıyor
+                //Derslik Tablosu Geçici Bir Tabloya Kopyalanıyor
+                komut = "select * from sinavderslikleri";
+                dt = new DataTable();
+                dt = islemler.Al(komut);
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     if (dt.Rows[i]["derslik"].ToString() == Derslik1) { Derslik1 = dt.Rows[i]["sayi"].ToString(); }
@@ -996,7 +1012,7 @@ namespace sp
                                             //Düzenlenen sınavın öğretim elemanı ile gözetmeni aynı mı diye bakılıyor
                                             if (eskiogretmen == cmbogretimelemani.SelectedItem.ToString())
                                             {   //aynı ise yapılacaklar
-                                                cevap = MessageBox.Show("Öğretim GÖrevlisini Kendi Sınavına GÖzetmen Olarak Seçtiniz! \nKabul Ediyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
+                                                cevap = MessageBox.Show("Öğretim Görevlisini Kendi Sınavına Gözetmen Olarak Seçtiniz! \nKabul Ediyor musunuz?", "UYARI!", MessageBoxButtons.YesNo);
                                                 if (cevap == DialogResult.Yes)
                                                 {
                                                     //1. Gözetmen kaydediliyor ve gözetmenlik sayısı arttırılıyor

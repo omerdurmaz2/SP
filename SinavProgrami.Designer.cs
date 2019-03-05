@@ -40,7 +40,6 @@
             this.cmbfiltreogretimgorevlisi = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.cmbfiltrebolumid = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -126,7 +125,6 @@
             this.cmbfiltrebolumadi.Size = new System.Drawing.Size(168, 21);
             this.cmbfiltrebolumadi.TabIndex = 53;
             this.cmbfiltrebolumadi.Text = "Bölüm Adı:";
-            this.cmbfiltrebolumadi.SelectedIndexChanged += new System.EventHandler(this.cmbfiltrebolumadi_SelectedIndexChanged);
             // 
             // cmbfiltretarih
             // 
@@ -210,18 +208,6 @@
             this.linkLabel1.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(82)))), ((int)(((byte)(82)))));
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
-            // cmbfiltrebolumid
-            // 
-            this.cmbfiltrebolumid.DropDownHeight = 100;
-            this.cmbfiltrebolumid.FormattingEnabled = true;
-            this.cmbfiltrebolumid.IntegralHeight = false;
-            this.cmbfiltrebolumid.Location = new System.Drawing.Point(416, 72);
-            this.cmbfiltrebolumid.Name = "cmbfiltrebolumid";
-            this.cmbfiltrebolumid.Size = new System.Drawing.Size(168, 21);
-            this.cmbfiltrebolumid.TabIndex = 53;
-            this.cmbfiltrebolumid.Text = "Bölüm idsi Tutulduğu Yer";
-            this.cmbfiltrebolumid.Visible = false;
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.dataGridView2);
@@ -264,7 +250,6 @@
             this.Controls.Add(this.cmbfiltreogretimgorevlisi);
             this.Controls.Add(this.cmbfiltretarih);
             this.Controls.Add(this.cmbfiltrebolumkodu);
-            this.Controls.Add(this.cmbfiltrebolumid);
             this.Controls.Add(this.cmbfiltrebolumadi);
             this.Controls.Add(this.label2);
             this.Name = "SinavProgrami";
@@ -272,7 +257,6 @@
             this.Load += new System.EventHandler(this.SinavProgrami_Load);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.cmbfiltrebolumadi, 0);
-            this.Controls.SetChildIndex(this.cmbfiltrebolumid, 0);
             this.Controls.SetChildIndex(this.cmbfiltrebolumkodu, 0);
             this.Controls.SetChildIndex(this.cmbfiltretarih, 0);
             this.Controls.SetChildIndex(this.cmbfiltreogretimgorevlisi, 0);
@@ -304,7 +288,6 @@
         private System.Windows.Forms.ComboBox cmbfiltreogretimgorevlisi;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.ComboBox cmbfiltrebolumid;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dataGridView2;
     }

@@ -42,7 +42,7 @@ namespace sp
                 //Seçilen Bölüme Göre Tabloya Eklenecek Kayıtlar Belirleniyor
                 if (bolum == "ORTAK DERS")
                 {
-                    if (Bolumler.Rows.Count != 0)
+                    if (Bolumler.Rows.Count > 0)
                     {
                         for (int i = 0; i < Bolumler.Rows.Count; i++)
                         {
@@ -55,6 +55,10 @@ namespace sp
 
                         }
 
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ders Kaydedildi Ancak Kayıtlı Hiçbir Bölüm Olmadığı İçin Sınav Tablosuna Kayıt Yapılmadı");
                     }
                 }
                 else
