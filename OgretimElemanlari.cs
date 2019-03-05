@@ -4,6 +4,8 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
+using System.Data;
+
 namespace sp
 {
     public partial class OgretimElemanlari : Tasarim
@@ -52,6 +54,7 @@ namespace sp
         #region Dışarıda Tanımlananlar
         MySqlDataReader dr; // sorgu methodu için tablo okumaya yarayan class
         VeritabaniIslemler islemler = new VeritabaniIslemler();
+        DataTable dt;
         string komut = "";
         string mesaj = "";
         public static int userid = -1; // session olarak duzenlenecek uyenin id sini tutuyor
@@ -106,23 +109,27 @@ namespace sp
             }
 
             //comboboxa veri basma 
+            dt = new DataTable();
             komut = "select * from bolumler";
-            dr = islemler.Oku(komut);
-            while (dr.Read())
+            dt = islemler.Al(komut);
+            if (dt.Rows.Count > 0)
             {
-                comboBox2.Items.Add(dr.GetString("bolum_adi"));
-                comboBox3.Items.Add(dr.GetString("id"));
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    if (dt.Rows[i]["program_adi"] != DBNull.Value && dt.Rows[i]["program_kodu"] != DBNull.Value)
+                    {
+                        comboBox2.Items.Add(dt.Rows[i]["program_kodu"].ToString() + " - " + dt.Rows[i]["program_adi"].ToString());
+                        comboBox3.Items.Add(dt.Rows[i]["id"].ToString());
+                    }
+                }
             }
-            islemler.Kapat();
-
-
         }
         #endregion
 
         #region Form Kontrol Methodu
         public void FormKontrol()
         {
-            if (txtunvan.Text == "" || txtsifre.Text == "" || txtadsoyad.Text == "" || txteposta.Text == "" || comboBox1.SelectedIndex==-1 || comboBox2.SelectedIndex==-1)
+            if (txtunvan.Text == "" || txtsifre.Text == "" || txtadsoyad.Text == "" || txteposta.Text == "" || comboBox1.SelectedIndex == -1 || comboBox2.SelectedIndex == -1)
             {
                 MessageBox.Show("Lütfen Gerekli Alanları Doldurunuz!");
             }
@@ -228,7 +235,7 @@ namespace sp
                             txteposta.Text = dr["eposta"].ToString();
                             txtsifre.Text = dr["sifre"].ToString();
                             comboBox1.SelectedIndex = int.Parse(dr["yetki"].ToString());
-                            comboBox3.SelectedItem= dr["bolumu"].ToString();
+                            comboBox3.SelectedItem = dr["bolumu"].ToString();
                             comboBox2.SelectedIndex = comboBox3.SelectedIndex;
                         }
                         else
