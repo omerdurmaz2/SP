@@ -116,7 +116,7 @@ namespace sp
                         MySqlDataReader rd;
                         VeritabaniIslemler sorgu = new VeritabaniIslemler();
                         label5.Text = "Bağlanıyor...";
-                        string komut = "SELECT * FROM OgretimElemani WHERE eposta='" + eposta + "' AND sifre='" + sifre + "';";
+                        string komut = "SELECT * FROM ogretimelemani WHERE eposta='" + eposta + "' AND sifre='" + sifre + "';";
                         rd = sorgu.Oku(komut);
                         if (rd.Read())
                         {
