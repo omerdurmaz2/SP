@@ -85,7 +85,7 @@ namespace sp
         {
 
 
-            komut = "select O.id as 'SIRA NO',O.unvan as 'ÜNVAN',O.Ad_Soyad as 'AD SOYAD',O.eposta as 'E POSTA',O.Kendi_Sinav_Sayisi as 'KENDİ SINAV SAYISI' ,O.Gozetmenlik_Sayisi as 'GÖZETMENLİK SAYISI' , B.bolum_adi as 'BÖLÜMÜ' from OgretimElemani O, bolumler B where O.bolumu = B.id";
+            komut = "select O.id as 'SIRA NO',O.unvan as 'ÜNVAN',O.Ad_Soyad as 'AD SOYAD',O.eposta as 'E POSTA',O.Kendi_Sinav_Sayisi as 'KENDİ SINAV SAYISI' ,O.Gozetmenlik_Sayisi as 'GÖZETMENLİK SAYISI' , B.bolum_adi as 'BÖLÜMÜ' from ogretimelemani O, bolumler B where O.bolumu = B.id";
             if (islemler.Al(komut) != null)
             {
                 dataGridView1.DataSource = islemler.Al(komut);
@@ -151,7 +151,7 @@ namespace sp
         #region Veritabanı E posta Kontrolü
         public void Sorgu()
         {
-            komut = "select * from OgretimElemani where eposta='" + txteposta.Text + "' and id <> " + userid + ";";
+            komut = "select * from ogretimelemani where eposta='" + txteposta.Text + "' and id <> " + userid + ";";
             if (islemler.Oku(komut).Read())
             {
                 MessageBox.Show("Aynı E posta da başka üye bulunmakta. Lütfen başka bir e posta girin...", "HATA!");
@@ -174,7 +174,7 @@ namespace sp
 
             if (userid == -1) //eğer id -1 ise yeni ekler
             {
-                komut = "INSERT INTO OgretimElemani (unvan,Ad_Soyad,eposta,Kendi_Sinav_Sayisi,Gozetmenlik_Sayisi,sifre,yetki,bolumu) VALUES ('" + unvan + "','" + adsoyad + "','" + eposta + "',0,0,'" + sifre + "'," + yetki + ", " + bolumid + ") ";
+                komut = "INSERT INTO ogretimelemani (unvan,Ad_Soyad,eposta,Kendi_Sinav_Sayisi,Gozetmenlik_Sayisi,sifre,yetki,bolumu) VALUES ('" + unvan + "','" + adsoyad + "','" + eposta + "',0,0,'" + sifre + "'," + yetki + ", " + bolumid + ") ";
                 mesaj = "Yeni Kayıt Eklendi";
             }
             else // eğer id -1 değilse id ye göre veri güncellenir
@@ -182,7 +182,7 @@ namespace sp
                 btnkirmizi1.Visible = false;
                 btnmavi1.Text = "EKLE";
 
-                komut = "UPDATE OgretimElemani SET unvan = '" + unvan + "' ,Ad_Soyad = '" + adsoyad + "' ,eposta = '" + eposta + "',sifre = '" + sifre + "', yetki = " + yetki + ", bolumu=" + bolumid + "  WHERE id = " + userid + ";";
+                komut = "UPDATE ogretimelemani SET unvan = '" + unvan + "' ,Ad_Soyad = '" + adsoyad + "' ,eposta = '" + eposta + "',sifre = '" + sifre + "', yetki = " + yetki + ", bolumu=" + bolumid + "  WHERE id = " + userid + ";";
                 mesaj = "Kayıt Güncellendi";
 
             }
@@ -219,7 +219,7 @@ namespace sp
                         btnkirmizi1.Visible = true; //iptal butonu görünür
                         btnmavi1.Text = "GÜNCELLE";
 
-                        komut = "select * from OgretimElemani where id=" + userid + ";";
+                        komut = "select * from ogretimelemani where id=" + userid + ";";
                         dr = islemler.Oku(komut);
                         if (dr.Read())
                         {
@@ -245,7 +245,7 @@ namespace sp
                         DialogResult uyari = MessageBox.Show("Silmek İstiyor musunuz? ", "DİKKAT!", MessageBoxButtons.YesNo);// silmek istenip istenmediği sorulur
                         if (uyari == DialogResult.Yes)
                         {
-                            komut = "DELETE FROM OgretimElemani where id=" + userid + ";";
+                            komut = "DELETE FROM ogretimelemani where id=" + userid + ";";
                             islemler.Degistir(komut);
 
                             MessageBox.Show("Silindi.");
