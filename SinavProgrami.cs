@@ -15,13 +15,19 @@ namespace sp
         public SinavProgrami()
         {
             InitializeComponent();
-            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 0, 0)); // border radius  
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 0, 0)); // border radius
             yToolStripMenuItem.Visible = false; // normal boyuta getir butonu kapalı
                                                 //this.WindowState = FormWindowState.Maximized;
             baslikhizala();
-            Width = Screen.PrimaryScreen.WorkingArea.Width;
-            Height = Screen.PrimaryScreen.WorkingArea.Height;
 
+
+            //this.ClientSize = new System.Drawing.Size(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
+            ////Rectangle rect = Screen.GetWorkingArea(this);
+            ////this.MaximizedBounds = Screen.GetWorkingArea(this);
+            //label3.Text = this.Width.ToString();
+            //label4.Text = this.Height.ToString();
+
+            ////this.WindowState = FormWindowState.Maximized;
         }
         private void SinavProgrami_Load(object sender, EventArgs e)
         {

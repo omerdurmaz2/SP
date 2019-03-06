@@ -30,7 +30,6 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbfiltrebolumadi = new System.Windows.Forms.ComboBox();
             this.cmbfiltretarih = new System.Windows.Forms.ComboBox();
@@ -41,9 +40,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,13 +56,127 @@
             // btnkirmizi1
             // 
             this.btnkirmizi1.FlatAppearance.BorderSize = 0;
-            this.btnkirmizi1.Location = new System.Drawing.Point(1176, 40);
+            this.btnkirmizi1.Location = new System.Drawing.Point(1104, 40);
             // 
             // btnmavi1
             // 
             this.btnmavi1.FlatAppearance.BorderSize = 0;
-            this.btnmavi1.Location = new System.Drawing.Point(1272, 40);
+            this.btnmavi1.Location = new System.Drawing.Point(1200, 40);
             this.btnmavi1.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
+                | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label1.Location = new System.Drawing.Point(312, 88);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(83, 19);
+            this.label1.TabIndex = 52;
+            this.label1.Text = "FİLTRELE: ";
+            // 
+            // cmbfiltrebolumadi
+            // 
+            this.cmbfiltrebolumadi.DropDownHeight = 100;
+            this.cmbfiltrebolumadi.FormattingEnabled = true;
+            this.cmbfiltrebolumadi.IntegralHeight = false;
+            this.cmbfiltrebolumadi.Location = new System.Drawing.Point(400, 88);
+            this.cmbfiltrebolumadi.Name = "cmbfiltrebolumadi";
+            this.cmbfiltrebolumadi.Size = new System.Drawing.Size(152, 21);
+            this.cmbfiltrebolumadi.TabIndex = 53;
+            this.cmbfiltrebolumadi.Text = "Bölüm Adı:";
+            // 
+            // cmbfiltretarih
+            // 
+            this.cmbfiltretarih.DropDownHeight = 100;
+            this.cmbfiltretarih.FormattingEnabled = true;
+            this.cmbfiltretarih.IntegralHeight = false;
+            this.cmbfiltretarih.Location = new System.Drawing.Point(944, 88);
+            this.cmbfiltretarih.Name = "cmbfiltretarih";
+            this.cmbfiltretarih.Size = new System.Drawing.Size(136, 21);
+            this.cmbfiltretarih.TabIndex = 53;
+            this.cmbfiltretarih.Text = "Sınav Tarihi:";
+            // 
+            // cmbfiltreogretimsekli
+            // 
+            this.cmbfiltreogretimsekli.FormattingEnabled = true;
+            this.cmbfiltreogretimsekli.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.cmbfiltreogretimsekli.Items.AddRange(new object[] {
+            "G",
+            "IO"});
+            this.cmbfiltreogretimsekli.Location = new System.Drawing.Point(656, 88);
+            this.cmbfiltreogretimsekli.Name = "cmbfiltreogretimsekli";
+            this.cmbfiltreogretimsekli.Size = new System.Drawing.Size(88, 21);
+            this.cmbfiltreogretimsekli.TabIndex = 54;
+            this.cmbfiltreogretimsekli.Text = "Öğretim Şekli";
+            // 
+            // cmbfiltrebolumkodu
+            // 
+            this.cmbfiltrebolumkodu.DropDownHeight = 100;
+            this.cmbfiltrebolumkodu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbfiltrebolumkodu.FormattingEnabled = true;
+            this.cmbfiltrebolumkodu.IntegralHeight = false;
+            this.cmbfiltrebolumkodu.Location = new System.Drawing.Point(560, 88);
+            this.cmbfiltrebolumkodu.Name = "cmbfiltrebolumkodu";
+            this.cmbfiltrebolumkodu.Size = new System.Drawing.Size(88, 21);
+            this.cmbfiltrebolumkodu.TabIndex = 53;
+            this.cmbfiltrebolumkodu.Tag = "";
+            // 
+            // cmbfiltresaat
+            // 
+            this.cmbfiltresaat.DropDownHeight = 100;
+            this.cmbfiltresaat.FormattingEnabled = true;
+            this.cmbfiltresaat.IntegralHeight = false;
+            this.cmbfiltresaat.Location = new System.Drawing.Point(1088, 88);
+            this.cmbfiltresaat.Name = "cmbfiltresaat";
+            this.cmbfiltresaat.Size = new System.Drawing.Size(88, 21);
+            this.cmbfiltresaat.TabIndex = 53;
+            this.cmbfiltresaat.Text = "Sınav Saati:";
+            // 
+            // cmbfiltreogretimgorevlisi
+            // 
+            this.cmbfiltreogretimgorevlisi.DropDownHeight = 100;
+            this.cmbfiltreogretimgorevlisi.FormattingEnabled = true;
+            this.cmbfiltreogretimgorevlisi.IntegralHeight = false;
+            this.cmbfiltreogretimgorevlisi.Location = new System.Drawing.Point(752, 88);
+            this.cmbfiltreogretimgorevlisi.Name = "cmbfiltreogretimgorevlisi";
+            this.cmbfiltreogretimgorevlisi.Size = new System.Drawing.Size(184, 21);
+            this.cmbfiltreogretimgorevlisi.TabIndex = 53;
+            this.cmbfiltreogretimgorevlisi.Text = "Öğretim Görevlisi:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial Black", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label2.Location = new System.Drawing.Point(64, 80);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(211, 22);
+            this.label2.TabIndex = 52;
+            this.label2.Text = "ÖĞRETİM GÖREVLİLERİ";
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
+            this.linkLabel1.LinkColor = System.Drawing.Color.Black;
+            this.linkLabel1.Location = new System.Drawing.Point(1184, 88);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(114, 18);
+            this.linkLabel1.TabIndex = 55;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Filtreleri Temizle";
+            this.linkLabel1.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(82)))), ((int)(((byte)(82)))));
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.dataGridView1);
+            this.panel1.Controls.Add(this.dataGridView2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 120);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1300, 580);
+            this.panel1.TabIndex = 1;
             // 
             // dataGridView1
             // 
@@ -88,135 +204,21 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Left;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
-            this.dataGridView1.Location = new System.Drawing.Point(318, 0);
+            this.dataGridView1.Location = new System.Drawing.Point(320, 0);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1048, 616);
+            this.dataGridView1.Size = new System.Drawing.Size(984, 580);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
             this.dataGridView1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridView1_KeyPress);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
-                | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(320, 80);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 19);
-            this.label1.TabIndex = 52;
-            this.label1.Text = "FİLTRELE: ";
-            // 
-            // cmbfiltrebolumadi
-            // 
-            this.cmbfiltrebolumadi.DropDownHeight = 100;
-            this.cmbfiltrebolumadi.FormattingEnabled = true;
-            this.cmbfiltrebolumadi.IntegralHeight = false;
-            this.cmbfiltrebolumadi.Location = new System.Drawing.Point(416, 88);
-            this.cmbfiltrebolumadi.Name = "cmbfiltrebolumadi";
-            this.cmbfiltrebolumadi.Size = new System.Drawing.Size(168, 21);
-            this.cmbfiltrebolumadi.TabIndex = 53;
-            this.cmbfiltrebolumadi.Text = "Bölüm Adı:";
-            // 
-            // cmbfiltretarih
-            // 
-            this.cmbfiltretarih.DropDownHeight = 100;
-            this.cmbfiltretarih.FormattingEnabled = true;
-            this.cmbfiltretarih.IntegralHeight = false;
-            this.cmbfiltretarih.Location = new System.Drawing.Point(1000, 88);
-            this.cmbfiltretarih.Name = "cmbfiltretarih";
-            this.cmbfiltretarih.Size = new System.Drawing.Size(136, 21);
-            this.cmbfiltretarih.TabIndex = 53;
-            this.cmbfiltretarih.Text = "Sınav Tarihi:";
-            // 
-            // cmbfiltreogretimsekli
-            // 
-            this.cmbfiltreogretimsekli.FormattingEnabled = true;
-            this.cmbfiltreogretimsekli.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.cmbfiltreogretimsekli.Items.AddRange(new object[] {
-            "G",
-            "IO"});
-            this.cmbfiltreogretimsekli.Location = new System.Drawing.Point(688, 88);
-            this.cmbfiltreogretimsekli.Name = "cmbfiltreogretimsekli";
-            this.cmbfiltreogretimsekli.Size = new System.Drawing.Size(88, 21);
-            this.cmbfiltreogretimsekli.TabIndex = 54;
-            this.cmbfiltreogretimsekli.Text = "Öğretim Şekli";
-            // 
-            // cmbfiltrebolumkodu
-            // 
-            this.cmbfiltrebolumkodu.DropDownHeight = 100;
-            this.cmbfiltrebolumkodu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbfiltrebolumkodu.FormattingEnabled = true;
-            this.cmbfiltrebolumkodu.IntegralHeight = false;
-            this.cmbfiltrebolumkodu.Location = new System.Drawing.Point(592, 88);
-            this.cmbfiltrebolumkodu.Name = "cmbfiltrebolumkodu";
-            this.cmbfiltrebolumkodu.Size = new System.Drawing.Size(88, 21);
-            this.cmbfiltrebolumkodu.TabIndex = 53;
-            this.cmbfiltrebolumkodu.Tag = "";
-            // 
-            // cmbfiltresaat
-            // 
-            this.cmbfiltresaat.DropDownHeight = 100;
-            this.cmbfiltresaat.FormattingEnabled = true;
-            this.cmbfiltresaat.IntegralHeight = false;
-            this.cmbfiltresaat.Location = new System.Drawing.Point(1144, 88);
-            this.cmbfiltresaat.Name = "cmbfiltresaat";
-            this.cmbfiltresaat.Size = new System.Drawing.Size(88, 21);
-            this.cmbfiltresaat.TabIndex = 53;
-            this.cmbfiltresaat.Text = "Sınav Saati:";
-            // 
-            // cmbfiltreogretimgorevlisi
-            // 
-            this.cmbfiltreogretimgorevlisi.DropDownHeight = 100;
-            this.cmbfiltreogretimgorevlisi.FormattingEnabled = true;
-            this.cmbfiltreogretimgorevlisi.IntegralHeight = false;
-            this.cmbfiltreogretimgorevlisi.Location = new System.Drawing.Point(784, 88);
-            this.cmbfiltreogretimgorevlisi.Name = "cmbfiltreogretimgorevlisi";
-            this.cmbfiltreogretimgorevlisi.Size = new System.Drawing.Size(208, 21);
-            this.cmbfiltreogretimgorevlisi.TabIndex = 53;
-            this.cmbfiltreogretimgorevlisi.Text = "Öğretim Görevlisi:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial Black", 11.25F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(64, 80);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(211, 22);
-            this.label2.TabIndex = 52;
-            this.label2.Text = "ÖĞRETİM GÖREVLİLERİ";
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
-            this.linkLabel1.LinkColor = System.Drawing.Color.Black;
-            this.linkLabel1.Location = new System.Drawing.Point(1248, 88);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(114, 18);
-            this.linkLabel1.TabIndex = 55;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Filtreleri Temizle";
-            this.linkLabel1.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(82)))), ((int)(((byte)(82)))));
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.dataGridView2);
-            this.panel1.Controls.Add(this.dataGridView1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 152);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1366, 616);
-            this.panel1.TabIndex = 1;
             // 
             // dataGridView2
             // 
@@ -234,14 +236,34 @@
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(320, 616);
+            this.dataGridView2.Size = new System.Drawing.Size(320, 580);
             this.dataGridView2.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(24, 48);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 56;
+            this.label3.Text = "label3";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(24, 64);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.TabIndex = 56;
+            this.label4.Text = "label3";
             // 
             // SinavProgrami
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1366, 768);
+            this.ClientSize = new System.Drawing.Size(1300, 700);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.linkLabel1);
@@ -268,8 +290,10 @@
             this.Controls.SetChildIndex(this.linkLabel1, 0);
             this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.label1, 0);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.label4, 0);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -277,8 +301,6 @@
         }
 
         #endregion
-
-        public  System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbfiltrebolumadi;
         private System.Windows.Forms.ComboBox cmbfiltretarih;
@@ -290,5 +312,8 @@
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dataGridView2;
+        public System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
