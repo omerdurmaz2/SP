@@ -483,7 +483,7 @@ namespace sp
         {
             try
             {
-                rect = dataGridView1.GetCellDisplayRectangle(dataGridView1.CurrentCell.ColumnIndex, dataGridView1.CurrentCell.RowIndex, true);
+                rect = dataGridView1.GetCellDisplayRectangle(colindex, rowindex, true);
                 KonumX = rect.X + panel1.Location.X;
                 KonumY = rect.Y + panel1.Location.Y;
                 DialogResult cevap;

@@ -115,7 +115,7 @@ namespace sp
                         {
                             SinavProgrami.KonumY -= 10;
                         }
-                        this.Location = new Point(SinavProgrami.KonumX - this.Width, SinavProgrami.KonumY);
+                        this.Location = new Point(SinavProgrami.KonumX - this.Width/4, SinavProgrami.KonumY);
                     }
 
                 }
