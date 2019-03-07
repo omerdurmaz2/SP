@@ -4,6 +4,8 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using MySql.Data.MySqlClient;
+using System.Data;
+
 namespace sp
 {
     public partial class Login : Tasarim
@@ -113,16 +115,21 @@ namespace sp
                     if (txtkod.Text == lblkod.Text)
                     {
                         #region Veritabanı Bağlantısı
-                        MySqlDataReader rd;
                         VeritabaniIslemler sorgu = new VeritabaniIslemler();
                         label5.Text = "Bağlanıyor...";
+                        DataTable dt =new DataTable();
                         string komut = "SELECT * FROM ogretimelemani WHERE eposta='" + eposta + "' AND sifre='" + sifre + "';";
-                        rd = sorgu.Oku(komut);
-                        if (rd.Read())
+                        dt = sorgu.Al(komut);
+                        if (dt==null)
                         {
-                            Yetki = byte.Parse(rd["yetki"].ToString());
+                            MessageBox.Show("Bağlantı Hatası!\nLütfen İnternet Bağlantınızı Kontrol Edip Tekrar Deneyin.","HATA!");
+                            label5.Text="";
+                        }
+                        else if (dt.Rows.Count!=0)
+                        {
+                            Yetki = byte.Parse(dt.Rows[0]["yetki"].ToString());
                             Session = true;
-                            Ad = rd["Ad_Soyad"].ToString();
+                            Ad = dt.Rows[0]["Ad_Soyad"].ToString();
                             this.Close();
 
 

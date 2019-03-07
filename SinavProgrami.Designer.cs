@@ -255,6 +255,7 @@
             this.Name = "SinavProgrami";
             this.Text = "SinavProgrami";
             this.Load += new System.EventHandler(this.SinavProgrami_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SinavProgrami_MouseDown);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.cmbfiltrebolumadi, 0);
             this.Controls.SetChildIndex(this.cmbfiltrebolumkodu, 0);

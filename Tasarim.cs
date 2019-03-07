@@ -85,7 +85,7 @@ namespace sp
 
         #region Formun Sürüklenmesi
 
-        private bool mouseDown;
+        public bool mouseDown;
         private Point _start_point = new Point(0, 0);
         #region Formun Üzerine Tıklanınca
         private void Tasarim_MouseDown(object sender, MouseEventArgs e)

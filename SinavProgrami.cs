@@ -128,7 +128,7 @@ namespace sp
                 islemler = new VeritabaniIslemler();
                 komut = "select id as 'SIRA NO', Prg_Kod as 'Program Kodu', Prg_Ad as 'Program Adı', Ogr_Sekli as 'ÖĞRETİM ŞEKLİ',donem as 'DÖNEM',Ders_Kodu as 'DERS KODU',Ders_Adi as 'DERS ADI',Ogr_Sayisi as 'ÖĞRENCİ SAYISI',Tarih as 'TARİH',Saat as 'SAAT',Unvan as 'ÜNVAN' , Ad_Soyad as 'AD SOYAD',Derslik1 as 'DERSLİK 1',Derslik2 as 'DERSLİK 2',Derslik3 as 'DERSLİK 3',Derslik4 as 'DERSLİK 4',Y_Ogr_Sayisi as 'YERLEŞEN ÖĞRENCİ SAYISI', Gozetmen1 as 'GÖZETMEN 1', Gozetmen2 as 'GÖZETMEN 2', Gozetmen3 as 'GÖZETMEN 3' from " + Home.donem + " order by id desc;";
 
-                if (islemler.Al(komut).Rows.Count>0)
+                if (islemler.Al(komut).Rows.Count > 0)
                 {
 
                     dataGridView1.Columns.Clear();
@@ -308,16 +308,16 @@ namespace sp
             {
                 cmbfiltretarih.Items.Clear();
                 DateTime tarih;
-                tablo=new DataTable();
+                tablo = new DataTable();
                 komut = "select * from sinavtarihleri order by tarih asc;";
                 tablo = islemler.Al(komut);
-                if (tablo.Rows.Count>0)
+                if (tablo.Rows.Count > 0)
                 {
                     for (int i = 0; i < tablo.Rows.Count; i++)
                     {
-                        if (tablo.Rows[i]["tarih"]!=DBNull.Value)
+                        if (tablo.Rows[i]["tarih"] != DBNull.Value)
                         {
-                            tarih=Convert.ToDateTime(tablo.Rows[i]["tarih"]);
+                            tarih = Convert.ToDateTime(tablo.Rows[i]["tarih"]);
                             cmbfiltretarih.Items.Add(tarih);
                         }
                     }
@@ -337,7 +337,7 @@ namespace sp
             try
             {
                 cmbfiltresaat.Items.Clear();
-                tablo=new DataTable();
+                tablo = new DataTable();
                 komut = "select saat from sinavsaatleri order by saat asc";
                 tablo = islemler.Al(komut);
                 if (tablo.Rows.Count > 0)
@@ -376,7 +376,7 @@ namespace sp
                             cmbfiltreogretimgorevlisi.Items.Add(tablo.Rows[i]["unvan"] + " " + tablo.Rows[i]["Ad_Soyad"]);
                         }
                     }
-                } 
+                }
             }
             catch (Exception err)
             {
@@ -612,8 +612,10 @@ namespace sp
         private void dataGridView1_KeyPress(object sender, KeyPressEventArgs e)
         {
 
-            if (dataGridView1.Rows.Count>0)
+            if (dataGridView1.Rows.Count > 0)
             {
+            
+
                 try
                 {
                     if (e.KeyChar == (char)Keys.Enter)
@@ -623,6 +625,8 @@ namespace sp
                         else
                         {
                             dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex - 1].Cells[dataGridView1.CurrentCell.ColumnIndex];
+
+
                         }
                         colindex = dataGridView1.CurrentCell.ColumnIndex;
                         rowindex = dataGridView1.CurrentCell.RowIndex;
@@ -630,6 +634,12 @@ namespace sp
 
                         sinavid = int.Parse(dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString());
 
+                        //son column tam görüntülenmediği için aşağıdaki işlem yapıldı
+                        if (dataGridView1.CurrentCell.ColumnIndex == dataGridView1.Columns.Count - 1)
+                        {
+                            dataGridView1.FirstDisplayedScrollingColumnIndex = dataGridView1.Columns.Count - 1;
+                        }
+                        //-------------------------
 
                         switch (dataGridView1.CurrentCell.ColumnIndex)
                         {
@@ -727,7 +737,7 @@ namespace sp
         {
             //Seçili hücrenin indexini keydownda alıyoruz çünkü enter a basıldığında seçili hücre değişiyor.
             //ancak bize entera basılmadan önceki hücre indexi lazım
-            if (dataGridView1.Rows.Count>0)
+            if (dataGridView1.Rows.Count > 0)
             {
                 rowindex = dataGridView1.CurrentCell.RowIndex;
             }
@@ -806,5 +816,11 @@ namespace sp
 
         }
 
+        //Bu sayfada Form Üzerisinden Sürükleme Yapılmaması Yapılan İşlem
+        private void SinavProgrami_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown=false; //tasarım classı kopyalandığı için tasarım formunaki mousedown false yapıldığında sürükleme iptal olur 
+        }
+        //-------
     }
 }
