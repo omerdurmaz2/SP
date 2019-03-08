@@ -15,8 +15,8 @@ namespace sp
         public SinavProgrami()
         {
             InitializeComponent();
-            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 0, 0)); // border radius
-            yToolStripMenuItem.Visible = false; // normal boyuta getir butonu kapalı
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // border radius
+            //yToolStripMenuItem.Visible = false; // normal boyuta getir butonu kapalı
                                                 //this.WindowState = FormWindowState.Maximized;
             baslikhizala();
 
