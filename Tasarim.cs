@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-
 namespace sp
 {
     public partial class Tasarim : Form

@@ -7,7 +7,7 @@ namespace sp
     {
         public static string ConnectionString()
         {
-            //orijinal
+
             return "server=remotemysql.com; database= tDNQ1XRXlu; uid=tDNQ1XRXlu; pwd=F44eHROJZ1;";
 
             //test

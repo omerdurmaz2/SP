@@ -50,6 +50,7 @@
             // lblbaslik
             // 
             this.lblbaslik.Location = new System.Drawing.Point(400, 48);
+            this.lblbaslik.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblbaslik.Size = new System.Drawing.Size(208, 22);
             this.lblbaslik.Text = "ÖĞRETİM ELEMANLARI";
             // 
@@ -57,12 +58,16 @@
             // 
             this.btnkirmizi1.FlatAppearance.BorderSize = 0;
             this.btnkirmizi1.Location = new System.Drawing.Point(744, 208);
+            this.btnkirmizi1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnkirmizi1.TabIndex = 9;
             this.btnkirmizi1.Click += new System.EventHandler(this.btnkirmizi1_Click);
             // 
             // btnmavi1
             // 
             this.btnmavi1.FlatAppearance.BorderSize = 0;
             this.btnmavi1.Location = new System.Drawing.Point(848, 208);
+            this.btnmavi1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnmavi1.TabIndex = 8;
             this.btnmavi1.Click += new System.EventHandler(this.btnmavi1_Click);
             // 
             // dataGridView1
@@ -74,11 +79,11 @@
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 250);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 256);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(950, 450);
+            this.dataGridView1.Size = new System.Drawing.Size(950, 384);
             this.dataGridView1.TabIndex = 7;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -95,6 +100,7 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.comboBox1.Items.AddRange(new object[] {
@@ -104,8 +110,7 @@
             this.comboBox1.Location = new System.Drawing.Point(680, 168);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(256, 21);
-            this.comboBox1.TabIndex = 5;
-            this.comboBox1.Text = "Seçiniz...";
+            this.comboBox1.TabIndex = 7;
             // 
             // label5
             // 
@@ -121,7 +126,7 @@
             // txtsifre
             // 
             this.txtsifre.BackColor = System.Drawing.Color.White;
-            this.txtsifre.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtsifre.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtsifre.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.txtsifre.Location = new System.Drawing.Point(344, 168);
             this.txtsifre.Name = "txtsifre";
@@ -142,7 +147,7 @@
             // txteposta
             // 
             this.txteposta.BackColor = System.Drawing.Color.White;
-            this.txteposta.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txteposta.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txteposta.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.txteposta.Location = new System.Drawing.Point(16, 168);
             this.txteposta.Name = "txteposta";
@@ -163,7 +168,7 @@
             // txtadsoyad
             // 
             this.txtadsoyad.BackColor = System.Drawing.Color.White;
-            this.txtadsoyad.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtadsoyad.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtadsoyad.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.txtadsoyad.Location = new System.Drawing.Point(344, 104);
             this.txtadsoyad.Name = "txtadsoyad";
@@ -184,7 +189,7 @@
             // txtunvan
             // 
             this.txtunvan.BackColor = System.Drawing.Color.White;
-            this.txtunvan.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtunvan.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtunvan.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.txtunvan.Location = new System.Drawing.Point(16, 104);
             this.txtunvan.Name = "txtunvan";
@@ -204,24 +209,24 @@
             // 
             // comboBox2
             // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.comboBox2.Location = new System.Drawing.Point(680, 104);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(256, 21);
-            this.comboBox2.TabIndex = 52;
-            this.comboBox2.Text = "Seçiniz...";
+            this.comboBox2.TabIndex = 6;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // comboBox3
             // 
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.comboBox3.Location = new System.Drawing.Point(680, 56);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(256, 21);
-            this.comboBox3.TabIndex = 54;
-            this.comboBox3.Text = "Seçiniz...";
+            this.comboBox3.TabIndex = 5;
             this.comboBox3.Visible = false;
             // 
             // label8
@@ -242,7 +247,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.ClientSize = new System.Drawing.Size(950, 700);
+            this.ClientSize = new System.Drawing.Size(950, 640);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.label7);
@@ -259,6 +264,7 @@
             this.Controls.Add(this.txtunvan);
             this.Controls.Add(this.dataGridView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "OgretimElemanlari";
             this.Opacity = 0.99D;
             this.Text = "Öğretim Elemanları";

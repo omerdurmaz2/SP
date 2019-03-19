@@ -43,6 +43,14 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -52,17 +60,23 @@
             // lblbaslik
             // 
             this.lblbaslik.Location = new System.Drawing.Point(776, 48);
+            this.lblbaslik.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             // 
             // btnkirmizi1
             // 
             this.btnkirmizi1.FlatAppearance.BorderSize = 0;
-            this.btnkirmizi1.Location = new System.Drawing.Point(1104, 40);
+            this.btnkirmizi1.Location = new System.Drawing.Point(1105, 32);
+            this.btnkirmizi1.Margin = new System.Windows.Forms.Padding(4);
+            this.btnkirmizi1.TabIndex = 8;
             // 
             // btnmavi1
             // 
             this.btnmavi1.FlatAppearance.BorderSize = 0;
-            this.btnmavi1.Location = new System.Drawing.Point(1200, 40);
-            this.btnmavi1.Visible = false;
+            this.btnmavi1.Location = new System.Drawing.Point(8, 40);
+            this.btnmavi1.Margin = new System.Windows.Forms.Padding(4);
+            this.btnmavi1.TabIndex = 9;
+            this.btnmavi1.Text = "YAZDIR";
+            this.btnmavi1.Click += new System.EventHandler(this.btnmavi1_Click);
             // 
             // label1
             // 
@@ -78,27 +92,29 @@
             // cmbfiltrebolumadi
             // 
             this.cmbfiltrebolumadi.DropDownHeight = 100;
+            this.cmbfiltrebolumadi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfiltrebolumadi.FormattingEnabled = true;
             this.cmbfiltrebolumadi.IntegralHeight = false;
             this.cmbfiltrebolumadi.Location = new System.Drawing.Point(96, 8);
             this.cmbfiltrebolumadi.Name = "cmbfiltrebolumadi";
             this.cmbfiltrebolumadi.Size = new System.Drawing.Size(152, 21);
-            this.cmbfiltrebolumadi.TabIndex = 53;
-            this.cmbfiltrebolumadi.Text = "Bölüm Adı:";
+            this.cmbfiltrebolumadi.TabIndex = 1;
+            this.cmbfiltrebolumadi.SelectedIndexChanged += new System.EventHandler(this.cmbfiltrebolumadi_SelectedIndexChanged);
             // 
             // cmbfiltretarih
             // 
             this.cmbfiltretarih.DropDownHeight = 100;
+            this.cmbfiltretarih.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfiltretarih.FormattingEnabled = true;
             this.cmbfiltretarih.IntegralHeight = false;
             this.cmbfiltretarih.Location = new System.Drawing.Point(640, 8);
             this.cmbfiltretarih.Name = "cmbfiltretarih";
             this.cmbfiltretarih.Size = new System.Drawing.Size(136, 21);
-            this.cmbfiltretarih.TabIndex = 53;
-            this.cmbfiltretarih.Text = "Sınav Tarihi:";
+            this.cmbfiltretarih.TabIndex = 5;
             // 
             // cmbfiltreogretimsekli
             // 
+            this.cmbfiltreogretimsekli.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfiltreogretimsekli.FormattingEnabled = true;
             this.cmbfiltreogretimsekli.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.cmbfiltreogretimsekli.Items.AddRange(new object[] {
@@ -107,8 +123,7 @@
             this.cmbfiltreogretimsekli.Location = new System.Drawing.Point(352, 8);
             this.cmbfiltreogretimsekli.Name = "cmbfiltreogretimsekli";
             this.cmbfiltreogretimsekli.Size = new System.Drawing.Size(88, 21);
-            this.cmbfiltreogretimsekli.TabIndex = 54;
-            this.cmbfiltreogretimsekli.Text = "Öğretim Şekli";
+            this.cmbfiltreogretimsekli.TabIndex = 3;
             // 
             // cmbfiltrebolumkodu
             // 
@@ -119,30 +134,30 @@
             this.cmbfiltrebolumkodu.Location = new System.Drawing.Point(256, 8);
             this.cmbfiltrebolumkodu.Name = "cmbfiltrebolumkodu";
             this.cmbfiltrebolumkodu.Size = new System.Drawing.Size(88, 21);
-            this.cmbfiltrebolumkodu.TabIndex = 53;
+            this.cmbfiltrebolumkodu.TabIndex = 2;
             this.cmbfiltrebolumkodu.Tag = "";
             // 
             // cmbfiltresaat
             // 
             this.cmbfiltresaat.DropDownHeight = 100;
+            this.cmbfiltresaat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfiltresaat.FormattingEnabled = true;
             this.cmbfiltresaat.IntegralHeight = false;
             this.cmbfiltresaat.Location = new System.Drawing.Point(784, 8);
             this.cmbfiltresaat.Name = "cmbfiltresaat";
             this.cmbfiltresaat.Size = new System.Drawing.Size(88, 21);
-            this.cmbfiltresaat.TabIndex = 53;
-            this.cmbfiltresaat.Text = "Sınav Saati:";
+            this.cmbfiltresaat.TabIndex = 6;
             // 
             // cmbfiltreogretimgorevlisi
             // 
             this.cmbfiltreogretimgorevlisi.DropDownHeight = 100;
+            this.cmbfiltreogretimgorevlisi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfiltreogretimgorevlisi.FormattingEnabled = true;
             this.cmbfiltreogretimgorevlisi.IntegralHeight = false;
             this.cmbfiltreogretimgorevlisi.Location = new System.Drawing.Point(448, 8);
             this.cmbfiltreogretimgorevlisi.Name = "cmbfiltreogretimgorevlisi";
             this.cmbfiltreogretimgorevlisi.Size = new System.Drawing.Size(184, 21);
-            this.cmbfiltreogretimgorevlisi.TabIndex = 53;
-            this.cmbfiltreogretimgorevlisi.Text = "Öğretim Görevlisi:";
+            this.cmbfiltreogretimgorevlisi.TabIndex = 4;
             // 
             // label2
             // 
@@ -162,7 +177,7 @@
             this.linkLabel1.Location = new System.Drawing.Point(880, 8);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(114, 18);
-            this.linkLabel1.TabIndex = 55;
+            this.linkLabel1.TabIndex = 7;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Filtreleri Temizle";
             this.linkLabel1.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(82)))), ((int)(((byte)(82)))));
@@ -177,7 +192,7 @@
             this.panel1.Controls.Add(this.dataGridView2);
             this.panel1.Location = new System.Drawing.Point(0, 120);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1300, 580);
+            this.panel1.Size = new System.Drawing.Size(1297, 578);
             this.panel1.TabIndex = 1;
             // 
             // dataGridView1
@@ -217,7 +232,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1016, 580);
+            this.dataGridView1.Size = new System.Drawing.Size(1013, 578);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
@@ -242,7 +257,7 @@
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(304, 580);
+            this.dataGridView2.Size = new System.Drawing.Size(301, 578);
             this.dataGridView2.TabIndex = 2;
             // 
             // panel2
@@ -257,19 +272,90 @@
             this.panel2.Controls.Add(this.cmbfiltretarih);
             this.panel2.Controls.Add(this.cmbfiltreogretimgorevlisi);
             this.panel2.Controls.Add(this.cmbfiltreogretimsekli);
-            this.panel2.Location = new System.Drawing.Point(304, 80);
+            this.panel2.Location = new System.Drawing.Point(288, 80);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1000, 32);
+            this.panel2.Size = new System.Drawing.Size(1260, 32);
             this.panel2.TabIndex = 56;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(400, 68);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 13);
+            this.label3.TabIndex = 57;
+            this.label3.Text = "Bölüm adı:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(557, 68);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(66, 13);
+            this.label4.TabIndex = 58;
+            this.label4.Text = "Bölüm kodu:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(653, 68);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(72, 13);
+            this.label5.TabIndex = 59;
+            this.label5.Text = "Öğretim Şekli:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(749, 68);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(89, 13);
+            this.label6.TabIndex = 60;
+            this.label6.Text = "Öğretim Görevlisi:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(944, 68);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(63, 13);
+            this.label7.TabIndex = 61;
+            this.label7.Text = "Sınav Tarihi";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(1085, 68);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(61, 13);
+            this.label8.TabIndex = 62;
+            this.label8.Text = "Sınav Saati";
+            // 
+            // printDialog1
+            // 
+            this.printDialog1.UseEXDialog = true;
             // 
             // SinavProgrami
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1300, 700);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label2);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SinavProgrami";
             this.Text = "SinavProgrami";
             this.Load += new System.EventHandler(this.SinavProgrami_Load);
@@ -280,6 +366,12 @@
             this.Controls.SetChildIndex(this.btnkirmizi1, 0);
             this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.panel2, 0);
+            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.label5, 0);
+            this.Controls.SetChildIndex(this.label6, 0);
+            this.Controls.SetChildIndex(this.label7, 0);
+            this.Controls.SetChildIndex(this.label8, 0);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
@@ -304,5 +396,13 @@
         private System.Windows.Forms.DataGridView dataGridView2;
         public System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.PrintDialog printDialog1;
     }
 }

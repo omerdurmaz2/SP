@@ -36,3 +36,73 @@ C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\o
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\obj\Release\sp.Bolumler.resources
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\obj\Release\sp.Dersler.resources
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\obj\Release\sp.csproj.GenerateResource.Cache
+C:\Users\omerd\Downloads\sp\sp\sp\bin\Release\sp.exe.config
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Release\sp.exe
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Release\sp.pdb
+C:\Users\omerd\Downloads\sp\sp\sp\bin\Release\sp.exe
+C:\Users\omerd\Downloads\sp\sp\sp\bin\Release\sp.pdb
+C:\Users\omerd\Downloads\sp\sp\sp\bin\Release\itextsharp.dll
+C:\Users\omerd\Downloads\sp\sp\sp\bin\Release\MySql.Data.dll
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Release\sp.csprojResolveAssemblyReference.cache
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Release\sp.Derslikler.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Release\sp.DonemBelirle.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Release\sp.SınavProgramıDüzenleFormu.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Release\sp.Saatler.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Release\sp.SinavProgrami.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Release\sp.Tasarim.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Release\sp.Home.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Release\sp.Login.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Release\sp.OgretimElemanlari.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Release\sp.Properties.Resources.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Release\sp.Tarihler.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Release\sp.Bolumler.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Release\sp.Dersler.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Release\sp.csproj.GenerateResource.Cache
+C:\Users\baris\Desktop\sp\sp\sp\bin\Release\sp.exe.config
+C:\Users\baris\Desktop\sp\sp\sp\obj\Release\sp.exe
+C:\Users\baris\Desktop\sp\sp\sp\obj\Release\sp.pdb
+C:\Users\baris\Desktop\sp\sp\sp\bin\Release\sp.exe
+C:\Users\baris\Desktop\sp\sp\sp\bin\Release\sp.pdb
+C:\Users\baris\Desktop\sp\sp\sp\bin\Release\itextsharp.dll
+C:\Users\baris\Desktop\sp\sp\sp\obj\Release\sp.csprojResolveAssemblyReference.cache
+C:\Users\baris\Desktop\sp\sp\sp\obj\Release\sp.Derslikler.resources
+C:\Users\baris\Desktop\sp\sp\sp\obj\Release\sp.DonemBelirle.resources
+C:\Users\baris\Desktop\sp\sp\sp\obj\Release\sp.SınavProgramıDüzenleFormu.resources
+C:\Users\baris\Desktop\sp\sp\sp\obj\Release\sp.Saatler.resources
+C:\Users\baris\Desktop\sp\sp\sp\obj\Release\sp.SinavProgrami.resources
+C:\Users\baris\Desktop\sp\sp\sp\obj\Release\sp.Tasarim.resources
+C:\Users\baris\Desktop\sp\sp\sp\obj\Release\sp.Home.resources
+C:\Users\baris\Desktop\sp\sp\sp\obj\Release\sp.Login.resources
+C:\Users\baris\Desktop\sp\sp\sp\obj\Release\sp.OgretimElemanlari.resources
+C:\Users\baris\Desktop\sp\sp\sp\obj\Release\sp.Properties.Resources.resources
+C:\Users\baris\Desktop\sp\sp\sp\obj\Release\sp.Tarihler.resources
+C:\Users\baris\Desktop\sp\sp\sp\obj\Release\sp.Bolumler.resources
+C:\Users\baris\Desktop\sp\sp\sp\obj\Release\sp.Dersler.resources
+C:\Users\baris\Desktop\sp\sp\sp\obj\Release\sp.csproj.GenerateResource.Cache
+C:\Users\baris\Desktop\sp\sp\sp\obj\Release\Interop.Microsoft.Office.Core.dll
+C:\Users\baris\Desktop\sp\sp\sp\obj\Release\sp.csproj.ResolveComReference.cache
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\bin\Release\sp.exe.config
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Release\sp.csproj.ResolveComReference.cache
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Release\sp.exe
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Release\sp.pdb
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\bin\Release\sp.exe
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\bin\Release\sp.pdb
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\bin\Release\itextsharp.dll
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\bin\Release\MySql.Data.dll
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Release\sp.csprojResolveAssemblyReference.cache
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Release\sp.Derslikler.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Release\sp.DonemBelirle.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Release\sp.SınavProgramıDüzenleFormu.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Release\sp.Saatler.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Release\sp.SinavProgrami.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Release\sp.Tasarim.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Release\sp.Home.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Release\sp.Login.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Release\sp.OgretimElemanlari.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Release\sp.Properties.Resources.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Release\sp.Tarihler.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Release\sp.Bolumler.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Release\sp.Dersler.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Release\sp.csproj.GenerateResource.Cache
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\obj\Release\sp.csproj.ResolveComReference.cache
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\bin\Release\itextsharp.dll

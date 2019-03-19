@@ -262,7 +262,7 @@ namespace sp
                 if (Gözetmen != 0)
                 {
                     dt = new DataTable();
-                    komut = "select Gozetmen1,Gozetmen2,Gozetmen3 from " + Home.donem + " where id=" + SinavProgrami.sinavid + ";";
+                    komut = "select Gozetmen1,Gozetmen2,Gozetmen3 from " + Home.donem + " where SiraNo=" + SinavProgrami.sinavid + ";";
                     dt = islemler.Al(komut);
                     if (dt.Rows.Count > 0)
                     {
@@ -324,7 +324,7 @@ namespace sp
                 //Sınav Tablosundaki Seçili Dersliklerin Alındığı Yer
                 string Derslik1 = "0", Derslik2 = "0", Derslik3 = "0", Derslik4 = "0";
                 dt = new DataTable();
-                komut = "select Derslik1,Derslik2,Derslik3,Derslik4 from " + Home.donem + " where id=" + SinavProgrami.sinavid + ";";
+                komut = "select Derslik1,Derslik2,Derslik3,Derslik4 from " + Home.donem + " where SiraNo=" + SinavProgrami.sinavid + ";";
                 dt = islemler.Al(komut);
                 if (dt.Rows.Count > 0)
                 {
@@ -442,7 +442,7 @@ namespace sp
 
                 //Sınav Tablosundan Düzenlenen Satırın Derslikleri Çekiliyor
                 dt = new DataTable();
-                komut = "select Ogr_Sayisi,Derslik1,Derslik2,Derslik3,Derslik4 from " + Home.donem + " where id=" + SinavProgrami.sinavid + ";";
+                komut = "select Ogr_Sayisi,Derslik1,Derslik2,Derslik3,Derslik4 from " + Home.donem + " where SiraNo=" + SinavProgrami.sinavid + ";";
                 dt = islemler.Al(komut);
                 if (dt.Rows.Count > 0)
                 {
@@ -474,8 +474,8 @@ namespace sp
                 if (Derslik4.All(char.IsDigit)) { toplamkapasite += int.Parse(Derslik4); }
 
                 //Eğer kapasite öğrenci sayısından küçükse ekrana yerleşen öğrenci sayısına kapasite basılıyor,değilse öğrenci sayısı basılıyor
-                if (ogrencisayisi > toplamkapasite) { komut = "update " + Home.donem + " set Y_Ogr_Sayisi=" + toplamkapasite + " where id=" + SinavProgrami.sinavid + ";"; }
-                else { komut = "update " + Home.donem + " set Y_Ogr_Sayisi=" + ogrencisayisi + " where id=" + SinavProgrami.sinavid + ";"; }
+                if (ogrencisayisi > toplamkapasite) { komut = "update " + Home.donem + " set Y_Ogr_Sayisi=" + toplamkapasite + " where SiraNo=" + SinavProgrami.sinavid + ";"; }
+                else { komut = "update " + Home.donem + " set Y_Ogr_Sayisi=" + ogrencisayisi + " where SiraNo=" + SinavProgrami.sinavid + ";"; }
                 islemler.Degistir(komut);
 
             }
@@ -500,7 +500,7 @@ namespace sp
         {
             try
             {
-                komut = "select * from " + Home.donem + " where id=" + SinavProgrami.sinavid + ";";
+                komut = "select * from " + Home.donem + " where SiraNo=" + SinavProgrami.sinavid + ";";
                 dr = islemler.Oku(komut);
                 switch (YapilanIslem)
                 {
@@ -777,15 +777,15 @@ namespace sp
             switch (gozetmenno) //Gözetmen numarasına göre tablodaki gözetmen değeri güncelleniyor
             {
                 case 1:
-                    komut = "UPDATE " + Home.donem + " SET Gozetmen1='" + seciliogretmen + "' where id=" + SinavProgrami.sinavid + ";";
+                    komut = "UPDATE " + Home.donem + " SET Gozetmen1='" + seciliogretmen + "' where SiraNo=" + SinavProgrami.sinavid + ";";
                     islemler.Degistir(komut);
                     break;
                 case 2:
-                    komut = "UPDATE " + Home.donem + " SET Gozetmen2='" + seciliogretmen + "' where id=" + SinavProgrami.sinavid + ";";
+                    komut = "UPDATE " + Home.donem + " SET Gozetmen2='" + seciliogretmen + "' where SiraNo=" + SinavProgrami.sinavid + ";";
                     islemler.Degistir(komut);
                     break;
                 case 3:
-                    komut = "UPDATE " + Home.donem + " SET Gozetmen3='" + seciliogretmen + "' where id=" + SinavProgrami.sinavid + ";";
+                    komut = "UPDATE " + Home.donem + " SET Gozetmen3='" + seciliogretmen + "' where SiraNo=" + SinavProgrami.sinavid + ";";
                     islemler.Degistir(komut);
                     break;
             }
@@ -818,7 +818,7 @@ namespace sp
                 {
                     case 1:
 
-                        komut = "UPDATE " + Home.donem + " SET Ogr_Sekli='" + cmbogretimsekli.SelectedItem.ToString() + "' where id=" + SinavProgrami.sinavid + "";
+                        komut = "UPDATE " + Home.donem + " SET Ogr_Sekli='" + cmbogretimsekli.SelectedItem.ToString() + "' where SiraNo=" + SinavProgrami.sinavid + "";
 
                         islemler.Degistir(komut);
                         this.DialogResult = DialogResult.OK;
@@ -828,13 +828,13 @@ namespace sp
 
                         if (txtogrencisayisi.Text == "0")
                         {
-                            komut = "UPDATE " + Home.donem + " SET Ogr_Sayisi=null, Derslik1=null, Derslik2=null, Derslik3=null, Derslik4=null,Y_Ogr_Sayisi=null  where id=" + SinavProgrami.sinavid + "";
+                            komut = "UPDATE " + Home.donem + " SET Ogr_Sayisi=null, Derslik1=null, Derslik2=null, Derslik3=null, Derslik4=null,Y_Ogr_Sayisi=null  where SiraNo=" + SinavProgrami.sinavid + "";
                             islemler.Degistir(komut);
 
                         }
                         else
                         {
-                            komut = "UPDATE " + Home.donem + " SET Ogr_Sayisi='" + txtogrencisayisi.Text + "' where id=" + SinavProgrami.sinavid + "";
+                            komut = "UPDATE " + Home.donem + " SET Ogr_Sayisi='" + txtogrencisayisi.Text + "' where SiraNo=" + SinavProgrami.sinavid + "";
                             islemler.Degistir(komut);
                             YerlesenOgrenciBelirle();
 
@@ -848,7 +848,7 @@ namespace sp
                     case 3:
 
                         DateTime tarih = Convert.ToDateTime(cmbtarih.SelectedItem);
-                        komut = "UPDATE " + Home.donem + " SET Tarih='" + tarih.ToString("yyyy-MM-dd") + "' where id=" + SinavProgrami.sinavid + "";
+                        komut = "UPDATE " + Home.donem + " SET Tarih='" + tarih.ToString("yyyy-MM-dd") + "' where SiraNo=" + SinavProgrami.sinavid + "";
 
                         islemler.Degistir(komut);
                         this.DialogResult = DialogResult.OK;
@@ -857,7 +857,7 @@ namespace sp
                     case 4:
 
                         DateTime saat = Convert.ToDateTime(cmbsaat.SelectedItem);
-                        komut = "UPDATE " + Home.donem + " SET Saat='" + saat.ToShortTimeString() + "' where id=" + SinavProgrami.sinavid + "";
+                        komut = "UPDATE " + Home.donem + " SET Saat='" + saat.ToShortTimeString() + "' where SiraNo=" + SinavProgrami.sinavid + "";
 
                         islemler.Degistir(komut);
                         this.DialogResult = DialogResult.OK;
@@ -876,7 +876,7 @@ namespace sp
                         Gozetmen3 = "0";
 
                         //Sınav Tablosundan Gözetmen Değerleri,Tarih,Saat ve Eski Öğretim Elamanı Bilgileri Alınıyor
-                        komut = "select * from " + Home.donem + " where id=" + SinavProgrami.sinavid + ";";
+                        komut = "select * from " + Home.donem + " where SiraNo=" + SinavProgrami.sinavid + ";";
                         dr = islemler.Oku(komut);
                         if (dr.Read())
                         {
@@ -901,7 +901,7 @@ namespace sp
                             case 0: //Eğer 0 ise öğretim elemanı bilgileri kaydediliyor
 
                                 //Seçilen Öğretim Elemanının Sınav Tablsunda aynı tarih ve saatte başka sınavı var mı kontrol ediliyor
-                                komut = "Select * from " + Home.donem + " where Tarih='" + starih.ToString("yyyy-MM-dd") + "' and Saat='" + ssaat.ToShortTimeString() + "' and concat(Unvan,' ',Ad_Soyad)='" + cmbogretimelemani.SelectedItem.ToString() + "' and id<>" + SinavProgrami.sinavid + "";
+                                komut = "Select * from " + Home.donem + " where Tarih='" + starih.ToString("yyyy-MM-dd") + "' and Saat='" + ssaat.ToShortTimeString() + "' and concat(Unvan,' ',Ad_Soyad)='" + cmbogretimelemani.SelectedItem.ToString() + "' and SiraNo<>" + SinavProgrami.sinavid + "";
                                 dr = islemler.Oku(komut);
 
                                 cevap = DialogResult.Yes;
@@ -936,7 +936,7 @@ namespace sp
                                         }
 
                                         //Sınav Tablosunda Kaydın Güncellenmesi
-                                        komut = "UPDATE " + Home.donem + " SET Unvan='" + yeniogretmenunvan + "', Ad_Soyad='" + yeniogretmenadsoyad + "' where id=" + SinavProgrami.sinavid + "";
+                                        komut = "UPDATE " + Home.donem + " SET Unvan='" + yeniogretmenunvan + "', Ad_Soyad='" + yeniogretmenadsoyad + "' where SiraNo=" + SinavProgrami.sinavid + "";
                                         islemler.Degistir(komut);
                                         this.DialogResult = DialogResult.OK;
                                         this.Close();
@@ -974,7 +974,7 @@ namespace sp
                                     }
 
                                     //Sınav Tablosunda Kaydın Güncellenmesi
-                                    komut = "UPDATE " + Home.donem + " SET Unvan='" + yeniogretmenunvan + "', Ad_Soyad='" + yeniogretmenadsoyad + "' where id=" + SinavProgrami.sinavid + "";
+                                    komut = "UPDATE " + Home.donem + " SET Unvan='" + yeniogretmenunvan + "', Ad_Soyad='" + yeniogretmenadsoyad + "' where SiraNo=" + SinavProgrami.sinavid + "";
                                     islemler.Degistir(komut);
                                     this.DialogResult = DialogResult.OK;
                                     this.Close();
@@ -992,7 +992,7 @@ namespace sp
                                     GozetmenlikSayisiDuzenle(false, Gozetmen3);//GÖzetmen 3 de kayıtlı olan öğretmenin gözetmenlik sayısı düşürülüyor
 
                                     //Tablodaki Bütün Gözetmenlerin değerleri null yapılıyor
-                                    komut = "UPDATE " + Home.donem + " SET Gozetmen1=null,Gozetmen2=null,Gozetmen3=null where id=" + SinavProgrami.sinavid + ";";
+                                    komut = "UPDATE " + Home.donem + " SET Gozetmen1=null,Gozetmen2=null,Gozetmen3=null where SiraNo=" + SinavProgrami.sinavid + ";";
                                     islemler.Degistir(komut);
 
                                     this.DialogResult = DialogResult.OK;
@@ -1001,7 +1001,7 @@ namespace sp
                                 else
                                 {
                                     //Sınav Tablosunda seçilen tarih ve saatte gözetmenin sınavı ya da gözetmenliği var mmı diye kontrol ediliyor
-                                    komut = "select * from " + Home.donem + " where Tarih='" + starih.ToString("yyyy-MM-dd") + "' and Saat='" + ssaat.ToShortTimeString() + "' and (concat(Unvan,' ',Ad_Soyad)='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen1='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen2='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen3='" + cmbogretimelemani.SelectedItem.ToString() + "') and id<>" + SinavProgrami.sinavid + ";";
+                                    komut = "select * from " + Home.donem + " where Tarih='" + starih.ToString("yyyy-MM-dd") + "' and Saat='" + ssaat.ToShortTimeString() + "' and (concat(Unvan,' ',Ad_Soyad)='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen1='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen2='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen3='" + cmbogretimelemani.SelectedItem.ToString() + "') and SiraNo<>" + SinavProgrami.sinavid + ";";
                                     dr = islemler.Oku(komut);
                                     if (dr.Read()) // Eğer var ise Bu alandakiler Yapılacak
                                     {
@@ -1066,7 +1066,7 @@ namespace sp
                                     GozetmenlikSayisiDuzenle(false, Gozetmen2);//GÖzetmen 2 de kayıtlı olan öğretmenin gözetmenlik sayısı düşürülüyor
                                     GozetmenlikSayisiDuzenle(false, Gozetmen3);//GÖzetmen 3 de kayıtlı olan öğretmenin gözetmenlik sayısı düşürülüyor
                                     //Tablodaki gözetmen 2 ve 3 değerleri null yapılıyor
-                                    komut = "UPDATE " + Home.donem + " SET Gozetmen2=null,Gozetmen3=null where id=" + SinavProgrami.sinavid + ";";
+                                    komut = "UPDATE " + Home.donem + " SET Gozetmen2=null,Gozetmen3=null where SiraNo=" + SinavProgrami.sinavid + ";";
                                     islemler.Degistir(komut);
 
                                     this.DialogResult = DialogResult.OK;
@@ -1075,7 +1075,7 @@ namespace sp
                                 else
                                 {
                                     //Sınav Tablosunda seçilen tarih ve saatte gözetmenin sınavı ya da gözetmenliği var mmı diye kontrol ediliyor
-                                    komut = "select * from " + Home.donem + " where Tarih='" + starih.ToString("yyyy-MM-dd") + "' and Saat='" + ssaat.ToShortTimeString() + "' and (concat(Unvan,' ',Ad_Soyad)='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen1='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen2='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen3='" + cmbogretimelemani.SelectedItem.ToString() + "') and id<>" + SinavProgrami.sinavid + ";";
+                                    komut = "select * from " + Home.donem + " where Tarih='" + starih.ToString("yyyy-MM-dd") + "' and Saat='" + ssaat.ToShortTimeString() + "' and (concat(Unvan,' ',Ad_Soyad)='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen1='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen2='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen3='" + cmbogretimelemani.SelectedItem.ToString() + "') and SiraNo<>" + SinavProgrami.sinavid + ";";
                                     dr = islemler.Oku(komut);
                                     if (dr.Read())// Eğer var ise Bu alandakiler Yapılacak
                                     {
@@ -1141,7 +1141,7 @@ namespace sp
                                     GozetmenlikSayisiDuzenle(false, Gozetmen3); //GÖzetmen 3 de kayıtlı olan öğretmenin gözetmenlik
 
                                     //Tablodaki gözetmen  3 değeri null yapılıyor
-                                    komut = "UPDATE " + Home.donem + " SET Gozetmen3=null where id=" + SinavProgrami.sinavid + ";";
+                                    komut = "UPDATE " + Home.donem + " SET Gozetmen3=null where SiraNo=" + SinavProgrami.sinavid + ";";
                                     islemler.Degistir(komut);
 
                                     this.DialogResult = DialogResult.OK;
@@ -1150,7 +1150,7 @@ namespace sp
                                 else
                                 {
                                     //Sınav Tablosunda seçilen tarih ve saatte gözetmenin sınavı ya da gözetmenliği var mmı diye kontrol ediliyor
-                                    komut = "select * from " + Home.donem + " where Tarih='" + starih.ToString("yyyy-MM-dd") + "' and Saat='" + ssaat.ToShortTimeString() + "' and (concat(Unvan,' ',Ad_Soyad)='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen1='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen2='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen3='" + cmbogretimelemani.SelectedItem.ToString() + "') and id<>" + SinavProgrami.sinavid + ";";
+                                    komut = "select * from " + Home.donem + " where Tarih='" + starih.ToString("yyyy-MM-dd") + "' and Saat='" + ssaat.ToShortTimeString() + "' and (concat(Unvan,' ',Ad_Soyad)='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen1='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen2='" + cmbogretimelemani.SelectedItem.ToString() + "' or Gozetmen3='" + cmbogretimelemani.SelectedItem.ToString() + "') and SiraNo<>" + SinavProgrami.sinavid + ";";
                                     dr = islemler.Oku(komut);
                                     if (dr.Read()) // Eğer var ise Bu alandakiler Yapılacak
                                     {
@@ -1237,7 +1237,7 @@ namespace sp
                                     break;
 
                             }
-                            komut += " where id=" + SinavProgrami.sinavid + ";";
+                            komut += " where SiraNo=" + SinavProgrami.sinavid + ";";
                             islemler.Degistir(komut);
 
                             //Kalan Dersliklere ve Öğrenci Sayısına Göre Yerleşen Öğrenci Sayısı Belirleniyor
@@ -1256,7 +1256,7 @@ namespace sp
                             secilisaat = "";
 
                             //Sınav Tablosundan Tarih ve Saat Alınıyor
-                            komut = "select * from " + Home.donem + " where id=" + SinavProgrami.sinavid + ";";
+                            komut = "select * from " + Home.donem + " where SiraNo=" + SinavProgrami.sinavid + ";";
                             dr = islemler.Oku(komut);
                             if (dr.Read())
                             {
@@ -1275,7 +1275,7 @@ namespace sp
 
 
                             //Tabloda Seçilen Tarih ve Saatte Seçilen Derslik Kullanılıyor mu Diye Bakılıyor
-                            komut = "Select * from " + Home.donem + " where Tarih='" + starih.ToString("yyyy-MM-dd") + "' and Saat='" + ssaat.ToShortTimeString() + "' and (Derslik1='" + seciliderslik[0] + "' or Derslik2='" + seciliderslik[0] + "' or Derslik3='" + seciliderslik[0] + "' or Derslik4='" + seciliderslik[0] + "') and id<>" + SinavProgrami.sinavid + "; ";
+                            komut = "Select * from " + Home.donem + " where Tarih='" + starih.ToString("yyyy-MM-dd") + "' and Saat='" + ssaat.ToShortTimeString() + "' and (Derslik1='" + seciliderslik[0] + "' or Derslik2='" + seciliderslik[0] + "' or Derslik3='" + seciliderslik[0] + "' or Derslik4='" + seciliderslik[0] + "') and SiraNo<>" + SinavProgrami.sinavid + "; ";
                             dr = islemler.Oku(komut);
 
                             //Eğer Kullanılıyorsa Kullanıcıya Kabul Ediyor musunuz diye soruluyor
@@ -1305,7 +1305,7 @@ namespace sp
                                         komut += "Derslik4='" + seciliderslik[0] + "' ";
                                         break;
                                 }
-                                komut += "where id=" + SinavProgrami.sinavid + ";";
+                                komut += "where SiraNo=" + SinavProgrami.sinavid + ";";
                                 islemler.Degistir(komut);
 
                                 //Derslik Kaydedildikten Sonra Yerleşen Öğrenci Sayısı Belirleniyor

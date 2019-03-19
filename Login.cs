@@ -167,13 +167,7 @@ namespace sp
 
         #region Güvenlik Kodu(Sadece Sayı Girişi)
 
-        private void txtkod_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
+        
 
         #endregion
 
@@ -185,5 +179,28 @@ namespace sp
         }
         #endregion
 
+        private void txteposta_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnmavi1_Click(this, new EventArgs());
+            }
+        }
+
+        private void txtsifre_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnmavi1_Click(this, new EventArgs());
+            }
+        }
+
+        private void txtkod_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnmavi1_Click(this, new EventArgs());
+            }
+        }
     }
 }

@@ -4,10 +4,13 @@ using System.Runtime.InteropServices;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 using System.Drawing;
-using System.Linq;
+
+
+
 
 namespace sp
 {
+
     public partial class SinavProgrami : Tasarim
     {
         #region Yapıcı Metod ve Form_Load
@@ -16,8 +19,8 @@ namespace sp
         {
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // border radius
-            //yToolStripMenuItem.Visible = false; // normal boyuta getir butonu kapalı
-                                                //this.WindowState = FormWindowState.Maximized;
+                                                                                                      //yToolStripMenuItem.Visible = false; // normal boyuta getir butonu kapalı
+                                                                                                      //this.WindowState = FormWindowState.Maximized;
             baslikhizala();
 
 
@@ -111,7 +114,7 @@ namespace sp
 
         public static int DuzenlenenAlan { get; set; }
 
-        Rectangle rect;
+        System.Drawing.Rectangle rect;
 
         int rowindex = 0;
         int colindex = 0;
@@ -126,7 +129,7 @@ namespace sp
             {
 
                 islemler = new VeritabaniIslemler();
-                komut = "select id as 'SIRA NO', Prg_Kod as 'Program Kodu', Prg_Ad as 'Program Adı', Ogr_Sekli as 'ÖĞRETİM ŞEKLİ',donem as 'DÖNEM',Ders_Kodu as 'DERS KODU',Ders_Adi as 'DERS ADI',Ogr_Sayisi as 'ÖĞRENCİ SAYISI',Tarih as 'TARİH',Saat as 'SAAT',Unvan as 'ÜNVAN' , Ad_Soyad as 'AD SOYAD',Derslik1 as 'DERSLİK 1',Derslik2 as 'DERSLİK 2',Derslik3 as 'DERSLİK 3',Derslik4 as 'DERSLİK 4',Y_Ogr_Sayisi as 'YERLEŞEN ÖĞRENCİ SAYISI', Gozetmen1 as 'GÖZETMEN 1', Gozetmen2 as 'GÖZETMEN 2', Gozetmen3 as 'GÖZETMEN 3' from " + Home.donem + " order by id desc;";
+                komut = "select SiraNo as 'SIRA NO', Prg_Kod as 'Program Kodu', Prg_Ad as 'Program Adı', Ogr_Sekli as 'ÖĞRETİM ŞEKLİ',donem as 'DÖNEM',Ders_Kodu as 'DERS KODU',Ders_Adi as 'DERS ADI',Ogr_Sayisi as 'ÖĞRENCİ SAYISI',Tarih as 'TARİH',Saat as 'SAAT',Unvan as 'ÜNVAN' , Ad_Soyad as 'AD SOYAD',Derslik1 as 'DERSLİK 1',Derslik2 as 'DERSLİK 2',Derslik3 as 'DERSLİK 3',Derslik4 as 'DERSLİK 4',Y_Ogr_Sayisi as 'YERLEŞEN ÖĞRENCİ SAYISI', Gozetmen1 as 'GÖZETMEN 1', Gozetmen2 as 'GÖZETMEN 2', Gozetmen3 as 'GÖZETMEN 3' from " + Home.donem + " order by SiraNo desc;";
 
                 if (islemler.Al(komut).Rows.Count > 0)
                 {
@@ -154,7 +157,7 @@ namespace sp
             {
                 DataTable guncelleme = new DataTable();
 
-                komut = "select * from " + Home.donem + " where id=" + sinavid + ";";
+                komut = "select * from " + Home.donem + " where SiraNo=" + sinavid + ";";
                 guncelleme = islemler.Al(komut);
                 if (guncelleme.Rows.Count == 1)
                 {
@@ -614,7 +617,7 @@ namespace sp
 
             if (dataGridView1.Rows.Count > 0)
             {
-            
+
 
                 try
                 {
@@ -756,11 +759,11 @@ namespace sp
                 islemler = new VeritabaniIslemler();
                 if (sinavid > 0)
                 {
-                    komut = "select id,Ogr_Sayisi,Y_Ogr_Sayisi from " + Home.donem + " where id=" + sinavid + "";
+                    komut = "select SiraNo,Ogr_Sayisi,Y_Ogr_Sayisi from " + Home.donem + " where SiraNo=" + sinavid + "";
                 }
                 else
                 {
-                    komut = "select id,Ogr_Sayisi,Y_Ogr_Sayisi from " + Home.donem + " order by id desc";
+                    komut = "select SiraNo,Ogr_Sayisi,Y_Ogr_Sayisi from " + Home.donem + " order by SiraNo desc";
                 }
 
 
@@ -792,7 +795,7 @@ namespace sp
 
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
-                            if (dataGridView1.Rows[i].Cells[0].Value.ToString() == dr.GetString("id"))
+                            if (dataGridView1.Rows[i].Cells[0].Value.ToString() == dr.GetString("SiraNo"))
                             {
 
                                 if (ogrencisayisi == 0 && yerlesenogrencisayisi == 0) { dataGridView1.Rows[i].Cells[16].Style.BackColor = Color.White; break; }
@@ -819,8 +822,94 @@ namespace sp
         //Bu sayfada Form Üzerisinden Sürükleme Yapılmaması Yapılan İşlem
         private void SinavProgrami_MouseDown(object sender, MouseEventArgs e)
         {
-            mouseDown=false; //tasarım classı kopyalandığı için tasarım formunaki mousedown false yapıldığında sürükleme iptal olur 
+            mouseDown = false; //tasarım classı kopyalandığı için tasarım formunaki mousedown false yapıldığında sürükleme iptal olur 
         }
-        //-------
+
+        private void cmbfiltrebolumadi_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            komut = "select SiraNo as 'SIRA NO', Prg_Kod as 'Program Kodu', Prg_Ad as 'Program Adı', Ogr_Sekli as 'ÖĞRETİM ŞEKLİ',donem as 'DÖNEM',Ders_Kodu as 'DERS KODU',Ders_Adi as 'DERS ADI',Ogr_Sayisi as 'ÖĞRENCİ SAYISI',Tarih as 'TARİH',Saat as 'SAAT',Unvan as 'ÜNVAN' , Ad_Soyad as 'AD SOYAD',Derslik1 as 'DERSLİK 1',Derslik2 as 'DERSLİK 2',Derslik3 as 'DERSLİK 3',Derslik4 as 'DERSLİK 4',Y_Ogr_Sayisi as 'YERLEŞEN ÖĞRENCİ SAYISI', Gozetmen1 as 'GÖZETMEN 1', Gozetmen2 as 'GÖZETMEN 2', Gozetmen3 as 'GÖZETMEN 3' from " + Home.donem + " WHERE Program Adı LIKE " + cmbfiltrebolumadi.SelectedItem + "";
+            dataGridView1.DataSource = islemler.Al(komut);
+        }
+
+        private void btnmavi1_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.Rows.Count != 0)
+            {
+
+                // Creating a Excel object. 
+                Microsoft.Office.Interop.Excel._Application excel = new Microsoft.Office.Interop.Excel.Application();
+                Microsoft.Office.Interop.Excel._Workbook workbook = excel.Workbooks.Add(Type.Missing);
+                Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+
+                try
+                {
+
+                    worksheet = workbook.ActiveSheet;
+
+                    worksheet.Name = "Sheet 1";
+
+
+
+                    //Loop through each row and read value from each column. 
+                    for (int i = 0; i < dataGridView1.Rows.Count + 1; i++)
+                    {
+                        for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                        {
+                            // Excel index starts from 1,1. As first Row would have the Column headers, adding a condition check. 
+                            if (i + 1 == 1)
+                            {
+                                worksheet.Cells[i + 1, j + 1] = dataGridView1.Columns[j].HeaderText;
+                            }
+                            else
+                            {
+                                if (dataGridView1.Rows[i - 1].Cells[j].Value != DBNull.Value)
+                                {
+                                    worksheet.Cells[i + 1, j + 1] = dataGridView1.Rows[i - 1].Cells[j].Value.ToString();
+                                }
+                            }
+                        }
+
+                    }
+
+                    //Getting the location and file name of the excel to save from user. 
+                    SaveFileDialog saveDialog = new SaveFileDialog();
+                    saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+                    saveDialog.FilterIndex = 2;
+                    string yol = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
+
+                    if (saveDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        workbook.SaveAs(saveDialog.FileName);
+                        MessageBox.Show("Export Successful");
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                finally
+                {
+                    excel.Quit();
+                    workbook = null;
+                    excel = null;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Kaydedilecek Veri Yok! ","HATA");
+            }
+        }
+
     }
 }
+
+
+
+
+
+
+
+
+
+

@@ -43,36 +43,44 @@
             // 
             // lblbaslik
             // 
-            this.lblbaslik.Location = new System.Drawing.Point(304, 264);
+            this.lblbaslik.Location = new System.Drawing.Point(405, 325);
+            this.lblbaslik.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblbaslik.Size = new System.Drawing.Size(287, 33);
             this.lblbaslik.Text = "";
             // 
             // btnkirmizi1
             // 
             this.btnkirmizi1.FlatAppearance.BorderSize = 0;
-            this.btnkirmizi1.Location = new System.Drawing.Point(208, 264);
+            this.btnkirmizi1.Location = new System.Drawing.Point(277, 325);
+            this.btnkirmizi1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnkirmizi1.TabIndex = 9;
             // 
             // btnmavi1
             // 
             this.btnmavi1.FlatAppearance.BorderSize = 0;
-            this.btnmavi1.Location = new System.Drawing.Point(368, 224);
+            this.btnmavi1.Location = new System.Drawing.Point(491, 276);
+            this.btnmavi1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnmavi1.TabIndex = 8;
             this.btnmavi1.Text = "DÖNEM BELİRLE";
             this.btnmavi1.Visible = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(120, 48);
+            this.label1.Location = new System.Drawing.Point(160, 59);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 13);
+            this.label1.Size = new System.Drawing.Size(75, 17);
             this.label1.TabIndex = 19;
             this.label1.Text = "UserName";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 48);
+            this.label2.Location = new System.Drawing.Point(21, 59);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(102, 13);
+            this.label2.Size = new System.Drawing.Size(136, 17);
             this.label2.TabIndex = 26;
             this.label2.Text = "Hoş geldiniz Sayın : ";
             // 
@@ -82,10 +90,11 @@
             this.button12.FlatAppearance.BorderSize = 0;
             this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button12.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button12.Location = new System.Drawing.Point(168, 72);
+            this.button12.Location = new System.Drawing.Point(224, 89);
+            this.button12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(136, 64);
-            this.button12.TabIndex = 32;
+            this.button12.Size = new System.Drawing.Size(181, 79);
+            this.button12.TabIndex = 2;
             this.button12.Text = "Öğretim Elemanları";
             this.button12.UseVisualStyleBackColor = false;
             this.button12.Click += new System.EventHandler(this.button12_Click);
@@ -96,10 +105,11 @@
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button1.Location = new System.Drawing.Point(320, 72);
+            this.button1.Location = new System.Drawing.Point(427, 89);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(136, 64);
-            this.button1.TabIndex = 33;
+            this.button1.Size = new System.Drawing.Size(181, 79);
+            this.button1.TabIndex = 3;
             this.button1.Text = "Derslikler";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -110,10 +120,11 @@
             this.button6.FlatAppearance.BorderSize = 0;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button6.Location = new System.Drawing.Point(16, 72);
+            this.button6.Location = new System.Drawing.Point(21, 89);
+            this.button6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(136, 64);
-            this.button6.TabIndex = 34;
+            this.button6.Size = new System.Drawing.Size(181, 79);
+            this.button6.TabIndex = 1;
             this.button6.Text = "Sınav Programı";
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
@@ -124,10 +135,11 @@
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button4.Location = new System.Drawing.Point(16, 152);
+            this.button4.Location = new System.Drawing.Point(21, 187);
+            this.button4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(64, 64);
-            this.button4.TabIndex = 36;
+            this.button4.Size = new System.Drawing.Size(85, 79);
+            this.button4.TabIndex = 4;
             this.button4.Text = "Sınav Tarihleri";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
@@ -138,10 +150,11 @@
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button5.Location = new System.Drawing.Point(168, 152);
+            this.button5.Location = new System.Drawing.Point(224, 187);
+            this.button5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(136, 64);
-            this.button5.TabIndex = 37;
+            this.button5.Size = new System.Drawing.Size(181, 79);
+            this.button5.TabIndex = 6;
             this.button5.Text = "Bölümler";
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
@@ -152,9 +165,10 @@
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label3.Font = new System.Drawing.Font("Arial Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label3.Location = new System.Drawing.Point(16, 264);
+            this.label3.Location = new System.Drawing.Point(21, 325);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(112, 22);
+            this.label3.Size = new System.Drawing.Size(141, 27);
             this.label3.TabIndex = 38;
             this.label3.Text = "Yükleniyor...";
             this.label3.Visible = false;
@@ -165,10 +179,11 @@
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button2.Location = new System.Drawing.Point(320, 152);
+            this.button2.Location = new System.Drawing.Point(427, 187);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(136, 64);
-            this.button2.TabIndex = 39;
+            this.button2.Size = new System.Drawing.Size(181, 79);
+            this.button2.TabIndex = 7;
             this.button2.Text = "Dersler";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -179,20 +194,21 @@
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button3.Location = new System.Drawing.Point(80, 152);
+            this.button3.Location = new System.Drawing.Point(107, 187);
+            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(72, 64);
-            this.button3.TabIndex = 36;
+            this.button3.Size = new System.Drawing.Size(96, 79);
+            this.button3.TabIndex = 5;
             this.button3.Text = "Sınav Saatleri";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Home
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.ClientSize = new System.Drawing.Size(471, 304);
+            this.ClientSize = new System.Drawing.Size(628, 374);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button5);
@@ -204,6 +220,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.Name = "Home";
             this.Opacity = 0.95D;
             this.Activated += new System.EventHandler(this.Home_Activated);

@@ -41,3 +41,67 @@ C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\o
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\obj\Debug\sp.Dersler.resources
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\obj\Debug\sp.csproj.GenerateResource.Cache
 C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\obj\Debug\sp.SınavProgramıDüzenleFormu.resources
+C:\Users\baris\Desktop\sp\sp\bin\Debug\sp.exe.config
+C:\Users\baris\Desktop\sp\sp\obj\Debug\sp.exe
+C:\Users\baris\Desktop\sp\sp\obj\Debug\sp.pdb
+C:\Users\baris\Desktop\sp\sp\bin\Debug\sp.exe
+C:\Users\baris\Desktop\sp\sp\bin\Debug\sp.pdb
+C:\Users\baris\Desktop\sp\sp\obj\Debug\sp.csprojResolveAssemblyReference.cache
+C:\Users\baris\Desktop\sp\sp\obj\Debug\sp.Derslikler.resources
+C:\Users\baris\Desktop\sp\sp\obj\Debug\sp.DonemBelirle.resources
+C:\Users\baris\Desktop\sp\sp\obj\Debug\sp.SınavProgramıDüzenleFormu.resources
+C:\Users\baris\Desktop\sp\sp\obj\Debug\sp.Saatler.resources
+C:\Users\baris\Desktop\sp\sp\obj\Debug\sp.SinavProgrami.resources
+C:\Users\baris\Desktop\sp\sp\obj\Debug\sp.Tasarim.resources
+C:\Users\baris\Desktop\sp\sp\obj\Debug\sp.Home.resources
+C:\Users\baris\Desktop\sp\sp\obj\Debug\sp.Login.resources
+C:\Users\baris\Desktop\sp\sp\obj\Debug\sp.OgretimElemanlari.resources
+C:\Users\baris\Desktop\sp\sp\obj\Debug\sp.Properties.Resources.resources
+C:\Users\baris\Desktop\sp\sp\obj\Debug\sp.Tarihler.resources
+C:\Users\baris\Desktop\sp\sp\obj\Debug\sp.Bolumler.resources
+C:\Users\baris\Desktop\sp\sp\obj\Debug\sp.Dersler.resources
+C:\Users\baris\Desktop\sp\sp\obj\Debug\sp.csproj.GenerateResource.Cache
+C:\Users\omerd\Downloads\sp\sp\sp\bin\Debug\sp.exe.config
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Debug\sp.exe
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Debug\sp.pdb
+C:\Users\omerd\Downloads\sp\sp\sp\bin\Debug\sp.exe
+C:\Users\omerd\Downloads\sp\sp\sp\bin\Debug\sp.pdb
+C:\Users\omerd\Downloads\sp\sp\sp\bin\Debug\MySql.Data.dll
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Debug\sp.csprojResolveAssemblyReference.cache
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Debug\sp.Derslikler.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Debug\sp.DonemBelirle.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Debug\sp.SınavProgramıDüzenleFormu.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Debug\sp.Saatler.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Debug\sp.SinavProgrami.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Debug\sp.Tasarim.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Debug\sp.Home.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Debug\sp.Login.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Debug\sp.OgretimElemanlari.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Debug\sp.Properties.Resources.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Debug\sp.Tarihler.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Debug\sp.Bolumler.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Debug\sp.Dersler.resources
+C:\Users\omerd\Downloads\sp\sp\sp\obj\Debug\sp.csproj.GenerateResource.Cache
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\bin\Debug\sp.exe.config
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Debug\sp.csproj.ResolveComReference.cache
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Debug\sp.exe
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Debug\sp.pdb
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\bin\Debug\sp.exe
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\bin\Debug\sp.pdb
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\bin\Debug\MySql.Data.dll
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Debug\sp.csprojResolveAssemblyReference.cache
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Debug\sp.Derslikler.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Debug\sp.DonemBelirle.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Debug\sp.SınavProgramıDüzenleFormu.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Debug\sp.Saatler.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Debug\sp.SinavProgrami.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Debug\sp.Tasarim.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Debug\sp.Home.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Debug\sp.Login.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Debug\sp.OgretimElemanlari.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Debug\sp.Properties.Resources.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Debug\sp.Tarihler.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Debug\sp.Bolumler.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Debug\sp.Dersler.resources
+C:\Users\omerd\Downloads\sp (1)\sp\sp\sp\obj\Debug\sp.csproj.GenerateResource.Cache
+C:\Users\omerd\Documents\Üniversite\2. Sınıf\2. Dönem\Sistem Analizi\sp\sp\obj\Debug\sp.csproj.ResolveComReference.cache
