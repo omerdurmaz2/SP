@@ -925,7 +925,8 @@ namespace sp
                 islemler = new VeritabaniIslemler();
                 if (islemler.Al(komut).Rows.Count > 0)
                 {
-                    MySqlConnection conn = new MySqlConnection("Server=localhost;uid=root;pwd=root;database=sp_test");
+
+                    MySqlConnection conn = new MySqlConnection(VeritabaniIslemler.ConnectionString());
 
                     da = new MySqlDataAdapter(komut, conn);
                     ds = new DataSet();

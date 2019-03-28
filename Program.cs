@@ -13,7 +13,7 @@ namespace sp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SinavProgrami());
+            Application.Run(new Home());
         }
     }
 }
