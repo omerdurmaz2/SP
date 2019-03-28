@@ -51,10 +51,17 @@
             this.label8 = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
+            this.btnPreviousPage = new System.Windows.Forms.Button();
+            this.btnNextPage = new System.Windows.Forms.Button();
+            this.txtDisplayPageNo = new System.Windows.Forms.TextBox();
+            this.btnLastPage = new System.Windows.Forms.Button();
+            this.btnFirstPage = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblbaslik
@@ -83,7 +90,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(8, 8);
+            this.label1.Location = new System.Drawing.Point(0, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 19);
             this.label1.TabIndex = 52;
@@ -95,7 +102,7 @@
             this.cmbfiltrebolumadi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfiltrebolumadi.FormattingEnabled = true;
             this.cmbfiltrebolumadi.IntegralHeight = false;
-            this.cmbfiltrebolumadi.Location = new System.Drawing.Point(96, 8);
+            this.cmbfiltrebolumadi.Location = new System.Drawing.Point(96, 24);
             this.cmbfiltrebolumadi.Name = "cmbfiltrebolumadi";
             this.cmbfiltrebolumadi.Size = new System.Drawing.Size(152, 21);
             this.cmbfiltrebolumadi.TabIndex = 1;
@@ -107,7 +114,7 @@
             this.cmbfiltretarih.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfiltretarih.FormattingEnabled = true;
             this.cmbfiltretarih.IntegralHeight = false;
-            this.cmbfiltretarih.Location = new System.Drawing.Point(640, 8);
+            this.cmbfiltretarih.Location = new System.Drawing.Point(640, 24);
             this.cmbfiltretarih.Name = "cmbfiltretarih";
             this.cmbfiltretarih.Size = new System.Drawing.Size(136, 21);
             this.cmbfiltretarih.TabIndex = 5;
@@ -120,7 +127,7 @@
             this.cmbfiltreogretimsekli.Items.AddRange(new object[] {
             "G",
             "IO"});
-            this.cmbfiltreogretimsekli.Location = new System.Drawing.Point(352, 8);
+            this.cmbfiltreogretimsekli.Location = new System.Drawing.Point(352, 24);
             this.cmbfiltreogretimsekli.Name = "cmbfiltreogretimsekli";
             this.cmbfiltreogretimsekli.Size = new System.Drawing.Size(88, 21);
             this.cmbfiltreogretimsekli.TabIndex = 3;
@@ -131,7 +138,7 @@
             this.cmbfiltrebolumkodu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfiltrebolumkodu.FormattingEnabled = true;
             this.cmbfiltrebolumkodu.IntegralHeight = false;
-            this.cmbfiltrebolumkodu.Location = new System.Drawing.Point(256, 8);
+            this.cmbfiltrebolumkodu.Location = new System.Drawing.Point(256, 24);
             this.cmbfiltrebolumkodu.Name = "cmbfiltrebolumkodu";
             this.cmbfiltrebolumkodu.Size = new System.Drawing.Size(88, 21);
             this.cmbfiltrebolumkodu.TabIndex = 2;
@@ -143,7 +150,7 @@
             this.cmbfiltresaat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfiltresaat.FormattingEnabled = true;
             this.cmbfiltresaat.IntegralHeight = false;
-            this.cmbfiltresaat.Location = new System.Drawing.Point(784, 8);
+            this.cmbfiltresaat.Location = new System.Drawing.Point(784, 24);
             this.cmbfiltresaat.Name = "cmbfiltresaat";
             this.cmbfiltresaat.Size = new System.Drawing.Size(88, 21);
             this.cmbfiltresaat.TabIndex = 6;
@@ -154,7 +161,7 @@
             this.cmbfiltreogretimgorevlisi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfiltreogretimgorevlisi.FormattingEnabled = true;
             this.cmbfiltreogretimgorevlisi.IntegralHeight = false;
-            this.cmbfiltreogretimgorevlisi.Location = new System.Drawing.Point(448, 8);
+            this.cmbfiltreogretimgorevlisi.Location = new System.Drawing.Point(448, 24);
             this.cmbfiltreogretimgorevlisi.Name = "cmbfiltreogretimgorevlisi";
             this.cmbfiltreogretimgorevlisi.Size = new System.Drawing.Size(184, 21);
             this.cmbfiltreogretimgorevlisi.TabIndex = 4;
@@ -174,7 +181,7 @@
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
             this.linkLabel1.LinkColor = System.Drawing.Color.Black;
-            this.linkLabel1.Location = new System.Drawing.Point(880, 8);
+            this.linkLabel1.Location = new System.Drawing.Point(880, 24);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(114, 18);
             this.linkLabel1.TabIndex = 7;
@@ -190,9 +197,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Controls.Add(this.dataGridView2);
-            this.panel1.Location = new System.Drawing.Point(0, 120);
+            this.panel1.Location = new System.Drawing.Point(0, 176);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1297, 578);
+            this.panel1.Size = new System.Drawing.Size(1297, 491);
             this.panel1.TabIndex = 1;
             // 
             // dataGridView1
@@ -232,7 +239,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1013, 578);
+            this.dataGridView1.Size = new System.Drawing.Size(1013, 491);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
@@ -257,13 +264,19 @@
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(301, 578);
+            this.dataGridView2.Size = new System.Drawing.Size(301, 491);
             this.dataGridView2.TabIndex = 2;
             // 
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.label3);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.label7);
+            this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.cmbfiltresaat);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.cmbfiltrebolumadi);
@@ -272,15 +285,15 @@
             this.panel2.Controls.Add(this.cmbfiltretarih);
             this.panel2.Controls.Add(this.cmbfiltreogretimgorevlisi);
             this.panel2.Controls.Add(this.cmbfiltreogretimsekli);
-            this.panel2.Location = new System.Drawing.Point(288, 80);
+            this.panel2.Location = new System.Drawing.Point(304, 88);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1260, 32);
+            this.panel2.Size = new System.Drawing.Size(992, 56);
             this.panel2.TabIndex = 56;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(400, 68);
+            this.label3.Location = new System.Drawing.Point(96, 0);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 13);
@@ -290,7 +303,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(557, 68);
+            this.label4.Location = new System.Drawing.Point(256, 0);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 13);
@@ -300,7 +313,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(653, 68);
+            this.label5.Location = new System.Drawing.Point(352, 0);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 13);
@@ -310,7 +323,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(749, 68);
+            this.label6.Location = new System.Drawing.Point(448, 0);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(89, 13);
@@ -320,7 +333,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(944, 68);
+            this.label7.Location = new System.Drawing.Point(640, 0);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(63, 13);
@@ -330,7 +343,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1085, 68);
+            this.label8.Location = new System.Drawing.Point(784, 0);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(61, 13);
@@ -341,17 +354,85 @@
             // 
             this.printDialog1.UseEXDialog = true;
             // 
+            // btnPreviousPage
+            // 
+            this.btnPreviousPage.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnPreviousPage.Font = new System.Drawing.Font("Arial Black", 10F, System.Drawing.FontStyle.Bold);
+            this.btnPreviousPage.Location = new System.Drawing.Point(96, 8);
+            this.btnPreviousPage.Name = "btnPreviousPage";
+            this.btnPreviousPage.Size = new System.Drawing.Size(72, 23);
+            this.btnPreviousPage.TabIndex = 61;
+            this.btnPreviousPage.Text = "<";
+            this.btnPreviousPage.UseVisualStyleBackColor = true;
+            this.btnPreviousPage.Click += new System.EventHandler(this.btnPreviousPage_Click);
+            // 
+            // btnNextPage
+            // 
+            this.btnNextPage.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnNextPage.Font = new System.Drawing.Font("Arial Black", 10F, System.Drawing.FontStyle.Bold);
+            this.btnNextPage.Location = new System.Drawing.Point(832, 8);
+            this.btnNextPage.Name = "btnNextPage";
+            this.btnNextPage.Size = new System.Drawing.Size(72, 23);
+            this.btnNextPage.TabIndex = 60;
+            this.btnNextPage.Text = ">";
+            this.btnNextPage.UseVisualStyleBackColor = true;
+            this.btnNextPage.Click += new System.EventHandler(this.btnNextPage_Click);
+            // 
+            // txtDisplayPageNo
+            // 
+            this.txtDisplayPageNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDisplayPageNo.Enabled = false;
+            this.txtDisplayPageNo.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+            this.txtDisplayPageNo.Location = new System.Drawing.Point(456, 8);
+            this.txtDisplayPageNo.Name = "txtDisplayPageNo";
+            this.txtDisplayPageNo.Size = new System.Drawing.Size(152, 21);
+            this.txtDisplayPageNo.TabIndex = 59;
+            this.txtDisplayPageNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btnLastPage
+            // 
+            this.btnLastPage.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnLastPage.Font = new System.Drawing.Font("Arial Black", 10F, System.Drawing.FontStyle.Bold);
+            this.btnLastPage.Location = new System.Drawing.Point(920, 8);
+            this.btnLastPage.Name = "btnLastPage";
+            this.btnLastPage.Size = new System.Drawing.Size(72, 23);
+            this.btnLastPage.TabIndex = 58;
+            this.btnLastPage.Text = ">>";
+            this.btnLastPage.UseVisualStyleBackColor = true;
+            this.btnLastPage.Click += new System.EventHandler(this.btnLastPage_Click);
+            // 
+            // btnFirstPage
+            // 
+            this.btnFirstPage.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnFirstPage.Font = new System.Drawing.Font("Arial Black", 10F, System.Drawing.FontStyle.Bold);
+            this.btnFirstPage.Location = new System.Drawing.Point(8, 8);
+            this.btnFirstPage.Name = "btnFirstPage";
+            this.btnFirstPage.Size = new System.Drawing.Size(75, 23);
+            this.btnFirstPage.TabIndex = 57;
+            this.btnFirstPage.Text = "<<";
+            this.btnFirstPage.UseVisualStyleBackColor = true;
+            this.btnFirstPage.Click += new System.EventHandler(this.btnFirstPage_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Controls.Add(this.btnFirstPage);
+            this.panel3.Controls.Add(this.btnLastPage);
+            this.panel3.Controls.Add(this.txtDisplayPageNo);
+            this.panel3.Controls.Add(this.btnNextPage);
+            this.panel3.Controls.Add(this.btnPreviousPage);
+            this.panel3.Location = new System.Drawing.Point(304, 144);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(992, 32);
+            this.panel3.TabIndex = 62;
+            // 
             // SinavProgrami
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1300, 700);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.ClientSize = new System.Drawing.Size(1300, 669);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label2);
@@ -361,22 +442,19 @@
             this.Load += new System.EventHandler(this.SinavProgrami_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SinavProgrami_MouseDown);
             this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.panel1, 0);
+            this.Controls.SetChildIndex(this.panel2, 0);
             this.Controls.SetChildIndex(this.lblbaslik, 0);
             this.Controls.SetChildIndex(this.btnmavi1, 0);
             this.Controls.SetChildIndex(this.btnkirmizi1, 0);
-            this.Controls.SetChildIndex(this.panel1, 0);
-            this.Controls.SetChildIndex(this.panel2, 0);
-            this.Controls.SetChildIndex(this.label3, 0);
-            this.Controls.SetChildIndex(this.label4, 0);
-            this.Controls.SetChildIndex(this.label5, 0);
-            this.Controls.SetChildIndex(this.label6, 0);
-            this.Controls.SetChildIndex(this.label7, 0);
-            this.Controls.SetChildIndex(this.label8, 0);
+            this.Controls.SetChildIndex(this.panel3, 0);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -404,5 +482,11 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.PrintDialog printDialog1;
+        private System.Windows.Forms.Button btnPreviousPage;
+        private System.Windows.Forms.Button btnNextPage;
+        private System.Windows.Forms.TextBox txtDisplayPageNo;
+        private System.Windows.Forms.Button btnLastPage;
+        private System.Windows.Forms.Button btnFirstPage;
+        private System.Windows.Forms.Panel panel3;
     }
 }

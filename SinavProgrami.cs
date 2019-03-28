@@ -62,7 +62,9 @@ namespace sp
 
                 //-----
                 sinavid = -1;
-                Listele();
+
+                komut = "select SiraNo as 'SIRA NO', Prg_Kod as 'Program Kodu', Prg_Ad as 'Program Adı', Ogr_Sekli as 'ÖĞRETİM ŞEKLİ',donem as 'DÖNEM',Ders_Kodu as 'DERS KODU',Ders_Adi as 'DERS ADI',Ogr_Sayisi as 'ÖĞRENCİ SAYISI',Tarih as 'TARİH',Saat as 'SAAT',Unvan as 'ÜNVAN' , Ad_Soyad as 'AD SOYAD',Derslik1 as 'DERSLİK 1',Derslik2 as 'DERSLİK 2',Derslik3 as 'DERSLİK 3',Derslik4 as 'DERSLİK 4',Y_Ogr_Sayisi as 'YERLEŞEN ÖĞRENCİ SAYISI', Gozetmen1 as 'GÖZETMEN 1', Gozetmen2 as 'GÖZETMEN 2', Gozetmen3 as 'GÖZETMEN 3' from " + Home.donem + " order by Tarih desc;";
+                Listele(komut);
                 //}
                 //else
                 //{
@@ -121,34 +123,37 @@ namespace sp
 
         DataTable tablo;
 
+
+
         #endregion
+        #region Orijinal Listeleme
+        //public void Listele()
+        //{
+        //    try
+        //    {
 
-        public void Listele()
-        {
-            try
-            {
+        //        islemler = new VeritabaniIslemler();
+        //        komut = "select SiraNo as 'SIRA NO', Prg_Kod as 'Program Kodu', Prg_Ad as 'Program Adı', Ogr_Sekli as 'ÖĞRETİM ŞEKLİ',donem as 'DÖNEM',Ders_Kodu as 'DERS KODU',Ders_Adi as 'DERS ADI',Ogr_Sayisi as 'ÖĞRENCİ SAYISI',Tarih as 'TARİH',Saat as 'SAAT',Unvan as 'ÜNVAN' , Ad_Soyad as 'AD SOYAD',Derslik1 as 'DERSLİK 1',Derslik2 as 'DERSLİK 2',Derslik3 as 'DERSLİK 3',Derslik4 as 'DERSLİK 4',Y_Ogr_Sayisi as 'YERLEŞEN ÖĞRENCİ SAYISI', Gozetmen1 as 'GÖZETMEN 1', Gozetmen2 as 'GÖZETMEN 2', Gozetmen3 as 'GÖZETMEN 3' from " + Home.donem + " order by SiraNo desc;";
 
-                islemler = new VeritabaniIslemler();
-                komut = "select SiraNo as 'SIRA NO', Prg_Kod as 'Program Kodu', Prg_Ad as 'Program Adı', Ogr_Sekli as 'ÖĞRETİM ŞEKLİ',donem as 'DÖNEM',Ders_Kodu as 'DERS KODU',Ders_Adi as 'DERS ADI',Ogr_Sayisi as 'ÖĞRENCİ SAYISI',Tarih as 'TARİH',Saat as 'SAAT',Unvan as 'ÜNVAN' , Ad_Soyad as 'AD SOYAD',Derslik1 as 'DERSLİK 1',Derslik2 as 'DERSLİK 2',Derslik3 as 'DERSLİK 3',Derslik4 as 'DERSLİK 4',Y_Ogr_Sayisi as 'YERLEŞEN ÖĞRENCİ SAYISI', Gozetmen1 as 'GÖZETMEN 1', Gozetmen2 as 'GÖZETMEN 2', Gozetmen3 as 'GÖZETMEN 3' from " + Home.donem + " order by SiraNo desc;";
+        //        if (islemler.Al(komut).Rows.Count > 0)
+        //        {
 
-                if (islemler.Al(komut).Rows.Count > 0)
-                {
+        //            dataGridView1.Columns.Clear();
+        //            dataGridView1.DataSource = null;
+        //            dataGridView1.Refresh();
 
-                    dataGridView1.Columns.Clear();
-                    dataGridView1.DataSource = null;
-                    dataGridView1.Refresh();
+        //            dataGridView1.DataSource = islemler.Al(komut);
+        //        }
 
-                    dataGridView1.DataSource = islemler.Al(komut);
-                }
-
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show("Tablo Listelenirken Hata! \nHata Kodu:" + err, "HATA!");
-            }
+        //    }
+        //    catch (Exception err)
+        //    {
+        //        MessageBox.Show("Tablo Listelenirken Hata! \nHata Kodu:" + err, "HATA!");
+        //    }
 
 
-        }
+        //}
+        #endregion
 
         public void Guncelle()
         {
@@ -827,9 +832,10 @@ namespace sp
 
         private void cmbfiltrebolumadi_SelectedIndexChanged(object sender, EventArgs e)
         {
+            komut = "select SiraNo as 'SIRA NO', Prg_Kod as 'Program Kodu', Prg_Ad as 'Program Adı', Ogr_Sekli as 'ÖĞRETİM ŞEKLİ',donem as 'DÖNEM',Ders_Kodu as 'DERS KODU',Ders_Adi as 'DERS ADI',Ogr_Sayisi as 'ÖĞRENCİ SAYISI',Tarih as 'TARİH',Saat as 'SAAT',Unvan as 'ÜNVAN' , Ad_Soyad as 'AD SOYAD',Derslik1 as 'DERSLİK 1',Derslik2 as 'DERSLİK 2',Derslik3 as 'DERSLİK 3',Derslik4 as 'DERSLİK 4',Y_Ogr_Sayisi as 'YERLEŞEN ÖĞRENCİ SAYISI', Gozetmen1 as 'GÖZETMEN 1', Gozetmen2 as 'GÖZETMEN 2', Gozetmen3 as 'GÖZETMEN 3' from " + Home.donem + " where Prg_Ad LIKE '" + cmbfiltrebolumadi.SelectedItem + "' order by Tarih desc;";
 
-            komut = "select SiraNo as 'SIRA NO', Prg_Kod as 'Program Kodu', Prg_Ad as 'Program Adı', Ogr_Sekli as 'ÖĞRETİM ŞEKLİ',donem as 'DÖNEM',Ders_Kodu as 'DERS KODU',Ders_Adi as 'DERS ADI',Ogr_Sayisi as 'ÖĞRENCİ SAYISI',Tarih as 'TARİH',Saat as 'SAAT',Unvan as 'ÜNVAN' , Ad_Soyad as 'AD SOYAD',Derslik1 as 'DERSLİK 1',Derslik2 as 'DERSLİK 2',Derslik3 as 'DERSLİK 3',Derslik4 as 'DERSLİK 4',Y_Ogr_Sayisi as 'YERLEŞEN ÖĞRENCİ SAYISI', Gozetmen1 as 'GÖZETMEN 1', Gozetmen2 as 'GÖZETMEN 2', Gozetmen3 as 'GÖZETMEN 3' from " + Home.donem + " WHERE Program Adı LIKE " + cmbfiltrebolumadi.SelectedItem + "";
-            dataGridView1.DataSource = islemler.Al(komut);
+
+            Listele(komut);
         }
 
         private void btnmavi1_Click(object sender, EventArgs e)
@@ -897,9 +903,187 @@ namespace sp
             }
             else
             {
-                MessageBox.Show("Kaydedilecek Veri Yok! ","HATA");
+                MessageBox.Show("Kaydedilecek Veri Yok! ", "HATA");
             }
         }
+
+        //FİLTRELEME İŞLEMİ
+        MySqlDataAdapter da;
+        DataSet ds;
+        DataTable dtSource;
+        int PageCount;
+        int maxRec;
+        int pageSize;
+        int currentPage;
+        int recNo;
+
+        public void Listele( string komut)
+        {
+            try
+            {
+
+                islemler = new VeritabaniIslemler();
+                if (islemler.Al(komut).Rows.Count > 0)
+                {
+                    MySqlConnection conn = new MySqlConnection("Server=localhost;uid=root;pwd=root;database=sp_test");
+
+                    da = new MySqlDataAdapter(komut, conn);
+                    ds = new DataSet();
+
+                    //Fill the DataSet.
+                    da.Fill(ds, Home.donem);
+
+                    //Set the source table.
+                    dtSource = ds.Tables[Home.donem];
+
+                    Fill();
+                }
+
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Tablo Listelenirken Hata! \nHata Kodu:" + err, "HATA!");
+            }
+        }
+        private void LoadPage()
+        {
+            int i;
+            int startRec;
+            int endRec;
+            DataTable dtTemp;
+
+            dtTemp = dtSource.Clone();
+
+            if (currentPage == PageCount)
+            {
+                endRec = maxRec;
+            }
+            else
+            {
+                endRec = pageSize * currentPage;
+            }
+            startRec = recNo;
+
+            for (i = startRec; i < endRec; i++)
+            {
+                dtTemp.ImportRow(dtSource.Rows[i]);
+                recNo += 1;
+            }
+            dataGridView1.DataSource = dtTemp;
+            DisplayPageInfo();
+        }
+        private void DisplayPageInfo()
+        {
+            txtDisplayPageNo.Text = "Sayfa " + currentPage.ToString() + "/ " + PageCount.ToString();
+        }
+
+
+        public void Fill()
+        {
+            try
+            {
+                pageSize = 20;
+                maxRec = dtSource.Rows.Count;
+                PageCount = maxRec / pageSize;
+
+                if ((maxRec % pageSize) > 0)
+                {
+                    PageCount += 1;
+                }
+
+                currentPage = 1;
+                recNo = 0;
+
+                LoadPage();
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.ToString());
+            }
+
+        }
+
+        private void btnLastPage_Click(object sender, EventArgs e)
+        {
+
+
+            //Check if you are already at the last page.
+            if (recNo == maxRec)
+            {
+                MessageBox.Show("Son Sayfadasınız!");
+                return;
+            }
+            currentPage = PageCount;
+            recNo = pageSize * (currentPage - 1);
+            LoadPage();
+            dataGridView1.Focus();
+
+        }
+
+        private void btnNextPage_Click(object sender, EventArgs e)
+        {
+
+            currentPage += 1;
+            if (currentPage > PageCount)
+            {
+                currentPage = PageCount;
+                if (recNo == maxRec)
+                {
+                    MessageBox.Show("Son Sayfadasınız!");
+                    return;
+                }
+            }
+            LoadPage();
+            dataGridView1.Focus();
+
+        }
+
+        private void btnPreviousPage_Click(object sender, EventArgs e)
+        {
+
+
+            if (currentPage == PageCount)
+            {
+                recNo = pageSize * (currentPage - 2);
+            }
+
+            currentPage -= 1;
+            if (currentPage < 1)
+            {
+                MessageBox.Show("1. Sayfadasınız!");
+                currentPage = 1;
+                return;
+            }
+            else
+            {
+                recNo = pageSize * (currentPage - 1);
+            }
+            LoadPage();
+            dataGridView1.Focus();
+
+        }
+
+        private void btnFirstPage_Click(object sender, EventArgs e)
+        {
+
+
+            if (currentPage == 1)
+            {
+                MessageBox.Show("1. Sayfadasınız!");
+                return;
+            }
+
+            currentPage = 1;
+            recNo = 0;
+            LoadPage();
+            dataGridView1.Focus();
+
+        }
+
+
+
+
+        //--------------------------------------
 
     }
 }

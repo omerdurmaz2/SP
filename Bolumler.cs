@@ -147,6 +147,10 @@ namespace sp
         {
             if (txtad.Text != "" || txtbkod.Text != "" || txtprogramadi.Text != "")
             {
+                txtad.Text=txtad.Text.Trim();
+                txtbkod.Text = txtbkod.Text.Trim();
+                txtprogramadi.Text = txtprogramadi.Text.Trim();
+
                 Sorgu();
             }
             else
