@@ -486,6 +486,7 @@ namespace sp
         #endregion
 
 
+        #region Düzenleme Formunun Açılması
 
         public void Ac()
         {
@@ -517,7 +518,11 @@ namespace sp
 
 
         }
+        #endregion
 
+
+        #region Datagrid İşlemleri
+        //Hücre Tıklanması
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -617,6 +622,7 @@ namespace sp
             }
 
         }
+        //Hücre tuşla seçilmesi
         private void dataGridView1_KeyPress(object sender, KeyPressEventArgs e)
         {
 
@@ -739,8 +745,7 @@ namespace sp
 
             }
         }
-
-
+        //Hücre içinde tuş aşağı basıldığı anda yapılacaklar
         private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
         {
             //Seçili hücrenin indexini keydownda alıyoruz çünkü enter a basıldığında seçili hücre değişiyor.
@@ -750,12 +755,15 @@ namespace sp
                 rowindex = dataGridView1.CurrentCell.RowIndex;
             }
         }
-
         //Veri Basıldıktan Sonra Hücre Rengi Değiştiriliyor
         private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             YerlesenOGrenciRenkAta();
         }
+
+        #endregion
+
+        #region Yerleşen Öğrenci Durumuna Göre Renk Atanması
 
         public void YerlesenOGrenciRenkAta()
         {
@@ -823,6 +831,8 @@ namespace sp
             }
 
         }
+        #endregion
+
 
         //Bu sayfada Form Üzerisinden Sürükleme Yapılmaması Yapılan İşlem
         private void SinavProgrami_MouseDown(object sender, MouseEventArgs e)
@@ -830,6 +840,7 @@ namespace sp
             mouseDown = false; //tasarım classı kopyalandığı için tasarım formunaki mousedown false yapıldığında sürükleme iptal olur 
         }
 
+        #region Filtreleme İşlemleri
         private void cmbfiltrebolumadi_SelectedIndexChanged(object sender, EventArgs e)
         {
             komut = "select SiraNo as 'SIRA NO', Prg_Kod as 'Program Kodu', Prg_Ad as 'Program Adı', Ogr_Sekli as 'ÖĞRETİM ŞEKLİ',donem as 'DÖNEM',Ders_Kodu as 'DERS KODU',Ders_Adi as 'DERS ADI',Ogr_Sayisi as 'ÖĞRENCİ SAYISI',Tarih as 'TARİH',Saat as 'SAAT',Unvan as 'ÜNVAN' , Ad_Soyad as 'AD SOYAD',Derslik1 as 'DERSLİK 1',Derslik2 as 'DERSLİK 2',Derslik3 as 'DERSLİK 3',Derslik4 as 'DERSLİK 4',Y_Ogr_Sayisi as 'YERLEŞEN ÖĞRENCİ SAYISI', Gozetmen1 as 'GÖZETMEN 1', Gozetmen2 as 'GÖZETMEN 2', Gozetmen3 as 'GÖZETMEN 3' from " + Home.donem + " where Prg_Ad LIKE '" + cmbfiltrebolumadi.SelectedItem + "' order by Tarih desc;";
@@ -838,6 +849,9 @@ namespace sp
             Listele(komut);
         }
 
+        #endregion
+
+        #region Yazdırma İşlemi
         private void btnmavi1_Click(object sender, EventArgs e)
         {
             if (dataGridView1.Rows.Count != 0)
@@ -907,7 +921,11 @@ namespace sp
             }
         }
 
-        //FİLTRELEME İŞLEMİ
+        #endregion
+
+        #region Sayfalama İşlemi
+
+        //SAYFALAMA İŞLEMİ
         MySqlDataAdapter da;
         DataSet ds;
         DataTable dtSource;
@@ -1085,6 +1103,7 @@ namespace sp
 
 
         //--------------------------------------
+        #endregion
 
     }
 }

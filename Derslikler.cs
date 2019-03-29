@@ -104,6 +104,8 @@ namespace sp
         #region Ekle Butonu
         private void btnmavi1_Click(object sender, EventArgs e)
         {
+            txtkapasite.Text = txtkapasite.Text.Trim();
+            txtad.Text = txtad.Text.Trim();
             FormKontrol();
 
         }

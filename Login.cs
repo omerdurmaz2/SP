@@ -89,9 +89,8 @@ namespace sp
 
         private void btnmavi1_Click(object sender, EventArgs e)
         {
-
-            string eposta = txteposta.Text;
-            string sifre = txtsifre.Text;
+            string eposta = txteposta.Text.Trim();
+            string sifre = txtsifre.Text.Trim();
 
 
 

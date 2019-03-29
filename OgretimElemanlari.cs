@@ -208,6 +208,10 @@ namespace sp
 
         private void btnmavi1_Click(object sender, EventArgs e)
         {
+            txtunvan.Text = txtunvan.Text.Trim();
+            txtadsoyad.Text = txtadsoyad.Text.Trim();
+            txteposta.Text = txteposta.Text.Trim();
+            txtsifre.Text = txtsifre.Text.Trim();
             FormKontrol(); // form kontrol metodundan textboxları kontrol eder sonra da sorgu metodunda girilen kayıt önceden girilmiş mi bakar ve en son kaydet metodundan kaydedilip ekran listelenir
         }
         #endregion

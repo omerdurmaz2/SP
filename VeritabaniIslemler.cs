@@ -8,10 +8,10 @@ namespace sp
         public static string ConnectionString()
         {
 
-            return "server=remotemysql.com; database= tDNQ1XRXlu; uid=tDNQ1XRXlu; pwd=F44eHROJZ1;";
+            //return "server=remotemysql.com; database= tDNQ1XRXlu; uid=tDNQ1XRXlu; pwd=F44eHROJZ1;";
 
             //test
-            //return "server=localhost; database= sp_test; uid=root; pwd=root;";
+            return "server=localhost; database= sp_test; uid=root; pwd=root;";
         }
 
 

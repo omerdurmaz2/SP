@@ -217,7 +217,8 @@ namespace sp
         #region Ekle Butonu
         private void btnmavi1_Click(object sender, EventArgs e)
         {
-
+            txtdad.Text = txtdad.Text.Trim();
+            txtdkod.Text = txtdkod.Text.Trim();
             FormKontrol();
 
         }
