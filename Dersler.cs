@@ -313,6 +313,11 @@ namespace sp
             }
 
         }
+
+        private void cmbbolum_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
         #endregion
 
         #region İptal Butonu

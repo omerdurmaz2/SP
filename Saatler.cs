@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Data.OleDb;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 namespace sp
@@ -169,5 +170,17 @@ namespace sp
         }
         #endregion
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult sil = new DialogResult();
+            sil = MessageBox.Show("Tabloyu silmek istedeğinize emin misiniz ?", "Uyarı", MessageBoxButtons.YesNo);
+            if (sil == DialogResult.Yes)
+            {
+                komut = "Delete  From sinavsaatleri";
+                islemler.Degistir(komut);
+                saatler_Load(null, null);
+            }
+
+        }
     }
 }

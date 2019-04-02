@@ -134,5 +134,15 @@ namespace sp
         }
         #endregion
 
+        #region Donem Belirle Sayfası
+
+        
+        private void btnmavi1_Click(object sender, EventArgs e)
+        {
+            label3.Visible = true;
+            DonemBelirle donem1 = new DonemBelirle();
+            donem1.ShowDialog();
+        }
+        #endregion
     }
 }

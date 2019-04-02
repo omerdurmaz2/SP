@@ -90,7 +90,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(0, 24);
+            this.label1.Location = new System.Drawing.Point(7, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 19);
             this.label1.TabIndex = 52;
@@ -102,6 +102,8 @@
             this.cmbfiltrebolumadi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfiltrebolumadi.FormattingEnabled = true;
             this.cmbfiltrebolumadi.IntegralHeight = false;
+            this.cmbfiltrebolumadi.Items.AddRange(new object[] {
+            "Deneme"});
             this.cmbfiltrebolumadi.Location = new System.Drawing.Point(96, 24);
             this.cmbfiltrebolumadi.Name = "cmbfiltrebolumadi";
             this.cmbfiltrebolumadi.Size = new System.Drawing.Size(152, 21);
@@ -118,6 +120,7 @@
             this.cmbfiltretarih.Name = "cmbfiltretarih";
             this.cmbfiltretarih.Size = new System.Drawing.Size(136, 21);
             this.cmbfiltretarih.TabIndex = 5;
+            this.cmbfiltretarih.SelectedIndexChanged += new System.EventHandler(this.cmbfiltretarih_SelectedIndexChanged);
             // 
             // cmbfiltreogretimsekli
             // 
@@ -131,6 +134,7 @@
             this.cmbfiltreogretimsekli.Name = "cmbfiltreogretimsekli";
             this.cmbfiltreogretimsekli.Size = new System.Drawing.Size(88, 21);
             this.cmbfiltreogretimsekli.TabIndex = 3;
+            this.cmbfiltreogretimsekli.SelectedIndexChanged += new System.EventHandler(this.cmbfiltreogretimsekli_SelectedIndexChanged);
             // 
             // cmbfiltrebolumkodu
             // 
@@ -143,6 +147,7 @@
             this.cmbfiltrebolumkodu.Size = new System.Drawing.Size(88, 21);
             this.cmbfiltrebolumkodu.TabIndex = 2;
             this.cmbfiltrebolumkodu.Tag = "";
+            this.cmbfiltrebolumkodu.SelectedIndexChanged += new System.EventHandler(this.cmbfiltrebolumkodu_SelectedIndexChanged);
             // 
             // cmbfiltresaat
             // 
@@ -154,6 +159,7 @@
             this.cmbfiltresaat.Name = "cmbfiltresaat";
             this.cmbfiltresaat.Size = new System.Drawing.Size(88, 21);
             this.cmbfiltresaat.TabIndex = 6;
+            this.cmbfiltresaat.SelectedIndexChanged += new System.EventHandler(this.cmbfiltresaat_SelectedIndexChanged);
             // 
             // cmbfiltreogretimgorevlisi
             // 
@@ -165,6 +171,7 @@
             this.cmbfiltreogretimgorevlisi.Name = "cmbfiltreogretimgorevlisi";
             this.cmbfiltreogretimgorevlisi.Size = new System.Drawing.Size(184, 21);
             this.cmbfiltreogretimgorevlisi.TabIndex = 4;
+            this.cmbfiltreogretimgorevlisi.SelectedIndexChanged += new System.EventHandler(this.cmbfiltreogretimgorevlisi_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -181,7 +188,7 @@
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
             this.linkLabel1.LinkColor = System.Drawing.Color.Black;
-            this.linkLabel1.Location = new System.Drawing.Point(880, 24);
+            this.linkLabel1.Location = new System.Drawing.Point(875, 24);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(114, 18);
             this.linkLabel1.TabIndex = 7;
@@ -293,7 +300,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(96, 0);
+            this.label3.Location = new System.Drawing.Point(93, -2);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 13);
@@ -323,7 +330,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(448, 0);
+            this.label6.Location = new System.Drawing.Point(445, -2);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(89, 13);
@@ -357,10 +364,13 @@
             // btnPreviousPage
             // 
             this.btnPreviousPage.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnPreviousPage.Font = new System.Drawing.Font("Arial Black", 10F, System.Drawing.FontStyle.Bold);
+            this.btnPreviousPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(171)))), ((int)(((byte)(227)))));
+            this.btnPreviousPage.FlatAppearance.BorderSize = 0;
+            this.btnPreviousPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPreviousPage.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnPreviousPage.Location = new System.Drawing.Point(96, 8);
             this.btnPreviousPage.Name = "btnPreviousPage";
-            this.btnPreviousPage.Size = new System.Drawing.Size(72, 23);
+            this.btnPreviousPage.Size = new System.Drawing.Size(66, 21);
             this.btnPreviousPage.TabIndex = 61;
             this.btnPreviousPage.Text = "<";
             this.btnPreviousPage.UseVisualStyleBackColor = true;
@@ -369,10 +379,13 @@
             // btnNextPage
             // 
             this.btnNextPage.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnNextPage.Font = new System.Drawing.Font("Arial Black", 10F, System.Drawing.FontStyle.Bold);
+            this.btnNextPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(171)))), ((int)(((byte)(227)))));
+            this.btnNextPage.FlatAppearance.BorderSize = 0;
+            this.btnNextPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNextPage.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnNextPage.Location = new System.Drawing.Point(832, 8);
             this.btnNextPage.Name = "btnNextPage";
-            this.btnNextPage.Size = new System.Drawing.Size(72, 23);
+            this.btnNextPage.Size = new System.Drawing.Size(66, 21);
             this.btnNextPage.TabIndex = 60;
             this.btnNextPage.Text = ">";
             this.btnNextPage.UseVisualStyleBackColor = true;
@@ -392,10 +405,13 @@
             // btnLastPage
             // 
             this.btnLastPage.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnLastPage.Font = new System.Drawing.Font("Arial Black", 10F, System.Drawing.FontStyle.Bold);
+            this.btnLastPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(171)))), ((int)(((byte)(227)))));
+            this.btnLastPage.FlatAppearance.BorderSize = 0;
+            this.btnLastPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLastPage.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnLastPage.Location = new System.Drawing.Point(920, 8);
             this.btnLastPage.Name = "btnLastPage";
-            this.btnLastPage.Size = new System.Drawing.Size(72, 23);
+            this.btnLastPage.Size = new System.Drawing.Size(62, 21);
             this.btnLastPage.TabIndex = 58;
             this.btnLastPage.Text = ">>";
             this.btnLastPage.UseVisualStyleBackColor = true;
@@ -403,11 +419,13 @@
             // 
             // btnFirstPage
             // 
-            this.btnFirstPage.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnFirstPage.Font = new System.Drawing.Font("Arial Black", 10F, System.Drawing.FontStyle.Bold);
+            this.btnFirstPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(171)))), ((int)(((byte)(227)))));
+            this.btnFirstPage.FlatAppearance.BorderSize = 0;
+            this.btnFirstPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFirstPage.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnFirstPage.Location = new System.Drawing.Point(8, 8);
             this.btnFirstPage.Name = "btnFirstPage";
-            this.btnFirstPage.Size = new System.Drawing.Size(75, 23);
+            this.btnFirstPage.Size = new System.Drawing.Size(66, 21);
             this.btnFirstPage.TabIndex = 57;
             this.btnFirstPage.Text = "<<";
             this.btnFirstPage.UseVisualStyleBackColor = true;

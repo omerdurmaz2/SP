@@ -42,8 +42,10 @@ namespace sp
                             cmbogretimsekli.Visible = true;
                             EskiVeriyiSec();
                             cmbogretimsekli.Focus();
+                            this.Text="ÖĞRETİM ŞEKLİ";
                             break;
                         case 2:
+                            this.Text = "ÖĞRENCİ SAYISI";
                             lblbaslik.Text = "ÖĞRENCİ SAYISI";
                             this.Size = new Size(240, 78);
                             txtogrencisayisi.Visible = true;
@@ -52,6 +54,7 @@ namespace sp
                             txtogrencisayisi.Focus();
                             break;
                         case 3:
+                            this.Text = "SINAV TARİHİ";
                             lblbaslik.Text = "SINAV TARİHİ";
                             lblseciniz.Visible = true;
                             btnmavi1.Location = new Point(btnmavi1.Location.X, 48);
@@ -63,6 +66,7 @@ namespace sp
                             cmbtarih.Focus();
                             break;
                         case 4:
+                            this.Text = "SINAV SAATİ";
                             lblbaslik.Text = "SINAV SAATİ";
                             lblseciniz.Visible = true;
                             btnmavi1.Location = new Point(btnmavi1.Location.X, 48);
@@ -74,8 +78,9 @@ namespace sp
                             cmbsaat.Focus();
                             break;
                         case 5:
-                            if (Gözetmen == 0) { lblbaslik.Text = "ÖĞRETİM ELEMANI"; }
-                            else { lblbaslik.Text = "GÖZETMEN"; }
+
+                            if (Gözetmen == 0) { lblbaslik.Text = "ÖĞRETİM ELEMANI"; this.Text = "ÖĞRETİM ELEMANI"; }
+                            else { lblbaslik.Text = "GÖZETMEN"; this.Text = "GÖZETMEN"; }
                             lblseciniz.Visible = true;
                             btnmavi1.Location = new Point(btnmavi1.Location.X, 48);
                             this.Size = new Size(380, 88);
@@ -86,6 +91,7 @@ namespace sp
                             cmbogretimelemani.Focus();
                             break;
                         case 6:
+                            this.Text = "DERSLİK";
                             lblbaslik.Text = "DERSLİK";
                             lblseciniz.Visible = true;
                             btnmavi1.Location = new Point(btnmavi1.Location.X, 48);

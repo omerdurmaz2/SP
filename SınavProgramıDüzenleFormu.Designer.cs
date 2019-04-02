@@ -256,7 +256,7 @@
             this.Controls.Add(this.cmbogretimsekli);
             this.Name = "SınavProgramıDüzenleFormu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "FormOgretimSekli";
+            this.Text = "";
             this.Load += new System.EventHandler(this.FormOgretimSekli_Load);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormOgretimSekli_KeyPress);
             this.Controls.SetChildIndex(this.cmbogretimsekli, 0);
