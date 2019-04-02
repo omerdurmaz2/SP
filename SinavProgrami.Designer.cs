@@ -102,8 +102,6 @@
             this.cmbfiltrebolumadi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfiltrebolumadi.FormattingEnabled = true;
             this.cmbfiltrebolumadi.IntegralHeight = false;
-            this.cmbfiltrebolumadi.Items.AddRange(new object[] {
-            "Deneme"});
             this.cmbfiltrebolumadi.Location = new System.Drawing.Point(96, 24);
             this.cmbfiltrebolumadi.Name = "cmbfiltrebolumadi";
             this.cmbfiltrebolumadi.Size = new System.Drawing.Size(152, 21);
@@ -116,6 +114,8 @@
             this.cmbfiltretarih.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfiltretarih.FormattingEnabled = true;
             this.cmbfiltretarih.IntegralHeight = false;
+            this.cmbfiltretarih.Items.AddRange(new object[] {
+            "Hepsi"});
             this.cmbfiltretarih.Location = new System.Drawing.Point(640, 24);
             this.cmbfiltretarih.Name = "cmbfiltretarih";
             this.cmbfiltretarih.Size = new System.Drawing.Size(136, 21);
@@ -128,6 +128,7 @@
             this.cmbfiltreogretimsekli.FormattingEnabled = true;
             this.cmbfiltreogretimsekli.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.cmbfiltreogretimsekli.Items.AddRange(new object[] {
+            "Hepsi",
             "G",
             "IO"});
             this.cmbfiltreogretimsekli.Location = new System.Drawing.Point(352, 24);
@@ -142,6 +143,8 @@
             this.cmbfiltrebolumkodu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfiltrebolumkodu.FormattingEnabled = true;
             this.cmbfiltrebolumkodu.IntegralHeight = false;
+            this.cmbfiltrebolumkodu.Items.AddRange(new object[] {
+            "Hepsi"});
             this.cmbfiltrebolumkodu.Location = new System.Drawing.Point(256, 24);
             this.cmbfiltrebolumkodu.Name = "cmbfiltrebolumkodu";
             this.cmbfiltrebolumkodu.Size = new System.Drawing.Size(88, 21);
@@ -155,6 +158,8 @@
             this.cmbfiltresaat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfiltresaat.FormattingEnabled = true;
             this.cmbfiltresaat.IntegralHeight = false;
+            this.cmbfiltresaat.Items.AddRange(new object[] {
+            "Hepsi"});
             this.cmbfiltresaat.Location = new System.Drawing.Point(784, 24);
             this.cmbfiltresaat.Name = "cmbfiltresaat";
             this.cmbfiltresaat.Size = new System.Drawing.Size(88, 21);
@@ -167,6 +172,8 @@
             this.cmbfiltreogretimgorevlisi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfiltreogretimgorevlisi.FormattingEnabled = true;
             this.cmbfiltreogretimgorevlisi.IntegralHeight = false;
+            this.cmbfiltreogretimgorevlisi.Items.AddRange(new object[] {
+            "Hepsi"});
             this.cmbfiltreogretimgorevlisi.Location = new System.Drawing.Point(448, 24);
             this.cmbfiltreogretimgorevlisi.Name = "cmbfiltreogretimgorevlisi";
             this.cmbfiltreogretimgorevlisi.Size = new System.Drawing.Size(184, 21);

@@ -35,10 +35,11 @@ namespace sp
                     button12.Visible = false;
                     button4.Visible = false;
                     button5.Visible = false;
-
                 }
                 label1.Text = Login.Ad;
             }
+            donem = "guz";
+
         }
         #endregion
 
@@ -65,7 +66,19 @@ namespace sp
 
         private void Home_Activated(object sender, EventArgs e)
         {
-            label3.Visible = false;
+            label3.Visible = false; // yükleniyor yazısı kaldırılıyor
+
+            //anasayfaya geri gelindiğinde döneme göre buton stili değişiyor
+            if (donem == "guz")
+            {
+                button7.BackColor = Color.FromArgb(44, 171, 227);
+                button7.Text = "GÜZ";
+            }
+            else
+            {
+                button7.BackColor = Color.FromArgb(255, 82, 82);
+                button7.Text = "BAHAR";
+            }
         }
         #endregion
 
@@ -136,12 +149,11 @@ namespace sp
 
         #region Donem Belirle Sayfası
 
-        
-        private void btnmavi1_Click(object sender, EventArgs e)
+       
+        private void button7_Click(object sender, EventArgs e)
         {
-            label3.Visible = true;
-            DonemBelirle donem1 = new DonemBelirle();
-            donem1.ShowDialog();
+            DonemBelirle db = new DonemBelirle();
+            db.ShowDialog();
         }
         #endregion
     }

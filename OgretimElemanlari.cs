@@ -24,14 +24,14 @@ namespace sp
         private void OgretimElemanlari_Load(object sender, EventArgs e)
         {
             //session kontrolü
-            if (Login.Session)
-            {
+            //if (Login.Session)
+            //{
                 Listele();
-            }
-            else
-            {
-                this.BeginInvoke(new MethodInvoker(this.Close));// formu zorla kapatma yolu
-            }
+            //}
+            //else
+            //{
+            //    this.BeginInvoke(new MethodInvoker(this.Close));// formu zorla kapatma yolu
+            //}
         }
         #endregion
         #region Köşelerin Yuvarlanması

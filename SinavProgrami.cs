@@ -59,6 +59,7 @@ namespace sp
                 FiltreSaatBas();
                 FiltreOgretimGorevlisiBas();
                 FiltreBolumKoduAdıBas();
+                cmbfiltreogretimsekli.SelectedIndex = 0;
 
                 //-----
                 sinavid = -1;
@@ -315,6 +316,7 @@ namespace sp
             try
             {
                 cmbfiltretarih.Items.Clear();
+                cmbfiltretarih.Items.Add("Hepsi");
                 DateTime tarih;
                 tablo = new DataTable();
                 komut = "select * from sinavtarihleri order by tarih asc;";
@@ -326,10 +328,12 @@ namespace sp
                         if (tablo.Rows[i]["tarih"] != DBNull.Value)
                         {
                             tarih = Convert.ToDateTime(tablo.Rows[i]["tarih"]);
-                            cmbfiltretarih.Items.Add(tarih);
+                            cmbfiltretarih.Items.Add(tarih.ToShortDateString());
                         }
                     }
                 }
+                cmbfiltretarih.SelectedIndex = 0;
+
             }
             catch (Exception err)
             {
@@ -345,6 +349,8 @@ namespace sp
             try
             {
                 cmbfiltresaat.Items.Clear();
+                cmbfiltresaat.Items.Add("Hepsi");
+
                 tablo = new DataTable();
                 komut = "select saat from sinavsaatleri order by saat asc";
                 tablo = islemler.Al(komut);
@@ -354,10 +360,11 @@ namespace sp
                     {
                         if (tablo.Rows[i]["saat"] != DBNull.Value)
                         {
-                            cmbfiltresaat.Items.Add(tablo.Rows[i]["saat"]);
+                            cmbfiltresaat.Items.Add(tablo.Rows[i]["saat"].ToString());
                         }
                     }
                 }
+                cmbfiltresaat.SelectedIndex = 0;
 
             }
             catch (Exception err)
@@ -373,6 +380,8 @@ namespace sp
             try
             {
                 cmbfiltreogretimgorevlisi.Items.Clear();
+                cmbfiltreogretimgorevlisi.Items.Add("Hepsi");
+
                 komut = "select * from ogretimelemani";
                 tablo = islemler.Al(komut);
                 if (tablo.Rows.Count > 0)
@@ -385,6 +394,8 @@ namespace sp
                         }
                     }
                 }
+                cmbfiltreogretimgorevlisi.SelectedIndex = 0;
+
             }
             catch (Exception err)
             {
@@ -400,6 +411,9 @@ namespace sp
             {
                 cmbfiltrebolumadi.Items.Clear();
                 cmbfiltrebolumkodu.Items.Clear();
+                cmbfiltrebolumadi.Items.Add("Hepsi");
+                cmbfiltrebolumkodu.Items.Add("Hepsi");
+
 
                 komut = "select * from bolumler";
                 tablo = islemler.Al(komut);
@@ -414,6 +428,9 @@ namespace sp
                         }
                     }
                 }
+                cmbfiltrebolumadi.SelectedIndex = 0;
+                cmbfiltrebolumkodu.SelectedIndex = 0;
+
             }
             catch (Exception err)
             {
@@ -428,35 +445,23 @@ namespace sp
         {
             try
             {
-                cmbfiltrebolumadi.SelectedIndex = -1;
-                cmbfiltrebolumadi.Text = "Bölüm Adı:";
+                cmbfiltrebolumadi.SelectedIndex = 0;
 
-                cmbfiltrebolumkodu.SelectedIndex = -1;
-                cmbfiltrebolumkodu.Text = "Bölüm Kodu:";
+                cmbfiltrebolumkodu.SelectedIndex = 0;
 
-                cmbfiltreogretimsekli.SelectedIndex = -1;
-                cmbfiltreogretimsekli.Text = "Öğretim Şekli";
+                cmbfiltreogretimsekli.SelectedIndex = 0;
 
-                cmbfiltreogretimgorevlisi.SelectedIndex = -1;
-                cmbfiltreogretimgorevlisi.Text = "Öğretim Görevlisi:";
+                cmbfiltreogretimgorevlisi.SelectedIndex = 0;
 
-                cmbfiltretarih.SelectedIndex = -1;
-                cmbfiltretarih.Text = "Tarih:";
+                cmbfiltretarih.SelectedIndex = 0;
 
-                cmbfiltresaat.SelectedIndex = -1;
-                cmbfiltresaat.Text = "Saat";
+                cmbfiltresaat.SelectedIndex = 0;
 
             }
             catch (Exception err)
             {
                 MessageBox.Show("Filtre Temizlenirken Hata! \nHata Kodu:" + err, "HATA!");
             }
-
-
-
-
-
-
         }
         #endregion
 
@@ -839,48 +844,76 @@ namespace sp
         {
             mouseDown = false; //tasarım classı kopyalandığı için tasarım formunaki mousedown false yapıldığında sürükleme iptal olur 
         }
-        
-                #region Filtreleme İşlemleri
-                public void filtreleme()
-                {
 
-                    komut = "select SiraNo as 'SIRA NO', Prg_Kod as 'Program Kodu', Prg_Ad as 'Program Adı', Ogr_Sekli as 'ÖĞRETİM ŞEKLİ',donem as 'DÖNEM',Ders_Kodu as 'DERS KODU',Ders_Adi as 'DERS ADI',Ogr_Sayisi as 'ÖĞRENCİ SAYISI',Tarih as 'TARİH',Saat as 'SAAT',Unvan as 'ÜNVAN' , Ad_Soyad as 'AD SOYAD',Derslik1 as 'DERSLİK 1',Derslik2 as 'DERSLİK 2',Derslik3 as 'DERSLİK 3',Derslik4 as 'DERSLİK 4',Y_Ogr_Sayisi as 'YERLEŞEN ÖĞRENCİ SAYISI', Gozetmen1 as 'GÖZETMEN 1', Gozetmen2 as 'GÖZETMEN 2', Gozetmen3 as 'GÖZETMEN 3' from " + Home.donem + " where ";
+        #region Filtreleme İşlemleri
+        public void filtreleme()
+        {
 
-                    if (cmbfiltrebolumkodu.SelectedIndex != -1)
-                        komut += "Prg_Kod LIKE '" + cmbfiltrebolumkodu.SelectedItem + "' AND ";
-                    if (cmbfiltrebolumadi.SelectedIndex != -1)
-                        komut += "Prg_Ad LIKE '" + cmbfiltrebolumadi.SelectedItem + "' AND ";
-                    if (cmbfiltreogretimsekli.SelectedIndex != -1)
-                        komut += "Ogr_Sekli LIKE '" + cmbfiltreogretimsekli.SelectedItem + "' AND ";
-                    if (cmbfiltreogretimgorevlisi.SelectedIndex != -1)
-                        komut += "concat(unvan,' '+Ad_Soyad)= '" + cmbfiltreogretimgorevlisi.SelectedItem + "' AND ";
-                    if (cmbfiltretarih.SelectedIndex != -1)
-                    {
-                        DateTime tarih = Convert.ToDateTime(cmbfiltretarih.SelectedItem);
-                        komut += "Tarih LIKE '" + tarih.ToString("yyyy-MM-dd") + "' AND ";
-                    }
-                    if (cmbfiltresaat.SelectedIndex != -1)
-                    {
-                        DateTime saat = Convert.ToDateTime(cmbfiltresaat.SelectedItem.ToString());
-                        komut += "Saat LIKE '" + saat.ToShortTimeString() + "' AND ";
-                    }
-                    komut = komut.Substring(0, komut.Length - 4);
-                    komut += ";";
+            komut = "select SiraNo as 'SIRA NO', Prg_Kod as 'Program Kodu', Prg_Ad as 'Program Adı', Ogr_Sekli as 'ÖĞRETİM ŞEKLİ',donem as 'DÖNEM',Ders_Kodu as 'DERS KODU',Ders_Adi as 'DERS ADI',Ogr_Sayisi as 'ÖĞRENCİ SAYISI',Tarih as 'TARİH',Saat as 'SAAT',Unvan as 'ÜNVAN' , Ad_Soyad as 'AD SOYAD',Derslik1 as 'DERSLİK 1',Derslik2 as 'DERSLİK 2',Derslik3 as 'DERSLİK 3',Derslik4 as 'DERSLİK 4',Y_Ogr_Sayisi as 'YERLEŞEN ÖĞRENCİ SAYISI', Gozetmen1 as 'GÖZETMEN 1', Gozetmen2 as 'GÖZETMEN 2', Gozetmen3 as 'GÖZETMEN 3' from " + Home.donem + " where ";
 
-                    Listele(komut);
+            if (cmbfiltrebolumkodu.SelectedIndex != 0 && cmbfiltrebolumkodu.SelectedIndex != -1)
+            {
+                komut += "Prg_Kod LIKE '" + cmbfiltrebolumkodu.SelectedItem + "' AND ";
+            }
+            if (cmbfiltrebolumadi.SelectedIndex != 0 && cmbfiltrebolumadi.SelectedIndex != -1)
+            {
+                komut += "Prg_Ad LIKE '" + cmbfiltrebolumadi.SelectedItem + "' AND ";
+            }
+            if (cmbfiltreogretimsekli.SelectedIndex != 0 && cmbfiltreogretimsekli.SelectedIndex != -1)
+            {
+                komut += "Ogr_Sekli LIKE '" + cmbfiltreogretimsekli.SelectedItem + "' AND ";
+            }
+            if (cmbfiltreogretimgorevlisi.SelectedIndex != 0 && cmbfiltreogretimgorevlisi.SelectedIndex != -1)
+            {
+                komut += "concat(Unvan,' ',Ad_Soyad) LIKE '" + cmbfiltreogretimgorevlisi.SelectedItem + "' AND ";
+            }
+            if (cmbfiltretarih.SelectedIndex != 0 && cmbfiltretarih.SelectedIndex != -1)
+            {
+                DateTime tarih = Convert.ToDateTime(cmbfiltretarih.SelectedItem);
+                komut += "Tarih LIKE '" + tarih.ToString("yyyy-MM-dd") + "' AND ";
+            }
+            if (cmbfiltresaat.SelectedIndex != 0 && cmbfiltresaat.SelectedIndex != -1)
+            {
+                komut += "Saat LIKE '" + cmbfiltresaat.SelectedItem.ToString() + "' AND ";
+            }
+            komut = komut.Substring(0, komut.Length - 4);
+            komut += ";";
 
-                }
-                private void cmbfiltrebolumadi_SelectedIndexChanged(object sender, EventArgs e)
-                {
-                    filtreleme();
+            Listele(komut);
+
+        }
+        private void cmbfiltrebolumadi_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filtreleme();
+        }
+        private void cmbfiltrebolumkodu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filtreleme();
+        }
+
+        private void cmbfiltreogretimsekli_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filtreleme();
+
+        }
+
+        private void cmbfiltretarih_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filtreleme();
+        }
+
+        private void cmbfiltreogretimgorevlisi_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filtreleme();
+        }
+
+        private void cmbfiltresaat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filtreleme();
+        }
+        #endregion
 
 
-
-                }
-
-                #endregion
-                
-        
         #region Yazdırma İşlemi
         private void btnmavi1_Click(object sender, EventArgs e)
         {
@@ -952,8 +985,8 @@ namespace sp
         }
 
         #endregion
-    
-        
+
+
 
         #region Sayfalama İşlemi
 
@@ -983,20 +1016,16 @@ namespace sp
 
                     //Fill the DataSet.
                     da.Fill(ds, Home.donem);
-                    if (ds.Tables[0].Rows.Count != 0)
-                    {
-                        dtSource = ds.Tables[Home.donem];
+                    dtSource = ds.Tables[Home.donem];
+                    Fill();
+                    dataGridView1.Focus();
 
-                        Fill();
-                    }
-                    //Set the source table.
-                    else
-                    {
-                        dataGridView1.DataSource = null;
-                        dataGridView1.Refresh();
-
-
-                    }
+                }
+                else
+                {
+                    dataGridView1.DataSource = null;
+                    dataGridView1.Rows.Clear();
+                    dataGridView1.Refresh();
                 }
 
             }
@@ -1030,11 +1059,11 @@ namespace sp
                 recNo += 1;
             }
 
-           
-            
-                dataGridView1.DataSource = dtTemp;
-           
-          
+
+
+            dataGridView1.DataSource = dtTemp;
+
+
             DisplayPageInfo();
         }
         private void DisplayPageInfo()
@@ -1151,31 +1180,6 @@ namespace sp
         //--------------------------------------
         #endregion
 
-        private void cmbfiltrebolumkodu_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            filtreleme();
-        }
-
-        private void cmbfiltreogretimsekli_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            filtreleme();
-
-        }
-
-        private void cmbfiltretarih_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            filtreleme();
-        }
-
-        private void cmbfiltreogretimgorevlisi_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            filtreleme();
-        }
-
-        private void cmbfiltresaat_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            filtreleme();
-        }
 
 
     }

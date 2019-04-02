@@ -363,5 +363,16 @@ namespace sp
 
         #endregion
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult sil = new DialogResult();
+            sil = MessageBox.Show("Tabloyu silmek istedeğinize emin misiniz ?", "Uyarı", MessageBoxButtons.YesNo);
+            if (sil == DialogResult.Yes)
+            {
+                komut = "Delete  From sinavtarihleri";
+                islemler.Degistir(komut);
+                TasarimOrnek_Load(null, null);
+            }
+        }
     }
 }

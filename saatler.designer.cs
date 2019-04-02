@@ -46,16 +46,16 @@
             // btnkirmizi1
             // 
             this.btnkirmizi1.FlatAppearance.BorderSize = 0;
-            this.btnkirmizi1.Location = new System.Drawing.Point(198, 129);
-            this.btnkirmizi1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnkirmizi1.Location = new System.Drawing.Point(184, 112);
+            this.btnkirmizi1.Margin = new System.Windows.Forms.Padding(2);
             this.btnkirmizi1.TabIndex = 3;
             this.btnkirmizi1.Click += new System.EventHandler(this.btnkirmizi1_Click);
             // 
             // btnmavi1
             // 
             this.btnmavi1.FlatAppearance.BorderSize = 0;
-            this.btnmavi1.Location = new System.Drawing.Point(304, 129);
-            this.btnmavi1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnmavi1.Location = new System.Drawing.Point(288, 112);
+            this.btnmavi1.Margin = new System.Windows.Forms.Padding(2);
             this.btnmavi1.TabIndex = 4;
             this.btnmavi1.Click += new System.EventHandler(this.btnmavi1_Click);
             // 
@@ -67,7 +67,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridView1.Location = new System.Drawing.Point(0, 206);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 24;
@@ -77,7 +77,10 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownHeight = 150;
+            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.IntegralHeight = false;
             this.comboBox1.Items.AddRange(new object[] {
             "00",
             "01",
@@ -103,16 +106,19 @@
             "21",
             "22",
             "23"});
-            this.comboBox1.Location = new System.Drawing.Point(70, 136);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox1.Location = new System.Drawing.Point(48, 111);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(35, 21);
+            this.comboBox1.Size = new System.Drawing.Size(51, 33);
             this.comboBox1.TabIndex = 1;
             this.comboBox1.Text = "00";
             // 
             // comboBox2
             // 
+            this.comboBox2.DropDownHeight = 150;
+            this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.IntegralHeight = false;
             this.comboBox2.Items.AddRange(new object[] {
             "00",
             "01",
@@ -174,17 +180,17 @@
             "57",
             "58",
             "59"});
-            this.comboBox2.Location = new System.Drawing.Point(119, 136);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox2.Location = new System.Drawing.Point(113, 111);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(38, 21);
+            this.comboBox2.Size = new System.Drawing.Size(55, 33);
             this.comboBox2.TabIndex = 2;
             this.comboBox2.Text = "00";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(68, 119);
+            this.label2.Location = new System.Drawing.Point(62, 94);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 13);
@@ -203,10 +209,14 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(384, 183);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(171)))), ((int)(((byte)(227)))));
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.button1.Location = new System.Drawing.Point(368, 168);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 19);
+            this.button1.Size = new System.Drawing.Size(88, 32);
             this.button1.TabIndex = 59;
             this.button1.Text = "Tümünü Sil";
             this.button1.UseVisualStyleBackColor = true;
@@ -223,7 +233,7 @@
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.dataGridView1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Saatler";
             this.Text = "Saatler";
             this.Load += new System.EventHandler(this.saatler_Load);

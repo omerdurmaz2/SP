@@ -39,6 +39,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button7 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblbaslik
@@ -51,7 +53,7 @@
             // btnkirmizi1
             // 
             this.btnkirmizi1.FlatAppearance.BorderSize = 0;
-            this.btnkirmizi1.Location = new System.Drawing.Point(208, 264);
+            this.btnkirmizi1.Location = new System.Drawing.Point(232, 264);
             this.btnkirmizi1.Margin = new System.Windows.Forms.Padding(4);
             this.btnkirmizi1.TabIndex = 9;
             // 
@@ -59,11 +61,11 @@
             // 
             this.btnmavi1.FlatAppearance.BorderSize = 0;
             this.btnmavi1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-            this.btnmavi1.Location = new System.Drawing.Point(368, 264);
+            this.btnmavi1.Location = new System.Drawing.Point(136, 264);
             this.btnmavi1.Margin = new System.Windows.Forms.Padding(4);
             this.btnmavi1.TabIndex = 8;
-            this.btnmavi1.Text = "DÖNEM BELİRLE";
-            this.btnmavi1.Click += new System.EventHandler(this.btnmavi1_Click);
+            this.btnmavi1.Text = "GÜZ";
+            this.btnmavi1.Visible = false;
             // 
             // label1
             // 
@@ -194,12 +196,38 @@
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label4.Location = new System.Drawing.Point(368, 240);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 13);
+            this.label4.TabIndex = 39;
+            this.label4.Text = "Dönem";
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(171)))), ((int)(((byte)(227)))));
+            this.button7.FlatAppearance.BorderSize = 0;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.button7.Location = new System.Drawing.Point(368, 264);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(88, 32);
+            this.button7.TabIndex = 40;
+            this.button7.Text = "GÜZ";
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.ClientSize = new System.Drawing.Size(471, 304);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button5);
@@ -230,6 +258,8 @@
             this.Controls.SetChildIndex(this.button5, 0);
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.button2, 0);
+            this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.button7, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -246,6 +276,8 @@
         public  System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label4;
+        public System.Windows.Forms.Button button7;
     }
 }
 
