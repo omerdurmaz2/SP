@@ -935,9 +935,9 @@ namespace sp
 
 
                     //Loop through each row and read value from each column. 
-                    for (int i = 0; i < dataGridView1.Rows.Count + 1; i++)
+                    for (int i = 0; i < dtSource.Rows.Count + 1; i++)
                     {
-                        for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                        for (int j = 0; j < dtSource.Columns.Count; j++)
                         {
                             // Excel index starts from 1,1. As first Row would have the Column headers, adding a condition check. 
                             if (i + 1 == 1)
@@ -946,9 +946,9 @@ namespace sp
                             }
                             else
                             {
-                                if (dataGridView1.Rows[i - 1].Cells[j].Value != DBNull.Value)
+                                if (dtSource.Rows[i - 1][j] != DBNull.Value)
                                 {
-                                    worksheet.Cells[i + 1, j + 1] = dataGridView1.Rows[i - 1].Cells[j].Value.ToString();
+                                    worksheet.Cells[i + 1, j + 1] = dtSource.Rows[i - 1][j].ToString();
                                 }
                             }
                         }
