@@ -26,7 +26,6 @@ namespace sp
             //session kontrolü
             //if (Login.Session)
             //{
-                Listele();
             //}
             //else
             //{
@@ -291,5 +290,11 @@ namespace sp
             comboBox3.SelectedIndex = comboBox2.SelectedIndex;
         }
 
+        //Form yüklendikten sonra veriler basılıyor
+        private void OgretimElemanlari_Shown(object sender, EventArgs e)
+        {
+            Listele();
+
+        }
     }
 }

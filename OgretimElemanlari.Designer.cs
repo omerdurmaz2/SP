@@ -58,7 +58,7 @@
             // 
             this.btnkirmizi1.FlatAppearance.BorderSize = 0;
             this.btnkirmizi1.Location = new System.Drawing.Point(744, 208);
-            this.btnkirmizi1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnkirmizi1.Margin = new System.Windows.Forms.Padding(4);
             this.btnkirmizi1.TabIndex = 9;
             this.btnkirmizi1.Click += new System.EventHandler(this.btnkirmizi1_Click);
             // 
@@ -66,7 +66,7 @@
             // 
             this.btnmavi1.FlatAppearance.BorderSize = 0;
             this.btnmavi1.Location = new System.Drawing.Point(848, 208);
-            this.btnmavi1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnmavi1.Margin = new System.Windows.Forms.Padding(4);
             this.btnmavi1.TabIndex = 8;
             this.btnmavi1.Click += new System.EventHandler(this.btnmavi1_Click);
             // 
@@ -264,11 +264,12 @@
             this.Controls.Add(this.txtunvan);
             this.Controls.Add(this.dataGridView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "OgretimElemanlari";
             this.Opacity = 0.99D;
             this.Text = "Öğretim Elemanları";
             this.Load += new System.EventHandler(this.OgretimElemanlari_Load);
+            this.Shown += new System.EventHandler(this.OgretimElemanlari_Shown);
             this.Controls.SetChildIndex(this.btnmavi1, 0);
             this.Controls.SetChildIndex(this.btnkirmizi1, 0);
             this.Controls.SetChildIndex(this.lblbaslik, 0);

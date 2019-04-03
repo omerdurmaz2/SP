@@ -39,33 +39,8 @@ namespace sp
                 //if (Login.Session)
                 //{
                 //Filtrelerin Basıldığı Yer
-                DonemBelirle donem = new DonemBelirle();
-                DialogResult cevap;
-                do
-                {
-                    cevap = donem.ShowDialog();
-                    if (cevap == DialogResult.None || cevap == DialogResult.No || cevap == DialogResult.Cancel)
-                    {
-                        MessageBox.Show("Lütfen Dönemi Seçiniz!", "UYARI!");
-                    }
-                    else
-                    {
-                        break;
-                    }
+                
 
-                } while (cevap == DialogResult.None || cevap == DialogResult.No || cevap == DialogResult.Cancel);
-                OgretimGorevlileriListele();
-                FiltreTarihBas();
-                FiltreSaatBas();
-                FiltreOgretimGorevlisiBas();
-                FiltreBolumKoduAdıBas();
-                cmbfiltreogretimsekli.SelectedIndex = 0;
-
-                //-----
-                sinavid = -1;
-
-                komut = "select SiraNo as 'SIRA NO', Prg_Kod as 'Program Kodu', Prg_Ad as 'Program Adı', Ogr_Sekli as 'ÖĞRETİM ŞEKLİ',donem as 'DÖNEM',Ders_Kodu as 'DERS KODU',Ders_Adi as 'DERS ADI',Ogr_Sayisi as 'ÖĞRENCİ SAYISI',Tarih as 'TARİH',Saat as 'SAAT',Unvan as 'ÜNVAN' , Ad_Soyad as 'AD SOYAD',Derslik1 as 'DERSLİK 1',Derslik2 as 'DERSLİK 2',Derslik3 as 'DERSLİK 3',Derslik4 as 'DERSLİK 4',Y_Ogr_Sayisi as 'YERLEŞEN ÖĞRENCİ SAYISI', Gozetmen1 as 'GÖZETMEN 1', Gozetmen2 as 'GÖZETMEN 2', Gozetmen3 as 'GÖZETMEN 3' from " + Home.donem + " order by Tarih desc;";
-                Listele(komut);
                 //}
                 //else
                 //{
@@ -1177,10 +1152,43 @@ namespace sp
 
 
 
+
+
         //--------------------------------------
         #endregion
 
+        #region Form Yüklendikten Sonra Verilerin Basılması
+        private void SinavProgrami_Shown(object sender, EventArgs e)
+        {
+            DonemBelirle donem = new DonemBelirle();
+            DialogResult cevap;
+            do
+            {
+                cevap = donem.ShowDialog();
+                if (cevap == DialogResult.None || cevap == DialogResult.No || cevap == DialogResult.Cancel)
+                {
+                    MessageBox.Show("Lütfen Dönemi Seçiniz!", "UYARI!");
+                }
+                else
+                {
+                    break;
+                }
 
+            } while (cevap == DialogResult.None || cevap == DialogResult.No || cevap == DialogResult.Cancel);
+            OgretimGorevlileriListele();
+            FiltreTarihBas();
+            FiltreSaatBas();
+            FiltreOgretimGorevlisiBas();
+            FiltreBolumKoduAdıBas();
+            cmbfiltreogretimsekli.SelectedIndex = 0;
+
+            //-----
+            sinavid = -1;
+
+            komut = "select SiraNo as 'SIRA NO', Prg_Kod as 'Program Kodu', Prg_Ad as 'Program Adı', Ogr_Sekli as 'ÖĞRETİM ŞEKLİ',donem as 'DÖNEM',Ders_Kodu as 'DERS KODU',Ders_Adi as 'DERS ADI',Ogr_Sayisi as 'ÖĞRENCİ SAYISI',Tarih as 'TARİH',Saat as 'SAAT',Unvan as 'ÜNVAN' , Ad_Soyad as 'AD SOYAD',Derslik1 as 'DERSLİK 1',Derslik2 as 'DERSLİK 2',Derslik3 as 'DERSLİK 3',Derslik4 as 'DERSLİK 4',Y_Ogr_Sayisi as 'YERLEŞEN ÖĞRENCİ SAYISI', Gozetmen1 as 'GÖZETMEN 1', Gozetmen2 as 'GÖZETMEN 2', Gozetmen3 as 'GÖZETMEN 3' from " + Home.donem + " order by Tarih desc;";
+            Listele(komut);
+        }
+        #endregion
 
     }
 }

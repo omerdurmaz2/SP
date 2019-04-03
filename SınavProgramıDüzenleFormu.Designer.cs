@@ -258,6 +258,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "";
             this.Load += new System.EventHandler(this.FormOgretimSekli_Load);
+            this.Shown += new System.EventHandler(this.SınavProgramıDüzenleFormu_Shown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormOgretimSekli_KeyPress);
             this.Controls.SetChildIndex(this.cmbogretimsekli, 0);
             this.Controls.SetChildIndex(this.txtogrencisayisi, 0);

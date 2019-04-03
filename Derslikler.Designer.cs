@@ -47,7 +47,7 @@
             // 
             this.btnkirmizi1.FlatAppearance.BorderSize = 0;
             this.btnkirmizi1.Location = new System.Drawing.Point(304, 160);
-            this.btnkirmizi1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnkirmizi1.Margin = new System.Windows.Forms.Padding(4);
             this.btnkirmizi1.TabIndex = 4;
             this.btnkirmizi1.Click += new System.EventHandler(this.btnkirmizi1_Click);
             // 
@@ -55,7 +55,7 @@
             // 
             this.btnmavi1.FlatAppearance.BorderSize = 0;
             this.btnmavi1.Location = new System.Drawing.Point(304, 120);
-            this.btnmavi1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnmavi1.Margin = new System.Windows.Forms.Padding(4);
             this.btnmavi1.TabIndex = 3;
             this.btnmavi1.Click += new System.EventHandler(this.btnmavi1_Click);
             // 
@@ -132,11 +132,12 @@
             this.Controls.Add(this.txtkapasite);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtad);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Derslikler";
             this.Opacity = 0.99D;
             this.Text = "Derslikler";
             this.Load += new System.EventHandler(this.Derslikler_Load);
+            this.Shown += new System.EventHandler(this.Derslikler_Shown);
             this.Controls.SetChildIndex(this.btnmavi1, 0);
             this.Controls.SetChildIndex(this.btnkirmizi1, 0);
             this.Controls.SetChildIndex(this.lblbaslik, 0);

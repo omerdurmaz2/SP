@@ -23,7 +23,6 @@ namespace sp
         {
             if (Login.Session)
             {
-                Listele();
             }
             else
             {
@@ -373,6 +372,13 @@ namespace sp
                 islemler.Degistir(komut);
                 TasarimOrnek_Load(null, null);
             }
+        }
+
+        //Form yüklendikten sonra veriler basılıyor
+        private void Tarihler_Shown(object sender, EventArgs e)
+        {
+            Listele();
+
         }
     }
 }

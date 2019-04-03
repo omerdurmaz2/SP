@@ -52,7 +52,7 @@
             // 
             this.btnkirmizi1.FlatAppearance.BorderSize = 0;
             this.btnkirmizi1.Location = new System.Drawing.Point(1000, 104);
-            this.btnkirmizi1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnkirmizi1.Margin = new System.Windows.Forms.Padding(4);
             this.btnkirmizi1.TabIndex = 6;
             this.btnkirmizi1.Click += new System.EventHandler(this.btnkirmizi1_Click);
             // 
@@ -60,7 +60,7 @@
             // 
             this.btnmavi1.FlatAppearance.BorderSize = 0;
             this.btnmavi1.Location = new System.Drawing.Point(904, 104);
-            this.btnmavi1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnmavi1.Margin = new System.Windows.Forms.Padding(4);
             this.btnmavi1.TabIndex = 5;
             this.btnmavi1.Click += new System.EventHandler(this.btnmavi1_Click);
             // 
@@ -146,7 +146,6 @@
             this.cmbbolum.Name = "cmbbolum";
             this.cmbbolum.Size = new System.Drawing.Size(256, 21);
             this.cmbbolum.TabIndex = 3;
-            this.cmbbolum.SelectedIndexChanged += new System.EventHandler(this.cmbbolum_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -190,10 +189,11 @@
             this.Controls.Add(this.txtdad);
             this.Controls.Add(this.dataGridView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Dersler";
             this.Text = "Dersler";
             this.Load += new System.EventHandler(this.Dersler_Load);
+            this.Shown += new System.EventHandler(this.Dersler_Shown);
             this.Controls.SetChildIndex(this.dataGridView1, 0);
             this.Controls.SetChildIndex(this.txtdad, 0);
             this.Controls.SetChildIndex(this.txtdkod, 0);

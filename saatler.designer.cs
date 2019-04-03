@@ -237,6 +237,7 @@
             this.Name = "Saatler";
             this.Text = "Saatler";
             this.Load += new System.EventHandler(this.saatler_Load);
+            this.Shown += new System.EventHandler(this.Saatler_Shown);
             this.Controls.SetChildIndex(this.lblbaslik, 0);
             this.Controls.SetChildIndex(this.btnmavi1, 0);
             this.Controls.SetChildIndex(this.btnkirmizi1, 0);

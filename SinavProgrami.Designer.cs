@@ -465,6 +465,7 @@
             this.Name = "SinavProgrami";
             this.Text = "SinavProgrami";
             this.Load += new System.EventHandler(this.SinavProgrami_Load);
+            this.Shown += new System.EventHandler(this.SinavProgrami_Shown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SinavProgrami_MouseDown);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.panel1, 0);

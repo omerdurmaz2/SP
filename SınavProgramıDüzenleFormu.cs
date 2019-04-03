@@ -40,8 +40,6 @@ namespace sp
                             this.Size = new Size(240, 88);
                             cmbogretimsekli.Location = new Point(10, 60);
                             cmbogretimsekli.Visible = true;
-                            EskiVeriyiSec();
-                            cmbogretimsekli.Focus();
                             this.Text="ÖĞRETİM ŞEKLİ";
                             break;
                         case 2:
@@ -50,8 +48,6 @@ namespace sp
                             this.Size = new Size(240, 78);
                             txtogrencisayisi.Visible = true;
                             txtogrencisayisi.Location = new Point(10, 40);
-                            EskiVeriyiSec();
-                            txtogrencisayisi.Focus();
                             break;
                         case 3:
                             this.Text = "SINAV TARİHİ";
@@ -61,9 +57,6 @@ namespace sp
                             this.Size = new Size(380, 88);
                             cmbtarih.Visible = true;
                             cmbtarih.Location = new Point(10, 60);
-                            TarihBas();
-                            EskiVeriyiSec();
-                            cmbtarih.Focus();
                             break;
                         case 4:
                             this.Text = "SINAV SAATİ";
@@ -73,9 +66,6 @@ namespace sp
                             this.Size = new Size(240, 88);
                             cmbsaat.Visible = true;
                             cmbsaat.Location = new Point(10, 60);
-                            SaatBas();
-                            EskiVeriyiSec();
-                            cmbsaat.Focus();
                             break;
                         case 5:
 
@@ -86,9 +76,6 @@ namespace sp
                             this.Size = new Size(380, 88);
                             cmbogretimelemani.Visible = true;
                             cmbogretimelemani.Location = new Point(10, 60);
-                            OgretimElemaniBas();
-                            EskiVeriyiSec();
-                            cmbogretimelemani.Focus();
                             break;
                         case 6:
                             this.Text = "DERSLİK";
@@ -98,9 +85,6 @@ namespace sp
                             this.Size = new Size(240, 88);
                             cmbderslik.Visible = true;
                             cmbderslik.Location = new Point(10, 60);
-                            DerslikBas();
-                            EskiVeriyiSec();
-                            cmbderslik.Focus();
                             break;
 
                     }
@@ -1369,6 +1353,54 @@ namespace sp
                 this.DialogResult = DialogResult.Abort;
                 this.Close();
             }
+        }
+
+        private void SınavProgramıDüzenleFormu_Shown(object sender, EventArgs e)
+        {
+            SinavProgrami sprogrm = new SinavProgrami();
+            try
+            {
+
+                    switch (YapilanIslem)
+                    {
+                        case 1:
+                            EskiVeriyiSec();
+                            cmbogretimsekli.Focus();
+                            break;
+                        case 2:
+                            EskiVeriyiSec();
+                            txtogrencisayisi.Focus();
+                            break;
+                        case 3:
+                            TarihBas();
+                            EskiVeriyiSec();
+                            cmbtarih.Focus();
+                            break;
+                        case 4:
+                            SaatBas();
+                            EskiVeriyiSec();
+                            cmbsaat.Focus();
+                            break;
+                        case 5:
+                            OgretimElemaniBas();
+                            EskiVeriyiSec();
+                            cmbogretimelemani.Focus();
+                            break;
+                        case 6:
+                            DerslikBas();
+                            EskiVeriyiSec();
+                            cmbderslik.Focus();
+                            break;
+
+                    }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Düzenleme Sayfası Açılırken Hata! \nHata Kodu:" + err, "HATA!");
+                this.DialogResult = DialogResult.Abort;
+                this.Close();
+            }
+
         }
     }
 }

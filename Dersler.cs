@@ -36,7 +36,6 @@ namespace sp
             }
 
 
-            Listele();
             //}
             //else
             //{
@@ -314,10 +313,8 @@ namespace sp
 
         }
 
-        private void cmbbolum_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
+
         #endregion
 
         #region İptal Butonu
@@ -330,6 +327,13 @@ namespace sp
 
         #endregion
 
+        #region Form yüklendikten sonra verilerin basılması
 
+        private void Dersler_Shown(object sender, EventArgs e)
+        {
+            Listele();
+
+        }
+        #endregion
     }
 }

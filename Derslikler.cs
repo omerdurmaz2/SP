@@ -21,7 +21,6 @@ namespace sp
 
             if (Login.Session)
             {
-                Listele();
             }
             else
             {
@@ -232,5 +231,10 @@ namespace sp
         }
         #endregion
 
+        //Form Yüklendikten sonra verilerin basılması
+        private void Derslikler_Shown(object sender, EventArgs e)
+        {
+            Listele();
+        }
     }
 }

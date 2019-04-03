@@ -24,7 +24,6 @@ namespace sp
         {
             if (Login.Session)
             {
-                yenile();
             }
             else
             {
@@ -178,9 +177,14 @@ namespace sp
             {
                 komut = "Delete  From sinavsaatleri";
                 islemler.Degistir(komut);
-                saatler_Load(null, null);
+                yenile();
             }
 
+        }
+
+        private void Saatler_Shown(object sender, EventArgs e)
+        {
+            yenile();
         }
     }
 }

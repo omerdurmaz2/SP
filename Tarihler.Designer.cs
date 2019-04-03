@@ -149,6 +149,7 @@
             this.Opacity = 0.95D;
             this.Text = "Tarihler";
             this.Load += new System.EventHandler(this.TasarimOrnek_Load);
+            this.Shown += new System.EventHandler(this.Tarihler_Shown);
             this.Controls.SetChildIndex(this.btnmavi1, 0);
             this.Controls.SetChildIndex(this.btnkirmizi1, 0);
             this.Controls.SetChildIndex(this.lblbaslik, 0);
