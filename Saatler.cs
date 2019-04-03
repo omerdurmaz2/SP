@@ -66,12 +66,13 @@ namespace sp
 
             if (e.RowIndex >= 0 && e.ColumnIndex > 1) // sütun başlığına tıklayınca hata vermesini önlemek için...
             {
+                saatid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+
                 switch (e.ColumnIndex)
                 {
                     case 2:
                         btnkirmizi1.Visible = true;
                         string saat = "";
-                        saatid = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
                         DateTime zaman = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
                         btnmavi1.Text = "DEĞİŞTİR";
                         saat = zaman.ToShortTimeString();
@@ -108,24 +109,37 @@ namespace sp
             kes[1] = comboBox2.SelectedItem.ToString();
             tamsaat = kes[0] + ":" + kes[1];
 
-            // guncelle = "UPDATE sinavsaatleri SET saat ='" + tamsaat + "' Where id=" + saatid + "";
-            //islemler.Degistir(guncelle);
+
+            string sorgu = "select * from sinavsaatleri where saat='" + tamsaat + "';";
+            MySqlDataReader rd;
+            rd = islemler.Oku(sorgu);
+
             if (saatid == -1)
             {
-                guncelle = "INSERT INTO sinavsaatleri (saat) VALUES ('" + tamsaat + "') ";
-                islemler.Degistir(guncelle);
-                temizle();
-                yenile();
+                if (!rd.Read())
+                {
+                    islemler.Kapat();
+                    guncelle = "INSERT INTO sinavsaatleri (saat) VALUES ('" + tamsaat + "') ";
+                    islemler.Degistir(guncelle);
+                    temizle();
+                    yenile();
+
+                }
+                else { MessageBox.Show("Aynı saat bulunmakta!", "UYARI"); islemler.Kapat(); }
 
 
             }
             else
             {
-                guncelle = "UPDATE sinavsaatleri SET saat ='" + tamsaat + "' Where id=" + saatid + "";
-                islemler.Degistir(guncelle);
-                temizle();
-                yenile();
-
+                if (!rd.Read())
+                {
+                    islemler.Kapat();
+                    guncelle = "UPDATE sinavsaatleri SET saat ='" + tamsaat + "' Where id=" + saatid + "";
+                    islemler.Degistir(guncelle);
+                    temizle();
+                    yenile();
+                }
+                else { MessageBox.Show("Aynı saat bulunmakta!", "UYARI"); islemler.Kapat(); btnmavi1.Text = "EKLE"; }
 
 
             }
