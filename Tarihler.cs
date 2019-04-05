@@ -370,7 +370,7 @@ namespace sp
             {
                 komut = "Delete  From sinavtarihleri";
                 islemler.Degistir(komut);
-                TasarimOrnek_Load(null, null);
+                Listele();
             }
         }
 

@@ -98,7 +98,7 @@ namespace sp
         int colindex = 0;
 
         DataTable tablo;
-
+        public string siralama="";
 
 
         #endregion
@@ -852,7 +852,7 @@ namespace sp
                 komut += "Saat LIKE '" + cmbfiltresaat.SelectedItem.ToString() + "' AND ";
             }
             komut = komut.Substring(0, komut.Length - 4);
-            komut += ";";
+            komut += siralama;
 
             Listele(komut);
 
@@ -1184,9 +1184,43 @@ namespace sp
 
             //-----
             sinavid = -1;
+            cmbsirala.SelectedIndex=0;
+        }
+        #endregion
 
-            komut = "select SiraNo as 'SIRA NO', Prg_Kod as 'Program Kodu', Prg_Ad as 'Program Adı', Ogr_Sekli as 'ÖĞRETİM ŞEKLİ',donem as 'DÖNEM',Ders_Kodu as 'DERS KODU',Ders_Adi as 'DERS ADI',Ogr_Sayisi as 'ÖĞRENCİ SAYISI',Tarih as 'TARİH',Saat as 'SAAT',Unvan as 'ÜNVAN' , Ad_Soyad as 'AD SOYAD',Derslik1 as 'DERSLİK 1',Derslik2 as 'DERSLİK 2',Derslik3 as 'DERSLİK 3',Derslik4 as 'DERSLİK 4',Y_Ogr_Sayisi as 'YERLEŞEN ÖĞRENCİ SAYISI', Gozetmen1 as 'GÖZETMEN 1', Gozetmen2 as 'GÖZETMEN 2', Gozetmen3 as 'GÖZETMEN 3' from " + Home.donem + " order by Tarih desc;";
-            Listele(komut);
+
+        #region Seçilen Sıralamaya Göre Listenin Sıralandığı Yer
+
+        private void cmbsirala_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            komut = "select SiraNo as 'SIRA NO', Prg_Kod as 'Program Kodu', Prg_Ad as 'Program Adı', Ogr_Sekli as 'ÖĞRETİM ŞEKLİ',donem as 'DÖNEM',Ders_Kodu as 'DERS KODU',Ders_Adi as 'DERS ADI',Ogr_Sayisi as 'ÖĞRENCİ SAYISI',Tarih as 'TARİH',Saat as 'SAAT',Unvan as 'ÜNVAN' , Ad_Soyad as 'AD SOYAD',Derslik1 as 'DERSLİK 1',Derslik2 as 'DERSLİK 2',Derslik3 as 'DERSLİK 3',Derslik4 as 'DERSLİK 4',Y_Ogr_Sayisi as 'YERLEŞEN ÖĞRENCİ SAYISI', Gozetmen1 as 'GÖZETMEN 1', Gozetmen2 as 'GÖZETMEN 2', Gozetmen3 as 'GÖZETMEN 3' from " + Home.donem + " ";
+            switch (cmbsirala.SelectedIndex)
+            {
+
+                case 0:
+                    siralama = " order by SiraNo desc;";
+                    break;
+                case 1:
+                    siralama = " order by Tarih asc;";
+                    break;
+                case 2:
+                    siralama = " order by Tarih desc;";
+                    break;
+                case 3:
+                    siralama = " order by Ders_Adi asc;";
+                    break;
+                case 4:
+                    siralama = " order by Ders_Adi desc;";
+                    break;
+                case 5:
+                    siralama = " order by Prg_Ad asc;";
+                    break;
+                case 6:
+                    siralama = " order by Prg_Ad desc;";
+                    break;
+            }
+            filtreleme();
+            //Seçilen Sıralama string bir değişkene kaydediliyor ve filtrelemeye gidilip datagrid basılıyor
         }
         #endregion
 
