@@ -76,7 +76,7 @@
             // btnkirmizi1
             // 
             this.btnkirmizi1.FlatAppearance.BorderSize = 0;
-            this.btnkirmizi1.Location = new System.Drawing.Point(1105, 32);
+            this.btnkirmizi1.Location = new System.Drawing.Point(1200, 48);
             this.btnkirmizi1.Margin = new System.Windows.Forms.Padding(4);
             this.btnkirmizi1.TabIndex = 8;
             // 
@@ -94,11 +94,11 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(7, 24);
+            this.label1.Location = new System.Drawing.Point(0, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 19);
+            this.label1.Size = new System.Drawing.Size(77, 19);
             this.label1.TabIndex = 52;
-            this.label1.Text = "FİLTRELE: ";
+            this.label1.Text = "FİLTRELE:";
             // 
             // cmbfiltrebolumadi
             // 
@@ -106,7 +106,7 @@
             this.cmbfiltrebolumadi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfiltrebolumadi.FormattingEnabled = true;
             this.cmbfiltrebolumadi.IntegralHeight = false;
-            this.cmbfiltrebolumadi.Location = new System.Drawing.Point(96, 24);
+            this.cmbfiltrebolumadi.Location = new System.Drawing.Point(80, 24);
             this.cmbfiltrebolumadi.Name = "cmbfiltrebolumadi";
             this.cmbfiltrebolumadi.Size = new System.Drawing.Size(152, 21);
             this.cmbfiltrebolumadi.TabIndex = 1;
@@ -135,9 +135,9 @@
             "Hepsi",
             "G",
             "IO"});
-            this.cmbfiltreogretimsekli.Location = new System.Drawing.Point(352, 24);
+            this.cmbfiltreogretimsekli.Location = new System.Drawing.Point(336, 24);
             this.cmbfiltreogretimsekli.Name = "cmbfiltreogretimsekli";
-            this.cmbfiltreogretimsekli.Size = new System.Drawing.Size(88, 21);
+            this.cmbfiltreogretimsekli.Size = new System.Drawing.Size(96, 21);
             this.cmbfiltreogretimsekli.TabIndex = 3;
             this.cmbfiltreogretimsekli.SelectedIndexChanged += new System.EventHandler(this.cmbfiltreogretimsekli_SelectedIndexChanged);
             // 
@@ -149,7 +149,7 @@
             this.cmbfiltrebolumkodu.IntegralHeight = false;
             this.cmbfiltrebolumkodu.Items.AddRange(new object[] {
             "Hepsi"});
-            this.cmbfiltrebolumkodu.Location = new System.Drawing.Point(256, 24);
+            this.cmbfiltrebolumkodu.Location = new System.Drawing.Point(240, 24);
             this.cmbfiltrebolumkodu.Name = "cmbfiltrebolumkodu";
             this.cmbfiltrebolumkodu.Size = new System.Drawing.Size(88, 21);
             this.cmbfiltrebolumkodu.TabIndex = 2;
@@ -178,7 +178,7 @@
             this.cmbfiltreogretimgorevlisi.IntegralHeight = false;
             this.cmbfiltreogretimgorevlisi.Items.AddRange(new object[] {
             "Hepsi"});
-            this.cmbfiltreogretimgorevlisi.Location = new System.Drawing.Point(448, 24);
+            this.cmbfiltreogretimgorevlisi.Location = new System.Drawing.Point(443, 24);
             this.cmbfiltreogretimgorevlisi.Name = "cmbfiltreogretimgorevlisi";
             this.cmbfiltreogretimgorevlisi.Size = new System.Drawing.Size(184, 21);
             this.cmbfiltreogretimgorevlisi.TabIndex = 4;
@@ -188,7 +188,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial Black", 11.25F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(64, 80);
+            this.label2.Location = new System.Drawing.Point(48, 144);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(211, 22);
             this.label2.TabIndex = 52;
@@ -197,7 +197,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
+            this.linkLabel1.Font = new System.Drawing.Font("Comic Sans MS", 9.5F);
             this.linkLabel1.LinkColor = System.Drawing.Color.Black;
             this.linkLabel1.Location = new System.Drawing.Point(875, 24);
             this.linkLabel1.Name = "linkLabel1";
@@ -311,7 +311,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(93, -2);
+            this.label3.Location = new System.Drawing.Point(77, -2);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 13);
@@ -321,7 +321,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(256, 0);
+            this.label4.Location = new System.Drawing.Point(240, 0);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 13);
@@ -331,7 +331,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(352, 0);
+            this.label5.Location = new System.Drawing.Point(336, 0);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 13);
@@ -341,7 +341,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(445, -2);
+            this.label6.Location = new System.Drawing.Point(440, -2);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(89, 13);
@@ -379,7 +379,7 @@
             this.btnPreviousPage.FlatAppearance.BorderSize = 0;
             this.btnPreviousPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPreviousPage.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnPreviousPage.Location = new System.Drawing.Point(96, 8);
+            this.btnPreviousPage.Location = new System.Drawing.Point(80, 8);
             this.btnPreviousPage.Name = "btnPreviousPage";
             this.btnPreviousPage.Size = new System.Drawing.Size(66, 21);
             this.btnPreviousPage.TabIndex = 61;
@@ -394,7 +394,7 @@
             this.btnNextPage.FlatAppearance.BorderSize = 0;
             this.btnNextPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNextPage.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnNextPage.Location = new System.Drawing.Point(328, 8);
+            this.btnNextPage.Location = new System.Drawing.Point(312, 8);
             this.btnNextPage.Name = "btnNextPage";
             this.btnNextPage.Size = new System.Drawing.Size(66, 21);
             this.btnNextPage.TabIndex = 60;
@@ -407,7 +407,7 @@
             this.txtDisplayPageNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDisplayPageNo.Enabled = false;
             this.txtDisplayPageNo.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-            this.txtDisplayPageNo.Location = new System.Drawing.Point(184, 8);
+            this.txtDisplayPageNo.Location = new System.Drawing.Point(168, 8);
             this.txtDisplayPageNo.Name = "txtDisplayPageNo";
             this.txtDisplayPageNo.Size = new System.Drawing.Size(128, 21);
             this.txtDisplayPageNo.TabIndex = 59;
@@ -420,7 +420,7 @@
             this.btnLastPage.FlatAppearance.BorderSize = 0;
             this.btnLastPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLastPage.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnLastPage.Location = new System.Drawing.Point(416, 8);
+            this.btnLastPage.Location = new System.Drawing.Point(392, 8);
             this.btnLastPage.Name = "btnLastPage";
             this.btnLastPage.Size = new System.Drawing.Size(62, 21);
             this.btnLastPage.TabIndex = 58;
@@ -434,7 +434,7 @@
             this.btnFirstPage.FlatAppearance.BorderSize = 0;
             this.btnFirstPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFirstPage.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnFirstPage.Location = new System.Drawing.Point(8, 8);
+            this.btnFirstPage.Location = new System.Drawing.Point(0, 8);
             this.btnFirstPage.Name = "btnFirstPage";
             this.btnFirstPage.Size = new System.Drawing.Size(66, 21);
             this.btnFirstPage.TabIndex = 57;
@@ -466,9 +466,9 @@
             this.chkgizli.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.chkgizli.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.chkgizli.FormattingEnabled = true;
-            this.chkgizli.Location = new System.Drawing.Point(824, 8);
+            this.chkgizli.Location = new System.Drawing.Point(808, 8);
             this.chkgizli.Name = "chkgizli";
-            this.chkgizli.Size = new System.Drawing.Size(168, 22);
+            this.chkgizli.Size = new System.Drawing.Size(176, 22);
             this.chkgizli.TabIndex = 63;
             this.chkgizli.Checkchanged += new System.EventHandler(this.chkgizli_Checkchanged);
             // 
@@ -487,9 +487,9 @@
             "Derse Göre (Z-A)",
             "Bölüme Göre (A-Z)",
             "Bölüme Göre (Z-A)"});
-            this.cmbsirala.Location = new System.Drawing.Point(536, 8);
+            this.cmbsirala.Location = new System.Drawing.Point(512, 8);
             this.cmbsirala.Name = "cmbsirala";
-            this.cmbsirala.Size = new System.Drawing.Size(128, 21);
+            this.cmbsirala.Size = new System.Drawing.Size(152, 21);
             this.cmbsirala.TabIndex = 65;
             this.cmbsirala.SelectedIndexChanged += new System.EventHandler(this.cmbsirala_SelectedIndexChanged);
             // 
@@ -497,23 +497,23 @@
             // 
             this.label10.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label10.Location = new System.Drawing.Point(672, 8);
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label10.Location = new System.Drawing.Point(680, 16);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(146, 15);
+            this.label10.Size = new System.Drawing.Size(130, 13);
             this.label10.TabIndex = 66;
-            this.label10.Text = "Gizlenecek Alanları Seçin";
+            this.label10.Text = "Gizlenecek Alanları Seçin:";
             // 
             // label9
             // 
             this.label9.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label9.Location = new System.Drawing.Point(488, 8);
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label9.Location = new System.Drawing.Point(472, 16);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(42, 15);
+            this.label9.Size = new System.Drawing.Size(36, 13);
             this.label9.TabIndex = 67;
             this.label9.Text = "Sırala:";
             // 
