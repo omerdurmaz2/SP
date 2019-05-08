@@ -54,6 +54,12 @@
     <Compile Include="ButtonEllipse.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CheckedCombo.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomCombo.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Derslikler.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Linq;
+using TyroDeveloperDLL;
 
 namespace sp
 {
@@ -30,7 +31,6 @@ namespace sp
             {
                 if (SinavProgrami.sinavid > 0)
                 {
-
                     switch (YapilanIslem)
                     {
                         case 1:
@@ -255,10 +255,20 @@ namespace sp
             islemler = new VeritabaniIslemler();
             try
             {
+                dt = new DataTable();
+                komut = "select Tarih,Saat from " + Home.donem + " where SiraNo=" + SinavProgrami.sinavid + ";";
+                dt = islemler.Al(komut);
+                if (dt.Rows.Count > 0)
+                {
+                    if (dt.Rows[0][0] != DBNull.Value) tarih = Convert.ToDateTime(dt.Rows[0][0].ToString());
+                    if (dt.Rows[0][1] != DBNull.Value) saat = Convert.ToDateTime(dt.Rows[0][1].ToString());
+                }
+
+
                 if (Gözetmen != 0)
                 {
                     dt = new DataTable();
-                    komut = "select Gozetmen1,Gozetmen2,Gozetmen3 from " + Home.donem + " where SiraNo=" + SinavProgrami.sinavid + ";";
+                    komut = "select Gozetmen1,Gozetmen2,Gozetmen3,Tarih,Saat from " + Home.donem + " where SiraNo=" + SinavProgrami.sinavid + ";";
                     dt = islemler.Al(komut);
                     if (dt.Rows.Count > 0)
                     {
@@ -286,7 +296,7 @@ namespace sp
 
                 if (Gözetmen != 0)
                 {
-                    cmbogretimelemani.Items.Add("Hiçbiri..");
+                    cmbogretimelemani.Items.Add(new ComboBoxItem("Hiçbiri", "0", Color.Black));
                 }
                 dt = new DataTable();
                 dt = islemler.Al(komut);
@@ -294,11 +304,25 @@ namespace sp
                 {
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
-                        if (dt.Rows[i]["unvan"] != DBNull.Value && dt.Rows[i]["Ad_Soyad"] != DBNull.Value)
+                        if (Gözetmen == 0)
                         {
-                            string birlesik = dt.Rows[i]["unvan"] + " " + dt.Rows[i]["Ad_Soyad"];
-                            cmbogretimelemani.Items.Add(birlesik);
+                            if (dt.Rows[i]["unvan"] != DBNull.Value && dt.Rows[i]["Ad_Soyad"] != DBNull.Value)
+                            {
+                                string birlesik = dt.Rows[i]["unvan"] + " " + dt.Rows[i]["Ad_Soyad"];
+                                if (Bak(birlesik) == DialogResult.OK) cmbogretimelemani.Items.Add(new ComboBoxItem(birlesik, i, Color.DarkRed));
+                                else cmbogretimelemani.Items.Add(new ComboBoxItem(birlesik, i, Color.DarkGreen));
+                            }
                         }
+                        else
+                        {
+                            if (dt.Rows[i]["unvan"] != DBNull.Value && dt.Rows[i]["Ad_Soyad"] != DBNull.Value)
+                            {
+                                string birlesik = dt.Rows[i]["unvan"] + " " + dt.Rows[i]["Ad_Soyad"];
+                                if (Bak(birlesik) == DialogResult.OK) cmbogretimelemani.Items.Add(new ComboBoxItem(birlesik, i + 1, Color.DarkRed));
+                                else cmbogretimelemani.Items.Add(new ComboBoxItem(birlesik, i + 1, Color.DarkGreen));
+                            }
+                        }
+
                     }
                 }
             }
@@ -321,7 +345,7 @@ namespace sp
                 //Sınav Tablosundaki Seçili Dersliklerin Alındığı Yer
                 string Derslik1 = "0", Derslik2 = "0", Derslik3 = "0", Derslik4 = "0";
                 dt = new DataTable();
-                komut = "select Derslik1,Derslik2,Derslik3,Derslik4 from " + Home.donem + " where SiraNo=" + SinavProgrami.sinavid + ";";
+                komut = "select Derslik1,Derslik2,Derslik3,Derslik4,Tarih,Saat from " + Home.donem + " where SiraNo=" + SinavProgrami.sinavid + ";";
                 dt = islemler.Al(komut);
                 if (dt.Rows.Count > 0)
                 {
@@ -329,6 +353,8 @@ namespace sp
                     if (dt.Rows[0]["Derslik2"] != DBNull.Value) { Derslik2 = dt.Rows[0]["Derslik2"].ToString(); }
                     if (dt.Rows[0]["Derslik3"] != DBNull.Value) { Derslik3 = dt.Rows[0]["Derslik3"].ToString(); }
                     if (dt.Rows[0]["Derslik4"] != DBNull.Value) { Derslik4 = dt.Rows[0]["Derslik4"].ToString(); }
+                    if (dt.Rows[0]["Tarih"] != DBNull.Value) { tarih = Convert.ToDateTime(dt.Rows[0]["Tarih"].ToString()); }
+                    if (dt.Rows[0]["Saat"] != DBNull.Value) { saat = Convert.ToDateTime(dt.Rows[0]["Saat"].ToString()); }
                 }
 
                 //Derslik Tablosundaki verilerin geçici Tabloya Kopyalanması
@@ -336,8 +362,7 @@ namespace sp
                 dt = new DataTable();
                 dt = islemler.Al(komut);
 
-
-                cmbderslik.Items.Add("Hiçbiri.."); //Kullanıcı Boş Seçerse Diye 0. indexe boş veri ekleniyor
+                cmbderslik.Items.Add(new ComboBoxItem("Hiçbiri...", "0", Color.Black));  //Kullanıcı Boş Seçerse Diye 0. indexe boş veri ekleniyor
 
                 //SınavProgramı sayfasından gelen -düzenlenen derslik numarası - veriye göre kullanıcının yönlendirilmesi ya da verilerin basılması
                 switch (Derslik)
@@ -348,7 +373,11 @@ namespace sp
                             if (dt.Rows[i]["derslik"].ToString() != Derslik2 && dt.Rows[i]["derslik"].ToString() != Derslik3 && dt.Rows[i]["derslik"].ToString() != Derslik4)
                             {
                                 string birlesik = dt.Rows[i]["derslik"].ToString() + " - " + dt.Rows[i]["sayi"].ToString() + " Kişilik";
-                                cmbderslik.Items.Add(birlesik);
+                                if (Bak(dt.Rows[i]["derslik"].ToString()) == DialogResult.OK)
+                                {
+                                    cmbderslik.Items.Add(new ComboBoxItem(birlesik, i + 1, Color.DarkRed));
+                                }
+                                else cmbderslik.Items.Add(new ComboBoxItem(birlesik, i + 1, Color.DarkGreen));
                             }
                         }
                         break;
@@ -366,7 +395,11 @@ namespace sp
                                 if (dt.Rows[i]["derslik"].ToString() != Derslik1 && dt.Rows[i]["derslik"].ToString() != Derslik3 && dt.Rows[i]["derslik"].ToString() != Derslik4)
                                 {
                                     string birlesik = dt.Rows[i]["derslik"].ToString() + " - " + dt.Rows[i]["sayi"].ToString() + " Kişilik";
-                                    cmbderslik.Items.Add(birlesik);
+                                    if (Bak(dt.Rows[i]["derslik"].ToString()) == DialogResult.OK)
+                                    {
+                                        cmbderslik.Items.Add(new ComboBoxItem(birlesik, i + 1, Color.DarkRed));
+                                    }
+                                    else cmbderslik.Items.Add(new ComboBoxItem(birlesik, i + 1, Color.DarkGreen));
                                 }
                             }
                         }
@@ -386,7 +419,11 @@ namespace sp
                                 if (dt.Rows[i]["derslik"].ToString() != Derslik1 && dt.Rows[i]["derslik"].ToString() != Derslik2 && dt.Rows[i]["derslik"].ToString() != Derslik4)
                                 {
                                     string birlesik = dt.Rows[i]["derslik"].ToString() + " - " + dt.Rows[i]["sayi"].ToString() + " Kişilik";
-                                    cmbderslik.Items.Add(birlesik);
+                                    if (Bak(dt.Rows[i]["derslik"].ToString()) == DialogResult.OK)
+                                    {
+                                        cmbderslik.Items.Add(new ComboBoxItem(birlesik, i + 1, Color.DarkRed));
+                                    }
+                                    else cmbderslik.Items.Add(new ComboBoxItem(birlesik, i + 1, Color.DarkGreen));
                                 }
                             }
                         }
@@ -406,7 +443,11 @@ namespace sp
                                 if (dt.Rows[i]["derslik"].ToString() != Derslik1 && dt.Rows[i]["derslik"].ToString() != Derslik2 && dt.Rows[i]["derslik"].ToString() != Derslik3)
                                 {
                                     string birlesik = dt.Rows[i]["derslik"].ToString() + " - " + dt.Rows[i]["sayi"].ToString() + " Kişilik";
-                                    cmbderslik.Items.Add(birlesik);
+                                    if (Bak(dt.Rows[i]["derslik"].ToString()) == DialogResult.OK)
+                                    {
+                                        cmbderslik.Items.Add(new ComboBoxItem(birlesik, i + 1, Color.DarkRed));
+                                    }
+                                    else cmbderslik.Items.Add(new ComboBoxItem(birlesik, i + 1, Color.DarkGreen));
                                 }
                             }
                         }
@@ -516,7 +557,6 @@ namespace sp
                             if (!dr.IsDBNull(7))
                             {
                                 txtogrencisayisi.Text = dr.GetString("Ogr_Sayisi");
-                                txtogrencisayisi.SelectAll();
                             }
                         }
                         break;
@@ -1388,6 +1428,7 @@ namespace sp
                     case 2:
                         EskiVeriyiSec();
                         txtogrencisayisi.Focus();
+                        txtogrencisayisi.SelectAll();
                         break;
                     case 3:
                         TarihBas();
@@ -1421,7 +1462,8 @@ namespace sp
 
         }
 
-        #region Tarih ve Saatte Öğretim Elemanı ve Gözetmen Kontrolü
+        #region Tarih ve Saat Değişikliğinde Derslik/Öğrement/Gözetmen Kontrolü
+
         //iki methodta da kullanılacak global değişkenler
         DateTime tarih = DateTime.Now;
         DateTime saat = DateTime.Now;
@@ -1466,7 +1508,7 @@ namespace sp
                         return DialogResult.Yes;
                     }
                 } //eğer güncellenecek saat eski saat ise işlem yapılmıyor
-                else 
+                else
                 {
 
                     saat = Convert.ToDateTime(cmbsaat.SelectedItem);
@@ -1503,6 +1545,7 @@ namespace sp
                 return DialogResult.No;
             }
         }
+
         public DialogResult Bak(string bakilacak)
         {
             try
@@ -1510,7 +1553,7 @@ namespace sp
                 komut = "select Unvan,Ad_Soyad,Derslik1,Derslik2,Derslik3,Derslik4,Gozetmen1,Gozetmen2,Gozetmen3 from " + Home.donem + " where Tarih='" + tarih.ToString("yyyy-MM-dd") + "' and Saat='" + saat.ToShortTimeString() + "'";
                 DataTable tablo = new DataTable();
                 tablo = islemler.Al(komut); //seçili olan tarih ve saatteki bütün veriler tabloya aktarılıyor
-                
+
                 for (int i = 0; i < tablo.Rows.Count; i++)
                 {//tablodaki bütün satırlar sırayla methoda gelen bakılacak değer ile karşılaştırılıyor.
                     //Eğer eşleşme olursa geriye ok mesajı gönderiliyor ve çağırılan yerde cevaba göre uyarı mesajı düzenleniyor
@@ -1526,10 +1569,6 @@ namespace sp
                         )
                     {
                         return DialogResult.OK;
-                    }
-                    else
-                    {
-                        return DialogResult.No;
                     }
                 }
                 return DialogResult.No;

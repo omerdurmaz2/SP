@@ -57,7 +57,7 @@
             this.btnLastPage = new System.Windows.Forms.Button();
             this.btnFirstPage = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.chkgizli = new CustomControl.CheckComboBox();
             this.cmbsirala = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -446,7 +446,7 @@
             // 
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.Controls.Add(this.checkedListBox1);
+            this.panel3.Controls.Add(this.chkgizli);
             this.panel3.Controls.Add(this.cmbsirala);
             this.panel3.Controls.Add(this.label10);
             this.panel3.Controls.Add(this.label9);
@@ -460,18 +460,17 @@
             this.panel3.Size = new System.Drawing.Size(992, 32);
             this.panel3.TabIndex = 62;
             // 
-            // checkedListBox1
+            // chkgizli
             // 
-            this.checkedListBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
-            "Dönem",
-            "Öğretim Elemanı",
-            "Derslik"});
-            this.checkedListBox1.Location = new System.Drawing.Point(856, 8);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(120, 19);
-            this.checkedListBox1.TabIndex = 68;
+            this.chkgizli.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.chkgizli.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.chkgizli.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.chkgizli.FormattingEnabled = true;
+            this.chkgizli.Location = new System.Drawing.Point(824, 8);
+            this.chkgizli.Name = "chkgizli";
+            this.chkgizli.Size = new System.Drawing.Size(168, 22);
+            this.chkgizli.TabIndex = 63;
+            this.chkgizli.Checkchanged += new System.EventHandler(this.chkgizli_Checkchanged);
             // 
             // cmbsirala
             // 
@@ -499,7 +498,7 @@
             this.label10.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label10.Location = new System.Drawing.Point(704, 8);
+            this.label10.Location = new System.Drawing.Point(672, 8);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(146, 15);
@@ -580,9 +579,9 @@
         private System.Windows.Forms.Button btnLastPage;
         private System.Windows.Forms.Button btnFirstPage;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.ComboBox cmbsirala;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
+        private CustomControl.CheckComboBox chkgizli;
     }
 }

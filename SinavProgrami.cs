@@ -4,9 +4,9 @@ using System.Runtime.InteropServices;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 using System.Drawing;
-
-
-
+using TyroDeveloperDLL;
+using CustomControl;
+using System.Collections.Generic;
 
 namespace sp
 {
@@ -36,10 +36,11 @@ namespace sp
         {
             try
             {
+                List<CheckComboBox.ComboboxData> dat1 = chkgizli.CheckItems;
+
                 //if (Login.Session)
                 //{
-                //Filtrelerin Basıldığı Yer
-                
+
 
                 //}
                 //else
@@ -98,7 +99,7 @@ namespace sp
         int colindex = 0;
 
         DataTable tablo;
-        public string siralama="";
+        public string siralama = "";
 
 
         #endregion
@@ -1184,7 +1185,17 @@ namespace sp
 
             //-----
             sinavid = -1;
-            cmbsirala.SelectedIndex=0;
+            cmbsirala.SelectedIndex = 0;
+
+            //Gizlenecek Alanların Basıldığı Yer
+            chkgizli.Items.Add(new CheckComboBox.ComboboxData("Sıra No", false));
+            chkgizli.Items.Add(new CheckComboBox.ComboboxData("Program Kodu", false));
+            chkgizli.Items.Add(new CheckComboBox.ComboboxData("Program Adı", false));
+            chkgizli.Items.Add(new CheckComboBox.ComboboxData("Dönem", false));
+            chkgizli.Items.Add(new CheckComboBox.ComboboxData("Ders Kodu", false));
+            chkgizli.Items.Add(new CheckComboBox.ComboboxData("Ders Adı", false));
+            chkgizli.Items.Add(new CheckComboBox.ComboboxData("Yerleşen Öğrenci Sayısı", false));
+
         }
         #endregion
 
@@ -1223,6 +1234,35 @@ namespace sp
             //Seçilen Sıralama string bir değişkene kaydediliyor ve filtrelemeye gidilip datagrid basılıyor
         }
         #endregion
+
+
+        //Seçilen Alanların Gizlendiği Yer
+        private void chkgizli_Checkchanged(object sender, EventArgs e)
+        {
+            try
+            {
+                List<CheckComboBox.ComboboxData> liste = chkgizli.CheckItems;
+                if (liste[0].Checked == true) dataGridView1.Columns[0].Visible = false;
+                else dataGridView1.Columns[0].Visible = true;
+                if (liste[1].Checked == true) dataGridView1.Columns[1].Visible = false;
+                else dataGridView1.Columns[1].Visible = true;
+                if (liste[2].Checked == true) dataGridView1.Columns[2].Visible = false;
+                else dataGridView1.Columns[2].Visible = true;
+                if (liste[3].Checked == true) dataGridView1.Columns[4].Visible = false;
+                else dataGridView1.Columns[4].Visible = true;
+                if (liste[4].Checked == true) dataGridView1.Columns[5].Visible = false;
+                else dataGridView1.Columns[5].Visible = true;
+                if (liste[5].Checked == true) dataGridView1.Columns[6].Visible = false;
+                else dataGridView1.Columns[6].Visible = true;
+                if (liste[6].Checked == true) dataGridView1.Columns[16].Visible = false;
+                else dataGridView1.Columns[16].Visible = true;
+
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Datagrid Sütun Gizlerken Hata! \nHata Kodu: " + err.ToString());
+            }
+        }
     }
 }
 
