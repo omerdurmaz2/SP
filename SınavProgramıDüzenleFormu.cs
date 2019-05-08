@@ -40,7 +40,7 @@ namespace sp
                             this.Size = new Size(240, 88);
                             cmbogretimsekli.Location = new Point(10, 60);
                             cmbogretimsekli.Visible = true;
-                            this.Text="ÖĞRETİM ŞEKLİ";
+                            this.Text = "ÖĞRETİM ŞEKLİ";
                             break;
                         case 2:
                             this.Text = "ÖĞRENCİ SAYISI";
@@ -105,7 +105,7 @@ namespace sp
                         {
                             SinavProgrami.KonumY -= 10;
                         }
-                        this.Location = new Point(SinavProgrami.KonumX - this.Width/4, SinavProgrami.KonumY);
+                        this.Location = new Point(SinavProgrami.KonumX - this.Width / 4, SinavProgrami.KonumY);
                     }
 
                 }
@@ -173,6 +173,10 @@ namespace sp
         DataTable dt;
 
         string komut = "";
+
+        DateTime eskitarih;
+        DateTime eskisaat;
+
         DateTime starih;
         DateTime ssaat;
         DialogResult cevap;
@@ -213,6 +217,7 @@ namespace sp
 
         }
         #endregion
+
         #region Saat Bas
         public void SaatBas()
         {
@@ -243,6 +248,7 @@ namespace sp
 
         }
         #endregion
+
         #region Öğretim Elemanı Bas
         public void OgretimElemaniBas()
         {
@@ -306,6 +312,7 @@ namespace sp
 
         }
         #endregion
+
         #region Derslik Bas
         public void DerslikBas()
         {
@@ -422,7 +429,7 @@ namespace sp
         {
             try
             {
-                
+
 
                 int ogrencisayisi = 0;
                 string Derslik1 = "0";
@@ -442,7 +449,7 @@ namespace sp
                     if (dt.Rows[0]["Derslik3"] != DBNull.Value) { Derslik3 = dt.Rows[0]["Derslik3"].ToString(); }
                     if (dt.Rows[0]["Derslik4"] != DBNull.Value) { Derslik4 = dt.Rows[0]["Derslik4"].ToString(); }
                 }
-                
+
                 //Sınav Tablosundan Çekilen Dersliklerin Kapasitesi Alınıyor
                 //Derslik Tablosu Geçici Bir Tabloya Kopyalanıyor
                 komut = "select * from sinavderslikleri";
@@ -509,6 +516,7 @@ namespace sp
                             if (!dr.IsDBNull(7))
                             {
                                 txtogrencisayisi.Text = dr.GetString("Ogr_Sayisi");
+                                txtogrencisayisi.SelectAll();
                             }
                         }
                         break;
@@ -517,8 +525,10 @@ namespace sp
                         {
                             if (!dr.IsDBNull(10))
                             {
+
                                 DateTime tarih = Convert.ToDateTime(dr.GetString("Tarih"));
                                 cmbtarih.SelectedItem = tarih.ToShortDateString();
+                                eskitarih = tarih;
                             }
                         }
                         break;
@@ -529,6 +539,7 @@ namespace sp
                             {
                                 DateTime saat = Convert.ToDateTime(dr.GetString("Saat"));
                                 cmbsaat.SelectedItem = saat.ToShortTimeString();
+                                eskisaat = saat;
                             }
                         }
                         break;
@@ -698,6 +709,7 @@ namespace sp
             Sorgu();
         }
         #endregion
+
         #region Sorgu Methodu
 
         public void Sorgu()
@@ -742,6 +754,7 @@ namespace sp
 
         }
         #endregion
+
         #region Öğretim Elemanı Sayfasında GÖzetmenlik Sayısının Azaltılıp Arttırılması
 
         public void GozetmenlikSayisiDuzenle(bool islem, string Gozetmen)
@@ -836,22 +849,27 @@ namespace sp
                         this.Close();
                         break;
                     case 3:
+                        if (DegisiklikKontrol(0) == DialogResult.Yes)
+                        {
+                            DateTime tarih = Convert.ToDateTime(cmbtarih.SelectedItem);
+                            komut = "UPDATE " + Home.donem + " SET Tarih='" + tarih.ToString("yyyy-MM-dd") + "' where SiraNo=" + SinavProgrami.sinavid + "";
 
-                        DateTime tarih = Convert.ToDateTime(cmbtarih.SelectedItem);
-                        komut = "UPDATE " + Home.donem + " SET Tarih='" + tarih.ToString("yyyy-MM-dd") + "' where SiraNo=" + SinavProgrami.sinavid + "";
-
-                        islemler.Degistir(komut);
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
+                            islemler.Degistir(komut);
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
+                        }
                         break;
                     case 4:
+                        if (DegisiklikKontrol(1) == DialogResult.Yes)
+                        {
 
-                        DateTime saat = Convert.ToDateTime(cmbsaat.SelectedItem);
-                        komut = "UPDATE " + Home.donem + " SET Saat='" + saat.ToShortTimeString() + "' where SiraNo=" + SinavProgrami.sinavid + "";
+                            DateTime saat = Convert.ToDateTime(cmbsaat.SelectedItem);
+                            komut = "UPDATE " + Home.donem + " SET Saat='" + saat.ToShortTimeString() + "' where SiraNo=" + SinavProgrami.sinavid + "";
 
-                        islemler.Degistir(komut);
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
+                            islemler.Degistir(komut);
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
+                        }
                         break;
                     case 5: // Öğretim Elemanı ve Gözetmenin Kaydedildiği Alan
 
@@ -1361,38 +1379,38 @@ namespace sp
             try
             {
 
-                    switch (YapilanIslem)
-                    {
-                        case 1:
-                            EskiVeriyiSec();
-                            cmbogretimsekli.Focus();
-                            break;
-                        case 2:
-                            EskiVeriyiSec();
-                            txtogrencisayisi.Focus();
-                            break;
-                        case 3:
-                            TarihBas();
-                            EskiVeriyiSec();
-                            cmbtarih.Focus();
-                            break;
-                        case 4:
-                            SaatBas();
-                            EskiVeriyiSec();
-                            cmbsaat.Focus();
-                            break;
-                        case 5:
-                            OgretimElemaniBas();
-                            EskiVeriyiSec();
-                            cmbogretimelemani.Focus();
-                            break;
-                        case 6:
-                            DerslikBas();
-                            EskiVeriyiSec();
-                            cmbderslik.Focus();
-                            break;
+                switch (YapilanIslem)
+                {
+                    case 1:
+                        EskiVeriyiSec();
+                        cmbogretimsekli.Focus();
+                        break;
+                    case 2:
+                        EskiVeriyiSec();
+                        txtogrencisayisi.Focus();
+                        break;
+                    case 3:
+                        TarihBas();
+                        EskiVeriyiSec();
+                        cmbtarih.Focus();
+                        break;
+                    case 4:
+                        SaatBas();
+                        EskiVeriyiSec();
+                        cmbsaat.Focus();
+                        break;
+                    case 5:
+                        OgretimElemaniBas();
+                        EskiVeriyiSec();
+                        cmbogretimelemani.Focus();
+                        break;
+                    case 6:
+                        DerslikBas();
+                        EskiVeriyiSec();
+                        cmbderslik.Focus();
+                        break;
 
-                    }
+                }
             }
             catch (Exception err)
             {
@@ -1402,5 +1420,127 @@ namespace sp
             }
 
         }
+
+        #region Tarih ve Saatte Öğretim Elemanı ve Gözetmen Kontrolü
+        //iki methodta da kullanılacak global değişkenler
+        DateTime tarih = DateTime.Now;
+        DateTime saat = DateTime.Now;
+        public DialogResult DegisiklikKontrol(byte ts)
+        {
+            try
+            {
+                //id si çekilen satırdaki verilerin tutulacağı değişkenler
+                string adsoyad = "";
+                string Derslik1 = "";
+                string Derslik2 = "";
+                string Derslik3 = "";
+                string Derslik4 = "";
+                string gozetmen1 = "";
+                string gozetmen2 = "";
+                string gozetmen3 = "";
+                komut = "select Unvan,Ad_Soyad,Derslik1,Derslik2,Derslik3,Derslik4,Gozetmen1,Gozetmen2,Gozetmen3,Tarih,Saat from " + Home.donem + " where SiraNo=" + SinavProgrami.sinavid + "";
+                DataTable tablo = new DataTable();
+                tablo = islemler.Al(komut);
+
+                //tabloya aktarılan satırın verileri değişkenlere aktarılıyor
+                if (tablo.Rows.Count != 0)
+                {
+                    adsoyad = tablo.Rows[0][0].ToString() + " " + tablo.Rows[0][1].ToString();
+                    Derslik1 = tablo.Rows[0][2].ToString();
+                    Derslik2 = tablo.Rows[0][3].ToString();
+                    Derslik3 = tablo.Rows[0][4].ToString();
+                    Derslik4 = tablo.Rows[0][5].ToString();
+                    gozetmen1 = tablo.Rows[0][6].ToString();
+                    gozetmen2 = tablo.Rows[0][7].ToString();
+                    gozetmen3 = tablo.Rows[0][8].ToString();
+                    tarih = Convert.ToDateTime(tablo.Rows[0][9].ToString());
+                    saat = Convert.ToDateTime(tablo.Rows[0][10].ToString());
+                }
+
+                //eğer güncellenecek tarih eski tarih ise işlem yapılmıyor
+                if (ts == 0)
+                {
+                    tarih = Convert.ToDateTime(cmbtarih.SelectedItem);
+                    if (tarih == eskitarih)
+                    {
+                        return DialogResult.Yes;
+                    }
+                } //eğer güncellenecek saat eski saat ise işlem yapılmıyor
+                else 
+                {
+
+                    saat = Convert.ToDateTime(cmbsaat.SelectedItem);
+                    if (saat == eskisaat)
+                    {
+                        return DialogResult.Yes;
+                    }
+
+                }
+
+                // değişkenlerdeki veriler sırasıyla kontrol edilmek üzere bak methoduna gönderiliyor ve methodtan gelen cavaba göre uyarı mesajı düzenleniyor
+                string uyari = "Güncellenecek (Tarih / Saatte);\n";
+                if (Bak(adsoyad) == DialogResult.OK) uyari += "\n+ Öğretim Elemanının Görevli Olduğu Başka Bir Sınav Bulunmakta!";
+                if (Derslik1 != "" && Bak(Derslik1) == DialogResult.OK) uyari += "\n+ 1. Derslik Kullanılmakta!";
+                if (Derslik2 != "" && Bak(Derslik2) == DialogResult.OK) uyari += "\n+ 2. Derslik Kullanılmakta!";
+                if (Derslik3 != "" && Bak(Derslik3) == DialogResult.OK) uyari += "\n+ 3. Derslik Kullanılmakta!";
+                if (Derslik4 != "" && Bak(Derslik4) == DialogResult.OK) uyari += "\n+ 4. Derslik Kullanılmakta!";
+                if (gozetmen1 != "" && Bak(gozetmen1) == DialogResult.OK) uyari += "\n+ 1. Gözetmenin Görevli Olduğu Başka Bir Sınav Bulunmakta!";
+                if (gozetmen2 != "" && Bak(gozetmen2) == DialogResult.OK) uyari += "\n+ 2. Gözetmenin Görevli Olduğu Başka Bir Sınav Bulunmakta!";
+                if (gozetmen3 != "" && Bak(gozetmen3) == DialogResult.OK) uyari += "\n+ 3. Gözetmenin Görevli Olduğu Başka Bir Sınav Bulunmakta!";
+
+                //eğer uyarı mesajına ekleme yapılmışsa kullanıcıya yansıtılıyor ve cevaba göre işlem yapılıyor
+                if (uyari.Substring(uyari.Length - 1, 1) != "\n")
+                {
+                    uyari += "\n\nKabul ediyor musunuz?";
+                    return MessageBox.Show(uyari, "UYARI!!", MessageBoxButtons.YesNo);
+                }//eğer uyarı mesajı değişmemiş ise işlem yapılmıyor
+                else return DialogResult.Yes;
+
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Tarih Saat Değişikliğinde Veri Kontrolü Yaparken Hata!\nHata Kodu: " + err.ToString());
+                return DialogResult.No;
+            }
+        }
+        public DialogResult Bak(string bakilacak)
+        {
+            try
+            {
+                komut = "select Unvan,Ad_Soyad,Derslik1,Derslik2,Derslik3,Derslik4,Gozetmen1,Gozetmen2,Gozetmen3 from " + Home.donem + " where Tarih='" + tarih.ToString("yyyy-MM-dd") + "' and Saat='" + saat.ToShortTimeString() + "'";
+                DataTable tablo = new DataTable();
+                tablo = islemler.Al(komut); //seçili olan tarih ve saatteki bütün veriler tabloya aktarılıyor
+                
+                for (int i = 0; i < tablo.Rows.Count; i++)
+                {//tablodaki bütün satırlar sırayla methoda gelen bakılacak değer ile karşılaştırılıyor.
+                    //Eğer eşleşme olursa geriye ok mesajı gönderiliyor ve çağırılan yerde cevaba göre uyarı mesajı düzenleniyor
+                    if (
+                        (tablo.Rows[i][0].ToString() + " " + tablo.Rows[i][1].ToString()) == bakilacak ||
+                        tablo.Rows[i][2].ToString() == bakilacak ||
+                        tablo.Rows[i][3].ToString() == bakilacak ||
+                        tablo.Rows[i][4].ToString() == bakilacak ||
+                        tablo.Rows[i][5].ToString() == bakilacak ||
+                        tablo.Rows[i][6].ToString() == bakilacak ||
+                        tablo.Rows[i][7].ToString() == bakilacak ||
+                        tablo.Rows[i][8].ToString() == bakilacak
+                        )
+                    {
+                        return DialogResult.OK;
+                    }
+                    else
+                    {
+                        return DialogResult.No;
+                    }
+                }
+                return DialogResult.No;
+
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Tarih Saat Değişikliğinde Veri Kontrolü Yaparken Hata!\nHata Kodu: " + err.ToString());
+                return DialogResult.No;
+            }
+        }
+        #endregion
     }
 }

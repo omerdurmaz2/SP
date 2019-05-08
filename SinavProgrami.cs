@@ -1223,7 +1223,6 @@ namespace sp
             //Seçilen Sıralama string bir değişkene kaydediliyor ve filtrelemeye gidilip datagrid basılıyor
         }
         #endregion
-
     }
 }
 

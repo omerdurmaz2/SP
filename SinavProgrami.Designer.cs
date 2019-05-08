@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbfiltrebolumadi = new System.Windows.Forms.ComboBox();
             this.cmbfiltretarih = new System.Windows.Forms.ComboBox();
@@ -57,8 +57,10 @@
             this.btnLastPage = new System.Windows.Forms.Button();
             this.btnFirstPage = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label9 = new System.Windows.Forms.Label();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.cmbsirala = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -230,23 +232,23 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
             this.dataGridView1.Location = new System.Drawing.Point(304, 0);
             this.dataGridView1.MultiSelect = false;
@@ -392,7 +394,7 @@
             this.btnNextPage.FlatAppearance.BorderSize = 0;
             this.btnNextPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNextPage.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnNextPage.Location = new System.Drawing.Point(480, 8);
+            this.btnNextPage.Location = new System.Drawing.Point(328, 8);
             this.btnNextPage.Name = "btnNextPage";
             this.btnNextPage.Size = new System.Drawing.Size(66, 21);
             this.btnNextPage.TabIndex = 60;
@@ -405,9 +407,9 @@
             this.txtDisplayPageNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDisplayPageNo.Enabled = false;
             this.txtDisplayPageNo.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-            this.txtDisplayPageNo.Location = new System.Drawing.Point(248, 8);
+            this.txtDisplayPageNo.Location = new System.Drawing.Point(184, 8);
             this.txtDisplayPageNo.Name = "txtDisplayPageNo";
-            this.txtDisplayPageNo.Size = new System.Drawing.Size(152, 21);
+            this.txtDisplayPageNo.Size = new System.Drawing.Size(128, 21);
             this.txtDisplayPageNo.TabIndex = 59;
             this.txtDisplayPageNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -418,7 +420,7 @@
             this.btnLastPage.FlatAppearance.BorderSize = 0;
             this.btnLastPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLastPage.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnLastPage.Location = new System.Drawing.Point(568, 8);
+            this.btnLastPage.Location = new System.Drawing.Point(416, 8);
             this.btnLastPage.Name = "btnLastPage";
             this.btnLastPage.Size = new System.Drawing.Size(62, 21);
             this.btnLastPage.TabIndex = 58;
@@ -444,6 +446,10 @@
             // 
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Controls.Add(this.checkedListBox1);
+            this.panel3.Controls.Add(this.cmbsirala);
+            this.panel3.Controls.Add(this.label10);
+            this.panel3.Controls.Add(this.label9);
             this.panel3.Controls.Add(this.btnFirstPage);
             this.panel3.Controls.Add(this.btnLastPage);
             this.panel3.Controls.Add(this.txtDisplayPageNo);
@@ -451,21 +457,25 @@
             this.panel3.Controls.Add(this.btnPreviousPage);
             this.panel3.Location = new System.Drawing.Point(304, 144);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(640, 32);
+            this.panel3.Size = new System.Drawing.Size(992, 32);
             this.panel3.TabIndex = 62;
             // 
-            // label9
+            // checkedListBox1
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(952, 152);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(36, 13);
-            this.label9.TabIndex = 63;
-            this.label9.Text = "Sırala:";
+            this.checkedListBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Items.AddRange(new object[] {
+            "Dönem",
+            "Öğretim Elemanı",
+            "Derslik"});
+            this.checkedListBox1.Location = new System.Drawing.Point(856, 8);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(120, 19);
+            this.checkedListBox1.TabIndex = 68;
             // 
             // cmbsirala
             // 
+            this.cmbsirala.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.cmbsirala.DropDownHeight = 120;
             this.cmbsirala.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbsirala.FormattingEnabled = true;
@@ -478,19 +488,41 @@
             "Derse Göre (Z-A)",
             "Bölüme Göre (A-Z)",
             "Bölüme Göre (Z-A)"});
-            this.cmbsirala.Location = new System.Drawing.Point(992, 152);
+            this.cmbsirala.Location = new System.Drawing.Point(536, 8);
             this.cmbsirala.Name = "cmbsirala";
-            this.cmbsirala.Size = new System.Drawing.Size(192, 21);
-            this.cmbsirala.TabIndex = 63;
+            this.cmbsirala.Size = new System.Drawing.Size(128, 21);
+            this.cmbsirala.TabIndex = 65;
             this.cmbsirala.SelectedIndexChanged += new System.EventHandler(this.cmbsirala_SelectedIndexChanged);
+            // 
+            // label10
+            // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label10.Location = new System.Drawing.Point(704, 8);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(146, 15);
+            this.label10.TabIndex = 66;
+            this.label10.Text = "Gizlenecek Alanları Seçin";
+            // 
+            // label9
+            // 
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label9.Location = new System.Drawing.Point(488, 8);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(42, 15);
+            this.label9.TabIndex = 67;
+            this.label9.Text = "Sırala:";
             // 
             // SinavProgrami
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1300, 669);
-            this.Controls.Add(this.cmbsirala);
-            this.Controls.Add(this.label9);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -504,12 +536,10 @@
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.panel2, 0);
+            this.Controls.SetChildIndex(this.panel3, 0);
             this.Controls.SetChildIndex(this.lblbaslik, 0);
             this.Controls.SetChildIndex(this.btnmavi1, 0);
             this.Controls.SetChildIndex(this.btnkirmizi1, 0);
-            this.Controls.SetChildIndex(this.panel3, 0);
-            this.Controls.SetChildIndex(this.label9, 0);
-            this.Controls.SetChildIndex(this.cmbsirala, 0);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
@@ -550,7 +580,9 @@
         private System.Windows.Forms.Button btnLastPage;
         private System.Windows.Forms.Button btnFirstPage;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.ComboBox cmbsirala;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
     }
 }
