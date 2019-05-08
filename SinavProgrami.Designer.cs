@@ -91,10 +91,12 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(0, 24);
+            this.label1.Location = new System.Drawing.Point(0, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 19);
             this.label1.TabIndex = 52;
@@ -106,7 +108,7 @@
             this.cmbfiltrebolumadi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfiltrebolumadi.FormattingEnabled = true;
             this.cmbfiltrebolumadi.IntegralHeight = false;
-            this.cmbfiltrebolumadi.Location = new System.Drawing.Point(80, 24);
+            this.cmbfiltrebolumadi.Location = new System.Drawing.Point(80, 32);
             this.cmbfiltrebolumadi.Name = "cmbfiltrebolumadi";
             this.cmbfiltrebolumadi.Size = new System.Drawing.Size(152, 21);
             this.cmbfiltrebolumadi.TabIndex = 1;
@@ -114,13 +116,14 @@
             // 
             // cmbfiltretarih
             // 
+            this.cmbfiltretarih.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbfiltretarih.DropDownHeight = 100;
             this.cmbfiltretarih.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfiltretarih.FormattingEnabled = true;
             this.cmbfiltretarih.IntegralHeight = false;
             this.cmbfiltretarih.Items.AddRange(new object[] {
             "Hepsi"});
-            this.cmbfiltretarih.Location = new System.Drawing.Point(640, 24);
+            this.cmbfiltretarih.Location = new System.Drawing.Point(640, 32);
             this.cmbfiltretarih.Name = "cmbfiltretarih";
             this.cmbfiltretarih.Size = new System.Drawing.Size(136, 21);
             this.cmbfiltretarih.TabIndex = 5;
@@ -135,7 +138,7 @@
             "Hepsi",
             "G",
             "IO"});
-            this.cmbfiltreogretimsekli.Location = new System.Drawing.Point(336, 24);
+            this.cmbfiltreogretimsekli.Location = new System.Drawing.Point(336, 32);
             this.cmbfiltreogretimsekli.Name = "cmbfiltreogretimsekli";
             this.cmbfiltreogretimsekli.Size = new System.Drawing.Size(96, 21);
             this.cmbfiltreogretimsekli.TabIndex = 3;
@@ -149,7 +152,7 @@
             this.cmbfiltrebolumkodu.IntegralHeight = false;
             this.cmbfiltrebolumkodu.Items.AddRange(new object[] {
             "Hepsi"});
-            this.cmbfiltrebolumkodu.Location = new System.Drawing.Point(240, 24);
+            this.cmbfiltrebolumkodu.Location = new System.Drawing.Point(240, 32);
             this.cmbfiltrebolumkodu.Name = "cmbfiltrebolumkodu";
             this.cmbfiltrebolumkodu.Size = new System.Drawing.Size(88, 21);
             this.cmbfiltrebolumkodu.TabIndex = 2;
@@ -158,13 +161,14 @@
             // 
             // cmbfiltresaat
             // 
+            this.cmbfiltresaat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbfiltresaat.DropDownHeight = 100;
             this.cmbfiltresaat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfiltresaat.FormattingEnabled = true;
             this.cmbfiltresaat.IntegralHeight = false;
             this.cmbfiltresaat.Items.AddRange(new object[] {
             "Hepsi"});
-            this.cmbfiltresaat.Location = new System.Drawing.Point(784, 24);
+            this.cmbfiltresaat.Location = new System.Drawing.Point(784, 32);
             this.cmbfiltresaat.Name = "cmbfiltresaat";
             this.cmbfiltresaat.Size = new System.Drawing.Size(88, 21);
             this.cmbfiltresaat.TabIndex = 6;
@@ -172,13 +176,14 @@
             // 
             // cmbfiltreogretimgorevlisi
             // 
+            this.cmbfiltreogretimgorevlisi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbfiltreogretimgorevlisi.DropDownHeight = 100;
             this.cmbfiltreogretimgorevlisi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfiltreogretimgorevlisi.FormattingEnabled = true;
             this.cmbfiltreogretimgorevlisi.IntegralHeight = false;
             this.cmbfiltreogretimgorevlisi.Items.AddRange(new object[] {
             "Hepsi"});
-            this.cmbfiltreogretimgorevlisi.Location = new System.Drawing.Point(443, 24);
+            this.cmbfiltreogretimgorevlisi.Location = new System.Drawing.Point(443, 32);
             this.cmbfiltreogretimgorevlisi.Name = "cmbfiltreogretimgorevlisi";
             this.cmbfiltreogretimgorevlisi.Size = new System.Drawing.Size(184, 21);
             this.cmbfiltreogretimgorevlisi.TabIndex = 4;
@@ -188,7 +193,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial Black", 11.25F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(48, 144);
+            this.label2.Location = new System.Drawing.Point(48, 152);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(211, 22);
             this.label2.TabIndex = 52;
@@ -196,10 +201,11 @@
             // 
             // linkLabel1
             // 
+            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Comic Sans MS", 9.5F);
             this.linkLabel1.LinkColor = System.Drawing.Color.Black;
-            this.linkLabel1.Location = new System.Drawing.Point(875, 24);
+            this.linkLabel1.Location = new System.Drawing.Point(875, 32);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(114, 18);
             this.linkLabel1.TabIndex = 7;
@@ -289,6 +295,7 @@
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.label5);
@@ -303,15 +310,15 @@
             this.panel2.Controls.Add(this.cmbfiltretarih);
             this.panel2.Controls.Add(this.cmbfiltreogretimgorevlisi);
             this.panel2.Controls.Add(this.cmbfiltreogretimsekli);
-            this.panel2.Location = new System.Drawing.Point(304, 88);
+            this.panel2.Location = new System.Drawing.Point(304, 80);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(992, 56);
+            this.panel2.Size = new System.Drawing.Size(1000, 56);
             this.panel2.TabIndex = 56;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(77, -2);
+            this.label3.Location = new System.Drawing.Point(77, 8);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 13);
@@ -321,7 +328,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(240, 0);
+            this.label4.Location = new System.Drawing.Point(240, 10);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 13);
@@ -331,7 +338,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(336, 0);
+            this.label5.Location = new System.Drawing.Point(336, 10);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 13);
@@ -340,8 +347,9 @@
             // 
             // label6
             // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(440, -2);
+            this.label6.Location = new System.Drawing.Point(440, 8);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(89, 13);
@@ -350,8 +358,9 @@
             // 
             // label7
             // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(640, 0);
+            this.label7.Location = new System.Drawing.Point(640, 10);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(63, 13);
@@ -360,8 +369,9 @@
             // 
             // label8
             // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(784, 0);
+            this.label8.Location = new System.Drawing.Point(784, 10);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(61, 13);
@@ -374,12 +384,11 @@
             // 
             // btnPreviousPage
             // 
-            this.btnPreviousPage.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btnPreviousPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(171)))), ((int)(((byte)(227)))));
             this.btnPreviousPage.FlatAppearance.BorderSize = 0;
             this.btnPreviousPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPreviousPage.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnPreviousPage.Location = new System.Drawing.Point(80, 8);
+            this.btnPreviousPage.Location = new System.Drawing.Point(80, 11);
             this.btnPreviousPage.Name = "btnPreviousPage";
             this.btnPreviousPage.Size = new System.Drawing.Size(66, 21);
             this.btnPreviousPage.TabIndex = 61;
@@ -389,12 +398,11 @@
             // 
             // btnNextPage
             // 
-            this.btnNextPage.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnNextPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(171)))), ((int)(((byte)(227)))));
             this.btnNextPage.FlatAppearance.BorderSize = 0;
             this.btnNextPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNextPage.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnNextPage.Location = new System.Drawing.Point(312, 8);
+            this.btnNextPage.Location = new System.Drawing.Point(318, 11);
             this.btnNextPage.Name = "btnNextPage";
             this.btnNextPage.Size = new System.Drawing.Size(66, 21);
             this.btnNextPage.TabIndex = 60;
@@ -404,23 +412,21 @@
             // 
             // txtDisplayPageNo
             // 
-            this.txtDisplayPageNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDisplayPageNo.Enabled = false;
             this.txtDisplayPageNo.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
-            this.txtDisplayPageNo.Location = new System.Drawing.Point(168, 8);
+            this.txtDisplayPageNo.Location = new System.Drawing.Point(168, 11);
             this.txtDisplayPageNo.Name = "txtDisplayPageNo";
-            this.txtDisplayPageNo.Size = new System.Drawing.Size(128, 21);
+            this.txtDisplayPageNo.Size = new System.Drawing.Size(134, 21);
             this.txtDisplayPageNo.TabIndex = 59;
             this.txtDisplayPageNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btnLastPage
             // 
-            this.btnLastPage.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnLastPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(171)))), ((int)(((byte)(227)))));
             this.btnLastPage.FlatAppearance.BorderSize = 0;
             this.btnLastPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLastPage.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnLastPage.Location = new System.Drawing.Point(392, 8);
+            this.btnLastPage.Location = new System.Drawing.Point(398, 11);
             this.btnLastPage.Name = "btnLastPage";
             this.btnLastPage.Size = new System.Drawing.Size(62, 21);
             this.btnLastPage.TabIndex = 58;
@@ -446,6 +452,7 @@
             // 
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.chkgizli);
             this.panel3.Controls.Add(this.cmbsirala);
             this.panel3.Controls.Add(this.label10);
@@ -455,18 +462,18 @@
             this.panel3.Controls.Add(this.txtDisplayPageNo);
             this.panel3.Controls.Add(this.btnNextPage);
             this.panel3.Controls.Add(this.btnPreviousPage);
-            this.panel3.Location = new System.Drawing.Point(304, 144);
+            this.panel3.Location = new System.Drawing.Point(304, 136);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(992, 32);
+            this.panel3.Size = new System.Drawing.Size(1000, 40);
             this.panel3.TabIndex = 62;
             // 
             // chkgizli
             // 
-            this.chkgizli.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.chkgizli.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkgizli.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.chkgizli.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.chkgizli.FormattingEnabled = true;
-            this.chkgizli.Location = new System.Drawing.Point(808, 8);
+            this.chkgizli.Location = new System.Drawing.Point(814, 11);
             this.chkgizli.Name = "chkgizli";
             this.chkgizli.Size = new System.Drawing.Size(176, 22);
             this.chkgizli.TabIndex = 63;
@@ -474,7 +481,7 @@
             // 
             // cmbsirala
             // 
-            this.cmbsirala.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.cmbsirala.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbsirala.DropDownHeight = 120;
             this.cmbsirala.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbsirala.FormattingEnabled = true;
@@ -487,7 +494,7 @@
             "Derse Göre (Z-A)",
             "Bölüme Göre (A-Z)",
             "Bölüme Göre (Z-A)"});
-            this.cmbsirala.Location = new System.Drawing.Point(512, 8);
+            this.cmbsirala.Location = new System.Drawing.Point(518, 11);
             this.cmbsirala.Name = "cmbsirala";
             this.cmbsirala.Size = new System.Drawing.Size(152, 21);
             this.cmbsirala.TabIndex = 65;
@@ -495,10 +502,10 @@
             // 
             // label10
             // 
-            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label10.Location = new System.Drawing.Point(680, 16);
+            this.label10.Location = new System.Drawing.Point(686, 19);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(130, 13);
@@ -507,10 +514,10 @@
             // 
             // label9
             // 
-            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label9.Location = new System.Drawing.Point(472, 16);
+            this.label9.Location = new System.Drawing.Point(478, 19);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(36, 13);
