@@ -1470,80 +1470,85 @@ namespace sp
         public DialogResult DegisiklikKontrol(byte ts)
         {
             try
-            {
-                //id si çekilen satırdaki verilerin tutulacağı değişkenler
-                string adsoyad = "";
-                string Derslik1 = "";
-                string Derslik2 = "";
-                string Derslik3 = "";
-                string Derslik4 = "";
-                string gozetmen1 = "";
-                string gozetmen2 = "";
-                string gozetmen3 = "";
-                komut = "select Unvan,Ad_Soyad,Derslik1,Derslik2,Derslik3,Derslik4,Gozetmen1,Gozetmen2,Gozetmen3,Tarih,Saat from " + Home.donem + " where SiraNo=" + SinavProgrami.sinavid + "";
-                DataTable tablo = new DataTable();
-                tablo = islemler.Al(komut);
+			{
+				//id si çekilen satırdaki verilerin tutulacağı değişkenler
+				string progkod = "";
+				string progad = "";
+				string adsoyad = "";
+				string Derslik1 = "";
+				string Derslik2 = "";
+				string Derslik3 = "";
+				string Derslik4 = "";
+				string gozetmen1 = "";
+				string gozetmen2 = "";
+				string gozetmen3 = "";
+				komut = "select Unvan,Ad_Soyad,Prg_Kod,Prg_Ad,Derslik1,Derslik2,Derslik3,Derslik4,Gozetmen1,Gozetmen2,Gozetmen3,Tarih,Saat from " + Home.donem + " where SiraNo=" + SinavProgrami.sinavid + "";
+				DataTable tablo = new DataTable();
+				tablo = islemler.Al(komut);
 
-                //tabloya aktarılan satırın verileri değişkenlere aktarılıyor
-                if (tablo.Rows.Count != 0)
-                {
-                    adsoyad = tablo.Rows[0][0].ToString() + " " + tablo.Rows[0][1].ToString();
-                    Derslik1 = tablo.Rows[0][2].ToString();
-                    Derslik2 = tablo.Rows[0][3].ToString();
-                    Derslik3 = tablo.Rows[0][4].ToString();
-                    Derslik4 = tablo.Rows[0][5].ToString();
-                    gozetmen1 = tablo.Rows[0][6].ToString();
-                    gozetmen2 = tablo.Rows[0][7].ToString();
-                    gozetmen3 = tablo.Rows[0][8].ToString();
-                    tarih = Convert.ToDateTime(tablo.Rows[0][9].ToString());
-                    saat = Convert.ToDateTime(tablo.Rows[0][10].ToString());
-                }
+				//tabloya aktarılan satırın verileri değişkenlere aktarılıyor
+				if (tablo.Rows.Count != 0)
+				{
+					adsoyad = tablo.Rows[0][0].ToString() + " " + tablo.Rows[0][1].ToString();
+					progkod = tablo.Rows[0][2].ToString();
+					progad = tablo.Rows[0][3].ToString();
+					Derslik1 = tablo.Rows[0][4].ToString();
+					Derslik2 = tablo.Rows[0][5].ToString();
+					Derslik3 = tablo.Rows[0][6].ToString();
+					Derslik4 = tablo.Rows[0][7].ToString();
+					gozetmen1 = tablo.Rows[0][8].ToString();
+					gozetmen2 = tablo.Rows[0][9].ToString();
+					gozetmen3 = tablo.Rows[0][10].ToString();
+					tarih = Convert.ToDateTime(tablo.Rows[0][11].ToString());
+					saat = Convert.ToDateTime(tablo.Rows[0][12].ToString());
+				}
 
-                //eğer güncellenecek tarih eski tarih ise işlem yapılmıyor
-                if (ts == 0)
-                {
-                    tarih = Convert.ToDateTime(cmbtarih.SelectedItem);
-                    if (tarih == eskitarih)
-                    {
-                        return DialogResult.Yes;
-                    }
-                } //eğer güncellenecek saat eski saat ise işlem yapılmıyor
-                else
-                {
+				//eğer güncellenecek tarih eski tarih ise işlem yapılmıyor
+				if (ts == 0)
+				{
+					tarih = Convert.ToDateTime(cmbtarih.SelectedItem);
+					if (tarih == eskitarih)
+					{
+						return DialogResult.Yes;
+					}
+				} //eğer güncellenecek saat eski saat ise işlem yapılmıyor
+				else
+				{
 
-                    saat = Convert.ToDateTime(cmbsaat.SelectedItem);
-                    if (saat == eskisaat)
-                    {
-                        return DialogResult.Yes;
-                    }
+					saat = Convert.ToDateTime(cmbsaat.SelectedItem);
+					if (saat == eskisaat)
+					{
+						return DialogResult.Yes;
+					}
 
-                }
+				}
 
-                // değişkenlerdeki veriler sırasıyla kontrol edilmek üzere bak methoduna gönderiliyor ve methodtan gelen cavaba göre uyarı mesajı düzenleniyor
-                string uyari = "Güncellenecek (Tarih / Saatte);\n";
-                if (Bak(adsoyad) == DialogResult.OK) uyari += "\n+ Öğretim Elemanının Görevli Olduğu Başka Bir Sınav Bulunmakta!";
-                if (Derslik1 != "" && Bak(Derslik1) == DialogResult.OK) uyari += "\n+ 1. Derslik Kullanılmakta!";
-                if (Derslik2 != "" && Bak(Derslik2) == DialogResult.OK) uyari += "\n+ 2. Derslik Kullanılmakta!";
-                if (Derslik3 != "" && Bak(Derslik3) == DialogResult.OK) uyari += "\n+ 3. Derslik Kullanılmakta!";
-                if (Derslik4 != "" && Bak(Derslik4) == DialogResult.OK) uyari += "\n+ 4. Derslik Kullanılmakta!";
-                if (gozetmen1 != "" && Bak(gozetmen1) == DialogResult.OK) uyari += "\n+ 1. Gözetmenin Görevli Olduğu Başka Bir Sınav Bulunmakta!";
-                if (gozetmen2 != "" && Bak(gozetmen2) == DialogResult.OK) uyari += "\n+ 2. Gözetmenin Görevli Olduğu Başka Bir Sınav Bulunmakta!";
-                if (gozetmen3 != "" && Bak(gozetmen3) == DialogResult.OK) uyari += "\n+ 3. Gözetmenin Görevli Olduğu Başka Bir Sınav Bulunmakta!";
+				// değişkenlerdeki veriler sırasıyla kontrol edilmek üzere bak methoduna gönderiliyor ve methodtan gelen cavaba göre uyarı mesajı düzenleniyor
+				string uyari = "Güncellenecek (Tarih / Saatte);\n";
+				if (Bak(progkod) == DialogResult.OK && Bak(progad) == DialogResult.OK) uyari +="\n+ Bölümün Başka Bir Sınavı Bulunmakta!!!";
+				if (Bak(adsoyad) == DialogResult.OK) uyari += "\n+ Öğretim Elemanının Görevli Olduğu Başka Bir Sınav Bulunmakta!";
+				if (Derslik1 != "" && Bak(Derslik1) == DialogResult.OK) uyari += "\n+ 1. Derslik Kullanılmakta!";
+				if (Derslik2 != "" && Bak(Derslik2) == DialogResult.OK) uyari += "\n+ 2. Derslik Kullanılmakta!";
+				if (Derslik3 != "" && Bak(Derslik3) == DialogResult.OK) uyari += "\n+ 3. Derslik Kullanılmakta!";
+				if (Derslik4 != "" && Bak(Derslik4) == DialogResult.OK) uyari += "\n+ 4. Derslik Kullanılmakta!";
+				if (gozetmen1 != "" && Bak(gozetmen1) == DialogResult.OK) uyari += "\n+ 1. Gözetmenin Görevli Olduğu Başka Bir Sınav Bulunmakta!";
+				if (gozetmen2 != "" && Bak(gozetmen2) == DialogResult.OK) uyari += "\n+ 2. Gözetmenin Görevli Olduğu Başka Bir Sınav Bulunmakta!";
+				if (gozetmen3 != "" && Bak(gozetmen3) == DialogResult.OK) uyari += "\n+ 3. Gözetmenin Görevli Olduğu Başka Bir Sınav Bulunmakta!";
 
-                //eğer uyarı mesajına ekleme yapılmışsa kullanıcıya yansıtılıyor ve cevaba göre işlem yapılıyor
-                if (uyari.Substring(uyari.Length - 1, 1) != "\n")
-                {
-                    uyari += "\n\nKabul ediyor musunuz?";
-                    return MessageBox.Show(uyari, "UYARI!!", MessageBoxButtons.YesNo);
-                }//eğer uyarı mesajı değişmemiş ise işlem yapılmıyor
-                else return DialogResult.Yes;
+				//eğer uyarı mesajına ekleme yapılmışsa kullanıcıya yansıtılıyor ve cevaba göre işlem yapılıyor
+				if (uyari.Substring(uyari.Length - 1, 1) != "\n")
+				{
+					uyari += "\n\nKabul ediyor musunuz?";
+					return MessageBox.Show(uyari, "UYARI!!", MessageBoxButtons.YesNo);
+				}//eğer uyarı mesajı değişmemiş ise işlem yapılmıyor
+				else return DialogResult.Yes;
 
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show("Tarih Saat Değişikliğinde Veri Kontrolü Yaparken Hata!\nHata Kodu: " + err.ToString());
-                return DialogResult.No;
-            }
+			}
+			catch (Exception err)
+			{
+				MessageBox.Show("Tarih Saat Değişikliğinde Veri Kontrolü Yaparken Hata!\nHata Kodu: " + err.ToString());
+				return DialogResult.No;
+			}
         }
 
         public DialogResult Bak(string bakilacak)
