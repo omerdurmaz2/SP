@@ -537,16 +537,19 @@ namespace sp
                             DuzenlenenAlan = 4;
                             Ac();
                             break;
-                        case 10:
-                            SınavProgramıDüzenleFormu.YapilanIslem = 5; //Öğretim Elemanı
-                            DuzenlenenAlan = 5;
-                            Ac();
-                            break;
-                        case 11:
-                            SınavProgramıDüzenleFormu.YapilanIslem = 5; //Öğretim Elemanı
-                            DuzenlenenAlan = 5;
-                            Ac();
-                            break;
+                       	case 10:
+							SınavProgramıDüzenleFormu.YapilanIslem = 5; //Öğretim Elemanı
+							SınavProgramıDüzenleFormu.Gözetmen = 0;
+							DuzenlenenAlan = 5;
+							Ac();
+							break;
+						case 11:
+							SınavProgramıDüzenleFormu.YapilanIslem = 5; //Öğretim Elemanı
+							DuzenlenenAlan = 5;
+							SınavProgramıDüzenleFormu.Gözetmen = 0;
+							Ac();
+							break;
+
                         case 12:
                             SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 1 
                             DuzenlenenAlan = 6;
@@ -658,16 +661,19 @@ namespace sp
                                 DuzenlenenAlan = 4;
                                 Ac();
                                 break;
-                            case 10:
+                           	case 10:
                                 SınavProgramıDüzenleFormu.YapilanIslem = 5; //Öğretim Elemanı
+                                SınavProgramıDüzenleFormu.Gözetmen = 0;
                                 DuzenlenenAlan = 5;
                                 Ac();
-                                break;
+							    break;
                             case 11:
                                 SınavProgramıDüzenleFormu.YapilanIslem = 5; //Öğretim Elemanı
                                 DuzenlenenAlan = 5;
+                                SınavProgramıDüzenleFormu.Gözetmen = 0;
                                 Ac();
                                 break;
+
                             case 12:
                                 SınavProgramıDüzenleFormu.YapilanIslem = 6; //Derslik 1 
                                 DuzenlenenAlan = 6;
