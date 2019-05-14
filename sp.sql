@@ -46,12 +46,7 @@ CREATE TABLE `bahar`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 63 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
--- Records of bahar
--- ----------------------------
-INSERT INTO `bahar` VALUES (61, 'Bilgisayar Programcılığı', 'BP101', 'IO', '4. Dönem', 'ING88', 'İngilizce II5', 55, 'Doc. Dr. ', 'Ahmet Kaya', '2019-02-08', '10:00:00', 'a34', NULL, NULL, NULL, 55, 'asd ömer', 'asdasd ömer', 'Doc. Kenan İmirzalıoğlu');
-INSERT INTO `bahar` VALUES (62, 'Tarım ve Köyişleri', 'TRM101', 'G', '4. Dönem', 'ING88', 'İngilizce II5', 111, 'asdasd', 'ömer', '2019-02-08', '10:00:00', 'a54', 'a25', 'a34', 'a41', 111, 'Doc. Kenan İmirzalıoğlu', 'asdasd ömer', NULL);
 
--- ----------------------------
 -- Table structure for bolumler
 -- ----------------------------
 DROP TABLE IF EXISTS `bolumler`;
